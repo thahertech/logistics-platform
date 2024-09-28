@@ -21,10 +21,13 @@ const Layout = ({ children }) => {
               <Link href="/createShipment" className={styles.navLink}>Luo Kuljetustilaus</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/marketplace" className={styles.navLink}>Tori</Link>
+              <Link href="/auth" className={styles.navLink}>Login</Link>
             </li>
             <li className={styles.navItem}>
               <Link href="/contact" className={styles.navLink}>Ota Yhteyttä</Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link href="/Profile" className={styles.navLink}>Profiili</Link>
             </li>
           </ul>
         </nav>

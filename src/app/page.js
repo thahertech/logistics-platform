@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Styles/Dashboard.module.css';
 import { Inter } from '@next/font/google';
+import './globals.css';
 
 
 const Dashboard = () => {
