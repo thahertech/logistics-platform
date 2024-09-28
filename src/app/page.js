@@ -4,23 +4,13 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Styles/Dashboard.module.css';
-import { Inter } from '@next/font/google';
 import './globals.css';
-
 
 const Dashboard = () => {
   const router = useRouter();
 
-  const handleDeliveriesNearbyClick = () => {
-    router.push('/deliveries-nearby');
-  };
-
-  const handleCreateShipmentClick = () => {
-    router.push('/create-shipment');
-  };
-
-  const handleMarketplaceClick = () => {
-    router.push('/marketplace');
+  const navigateTo = (path) => {
+    router.push(path);
   };
 
   return (
@@ -31,50 +21,31 @@ const Dashboard = () => {
       </div>
 
       <div className={styles.container}>
-        <div className={styles.card} onClick={handleDeliveriesNearbyClick}>
-          <Image
-            src="/assets/TruckImg.jpeg"
-            alt="Deliveries Nearby"
-            layout="intrinsic"
-            width={500}
-            height={300}
-            objectFit="cover"
-            className={styles.cardImage}
-          />
-          <div className={styles.cardContent}>
-            <h2 className={styles.cardTitle}>Lähellä</h2>
+        {[
+          { src: '/assets/TruckImg.jpeg', title: 'Lähellä', path: '/deliveries-nearby' },
+          { src: '/assets/Newimage.jpeg', title: 'Kuljetustilaus', path: '/createShipment' },
+          { src: '/assets/Truck1.jpeg', title: 'Avoimet kuljetukset', path: '/marketplace' }
+        ].map((card, index) => (
+          <div
+            key={index}
+            className={styles.card}
+            onClick={() => navigateTo(card.path)}
+            tabIndex={0}
+            role="button"
+            onKeyPress={(e) => e.key === 'Enter' && navigateTo(card.path)}
+          >
+            <Image
+              src={card.src}
+              alt={card.title}
+              width={500}
+              height={300}
+              className={styles.cardImage}
+            />
+            <div className={styles.cardContent}>
+              <h2 className={styles.cardTitle}>{card.title}</h2>
+            </div>
           </div>
-        </div>
-
-        <div className={styles.card} onClick={handleCreateShipmentClick}>
-          <Image
-            src="/assets/Newimage.jpeg"
-            alt="Create Shipment"
-            layout="intrinsic"
-            width={500}
-            height={300}
-            objectFit="cover"
-            className={styles.cardImage}
-          />
-          <div className={styles.cardContent}>
-            <h2 className={styles.cardTitle}>Kuljetustilaus</h2>
-          </div>
-        </div>
-
-        <div className={styles.card} onClick={handleMarketplaceClick}>
-          <Image
-            src="/assets/Truck1.jpeg"
-            alt="Marketplace"
-            layout="intrinsic"
-            width={500}
-            height={300}
-            objectFit="cover"
-            className={styles.cardImage}
-          />
-          <div className={styles.cardContent}>
-            <h2 className={styles.cardTitle}>Avoimet kuljetukset</h2>
-          </div>
-        </div>
+        ))}
       </div>
 
       <div className={styles.section}>

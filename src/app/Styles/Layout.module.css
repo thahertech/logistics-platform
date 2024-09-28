@@ -80,4 +80,14 @@
       padding: 10px;
     }
   }
+
+.backdrop-filter {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.bg-opacity-50 {
+  background-color: rgba(107, 114, 128, 0.5);
+}
+
   

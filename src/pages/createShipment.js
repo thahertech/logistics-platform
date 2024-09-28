@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import Layout from '../app/dashboard/Layout'
+import Layout from '../app/dashboard/Layout';
+import '../app/globals.css';
+
 
 const CreateShipment = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -29,65 +31,59 @@ const CreateShipment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
+  
     if (activeStep === 2) {
       const fullAddress = `${street}, ${city}, ${postalCode}`;
       let lat, lng;
-
+  
       try {
-        const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        const response = await axios.get('https://nominatim.openstreetmap.org/search', {
           params: {
-            address: fullAddress,
-            key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, // Use NEXT_PUBLIC for client-side access
+            q: fullAddress,
+            format: 'json',
+            limit: 1,
           },
         });
-
-        const { results } = response.data;
-        lat = results[0].geometry.location.lat;
-        lng = results[0].geometry.location.lng;
-
+  
+        if (response.data.length > 0) {
+          lat = response.data[0].lat;
+          lng = response.data[0].lon;
+        } else {
+          alert('Could not find coordinates for the address.');
+          return;
+        }
       } catch (error) {
         console.error('Error fetching coordinates:', error);
         alert('Failed to fetch coordinates for the address.');
         return;
       }
-
-      const today = dayjs().startOf('day');
-      const pickup = dayjs(pickupDate);
-      const delivery = dayjs(deliveryDate);
-
-      if (pickup.isBefore(today)) {
-        alert('Pickup date cannot be in the past.');
-        return;
-      }
-
-      if (delivery.isBefore(today)) {
-        alert('Delivery date cannot be in the past.');
-        return;
-      }
-
-      if (delivery.isBefore(pickup.add(2, 'day'))) {
-        alert('Delivery date must be at least 2 days after the pickup date.');
-        return;
-      }
-
+  
+      // Assuming you have the JWT token stored in localStorage after authentication
+      const jwtToken = localStorage.getItem('jwtToken');
+  
       try {
-        const response = await axios.post('http://localhost:5001/api/shipments/create', {
+        const shipmentData = {
           location: fullAddress,
           destination,
           pickupDate,
           deliveryDate,
           truckRequirements,
           weight,
-          kuljetettavatYksiköt,
+          kuljetettavatYksiköt: transportUnits,
           details,
           price,
           latitude: lat,
           longitude: lng,
+        };
+  
+        const response = await axios.post('http://truckup.local/wp-json/wp/v2/kuljetus', shipmentData, {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`, // Add the JWT token here
+            'Content-Type': 'application/json',
+          },
         });
-
-        if (response.ok) {
+  
+        if (response.status === 201) {
           alert('Shipment created successfully!');
           setActiveStep(0); // Reset the form on successful submission
         } else {
@@ -99,6 +95,8 @@ const CreateShipment = () => {
       }
     }
   };
+  
+  
 
   const steps = ['Noutotiedot', 'Kuljetustiedot', 'Toimitustiedot'];
 
@@ -217,52 +215,55 @@ const CreateShipment = () => {
 
   return (
     <Layout>
-
-    <div className="flex flex-col items-center justify-center h-screen">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-black flex flex-col p-6 rounded-lg shadow-md w-96">
-        
-        <h2 className="text-lg font-bold mb-4">Kuljetustilaus</h2>
-        <div className="mb-4">
-          <div className="flex justify-between">
-            {steps.map((label, index) => (
-              <div key={label} className={`text-center ${activeStep === index ? 'text-blue-500' : 'text-gray-500'}`}>
-                <span>{label}</span>
-              </div>
-            ))}
+      <div className="flex flex-col items-center justify-center h-screen bg-black-800">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-gray-700 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-96"
+        >
+          <h2 className="text-lg font-bold mb-4 text-white">Kuljetustilaus</h2>
+          <div className="mb-4">
+            <div className="flex justify-between">
+              {steps.map((label, index) => (
+                <div
+                  key={label}
+                  className={`text-center ${activeStep === index ? 'text-blue-500' : 'text-gray-500'}`}
+                >
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        {renderStepContent(activeStep)}
-        <div className="flex justify-between mt-4">
-          <button
-            type="button"
-            className={`bg-gray-300 text-white px-4 py-2 rounded ${activeStep === 0 ? 'hidden' : ''}`}
-            onClick={handleBack}
-          >
-            Takaisin
-          </button>
-          {activeStep === steps.length - 1 ? (
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              Julkaise
-            </button>
-          ) : (
+          {renderStepContent(activeStep)}
+          <div className="flex justify-between mt-4">
             <button
               type="button"
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-              onClick={handleNext}
+              className={`bg-gray-300 text-white px-4 py-2 rounded ${activeStep === 0 ? 'hidden' : ''}`}
+              onClick={handleBack}
             >
-              Seuraava
+              Takaisin
             </button>
-          )}
-        </div>
-      </form>
-    </div>
+            {activeStep === steps.length - 1 ? (
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+              >
+                Julkaise
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+                onClick={handleNext}
+              >
+                Seuraava
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
     </Layout>
   );
 };
+
 
 export default CreateShipment;
