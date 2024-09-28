@@ -1,30 +1,43 @@
+/* General Page Styles */
+.body {
+  font-family: 'Inter';
+}
+
 .hero {
-    background-color: #f5f5f5;
-    padding: 40px 20px;
+    background-color: #f5f5f5; /* Fallback color in case the image doesn't load */
+    background-image: url('../../../public/assets/truckupBG.jpeg'); /* Path to your image */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    padding: 100px 0;
+    width: 100%;
     text-align: center;
     border-bottom: 1px solid #ddd;
+    border-radius: 5px;
   }
-  
+
   .DashboardTitle {
     font-size: 48px;
+    font-family: 'Inter', sans-serif;
+
     font-weight: bold;
     margin: 0;
     color: #333;
   }
-  
+
   .line {
     font-size: 24px;
     color: #666;
     margin-top: 10px;
   }
-  
+
   .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
   }
-  
+
   .card {
     position: relative;
     width: 300px;
@@ -36,12 +49,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  
+
   .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
-  
+
   .cardImage {
     position: absolute;
     top: 0;
@@ -51,7 +64,7 @@
     object-fit: cover;
     border-radius: 10px;
   }
-  
+
   .cardContent {
     position: absolute;
     bottom: 0;
@@ -64,24 +77,24 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
-  
+
   .cardTitle {
     font-size: 24px;
     margin: 0;
     text-align: center;
   }
-  
+
   .section {
     padding: 40px 20px;
     background-color: #fafafa;
   }
-  
+
   .testimonialContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
   }
-  
+
   .testimonialCard {
     width: 300px;
     margin: 20px;
@@ -90,26 +103,26 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+
   .testimonialText {
     font-size: 16px;
     color: #333;
     margin-bottom: 10px;
   }
-  
+
   .testimonialAuthor {
     font-size: 14px;
     color: #888;
     text-align: right;
   }
-  
+
   .sectionTitle {
     font-size: 32px;
     text-align: center;
     color: #333;
     margin-bottom: 20px;
   }
-  
+
   .sectionContent {
     font-size: 18px;
     color: #666;
@@ -117,7 +130,7 @@
     max-width: 800px;
     margin: 0 auto 30px auto;
   }
-  
+
   .contactButton {
     display: block;
     width: 200px;
@@ -131,13 +144,24 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
+
   .contactButton:hover {
     background-color: #005bb5;
   }
-  
+
   .hero2 {
     background-color: #f5f5f5;
     padding: 60px 20px;
-    text-align: center
-  }  
+    text-align: center;
+    border-top: 1px solid #ddd;
+  }
+
+  .hero2 h2 {
+    font-size: 36px;
+    color: #333;
+    margin: 0;
+  }
+
+  .navLink {
+    font-family: 'Inter';
+  }

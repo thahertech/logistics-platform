@@ -1,9 +1,11 @@
 'use client';
-
+import Layout from './dashboard/Layout';
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Styles/Dashboard.module.css';
+import { Inter } from '@next/font/google';
+
 
 const Dashboard = () => {
   const router = useRouter();
@@ -21,7 +23,7 @@ const Dashboard = () => {
   };
 
   return (
-    <>
+    <Layout>
       <div className={styles.hero}>
         <h1 className={styles.DashboardTitle}>TruckUp</h1>
         <div className={styles.line}>Hero Text</div>
@@ -98,7 +100,7 @@ const Dashboard = () => {
       <div className={styles.hero2}>
         <h2>Löydä ja myy kuljetus omilla ehdoilla</h2>
       </div>
-    </>
+    </Layout>
   );
 };
 
