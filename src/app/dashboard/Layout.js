@@ -10,14 +10,18 @@ const Layout = ({ children }) => {
         <nav>
          <ul className={styles.navMenu}>
 
+         <li className={styles.navItem}>
+              <Link href="/" className={styles.navLink}>etusivu</Link>
+            </li>
+
             <li className={styles.navItem}>
-              <Link href="/createShipment" className={styles.navLink}>TILAUS</Link>
+              <Link href="/createShipment" className={styles.navLink}>tilaus</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/marketplace" className={styles.navLink}>AVOIMET</Link>
+              <Link href="/marketplace" className={styles.navLink}>avoimet</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/Profile" className={styles.navLink}>PROFIILI</Link>
+              <Link href="/Profile" className={styles.navLink}>oma tili</Link>
             </li>
           </ul>
         </nav>
@@ -25,7 +29,7 @@ const Layout = ({ children }) => {
           Logistix
         </Link>
       <li className={styles.navItem}>
-              <Link href="/auth" className={styles.navLink1}>KIRJAUDU</Link>
+              <Link href="/auth" className={styles.navLink1}>kirjaudu</Link>
             </li>
             </div>
 
