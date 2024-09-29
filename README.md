@@ -7,6 +7,7 @@ Next.js application designed for managing and filtering delivery records sourced
 ## 📋 Table of Contents
 
 - [Features](#features)
+- [Images] (#images)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -24,6 +25,15 @@ Next.js application designed for managing and filtering delivery records sourced
 - **Responsive Design**: Optimized for both mobile and desktop views.
 - **Informative Sections**: Learn about the company and its mission in the "About Us" section.
 - **Contact Us**: Easy access to reach out for inquiries or support.
+
+---
+
+## Images
+<img src="https://github.com/user-attachments/assets/52486dc8-97bd-41d1-9313-31b4c7e1f304" width="100%">
+<img width="1440" alt="Screenshot 2024-09-29 at 18 11 08" src="https://github.com/user-attachments/assets/80799950-9f9a-46ff-bf39-503ab0d7abf8">
+<img width="1440" alt="Screenshot 2024-09-29 at 18 11 21" src="https://github.com/user-attachments/assets/321abe88-324c-4553-9b3c-d54419a3a3e6">
+<img width="1440" alt="Screenshot 2024-09-29 at 18 12 59" src="https://github.com/user-attachments/assets/f3cead58-44cb-431c-81eb-2c784b13e01f">
+<img width="1440" alt="Screenshot 2024-09-29 at 18 12 44" src="https://github.com/user-attachments/assets/1331c3d6-5880-4d90-a152-4240d0a6e53b">
 
 ---
 
