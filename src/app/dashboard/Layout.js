@@ -5,7 +5,6 @@ import styles from '../Styles/Layout.module.css';
 const Layout = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Check localStorage for a token to set authentication state
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsAuthenticated(!!token);
