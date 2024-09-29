@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Styles/Dashboard.module.css';
 import './globals.css';
+import FunFacts from './dashboard/funfacts';
 
 const Dashboard = () => {
   const router = useRouter();
@@ -16,15 +17,20 @@ const Dashboard = () => {
   return (
     <Layout>
       <div className={styles.hero}>
-        <h1 className={styles.DashboardTitle}>TruckUp</h1>
-        <div className={styles.line}>Hero Text</div>
+        <div className={styles.line}>
+        <h3>  Tehosta kuljetuksia
+        </h3>
+        <h4>
+        ja löydä ratkaisu nopeasti !
+        </h4>
+        </div>
       </div>
 
       <div className={styles.container}>
         {[
           { src: '/assets/TruckImg.jpeg', title: 'Lähellä', path: '/deliveries-nearby' },
           { src: '/assets/Newimage.jpeg', title: 'Kuljetustilaus', path: '/createShipment' },
-          { src: '/assets/Truck1.jpeg', title: 'Avoimet kuljetukset', path: '/marketplace' }
+          { src: '/assets/Truck1.jpeg', title: 'Löydä toimitus', path: '/marketplace' }
         ].map((card, index) => (
           <div
             key={index}
@@ -47,32 +53,31 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
-
       <div className={styles.section}>
-        <div className={styles.testimonialContainer}>
-          <div className={styles.testimonialCard}>
-            <p className={styles.testimonialText}>
-              "TruckUp has revolutionized our logistics operations. The platform is intuitive and saves us a lot of time!"
-            </p>
-            <p className={styles.testimonialAuthor}>Company A</p>
-          </div>
-        </div>
+      <h2 className={styles.sectionTitle}>Kysymyksiä tai tarvitsetko tukea?</h2>
+    <p className={styles.sectionContent1}>
+      Ota yhteyttä tiimiimme saadaksesi apua. Olemme täällä auttaaksemme sinua kaikissa kysymyksissäsi palveluistamme tai alustastamme.
+    </p>
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Have questions or need support?</h2>
-        <p className={styles.sectionContent}>
-          Get in touch with our team for assistance. We're here to help you with any inquiries you may have about our services or platform.
-        </p>
-        <button className={styles.contactButton} onClick={() => router.push('/contact')}>
-          Contact Us
-        </button>
+        <FunFacts />
       </div>
 
-      <div className={styles.hero2}>
-        <h2>Löydä ja myy kuljetus omilla ehdoilla</h2>
-      </div>
-    </Layout>
+      <div className={styles.section}>
+    <h2 className={styles.sectionTitle}>Kysymyksiä tai tarvitsetko tukea?</h2>
+    <p className={styles.sectionContent}>
+      Ota yhteyttä tiimiimme saadaksesi apua. Olemme täällä auttaaksemme sinua kaikissa kysymyksissäsi palveluistamme tai alustastamme.
+    </p>
+    <button className={styles.contactButton} onClick={() => router.push('/contact')}>
+      Ota yhteyttä
+    </button>
+  </div>
+
+  <div className={styles.hero2}>
+    <h2>Löydä ja myy kuljetus omilla ehdoilla</h2>
+  </div>
+</Layout>
   );
 };
 

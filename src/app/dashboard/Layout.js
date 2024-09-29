@@ -5,38 +5,56 @@ import styles from '../Styles/Layout.module.css';
 const Layout = ({ children }) => {
   return (
     <>
-      <header className={styles.header}>
-        <Link href="/" className={styles.headerLogo}>
-          TruckUp
-        </Link>
+    <header>
+    <div className={styles.header}>
         <nav>
-          <ul className={styles.navMenu}>
+         <ul className={styles.navMenu}>
+
             <li className={styles.navItem}>
-              <Link href="/" className={styles.navLink}>Koti</Link>
-            </li>
-        
-            <li className={styles.navItem}>
-              <Link href="/createShipment" className={styles.navLink}>Luo Kuljetustilaus</Link>
+              <Link href="/createShipment" className={styles.navLink}>TILAUS</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/auth" className={styles.navLink}>Login</Link>
+              <Link href="/marketplace" className={styles.navLink}>AVOIMET</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/marketplace" className={styles.navLink}>Kuljetukset</Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link href="/Profile" className={styles.navLink}>Profiili</Link>
+              <Link href="/Profile" className={styles.navLink}>PROFIILI</Link>
             </li>
           </ul>
         </nav>
-      </header>
+        <Link href="/" className={styles.headerLogo}>
+          Logistix
+        </Link>
+      <li className={styles.navItem}>
+              <Link href="/auth" className={styles.navLink1}>KIRJAUDU</Link>
+            </li>
+            </div>
+
+    </header>
 
       <main className={styles.mainContent}>
         {children}
       </main>
 
       <footer className={styles.footer}>
-        <p className={styles.footerText}>© 2024 TruckUp. All rights reserved.</p>
+        <p className={styles.footerText}>© 2024 TruckUp OY | All rights reserved.</p>
+        <nav>
+         <ul className={styles.footerMenu}>
+
+            <li className={styles.footerItem}>
+              <Link href="/contact" className={styles.footerLink}>Ota Yhteyttä</Link>
+            </li>
+            <li className={styles.footerItem}>
+              <Link href="/marketplace" className={styles.footerLink}>Tietosuoja</Link>
+            </li>
+            <li className={styles.footerItem}>
+              <Link href="/Profile" className={styles.footerLink}>Meistä</Link>
+            </li>
+
+ 
+          </ul>
+
+        </nav>
+
       </footer>
     </>
   );
