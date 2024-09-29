@@ -30,7 +30,7 @@
   .funFactCard {
     min-width: 300px;
     margin: 0 20px;
-    background: #0000002f;
+    background: #000000e2;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 
@@ -41,7 +41,7 @@
 
   .funFactText {
     font-size: 18px;
-    color: black;
+    color: rgb(255, 255, 255);
     text-align: center;
   }
 
@@ -50,7 +50,7 @@
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-100%); /* Scroll left by 100% of the container */
+      transform: translateX(-100%);
     }
   }
 
