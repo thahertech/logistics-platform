@@ -51,7 +51,7 @@ const Layout = ({ children }) => {
               <Link href="/marketplace" className={styles.footerLink}>Tietosuoja</Link>
             </li>
             <li className={styles.footerItem}>
-              <Link href="/Profile" className={styles.footerLink}>Meistä</Link>
+              <Link href="/aboutUs" className={styles.footerLink}>Meistä</Link>
             </li>
 
  
