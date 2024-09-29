@@ -28,74 +28,75 @@ const CreateShipment = () => {
   const handleBack = () => {
     setActiveStep((prev) => prev - 1);
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
   
-    if (activeStep === 2) {
-      const fullAddress = `${street}, ${city}, ${postalCode}`;
-      let lat, lng;
-  
-      try {
-        const response = await axios.get('https://nominatim.openstreetmap.org/search', {
-          params: {
-            q: fullAddress,
-            format: 'json',
-            limit: 1,
-          },
-        });
-  
-        if (response.data.length > 0) {
-          lat = response.data[0].lat;
-          lng = response.data[0].lon;
-        } else {
-          alert('Could not find coordinates for the address.');
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      if (activeStep === 2) {
+        const fullAddress = `${street}, ${city}, ${postalCode}`;
+        let lat, lng;
+    
+        try {
+          const response = await axios.get('https://nominatim.openstreetmap.org/search', {
+            params: {
+              q: fullAddress,
+              format: 'json',
+              limit: 1,
+            },
+          });
+    
+          if (response.data.length > 0) {
+            lat = response.data[0].lat;
+            lng = response.data[0].lon;
+          } else {
+            alert('Could not find coordinates for the address.');
+            return;
+          }
+        } catch (error) {
+          console.error('Error fetching coordinates:', error);
+          alert('Failed to fetch coordinates for the address.');
           return;
         }
-      } catch (error) {
-        console.error('Error fetching coordinates:', error);
-        alert('Failed to fetch coordinates for the address.');
-        return;
-      }
-  
-      // Assuming you have the JWT token stored in localStorage after authentication
-      const jwtToken = localStorage.getItem('jwtToken');
-  
-      try {
-        const shipmentData = {
-          location: fullAddress,
-          destination,
-          pickupDate,
-          deliveryDate,
-          truckRequirements,
-          weight,
-          kuljetettavatYksiköt: transportUnits,
-          details,
-          price,
-          latitude: lat,
-          longitude: lng,
-        };
-  
-        const response = await axios.post('http://truckup.local/wp-json/wp/v2/kuljetus', shipmentData, {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`, // Add the JWT token here
-            'Content-Type': 'application/json',
-          },
-        });
-  
-        if (response.status === 201) {
-          alert('Shipment created successfully!');
-          setActiveStep(0); // Reset the form on successful submission
-        } else {
+    
+        const jwtToken = localStorage.getItem('jwtToken');
+    
+        try {
+          const shipmentData = {
+            // Ensure these keys match your ACF field names
+            nimi: companyName, // Add this field
+            sijainti: {
+              lat: lat, // Assuming you want to send lat/lng to the Google Map field
+              lng: lng,
+            },
+            nouto: pickupDate,
+            toimitus: deliveryDate,
+            paino: weight,
+            // Add any other fields needed
+            kuljetettavatYksiköt: transportUnits,
+            details,
+            price,
+          };
+    
+          const response = await axios.post('http://truckup.local/wp-json/wp/v2/kuljetus', shipmentData, {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+              'Content-Type': 'application/json',
+            },
+          });
+    
+          if (response.status === 201) {
+            alert('Shipment created successfully!');
+            setActiveStep(0); // Reset the form on successful submission
+          } else {
+            alert('Failed to create shipment');
+          }
+        } catch (error) {
+          console.error('Error creating shipment:', error);
           alert('Failed to create shipment');
         }
-      } catch (error) {
-        console.error('Error creating shipment:', error);
-        alert('Failed to create shipment');
       }
-    }
-  };
-  
+    };
+    
   
 
   const steps = ['Noutotiedot', 'Kuljetustiedot', 'Toimitustiedot'];

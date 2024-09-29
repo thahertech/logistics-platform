@@ -69,7 +69,7 @@ const Auth = () => {
       <div className="flex justify-center items-center h-screen bg-black-200">
         <div className="bg-gray-100 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-96">
           <h2 className="text-2xl font-bold mb-6 text-center text-white">
-            {isLogin ? 'Login' : 'Register'}
+            {isLogin ? 'Kirjaudu' : 'Register'}
           </h2>
           <form onSubmit={handleSubmit}>
             {!isLogin && (
@@ -128,11 +128,11 @@ const Auth = () => {
               </>
             )}
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">{isLogin ? 'Username or Email' : 'Email'}</label>
+              <label className="block text-gray-700 mb-2">{isLogin ? 'Käyttäjänimi' : 'Sähköposti'}</label>
               <input
                 type={isLogin ? 'text' : 'email'}
                 name="usernameOrEmail"
-                placeholder={isLogin ? 'Enter your username or email' : 'Enter your email'}
+                placeholder={isLogin ? 'Käyttäjänimi tai sähköposti' : 'Enter your email'}
                 value={formData.usernameOrEmail}
                 onChange={handleChange}
                 className="text-black border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring focus:ring-blue-400"
@@ -140,11 +140,11 @@ const Auth = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Password</label>
+              <label className="block text-gray-700 mb-2">Salasana</label>
               <input
                 type="password"
                 name="password"
-                placeholder="Enter your password"
+                placeholder="****"
                 value={formData.password}
                 onChange={handleChange}
                 className="text-black border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring focus:ring-blue-400"
@@ -155,17 +155,17 @@ const Auth = () => {
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
             >
-              {isLogin ? 'Login' : 'Register'}
+              {isLogin ? 'Kirjaudu' : 'Rekisteröi'}
             </button>
             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
-            <p className="mt-4 text-center text-white">
-              {isLogin ? 'No account?' : 'Already have an account?'}
+            <p className="mt-4 text-left text-white">
+              {isLogin ? 'Ei käyttäjää? ' : 'Löytyykö käyttäjätili?'}
               <button
                 type="button"
-                className="text-blue-600 hover:underline"
+                className="text-blue-600 hover:underline ml-6"
                 onClick={() => setIsLogin(!isLogin)}
               >
-                {isLogin ? ' Register' : ' Login'}
+                {isLogin ? ' Rekisteröi' : 'Kirjaudu'}
               </button>
             </p>
           </form>
