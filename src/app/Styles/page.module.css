@@ -1,0 +1,54 @@
+.aboutUsHero {
+    background-image: url('../../../public/assets/aboutUsBG.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #3333332c;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    opacity: 0.8;
+  }
+
+  .DashboardTitle {
+    font-size: 48px;
+    font-family: 'Inter', sans-serixf;
+    font-variant: small-caps;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0;
+    color: #ffffff;
+  }
+
+  .section {
+    background-color: #fafafa;
+    padding: 40px 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+  }
+
+  .sectionTitle {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .sectionContent {
+    font-size: 18px;
+    color: #11111151;
+    margin-bottom: 30px;
+  }
+
+  .benefitsList {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .benefitsList li {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+  }
