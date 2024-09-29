@@ -66,8 +66,8 @@ const Auth = () => {
 
   return (
     <Layout>
-      <div className="flex justify-center items-center h-screen bg-gray-200">
-        <div className="bg-gray-700 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-96">
+      <div className="flex justify-center items-center h-screen bg-black-200">
+        <div className="bg-gray-100 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-96">
           <h2 className="text-2xl font-bold mb-6 text-center text-white">
             {isLogin ? 'Login' : 'Register'}
           </h2>

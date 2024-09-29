@@ -4,63 +4,138 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #19579f;
-    padding: 20px 20px;
+    background-color: #000000a1;
+    padding: 25px 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+
+  .section {
+    padding: 0;
+    overflow: hidden;
+  }
   
-  .headerLogo {
-    font-size: 24px;
-    font-weight: bold;
+  .funFactsContainer {
+    overflow: hidden; 
+    position: relative;
+    padding: 0 50px;
+
+  }
+  
+  .funFactsWrapper {
+    display: flex;
+    animation: scroll 66s linear infinite;
+
+  }
+  
+  .funFactCard {
+    min-width: 300px;
+    margin: 0 20px;
+    background: #0000002f;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .funFactText {
+    font-size: 18px;
+    color: black;
+    text-align: center;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%); /* Scroll left by 100% of the container */
+    }
+  }
+
+
+  .headerLogo, .footerLogo {
+    font-size: 54px;
+    font-weight: 600;
+    font-variant: small-caps;
     color: #fff;
     text-decoration: none;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
-  
-  .navMenu {
+
+  .navMenu, .footerMenu {
     display: flex;
+    flex-direction: row;
     gap: 20px;
+    margin-left: 4vw;
   }
-  
-  .navItem {
+  .footerMenu {
+    margin-left: 0;
+    margin-right: 4vw;
+  }
+
+  .navItem, .footerItem{
     list-style: none;
   }
-  
-  .navLink {
+
+  .navLink, .navLink1, .footerLink, .footerLink1 {
     font-size: 18px;
     color: #fff;
     text-decoration: none;
+    padding: 10px 5px;
     transition: color 0.3s ease;
+    font-weight: 200;
+    letter-spacing: 0.2rem;
+    font-variant: small-caps;
+
   }
-  
-  .navLink:hover {
-    color: #3a35c9;
+
+  .navLink1, .footerLink1 {
+    padding-left: 30px;
+    padding-right: 40px;
+    border-left: 1px solid #ffffff2f;
   }
-  
+
+  .navLink:hover, .navLink1:hover, .footerLink:hover {
+    box-shadow: 0px 1px 2px 0.5px rgba(255, 255, 255, 0.71);
+    border-radius: 5px;
+  }
+
   /* Main Content Styles */
   .mainContent {
     padding: 10px;
     max-width: 1400px;
     margin: 0 auto;
   }
-  
+
   .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  
+
   /* Footer Styles */
   .footer {
-    background-color: #333;
+    display: flex;
     color: #fff;
-    padding: 20px;
-    text-align: center;
+    padding: 30px;
+    margin-bottom: 20px;
+    align-content: center;
     margin-top: 40px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-between;
   }
   
   .footerText {
     font-size: 16px;
-    font-family: 'Inter';
+    justify-content: flex-start;
   }
   
   /* Responsive Design */
