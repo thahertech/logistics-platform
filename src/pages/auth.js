@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import '../app/globals.css'
-import Layout from '../app/dashboard/Layout'; // Adjust this import if necessary
+import Layout from '../app/dashboard/Layout';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -28,7 +28,7 @@ const Auth = () => {
 
     const endpoint = isLogin
       ? process.env.NEXT_PUBLIC_LOGIN_ENDPOINT
-      : process.env.NEXT_PUBLIC_REGISTER_ENDPOINT; // Use environment variables for endpoints
+      : process.env.NEXT_PUBLIC_REGISTER_ENDPOINT;
 
     try {
       const response = await axios.post(endpoint, {
@@ -36,7 +36,7 @@ const Auth = () => {
         password: formData.password,
         ...(isLogin ? {} : {
           name: formData.name,
-          email: formData.usernameOrEmail, // WordPress expects `email` during registration
+          email: formData.usernameOrEmail, // WordPress expects `email` during regis.
           companyName: formData.companyName,
           street: formData.street,
           city: formData.city,
@@ -45,7 +45,7 @@ const Auth = () => {
       });
 
       if (isLogin) {
-        // Store token in localStorage (client-side only)
+        // (client-side only)
         if (typeof window !== 'undefined') {
           localStorage.setItem('token', response.data.token);
           console.log(response.data.token);
@@ -55,7 +55,6 @@ const Auth = () => {
         // Navigate to Profile page
         router.push('/Profile');
       } else {
-        // Handle registration success
         console.log('Registered!', response.data);
       }
     } catch (error) {
