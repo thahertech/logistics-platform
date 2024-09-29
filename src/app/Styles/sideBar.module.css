@@ -1,0 +1,48 @@
+.sidebar {
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+    border-radius: 0 0 8px 8px;
+    position: sticky;
+    top: 100px;
+    height: auto;
+    border-top: 1px solid #fff;
+    overflow-y: auto;
+  }
+
+  
+  .filterGroup {
+    margin-bottom: 20px;
+  }
+  
+  .filterGroup label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .filterGroup input,
+  .filterGroup select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .submitbutton {
+    background-color: #3470b5;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .submitbutton:hover {
+    background-color: #005bb5;
+  }
+  

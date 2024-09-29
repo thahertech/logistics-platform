@@ -18,10 +18,10 @@ const Dashboard = () => {
     <Layout>
       <div className={styles.hero}>
         <div className={styles.line}>
-        <h3>  Tehosta kuljetuksia
+        <h3>  Kasvata tehokkuutta
         </h3>
         <h4>
-        ja löydä ratkaisu nopeasti !
+        ja löydä seuraava kuljetus
         </h4>
         </div>
       </div>
@@ -53,12 +53,21 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
-      <div className={styles.section}>
-      <h2 className={styles.sectionTitle}>Kysymyksiä tai tarvitsetko tukea?</h2>
-    <p className={styles.sectionContent1}>
-      Ota yhteyttä tiimiimme saadaksesi apua. Olemme täällä auttaaksemme sinua kaikissa kysymyksissäsi palveluistamme tai alustastamme.
-    </p>
-      </div>
+      <div className={`${styles.section} ${styles.whyChooseUs}`}>
+<div className={styles.sectionHeader}>
+  <h2 className={styles.sectionTitle}>Miksi valita palvelumme?</h2>
+  <p className={styles.sectionContent1}>
+    Tarjoamme ympäristöystävällisiä kuljetusratkaisuja, jotka eivät ainoastaan vähennä hiilijalanjälkeäsi, vaan myös tarjoavat kilpailukykyiset hinnat.
+  </p>
+  </div>
+  <ul className={styles.benefitsList}>
+    <li>🌱 <h4>Ympäristöystävällisyys</h4> Käytämme kestäviä käytäntöjä minimoidaksemme ympäristövaikutuksemme.</li>
+    <li>💰 <h4>Kilpailukykyiset hinnat</h4> Tarjoamme laadukkaita palveluja kohtuulliseen hintaan.</li>
+    <li>📦 <h4>Luotettavat palvelut</h4> Meidän tiimimme on sitoutunut tarjoamaan luotettavia ja ajantasaisia toimituksia.</li>
+    <li>🤝 <h4>Asiakastuki</h4> Olemme täällä auttamassa sinua kaikissa kysymyksissäsi palveluistamme tai alustastamme.</li>
+  </ul>
+</div>
+
 
       <div className={styles.section}>
         <FunFacts />
