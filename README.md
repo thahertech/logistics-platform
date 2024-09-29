@@ -18,7 +18,7 @@ Next.js application designed for managing and filtering delivery records sourced
 
 ---
 
-## ⭐ Features
+## Features
 
 - **Delivery Management**: View and manage deliveries from a WordPress REST API.
 - **Dynamic Filtering**: Filter deliveries by pickup location, delivery location, price, date, and transport type.
@@ -37,7 +37,7 @@ Next.js application designed for managing and filtering delivery records sourced
 
 ---
 
-## ⚙️ Technologies Used
+## Technologies Used
 
 - **Next.js**: A React framework for building server-rendered and statically generated web applications.
 - **Axios**: A promise-based HTTP client for the browser and Node.js.
@@ -46,7 +46,7 @@ Next.js application designed for managing and filtering delivery records sourced
 
 ---
 
-## 📥 Installation
+## Installation
 
 To run this project locally, follow these steps:
 
@@ -70,12 +70,12 @@ npm run dev
 
 Open your browser and navigate to http://localhost:3000 to view the application.
 
-## 💻 Usage
+## Usage
 Home Dashboard: Users can navigate to different features such as viewing nearby deliveries, creating shipments, and finding available deliveries.
 Filtering Deliveries: Utilize the filter sidebar to narrow down delivery options based on various criteria.
 About Us: Learn more about the company, its mission, and values.
 
-## 🧩 Components
+## Components
 AboutUs
 Provides an overview of the company, detailing who we are, our mission, values, and contact information. All the basics, u know!
 
@@ -85,7 +85,7 @@ The main interface where users can interact with various delivery services, navi
 FilterSidebar
 Allows users to filter deliveries based on pickup and delivery locations, price, date, and transport type through a user-friendly interface.
 
-## 🤝 Contributing
+## Contributing
 Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
 Fork the repository.
@@ -104,11 +104,11 @@ git push origin feature/YourFeature
 
 Open a pull request.
 
-## 📝 License
+## License
 
 This project is licensed under a custom license that prohibits commercial use. Please do not use, modify, or distribute this software for commercial purposes without explicit permission.
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 Next.js
 Axios
