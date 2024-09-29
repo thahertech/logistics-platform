@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ContentList = ({ filters }) => {
-  const allItems = [/* Array of shipment data */];
+  const allItems = [];
 
   const filteredItems = allItems.filter(item => {
     const {
@@ -13,11 +13,11 @@ const ContentList = ({ filters }) => {
     } = filters;
 
     const matchesPickup = pickupLocation
-      ? item.pickupLocation.toLowerCase().includes(pickupLocation.toLowerCase())
+      ? item.acf.pickupLocation.includes(pickupLocation)
       : true;
 
     const matchesDelivery = deliveryLocation
-      ? item.deliveryLocation.toLowerCase().includes(deliveryLocation.toLowerCase())
+      ? item.acf.deliveryLocation.includes(deliveryLocation)
       : true;
 
     const matchesPrice = price ? item.price <= price : true;
@@ -47,9 +47,8 @@ const ContentList = ({ filters }) => {
     <div>
       {filteredItems.map(item => (
         <div key={item.id}>
-          {/* Render each shipment or delivery item */}
           <h4>{item.title}</h4>
-          <p>{item.description}</p>
+          <p>{item.weight} kg</p>
           <p>{item.price} €</p>
         </div>
       ))}
