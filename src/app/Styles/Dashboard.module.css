@@ -39,17 +39,8 @@
 
   }
 
-  .DashboardTitle {
-    font-size: 48px;
-    font-family: 'Inter', sans-serixf;
-    
-    font-weight: bold;
-    margin: 0;
-    color: #333;
-  }
-
   .line {
-    font-size: 74px;
+    font-size: 4rem;
     font-variant: small-caps;
     color: #ffffff;
     border-radius: 10px;
@@ -125,7 +116,7 @@
   }
 
   .cardTitle {
-    font-size: 24px;
+    font-size: 1.6rem;
     font-weight: 200;
     margin: 0;
     text-align: left;
