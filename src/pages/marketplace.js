@@ -12,14 +12,14 @@ const Deliveries = () => {
   const [error, setError] = useState(null);
   const [selectedDelivery, setSelectedDelivery] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [filters, setFilters] = useState({}); // To store filters
+  const [filters, setFilters] = useState({});
 
   useEffect(() => {
     const fetchDeliveries = async () => {
       try {
         const response = await axios.get('http://truckup.local/wp-json/wp/v2/kuljetus');
         setDeliveries(response.data);
-        setFilteredDeliveries(response.data); // Initially display all deliveries
+        setFilteredDeliveries(response.data);
       } catch (error) {
         console.error('Error fetching deliveries:', error);
         setError('Failed to fetch deliveries.');
@@ -44,25 +44,25 @@ const Deliveries = () => {
       } = newFilters;
 
       const matchesPickup = pickupLocation
-        ? delivery.acf.nouto.toLowerCase().includes(pickupLocation.toLowerCase())
+        ? delivery.acf.pickup_location ? delivery.acf.pickup_location.toLowerCase().includes(pickupLocation.toLowerCase()) : false
         : true;
 
       const matchesDelivery = deliveryLocation
-        ? delivery.acf.toimitus.toLowerCase().includes(deliveryLocation.toLowerCase())
+        ? delivery.acf.delivery_location ? delivery.acf.delivery_location.toLowerCase().includes(deliveryLocation.toLowerCase()) : false
         : true;
 
-      const matchesPrice = price ? delivery.acf.hinta <= price : true;
+      const matchesPrice = price ? parseFloat(delivery.acf.price) <= parseFloat(price) : true;
 
       const matchesDate = date === 'now'
-        ? new Date(delivery.acf.pvm).getDate() === new Date().getDate()
+        ? new Date(delivery.acf.pickup_date).getDate() === new Date().getDate()
         : date === 'tomorrow'
-        ? new Date(delivery.acf.pvm).getDate() === new Date().getDate() + 1
+        ? new Date(delivery.acf.pickup_date).getDate() === new Date().getDate() + 1
         : date === 'nextWeek'
-        ? new Date(delivery.acf.pvm) > new Date() && new Date(delivery.acf.pvm) <= new Date().setDate(new Date().getDate() + 7)
+        ? new Date(delivery.acf.pickup_date) > new Date() && new Date(delivery.acf.pickup_date) <= new Date().setDate(new Date().getDate() + 7)
         : true;
 
       const matchesTransportType = transportType.length
-        ? transportType.includes(delivery.acf.kuljetustyyppi)
+        ? transportType.includes(delivery.acf.transport_type)
         : true;
 
       return (
@@ -74,7 +74,7 @@ const Deliveries = () => {
       );
     });
 
-    setFilteredDeliveries(filtered); // Update the filtered deliveries
+    setFilteredDeliveries(filtered);
   };
 
   const handleCardClick = (delivery) => {
@@ -90,12 +90,9 @@ const Deliveries = () => {
   return (
     <Layout>
       <div className="flex">
-        {/* Sidebar for filtering deliveries */}
         <FilterSidebar applyFilters={applyFilters} />
-
-        {/* Main content area */}
         <div className="flex flex-col justify-center items-center p-8 bg-gray-200 w-full">
-          <h2 className="text-2xl text-gray-700 font-bold mb-6">Deliveries</h2>
+          <h2 className="text-2xl text-gray-700 font-bold mb-6">Kuljetukset</h2>
           {loading ? (
             <p>Loading deliveries...</p>
           ) : error ? (
@@ -109,15 +106,15 @@ const Deliveries = () => {
                     className="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
                     onClick={() => handleCardClick(delivery)}
                   >
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">{delivery.acf.nimi}</h3>
-                    <p className="text-gray-600 mb-1"><strong>Toimitus:</strong> {delivery.acf.toimitus}</p>
-                    <p className="text-gray-600 mb-1"><strong>Nouto:</strong> {delivery.acf.nouto}</p>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">{delivery.acf.shipment_name}</h3>
+                    <p className="text-gray-600 mb-1"><strong>Toimitus:</strong> {delivery.acf.delivery_location.lat}, {delivery.acf.delivery_location.lng}</p>
+                    <p className="text-gray-600 mb-1"><strong>Nouto:</strong> {delivery.acf.pickup_location.lat}, {delivery.acf.pickup_location.lng}</p>
                     <p className="text-gray-600 mb-1"><strong>Paino:</strong> {delivery.acf.paino} kg</p>
-                    <p className="text-gray-600 mb-1"><strong>Hinta:</strong> {delivery.acf.hinta} €</p>
+                    <p className="text-gray-600 mb-1"><strong>Hinta:</strong> {delivery.acf.price} €</p>
                   </div>
                 ))
               ) : (
-                <p>No deliveries found.</p>
+                <p>Ei kuljetuksia</p>
               )}
             </div>
           )}

@@ -4,102 +4,109 @@ import dayjs from 'dayjs';
 import Layout from '../app/dashboard/Layout';
 import '../app/globals.css';
 
-
 const CreateShipment = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [companyName, setCompanyName] = useState('');
-  const [street, setStreet] = useState('');
-  const [city, setCity] = useState('');
-  const [postalCode, setPostalCode] = useState('');
-  const [destination, setDestination] = useState('');
+  const [pickupAddress, setPickupAddress] = useState('');
+  const [pickupLocation, setPickupLocation] = useState({ lat: '', lng: '' });
   const [pickupDate, setPickupDate] = useState(dayjs().format('YYYY-MM-DD'));
   const [deliveryDate, setDeliveryDate] = useState('');
-  const [truckRequirements, setTruckRequirements] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [deliveryLocation, setDeliveryLocation] = useState({ lat: '', lng: '' });
   const [weight, setWeight] = useState('');
   const [transportUnits, setTransportUnits] = useState('');
-  const [details, setDetails] = useState('');
   const [price, setPrice] = useState('');
-  const [deleteAfter, setDeleteAfter] = useState('48h');
 
-  const handleNext = () => {
-    setActiveStep((prev) => prev + 1);
+  const getCoordinates = async (address) => {
+    try {
+      const response = await axios.get('https://nominatim.openstreetmap.org/search', {
+        params: {
+          q: address,
+          format: 'json',
+          limit: 1,
+        },
+      });
+
+      if (response.data.length > 0) {
+        return { lat: response.data[0].lat, lng: response.data[0].lon };
+      } else {
+        alert('Could not find coordinates for the address.');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error fetching coordinates:', error);
+      alert('Failed to fetch coordinates for the address.');
+      return null;
+    }
+  };
+
+  const handleNext = async () => {
+    if (activeStep === 0) {
+      const coords = await getCoordinates(pickupAddress);
+      if (coords) {
+        setPickupLocation(coords);
+        setActiveStep((prev) => prev + 1);
+      }
+    } else if (activeStep === 1) {
+      const coords = await getCoordinates(deliveryAddress);
+      if (coords) {
+        setDeliveryLocation(coords);
+        setActiveStep((prev) => prev + 1);
+      }
+    } else {
+      setActiveStep((prev) => prev + 1);
+    }
   };
 
   const handleBack = () => {
     setActiveStep((prev) => prev - 1);
   };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-    
-      if (activeStep === 2) {
-        const fullAddress = `${street}, ${city}, ${postalCode}`;
-        let lat, lng;
-    
-        try {
-          const response = await axios.get('https://nominatim.openstreetmap.org/search', {
-            params: {
-              q: fullAddress,
-              format: 'json',
-              limit: 1,
-            },
-          });
-    
-          if (response.data.length > 0) {
-            lat = response.data[0].lat;
-            lng = response.data[0].lon;
-          } else {
-            alert('Could not find coordinates for the address.');
-            return;
-          }
-        } catch (error) {
-          console.error('Error fetching coordinates:', error);
-          alert('Failed to fetch coordinates for the address.');
-          return;
-        }
-    
-        const jwtToken = localStorage.getItem('jwtToken');
-    
-        try {
-          const shipmentData = {
-            // Ensure these keys match your ACF field names
-            nimi: companyName, // Add this field
-            sijainti: {
-              lat: lat, // Assuming you want to send lat/lng to the Google Map field
-              lng: lng,
-            },
-            nouto: pickupDate,
-            toimitus: deliveryDate,
-            paino: weight,
-            // Add any other fields needed
-            kuljetettavatYksiköt: transportUnits,
-            details,
-            price,
-          };
-    
-          const response = await axios.post('http://truckup.local/wp-json/wp/v2/kuljetus', shipmentData, {
-            headers: {
-              Authorization: `Bearer ${jwtToken}`,
-              'Content-Type': 'application/json',
-            },
-          });
-    
-          if (response.status === 201) {
-            alert('Shipment created successfully!');
-            setActiveStep(0); // Reset the form on successful submission
-          } else {
-            alert('Failed to create shipment');
-          }
-        } catch (error) {
-          console.error('Error creating shipment:', error);
-          alert('Failed to create shipment');
-        }
-      }
-    };
-    
-  
 
-  const steps = ['Noutotiedot', 'Kuljetustiedot', 'Toimitustiedot'];
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const shipmentData = {
+      status: 'publish',
+      title: companyName,
+      acf: {
+        shipment_name: companyName,
+        weight: weight,
+        pickup_location: pickupLocation,
+        delivery_location: deliveryLocation,
+        pickup_date: pickupDate,
+        delivery_date: deliveryDate,
+        transport_units: transportUnits,
+        price: price,
+      },
+    };
+
+    console.log('Shipment Data:', shipmentData);
+
+
+    try {
+      const jwtToken = localStorage.getItem('token');
+      const response = await axios.post('http://truckup.local/wp-json/wp/v2/kuljetus', shipmentData, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 201) {
+        alert('Kuljetustilaus luotiin onnistuneesti!');
+        console.log('API Response:', response.data);  // Log the API response
+
+        setActiveStep(0); // Reset the form on successful submission
+      } else {
+        alert('Kuljetustilauksen luominen epäonnistui');
+      }
+    } catch (error) {
+      console.error('Virhe kuljetustilauksen luomisessa:', error);
+      alert('Kuljetustilauksen luominen epäonnistui');
+    }
+  };
+
+  const steps = ['Noutotiedot', 'Toimitustiedot', 'Kuljetustiedot'];
 
   const renderStepContent = (step) => {
     switch (step) {
@@ -116,23 +123,15 @@ const CreateShipment = () => {
             <input
               type="text"
               className="w-full p-2 mb-4 border rounded"
-              placeholder="Katuosoite"
-              value={street}
-              onChange={(e) => setStreet(e.target.value)}
+              placeholder="Nouto Osoite"
+              value={pickupAddress}
+              onChange={(e) => setPickupAddress(e.target.value)}
             />
             <input
-              type="text"
+              type="date"
               className="w-full p-2 mb-4 border rounded"
-              placeholder="Kaupunki"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-            <input
-              type="text"
-              className="w-full p-2 mb-4 border rounded"
-              placeholder="Postinumero"
-              value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
+              value={pickupDate}
+              onChange={(e) => setPickupDate(e.target.value)}
             />
           </>
         );
@@ -142,15 +141,9 @@ const CreateShipment = () => {
             <input
               type="text"
               className="w-full p-2 mb-4 border rounded"
-              placeholder="Toimitusosoite"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
-            />
-            <input
-              type="date"
-              className="w-full p-2 mb-4 border rounded"
-              value={pickupDate}
-              onChange={(e) => setPickupDate(e.target.value)}
+              placeholder="Toimitus Osoite"
+              value={deliveryAddress}
+              onChange={(e) => setDeliveryAddress(e.target.value)}
             />
             <input
               type="date"
@@ -163,13 +156,6 @@ const CreateShipment = () => {
       case 2:
         return (
           <>
-            <input
-              type="text"
-              className="w-full p-2 mb-4 border rounded"
-              placeholder="Kuljetuksen tiedot"
-              value={truckRequirements}
-              onChange={(e) => setTruckRequirements(e.target.value)}
-            />
             <input
               type="number"
               className="w-full p-2 mb-4 border rounded"
@@ -191,26 +177,10 @@ const CreateShipment = () => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
-            <textarea
-              className="w-full p-2 mb-4 border rounded"
-              placeholder="Lisätiedot"
-              value={details}
-              onChange={(e) => setDetails(e.target.value)}
-            />
-            <select
-              className="w-full p-2 mb-4 border rounded"
-              value={deleteAfter}
-              onChange={(e) => setDeleteAfter(e.target.value)}
-            >
-              <option value="48h">48 Hours</option>
-              <option value="72h">72 Hours</option>
-              <option value="1w">1 Week</option>
-              <option value="2w">2 Weeks</option>
-            </select>
           </>
         );
       default:
-        return 'Unknown step';
+        return 'Tuntematon vaihe';
     }
   };
 
@@ -221,7 +191,7 @@ const CreateShipment = () => {
           onSubmit={handleSubmit}
           className="bg-gray-700 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-96"
         >
-          <h2 className="text-lg font-bold mb-4 text-white">Kuljetustilaus</h2>
+          <h2 className="text-lg font-bold mb-4 text-white">Luo Kuljetustilaus</h2>
           <div className="mb-4">
             <div className="flex justify-between">
               {steps.map((label, index) => (
@@ -265,6 +235,5 @@ const CreateShipment = () => {
     </Layout>
   );
 };
-
 
 export default CreateShipment;

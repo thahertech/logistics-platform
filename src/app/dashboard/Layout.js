@@ -12,10 +12,9 @@ const Layout = ({ children }) => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Clear the token
-    setIsAuthenticated(false); // Update state
-    // Optionally redirect to the home page or login page
-    window.location.href = '/auth'; // Or use router.push if you prefer
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    window.location.href = '/auth';
   };
 
   return (
@@ -54,7 +53,7 @@ const Layout = ({ children }) => {
         {children}
       </main>
       <footer className={styles.footer}>
-        <p className={styles.footerText}>© 2024 TruckUp OY | All rights reserved.</p>
+        <p className={styles.footerText}>© 2024 Logistix OY | All rights reserved.  Designed by Sensei Studios</p>
         <nav>
           <ul className={styles.footerMenu}>
             <li className={styles.footerItem}>
