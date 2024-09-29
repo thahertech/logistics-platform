@@ -48,6 +48,8 @@ const Auth = () => {
         // Store token in localStorage (client-side only)
         if (typeof window !== 'undefined') {
           localStorage.setItem('token', response.data.token);
+          console.log(response.data.token);
+          
         }
 
         // Navigate to Profile page

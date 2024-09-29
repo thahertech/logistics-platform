@@ -1,56 +1,71 @@
+import React, { useEffect, useState } from 'react';
+import Layout from '@/app/dashboard/Layout';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
-import { useEffect, useState } from 'react';
+import '../app/globals.css';
+import UserRating from './ratingDetails';
+import Rating from './rating';
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const decodedToken = jwtDecode(token);
 
-    if (token) {
-      // Decode the token to check expiry and other details
-      console.log('Token:', token);
-      console.log('Decoded Token:', decodedToken);
-
-      // Fetch user details with the token
-      fetchUserDetails(decodedToken);
-    } else {
-      setError('No token found');
-    }
-  }, []);
-
-  const fetchUserDetails = async (token) => {
-    try {
-      const response = await axios.get('http://truckup.local/wp-json/wp/v2/users/me', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUserDetails(response.data);
-      console.log('User Details:', response.data);
-    } catch (error) {
-      console.error('Error fetching user details', error);
-      setError('Failed to fetch user details.');
-    }
-  };
-
+    const fetchUserDetails = async () => {
+      if (!token) {
+          setError('No authentication token found.');
+          setLoading(false);
+          return;
+      }
+  
+      try {
+  
+  
+          const decoded = jwtDecode(token); // Decode the token
+  
+          const response = await axios.get('http://truckup.local/wp-json/wp/v2/users/me', {
+              headers: {
+                  Authorization: `Bearer ${token}`,
+              },
+          });
+          console.log('User Details Response:', response.data); 
+          setUserDetails(response.data);
+          
+      } catch (error) {
+          console.error('Error fetching user details', error); 
+          setError('Failed to fetch user details.');
+      } finally {
+          setLoading(false);
+      }
+    };
+  
+    fetchUserDetails();
+  }, []); 
   return (
-    <div>
-      <h1>Profile</h1>
-      {error && <p>Error: {error}</p>}
-      {userDetails ? (
-        <div>
-          <h2>Welcome, {userDetails.name}</h2>
-          <p>Email: {userDetails.email}</p>
-          {/* Display other user details as necessary */}
+    <Layout>
+      <div className="flex justify-center items-center h-screen bg-gray-200">
+        <div className="text-black bg-white p-8 rounded-lg shadow-lg w-96">
+          <h2 className="text-2xl text-black text-gray-700 font-bold mb-6 text-center">Profiili</h2>
+          {loading ? (
+            <p>Odota hetki...</p> 
+          ) : error ? (
+            <p className="text-red-500">{error}</p>
+          ) : (
+            <div>
+              <p><strong>Nimi:</strong> {userDetails?.name}</p>
+              <p><strong>Sähköposti:</strong> {userDetails?.email}</p>
+              <p><strong>Osoite:</strong> {userDetails?.address}</p>
+              <Rating/>
+              <UserRating/>
+
+            </div>
+          )}
         </div>
-      ) : (
-        <p>Loading user details...</p>
-      )}
-    </div>
+      </div>
+    </Layout>
   );
 };
 
