@@ -64,7 +64,7 @@ const CreateShipment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const shipmentData = {
       status: 'publish',
       title: companyName,
@@ -79,24 +79,27 @@ const CreateShipment = () => {
         price: price,
       },
     };
-
+  
     console.log('Shipment Data:', shipmentData);
-
-
+  
     try {
-      const jwtToken = localStorage.getItem('token');
+      let jwtToken = null;
+      if (typeof window !== "undefined") {
+        jwtToken = localStorage.getItem('token');
+      }
+  
       const response = await axios.post('http://truckup.local/wp-json/wp/v2/kuljetus', shipmentData, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
           'Content-Type': 'application/json',
         },
       });
-
+  
       if (response.status === 201) {
         alert('Kuljetustilaus luotiin onnistuneesti!');
-        console.log('API Response:', response.data);  // Log the API response
-
-        setActiveStep(0); // Reset the form on successful submission
+        console.log('API Response:', response.data);
+  
+        setActiveStep(0);
       } else {
         alert('Kuljetustilauksen luominen epäonnistui');
       }
@@ -105,6 +108,7 @@ const CreateShipment = () => {
       alert('Kuljetustilauksen luominen epäonnistui');
     }
   };
+  
 
   const steps = ['Noutotiedot', 'Toimitustiedot', 'Kuljetustiedot'];
 
