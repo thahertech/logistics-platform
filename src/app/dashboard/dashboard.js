@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Styles/Dashboard.module.css';
 import './globals.css';
+import FunFacts from './funfacts';
 
 const Dashboard = () => {
   const router = useRouter();
@@ -37,7 +38,7 @@ const Dashboard = () => {
             width={500}
             height={300}
             className={styles.cardImage}
-            priority // Add priority to load images faster
+            priority
           />
           <div className={styles.cardContent}>
             <h2 className={styles.cardTitle}>Lähellä</h2>
@@ -75,14 +76,9 @@ const Dashboard = () => {
 
       <div className={styles.section}>
         <div className={styles.testimonialContainer}>
-          <div className={styles.testimonialCard}>
-            <p className={styles.testimonialText}>
-              "TruckUp has revolutionized our logistics operations. The platform is intuitive and saves us a lot of time!"
-            </p>
-            <p className={styles.testimonialAuthor}>Company A</p>
+
           </div>
         </div>
-      </div>
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Have questions or need support?</h2>
