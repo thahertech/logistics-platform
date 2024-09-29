@@ -31,7 +31,6 @@ const Deliveries = () => {
     fetchDeliveries();
   }, []);
 
-  // Function to apply the filters
   const applyFilters = (newFilters) => {
     setFilters(newFilters);
     const filtered = deliveries.filter((delivery) => {
@@ -44,11 +43,11 @@ const Deliveries = () => {
       } = newFilters;
 
       const matchesPickup = pickupLocation
-        ? delivery.acf.pickup_location ? delivery.acf.pickup_location.toLowerCase().includes(pickupLocation.toLowerCase()) : false
+        ? delivery.acf.pickup_location ? delivery.acf.pickup_location.includes(pickupLocation) : false
         : true;
 
       const matchesDelivery = deliveryLocation
-        ? delivery.acf.delivery_location ? delivery.acf.delivery_location.toLowerCase().includes(deliveryLocation.toLowerCase()) : false
+        ? delivery.acf.delivery_location ? delivery.acf.delivery_location.includes(deliveryLocation) : false
         : true;
 
       const matchesPrice = price ? parseFloat(delivery.acf.price) <= parseFloat(price) : true;
@@ -107,9 +106,9 @@ const Deliveries = () => {
                     onClick={() => handleCardClick(delivery)}
                   >
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">{delivery.acf.shipment_name}</h3>
-                    <p className="text-gray-600 mb-1"><strong>Toimitus:</strong> {delivery.acf.delivery_location.lat}, {delivery.acf.delivery_location.lng}</p>
-                    <p className="text-gray-600 mb-1"><strong>Nouto:</strong> {delivery.acf.pickup_location.lat}, {delivery.acf.pickup_location.lng}</p>
-                    <p className="text-gray-600 mb-1"><strong>Paino:</strong> {delivery.acf.paino} kg</p>
+                    <p className="text-gray-600 mb-1"><strong>Toimituspvm:</strong> {delivery.acf.delivery_date}</p>
+                    <p className="text-gray-600 mb-1"><strong>Noutopvm:</strong> {delivery.acf.pickup_date}</p>
+                    <p className="text-gray-600 mb-1"><strong>Paino:</strong> {delivery.acf.weight} kg</p>
                     <p className="text-gray-600 mb-1"><strong>Hinta:</strong> {delivery.acf.price} €</p>
                   </div>
                 ))
