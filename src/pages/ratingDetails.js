@@ -1,51 +1,48 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 
-const UserRating = () => {
-    const [userId, setUserId] = useState(null);
-    const [averageRating, setAverageRating] = useState(0);
-    const token = localStorage.getItem('token'); // Ensure your token is stored in local storage
+const RatingsList = () => {
+    const [ratings, setRatings] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        // Check for token and decode it
-        if (token) {
-            const decodedToken = jwtDecode(token);
-            const id = decodedToken.data.user.id; // Adjust according to your JWT structure
-            setUserId(id); // Set user ID to state
-            console.log('User ID:', id);
-        } else {
-            console.error('No token found');
-        }
-    }, [token]); // Dependency array includes token
+        const fetchRatings = async () => {
+            const token = localStorage.getItem('token');
 
-    // Fetch user ratings only when userId is available
-    useEffect(() => {
-        if (userId) {
-            fetchAverageRating(userId);
-        }
-    }, [userId]); // Dependency array includes userId
+            try {
+                const response = await axios.get('http://truckup.local/wp-json/wp/v2/rating', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setRatings(response.data); // Store the ratings data
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error fetching ratings:', error);
+                setErrorMessage('Failed to fetch ratings. Please try again later.');
+            }
+        };
 
-    const fetchAverageRating = async (id) => {
-        try {
-            const response = await axios.get(`http://truckup.local/wp-json/custom/v1/user-ratings/${id}`);
-            setAverageRating(response.data.average_rating); // Assuming your API returns { average_rating: value }
-            console.log('Average Rating:', response.data.average_rating);
-        } catch (error) {
-            console.error('Error fetching user ratings:', error);
-        }
-    };
+        fetchRatings();
+    }, []);
 
     return (
         <div>
-            <h2>User Rating</h2>
-            {userId ? (
-                <p>Average Rating: {averageRating}</p>
-            ) : (
-                <p>Loading...</p>
-            )}
+          <h3>User Ratings</h3>
+          {ratings.length === 0 ? (
+            <p>No ratings found.</p>
+          ) : (
+            ratings.map((rating) => (
+              <div key={rating.slug} className="border rounded-lg p-4 mb-4 bg-gray-50 shadow">
+                <p><strong>Rating:</strong> {rating.acf.rating} / 5</p>
+                <p><strong>Comment:</strong> {rating.acf.comment}</p>
+                <p><strong>Date:</strong> {new Date(rating.date).toLocaleDateString()}</p>
+              </div>
+            ))
+          )}
         </div>
-    );
-};
-
-export default UserRating;
+      );
+    };
+    
+    export default RatingsList;
+    

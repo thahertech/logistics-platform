@@ -1,47 +1,107 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './RatingForm.css'; // Import CSS for styling the stars
 
-const RatingForm = ({ userId }) => {
-  const [rating, setRating] = useState(0);
-  const [message, setMessage] = useState('');
+const RatingForm = ({ deliveryId, onRatingSubmitted }) => {
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState('');
+    const [message, setMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [userId, setUserId] = useState(null);
 
-  const handleRatingSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem('token'); // Ensure your token is stored in local storage
+    useEffect(() => {
+        const fetchUserId = async () => {
+            const token = localStorage.getItem('token');
 
-      const response = await axios.post('http://truckup.local/wp-json/custom/v1/rate-user', {
-        rated_user_id: userId,
-        rating,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+            try {
+                const response = await axios.get('http://truckup.local/wp-json/wp/v2/users/me', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setUserId(response.data.id);
+            } catch (error) {
+                console.error('Error fetching user ID:', error);
+                setErrorMessage('Failed to fetch user details. Please try again.');
+            }
+        };
 
-      setMessage(response.data); // Success message
-      console.log('set rating');
-      setRating(0); // Reset rating
-    } catch (error) {
-      console.error('Error submitting rating:', error);
-      setMessage('Failed to submit rating.');
-    }
-  };
+        fetchUserId();
+    }, []);
 
-  return (
-    <form onSubmit={handleRatingSubmit}>
-      <select value={rating} onChange={(e) => setRating(e.target.value)}>
-        <option value={0}>Select Rating</option>
-        <option value={1}>1 Star</option>
-        <option value={2}>2 Stars</option>
-        <option value={3}>3 Stars</option>
-        <option value={4}>4 Stars</option>
-        <option value={5}>5 Stars</option>
-      </select>
-      <button type="submit">Submit Rating</button>
-      {message && <p>{message}</p>}
-    </form>
-  );
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+
+        try {
+            const response = await axios.post(
+                `http://truckup.local/wp-json/custom/v1/rate-user`,
+                {
+                    rated_user_id: userId,
+                    rating,
+                    comment,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            setMessage('Rating submitted successfully!');
+
+            // Call the parent's function to update ratings
+            if (onRatingSubmitted) {
+                onRatingSubmitted({ rating, comment }); // Pass the new rating to the parent
+            }
+
+            // Reset the form fields
+            setRating(0);
+            setComment('');
+        } catch (error) {
+            console.error('Error submitting rating', error);
+            setMessage('Failed to submit rating. Please try again.');
+        }
+    };
+
+    // Star rating handler
+    const handleStarClick = (value) => {
+        setRating(value);
+    };
+
+    // Render star icons based on the current rating
+    const renderStars = () => {
+        return [...Array(5)].map((_, index) => {
+            const starValue = index + 1;
+            return (
+                <span
+                    key={starValue}
+                    className={`star ${starValue <= rating ? 'filled' : ''}`}
+                    onClick={() => handleStarClick(starValue)}
+                >
+                    ★
+                </span>
+            );
+        });
+    };
+
+    return (
+        <div>
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+            <form onSubmit={handleSubmit}>
+                <div className="star-rating">
+                    {renderStars()}
+                </div>
+                <textarea
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="Leave a comment..."
+                    required
+                />
+                <button type="submit">Submit Rating</button>
+            </form>
+            {message && <p style={{ color: 'green' }}>{message}</p>}
+        </div>
+    );
 };
 
 export default RatingForm;

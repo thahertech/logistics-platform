@@ -16,7 +16,7 @@ const CreateShipment = () => {
   const [weight, setWeight] = useState('');
   const [transportUnits, setTransportUnits] = useState('');
   const [price, setPrice] = useState('');
-
+  const [details, setDetails] = useState('');
   const getCoordinates = async (address) => {
     try {
       const response = await axios.get('https://nominatim.openstreetmap.org/search', {
@@ -77,6 +77,7 @@ const CreateShipment = () => {
         delivery_date: deliveryDate,
         transport_units: transportUnits,
         price: price,
+        details: details,
       },
     };
   
@@ -173,6 +174,13 @@ const CreateShipment = () => {
               placeholder="Kuljetettavat yksiköt"
               value={transportUnits}
               onChange={(e) => setTransportUnits(e.target.value)}
+            />
+             <input
+              type="text"
+              className="w-full p-2 mb-4 border rounded"
+              placeholder="Lisätietoa"
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
             />
             <input
               type="number"
