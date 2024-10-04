@@ -16,7 +16,8 @@ const CreateShipment = () => {
   const [weight, setWeight] = useState('');
   const [transportUnits, setTransportUnits] = useState('');
   const [price, setPrice] = useState('');
-
+  const [details, setDetails] = useState('');
+  const [image, setImage] = useState(null);
   const getCoordinates = async (address) => {
     try {
       const response = await axios.get('https://nominatim.openstreetmap.org/search', {
@@ -65,22 +66,49 @@ const CreateShipment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
+    let imageUrl = '';
+    if (image) {
+      imageUrl = await uploadImage(image);
+    }
+  
     const shipmentData = {
       status: 'publish',
-      title: companyName,
-      acf: {
-        shipment_name: companyName,
-        weight: weight,
-        pickup_location: pickupLocation,
-        delivery_location: deliveryLocation,
-        pickup_date: pickupDate,
-        delivery_date: deliveryDate,
-        transport_units: transportUnits,
-        price: price,
-      },
+      name: companyName,
+      type: 'simple',
+      regular_price: price,
+      description: details,
+      weight: weight,
+      short_description: details,
+      meta_data: [
+        {
+          key: 'pickup_location',
+          value: pickupLocation,
+        },
+        {
+          key: 'delivery_location',
+          value: deliveryLocation,
+        },
+        {
+          key: 'pickup_date',
+          value: pickupDate,
+        },
+        {
+          key: 'delivery_date',
+          value: deliveryDate,
+        },
+        {
+          key: 'transport_units',
+          value: transportUnits,
+        },
+        {
+          key: 'price',
+          value: price,
+        },
+      ],
+      images: imageUrl ? [{ src: imageUrl }] : [], // Add image URL to product data
     };
   
-    console.log('Shipment Data:', shipmentData);
+    console.log('Product Data:', shipmentData);
   
     try {
       let jwtToken = null;
@@ -88,7 +116,7 @@ const CreateShipment = () => {
         jwtToken = localStorage.getItem('token');
       }
   
-      const response = await axios.post('http://truckup.local/wp-json/wp/v2/kuljetus', shipmentData, {
+      const response = await axios.post('http://truckup.local/wp-json/wc/v3/products', shipmentData, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
           'Content-Type': 'application/json',
@@ -96,19 +124,45 @@ const CreateShipment = () => {
       });
   
       if (response.status === 201) {
-        alert('Kuljetustilaus luotiin onnistuneesti!');
+        alert('Product created successfully!');
         console.log('API Response:', response.data);
-  
-        setActiveStep(0);
+        setActiveStep(0); // Reset steps
       } else {
-        alert('Kuljetustilauksen luominen epäonnistui');
+        alert('Failed to create the product');
       }
     } catch (error) {
-      console.error('Virhe kuljetustilauksen luomisessa:', error);
-      alert('Kuljetustilauksen luominen epäonnistui');
+      console.error('Error creating product:', error);
+      alert('Failed to create the product');
     }
   };
-  
+
+  const uploadImage = async (file) => {
+    let imageUrl = '';
+    try {
+      const formData = new FormData();
+      formData.append('file', file); // Append file to FormData
+
+      let jwtToken = localStorage.getItem('token'); // Get the token from local storage
+
+      // Upload image to WordPress
+      const response = await axios.post('http://truckup.local/wp-json/wp/v2/media', formData, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.status === 201) {
+        imageUrl = response.data.source_url; // Get image URL from response
+      } else {
+        alert('Failed to upload image');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Failed to upload image');
+    }
+    return imageUrl;
+  };
 
   const steps = ['Noutotiedot', 'Toimitustiedot', 'Kuljetustiedot'];
 
@@ -175,11 +229,24 @@ const CreateShipment = () => {
               onChange={(e) => setTransportUnits(e.target.value)}
             />
             <input
+              type="text"
+              className="w-full p-2 mb-4 border rounded"
+              placeholder="Lisätietoa"
+              value={details}
+              onChange={(e) => setDetails(e.target.value)}
+            />
+            <input
               type="number"
               className="w-full p-2 mb-4 border rounded"
               placeholder="Hinta"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+            />
+            <input
+              type="file"
+              className="w-full p-2 mb-4 border rounded"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])} // Store the selected file
             />
           </>
         );

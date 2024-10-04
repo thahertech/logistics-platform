@@ -15,6 +15,7 @@ const FilterSidebar = ({ applyFilters }) => {
     setFilters({ ...filters, [name]: value });
   };
 
+  // Handle checkbox changes for transport type
   const handleCheckboxChange = (e) => {
     const { value, checked } = e.target;
     if (checked) {
@@ -29,6 +30,24 @@ const FilterSidebar = ({ applyFilters }) => {
 
   const handleSubmit = () => {
     applyFilters(filters);
+  };
+
+  // Reset filters
+  const resetFilters = () => {
+    setFilters({
+      pickupLocation: '',
+      deliveryLocation: '',
+      price: '',
+      date: 'now',
+      transportType: []
+    });
+    applyFilters({
+      pickupLocation: '',
+      deliveryLocation: '',
+      price: '',
+      date: 'now',
+      transportType: []
+    });
   };
 
   return (
@@ -114,8 +133,14 @@ const FilterSidebar = ({ applyFilters }) => {
         </div>
       </div>
 
-      <button className={styles.submitbutton}
-      onClick={handleSubmit}>Suodata</button>
+      <div className={styles.buttonGroup}>
+        <button className={styles.submitbutton} onClick={handleSubmit}>
+          Suodata
+        </button>
+        <button className={styles.resetButton} onClick={resetFilters}>
+          Nollaa Suodattimet
+        </button>
+      </div>
     </div>
   );
 };
