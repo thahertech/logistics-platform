@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Function to calculate the distance between two coordinates (Haversine formula)
+//(Haversine formula)
 const calculateDistance = (lat1, lng1, lat2, lng2) => {
   const toRad = (value) => (value * Math.PI) / 180;
 
@@ -20,7 +20,7 @@ const calculateDistance = (lat1, lng1, lat2, lng2) => {
 };
 
 const ContentList = ({ filters }) => {
-  const allItems = []; // Your array of items with coordinates
+  const allItems = [];
 
   const filteredItems = allItems.filter(item => {
     const {
@@ -31,11 +31,9 @@ const ContentList = ({ filters }) => {
       transportType
     } = filters;
 
-    // Coordinates for pickup and delivery locations from filter
-    const filterPickup = pickupLocation ? pickupLocation : null;  // Assuming it's an object {lat, lng}
+    const filterPickup = pickupLocation ? pickupLocation : null;
     const filterDelivery = deliveryLocation ? deliveryLocation : null;
 
-    // Matching pickup location by proximity (within a 10 km radius)
     const matchesPickup = filterPickup
       ? calculateDistance(
           filterPickup.lat,
@@ -52,7 +50,7 @@ const ContentList = ({ filters }) => {
           filterDelivery.lng,
           item.acf.delivery_location.lat,
           item.acf.delivery_location.lng
-        ) < 10  // Check if the distance is less than 10 km
+        ) < 10
       : true;
 
     const matchesPrice = price ? item.acf.price <= price : true;

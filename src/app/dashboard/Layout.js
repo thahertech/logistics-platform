@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CartSidebar from '../components/cartSidebar';
-import {jwtDecode} from 'jwt-decode'; 
+import {jwtDecode} from 'jwt-decode';
 
 const Layout = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -14,16 +14,16 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    jwtDecode(token);
 
 
     setIsAuthenticated(!!token);
 
     if (token) {
+      jwtDecode(token);
       fetchCartCount(token);
     }
     else {
-      
+
     }
   }, []);
 
