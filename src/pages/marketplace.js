@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import FilterSidebar from '../app/components/sideBar'; // Ensure the import is correct
-import Layout from '../app/dashboard/Layout'; // Ensure the import is correct
-import Modal from './Modal'; // Ensure the import is correct
+import FilterSidebar from '../app/components/sideBar';
+import Layout from '../app/dashboard/Layout';
+import Modal from '../app/components/Modal';
 import '../app/globals.css';
+import getProducts from '@/app/products/getProducts';
+import Products from './products';
 
 const Deliveries = () => {
   const [deliveries, setDeliveries] = useState([]);
@@ -118,7 +120,6 @@ const Deliveries = () => {
         },
       });
       alert('Purchase successful!');
-      // Optionally refresh the deliveries or navigate to a confirmation page
     } catch (error) {
       console.error('Error purchasing delivery:', error);
       alert('Failed to purchase delivery.');
@@ -137,6 +138,8 @@ const Deliveries = () => {
             <p className="text-red-500">{error}</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl">
+
+      
               {filteredDeliveries.length > 0 ? (
                 filteredDeliveries.map((delivery) => (
                   <div

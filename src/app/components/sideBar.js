@@ -10,7 +10,6 @@ const FilterSidebar = ({ applyFilters }) => {
     transportType: []
   });
 
-  // Handle text inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFilters({ ...filters, [name]: value });
@@ -29,7 +28,6 @@ const FilterSidebar = ({ applyFilters }) => {
     }
   };
 
-  // Submit filters
   const handleSubmit = () => {
     applyFilters(filters);
   };
