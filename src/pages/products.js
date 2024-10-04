@@ -72,24 +72,37 @@ const Products = () => {
           <p className="text-red-500">{error}</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl">
-            {products.map((product) => (
-              <div key={product.id} className="bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">{product.name}</h3>
+  {products.map((product) => {
+
+    const pickupDateMeta = product.meta_data.find(meta => meta.key === 'pickup_date');
+    const pickupdate = pickupDateMeta ? pickupDateMeta.value : 'ei saatavilla';
+
+    const deliveryDateMeta = product.meta_data.find(meta => meta.key === 'delivery_date');
+    const deliveryDate = deliveryDateMeta ? deliveryDateMeta.value : 'ei saatavilla'
+
+    return (
+                <div key={product.id} className="bg-white p-6 rounded-lg shadow-lg">
+                <h3 className="text-gray-600 mb-1"><strong>Toimitus: </strong> {deliveryDate}</h3>
                 <img
-                  src={product.images[0]?.src}
-                  alt={product.name}
-                  className="w-full h-auto mb-2 cursor-pointer"
-                  onClick={() => openModal(product)}
-                />
-                <p className="text-gray-600 mb-1"><strong>Hinta: </strong> {product.price} €</p>
-                <button
-                  onClick={() => handleAddToCart(product.id)}
-                  className="bg-blue-500 text-white rounded p-2 w-full"
-                >
-                  Lisää ostoskoriin
-                </button>
-              </div>
-            ))}
+                    src={product.images[0]?.src || 'default-image.jpg'}
+                    alt={product.name}
+                    className="w-full h-auto mb-2 cursor-pointer"
+                    onClick={() => openModal(product)}
+                  />
+                  <p className="text-gray-600 mb-1"><strong>Hinta: </strong> {product.price} €</p>
+                  <p className="text-gray-600 mb-1"><strong>Lisätietoa: </strong></p>
+                  <div className="text-gray-600 mb-1" dangerouslySetInnerHTML={{ __html: product.description }} />
+                  <p className="text-gray-600 mb-1"><strong>Nouto: </strong> {pickupdate}</p>
+
+                  <button
+                    onClick={() => handleAddToCart(product.id)}
+                    className="bg-blue-500 text-white rounded p-2 w-full"
+                  >
+                    Lisää ostoskoriin
+                  </button>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>

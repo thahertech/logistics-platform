@@ -24,7 +24,7 @@ const Auth = () => {
 
     const endpoint = isLogin
       ? process.env.NEXT_PUBLIC_LOGIN_ENDPOINT
-      : process.env.NEXT_PUBLIC_REGISTER_ENDPOINT; // Custom registration endpoint
+      : process.env.NEXT_PUBLIC_REGISTER_ENDPOINT;
 
     try {
       const response = await axios.post(endpoint, {
@@ -35,15 +35,12 @@ const Auth = () => {
       });
 
       if (isLogin) {
-        // Store the JWT token
         if (typeof window !== 'undefined') {
           localStorage.setItem('token', response.data.token);
         }
-        // Redirect to profile
         router.push('/Profile');
       } else {
         console.log('Registered!', response.data);
-        // Optionally redirect after registration
       }
     } catch (error) {
       setError(error.response?.data?.message || 'Authentication failed');
