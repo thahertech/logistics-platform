@@ -15,7 +15,7 @@ const RatingsList = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setRatings(response.data); // Store the ratings data
+                setRatings(response.data);
                 console.log(response.data);
             } catch (error) {
                 console.error('Error fetching ratings:', error);

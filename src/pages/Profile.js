@@ -3,7 +3,7 @@ import Layout from '@/app/dashboard/Layout';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import '../app/globals.css';
-import UserRating from './ratingDetails';
+import UserRating from '../app/components/ratingDetails';
 import { useForm } from 'react-hook-form';
 
 const Profile = () => {
@@ -14,16 +14,17 @@ const Profile = () => {
   const [deliveriesPurchased, setDeliveriesPurchased] = useState([]);
   const { register, handleSubmit, reset } = useForm();
   const [activeTab, setActiveTab] = useState('posted');
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
+    
+    if (!token) {
+      setError('User not signed in.');
+      setLoading(false);
+      return; // Exit if user is not signed in
+    }
 
     const fetchUserDetails = async () => {
-      if (!token) {
-        setError('No authentication token found.');
-        setLoading(false);
-        return;
-      }
-
       try {
         const decoded = jwtDecode(token);
         const response = await axios.get('http://truckup.local/wp-json/wp/v2/users/me', {
@@ -41,32 +42,25 @@ const Profile = () => {
       }
     };
 
-    const fetchUserDeliveries = async () => {
-      const token = localStorage.getItem('token');
+    const fetchUserProducts = async () => {
       try {
-        // Fetching posted deliveries for users who want to offer shipments
-        const postedResponse = await axios.get('http://truckup.local/wp-json/wp/v2/user-deliveries', {
+        const decoded = jwtDecode(token);
+        const userId = decoded.id;
+        const response = await axios.get(`http://truckup.local/wp-json/wc/v3/products?author=${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setDeliveriesPosted(postedResponse.data);
-
-        // Fetching purchased deliveries for users who want to buy shipments
-        // const purchasedResponse = await axios.get('http://truckup.local/wp-json/wp/v2/sales', {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`,
-        //   },
-        // });
-        // setDeliveriesPurchased(purchasedResponse.data);
+        setDeliveriesPosted(response.data);
+        console.log(response.data);
       } catch (error) {
-        console.error('Error fetching deliveries:', error);
-        setError('Failed to fetch deliveries.');
+        console.error('Error fetching products:', error);
+        setError('Failed to fetch products.');
       }
     };
 
     fetchUserDetails();
-    fetchUserDeliveries();
+    fetchUserProducts();
   }, [reset]);
 
   const onSubmit = async (data) => {
@@ -86,7 +80,6 @@ const Profile = () => {
     }
   };
 
-  // Determine user type (you might want to refine this logic based on your user types)
   const isBuyer = userDetails?.user_type === 'buyer';
   const isSeller = userDetails?.user_type !== 'seller';
 
@@ -100,57 +93,63 @@ const Profile = () => {
           ) : error ? (
             <p className="text-red-500 text-center">{error}</p>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-4">
-                <label htmlFor="name" className="block mb-2 text-gray-700">Nimi:</label>
-                <input
-                  type="text"
-                  {...register('name')}
-                  className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block mb-2 text-gray-700">Sähköposti:</label>
-                <input
-                  type="email"
-                  {...register('email')}
-                  className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
-                />
-              </div>
-              <button type="submit" className="bg-blue-500 text-white rounded p-2 mt-4 w-full hover:bg-blue-600 transition">Päivitä profiili</button>
-            </form>
-          )}
+            <>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="mb-4">
+                  <label htmlFor="name" className="block mb-2 text-gray-700">Nimi:</label>
+                  <input
+                    type="text"
+                    {...register('name')}
+                    className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="email" className="block mb-2 text-gray-700">Sähköposti:</label>
+                  <input
+                    type="email"
+                    {...register('email')}
+                    className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
+                  />
+                </div>
+                <button type="submit" className="bg-blue-500 text-white rounded p-2 mt-4 w-full hover:bg-blue-600 transition">Päivitä profiili</button>
+              </form>
 
-          <div className="mt-8 flex justify-center">
-            {isSeller && (
-              <button
-                onClick={() => setActiveTab('posted')}
-                className={`mr-4 p-2 rounded transition ${activeTab === 'posted' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-                Kaikki julkaistut kuljetukset
-              </button>
-            )}
-            {isBuyer && (
-              <button
-                onClick={() => setActiveTab('purchased')}
-                className={`mr-4 p-2 rounded transition ${activeTab === 'purchased' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-                Kaikki ostetut kuljetukset
-              </button>
-            )}
-            <button
-              onClick={() => setActiveTab('rating')}
-              className={`mr-4 p-2 rounded transition ${activeTab === 'rating' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-              Arvostelut
-            </button>
-          </div>
+              {userDetails && (
+                <div className="mt-8 flex justify-center">
+                  {isSeller && (
+                    <button
+                      onClick={() => setActiveTab('posted')}
+                      className={`mr-4 p-2 rounded transition ${activeTab === 'posted' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                      Kaikki julkaistut kuljetukset
+                    </button>
+                  )}
+                  {isBuyer && (
+                    <button
+                      onClick={() => setActiveTab('purchased')}
+                      className={`mr-4 p-2 rounded transition ${activeTab === 'purchased' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                      Kaikki ostetut kuljetukset
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setActiveTab('rating')}
+                    className={`mr-4 p-2 rounded transition ${activeTab === 'rating' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                    Arvostelut
+                  </button>
+                </div>
+              )}
+            </>
+          )}
 
           <div className="mt-4">
             {activeTab === 'posted' && isSeller ? (
               <div>
                 {deliveriesPosted.length ? deliveriesPosted.map(delivery => (
                   <div key={delivery.id} className="border rounded-lg p-4 mb-4 bg-gray-50 shadow">
-                    <p><strong>Toimituspvm:</strong> {delivery.delivery_date}</p>
+                    <p><strong>Nimi:</strong> {delivery.name}</p>
+                    <p><strong>Toimituspvm:</strong> {delivery.date}</p>
                     <p><strong>Noutopvm:</strong> {delivery.pickup_date}</p>
                     <p><strong>Paino:</strong> {delivery.weight} kg</p>
+                    <p><strong>Lisätietoa:</strong> {delivery.description}</p>
                     <p><strong>Hinta:</strong> {delivery.price} €</p>
                   </div>
                 )) : (
@@ -161,7 +160,7 @@ const Profile = () => {
               <div>
                 {deliveriesPurchased.length ? deliveriesPurchased.map(delivery => (
                   <div key={delivery.id} className="border rounded-lg p-4 mb-4 bg-gray-50 shadow">
-                    <p><strong>Toimituspvm:</strong> {delivery.delivery_date}</p>
+                    <p><strong>Nimi:</strong> {delivery.name}</p>
                     <p><strong>Noutopvm:</strong> {delivery.pickup_date}</p>
                     <p><strong>Paino:</strong> {delivery.weight} kg</p>
                     <p><strong>Hinta:</strong> {delivery.price} €</p>

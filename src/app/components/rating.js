@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './RatingForm.css'; // Import CSS for styling the stars
+import './RatingForm.css';
 
-const RatingForm = ({ deliveryId, onRatingSubmitted }) => {
+const RatingForm = ({ onRatingSubmitted }) => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [message, setMessage] = useState('');
@@ -49,12 +49,10 @@ const RatingForm = ({ deliveryId, onRatingSubmitted }) => {
             );
             setMessage('Rating submitted successfully!');
 
-            // Call the parent's function to update ratings
             if (onRatingSubmitted) {
-                onRatingSubmitted({ rating, comment }); // Pass the new rating to the parent
+                onRatingSubmitted({ rating, comment });
             }
 
-            // Reset the form fields
             setRating(0);
             setComment('');
         } catch (error) {
@@ -63,12 +61,10 @@ const RatingForm = ({ deliveryId, onRatingSubmitted }) => {
         }
     };
 
-    // Star rating handler
     const handleStarClick = (value) => {
         setRating(value);
     };
 
-    // Render star icons based on the current rating
     const renderStars = () => {
         return [...Array(5)].map((_, index) => {
             const starValue = index + 1;
