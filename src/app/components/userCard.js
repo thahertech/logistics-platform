@@ -3,7 +3,6 @@ import Image from 'next/image';
 import styles from '../Styles/Layout.module.css';
 
 const UserCards = () => {
-  const [cardsInView, setCardsInView] = useState({});
 
   useEffect(() => {
     const cardElements = document.querySelectorAll(`.${styles.card}`);
@@ -15,12 +14,12 @@ const UserCards = () => {
             entry.target.classList.add(
               entry.target.dataset.index % 2 === 0 ? styles['slide-in-left'] : styles['slide-in-right']
             );
-            entry.target.style.opacity = 1; // Make sure the card becomes visible
+            entry.target.style.opacity = 1;
           }
         });
       },
       {
-        threshold: 0.1, // Trigger animation when 10% of the card is in view
+        threshold: 0.1
       }
     );
 

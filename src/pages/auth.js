@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import '../app/globals.css'
+import '../app/globals.css';
 import Layout from '../app/dashboard/Layout';
 
 const Auth = () => {
@@ -10,12 +10,8 @@ const Auth = () => {
     usernameOrEmail: '',
     password: '',
     name: '',
-    companyName: '',
-    street: '',
-    city: '',
-    postalCode: '',
   });
-  const [error, setError] = useState(null); // Error state for user feedback
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -32,27 +28,16 @@ const Auth = () => {
 
     try {
       const response = await axios.post(endpoint, {
-        username: isLogin ? formData.usernameOrEmail : formData.usernameOrEmail,
+        username: formData.usernameOrEmail,
         password: formData.password,
-        ...(isLogin ? {} : {
-          name: formData.name,
-          email: formData.usernameOrEmail, // WordPress expects `email` during regis.
-          companyName: formData.companyName,
-          street: formData.street,
-          city: formData.city,
-          postalCode: formData.postalCode,
-        }),
+        email: formData.usernameOrEmail,
+        name: formData.name,
       });
 
       if (isLogin) {
-        // (client-side only)
         if (typeof window !== 'undefined') {
           localStorage.setItem('token', response.data.token);
-          console.log(response.data.token);
-          
         }
-
-        // Navigate to Profile page
         router.push('/Profile');
       } else {
         console.log('Registered!', response.data);
@@ -68,7 +53,7 @@ const Auth = () => {
       <div className="flex justify-center items-center h-screen bg-black-200">
         <div className="bg-gray-100 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-96">
           <h2 className="text-2xl font-bold mb-6 text-center text-white">
-            {isLogin ? 'Kirjaudu' : 'Register'}
+            {isLogin ? 'Login' : 'Register'}
           </h2>
           <form onSubmit={handleSubmit}>
             {!isLogin && (
@@ -77,76 +62,34 @@ const Auth = () => {
                   <input
                     type="text"
                     name="name"
-                    placeholder="Yritys tai Nimesi"
+                    placeholder="Name"
                     value={formData.name}
                     onChange={handleChange}
                     className="text-black w-full p-2 mb-4 border rounded"
                     required
                   />
                 </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    name="companyName"
-                    placeholder="Yritys"
-                    value={formData.companyName}
-                    onChange={handleChange}
-                    className="text-black w-full p-2 mb-4 border rounded"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    name="street"
-                    placeholder="Katuosoite"
-                    value={formData.street}
-                    onChange={handleChange}
-                    className="text-black w-full p-2 mb-4 border rounded"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    name="city"
-                    placeholder="Kaupunki"
-                    value={formData.city}
-                    onChange={handleChange}
-                    className="text-black w-full p-2 mb-4 border rounded"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    name="postalCode"
-                    placeholder="Postinumero"
-                    value={formData.postalCode}
-                    onChange={handleChange}
-                    className="text-black w-full p-2 mb-4 border rounded"
-                  />
-                </div>
               </>
             )}
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">{isLogin ? 'Käyttäjänimi' : 'Sähköposti'}</label>
+              <label className="block text-gray-700 mb-2">{isLogin ? 'Username or Email' : 'Email'}</label>
               <input
                 type={isLogin ? 'text' : 'email'}
                 name="usernameOrEmail"
-                placeholder={isLogin ? 'Käyttäjänimi tai sähköposti' : 'Enter your email'}
                 value={formData.usernameOrEmail}
                 onChange={handleChange}
-                className="text-black border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring focus:ring-blue-400"
+                className="text-black border border-gray-300 p-2 w-full rounded"
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Salasana</label>
+              <label className="block text-gray-700 mb-2">Password</label>
               <input
                 type="password"
                 name="password"
-                placeholder="****"
                 value={formData.password}
                 onChange={handleChange}
-                className="text-black border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring focus:ring-blue-400"
+                className="text-black border border-gray-300 p-2 w-full rounded"
                 required
               />
             </div>
@@ -154,17 +97,17 @@ const Auth = () => {
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
             >
-              {isLogin ? 'Kirjaudu' : 'Rekisteröi'}
+              {isLogin ? 'Login' : 'Register'}
             </button>
             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
             <p className="mt-4 text-left text-white">
-              {isLogin ? 'Ei käyttäjää? ' : 'Löytyykö käyttäjätili?'}
+              {isLogin ? 'No account? ' : 'Already have an account?'}
               <button
                 type="button"
                 className="text-blue-600 hover:underline ml-6"
                 onClick={() => setIsLogin(!isLogin)}
               >
-                {isLogin ? ' Rekisteröi' : 'Kirjaudu'}
+                {isLogin ? ' Register' : 'Login'}
               </button>
             </p>
           </form>
