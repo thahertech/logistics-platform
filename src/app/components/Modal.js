@@ -19,14 +19,14 @@ const Modal = ({ isOpen, onClose, product }) => {
         {product && (
           <>
           <h2 className="text-gray-600 mb-1"><strong>Toimitus: </strong> {deliveryDate}</h2>
-          {product.images.length > 0 && (
+          {/* {product.images.length > 0 && (
               <img src={product.images[0]?.src} alt={product.name} className="w-full h-auto mb-2" />
-            )}
+            )} */}
             <p><strong></strong>Hinta: {product.price} €</p>
             <p><strong>Nouto:</strong> {pickupDate}</p>
             <p><strong>Määrä:</strong> {transport_units}</p>
 
-            <p><strong></strong> {product.weight || 'N/A'} kg</p>
+            <p><strong>Paino:</strong> {product.weight || 'N/A'} kg</p>
             <p>{product.tags['slug']}</p>
             <div 
               className="mt-2" 

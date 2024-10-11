@@ -81,18 +81,19 @@ const Products = () => {
     const deliveryDate = deliveryDateMeta ? deliveryDateMeta.value : 'ei saatavilla'
 
     return (
-                <div key={product.id} className="bg-white p-6 rounded-lg shadow-lg">
+                <div key={product.id} className="bg-white p-6 rounded-lg shadow-lg" onClick={() => openModal(product)}>
                 <h3 className="text-gray-600 mb-1"><strong>Toimitus: </strong> {deliveryDate}</h3>
-                <img
+                <p className="text-gray-600 mb-1"><strong>Nouto: </strong> {pickupdate}</p>
+
+                {/* <img
                     src={product.images[0]?.src || 'default-image.jpg'}
                     alt={product.name}
                     className="w-full h-auto mb-2 cursor-pointer"
                     onClick={() => openModal(product)}
-                  />
+                  /> */}
                   <p className="text-gray-600 mb-1"><strong>Hinta: </strong> {product.price} €</p>
                   <p className="text-gray-600 mb-1"><strong>Lisätietoa: </strong></p>
                   <div className="text-gray-600 mb-1" dangerouslySetInnerHTML={{ __html: product.description }} />
-                  <p className="text-gray-600 mb-1"><strong>Nouto: </strong> {pickupdate}</p>
 
                   <button
                     onClick={() => handleAddToCart(product.id)}

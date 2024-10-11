@@ -3,9 +3,7 @@ import axios from 'axios';
 import styles from '../Styles/CartSidebar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faShoppingCart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
-import {jwtDecode} from 'jwt-decode'; 
-
+import {jwtDecode} from 'jwt-decode';
 import '../globals.css';
 
 const CartSidebar = ({ isOpen, onClose }) => {
@@ -26,8 +24,9 @@ const CartSidebar = ({ isOpen, onClose }) => {
         return;
       }
 
+      jwtDecode(token);
+
       try {
-        jwtDecode(token);
 
         const response = await axios.get('http://truckup.local/wp-json/wc/store/cart', {
           headers: {
@@ -50,16 +49,18 @@ const CartSidebar = ({ isOpen, onClose }) => {
   const handleDeleteItem = async (itemId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://truckup.local/wp-json/wc/store/cart/items/${itemId}`, {
+      await axios.delete(`http://truckup.local/wp-json/wc/store/cart/item/${itemId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      // Update state to reflect the deleted item
       setCartData(prevData => prevData.filter(item => item.id !== itemId));
     } catch (error) {
       console.error("Failed to delete the item:", error);
     }
   };
+  
 
   const handleCheckout = () => {
     // Toggle to checkout view
@@ -88,7 +89,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
           <p className={styles.cartItemPrice}>{item.regular_price ? `${item.regular_price}€` : 'Price missing'}</p>
           <p className={styles.cartItemQuantity}>Quantity: {item.quantity || '1'}</p>
           {item.sku && <p className={styles.cartItemSku}>SKU: {item.sku}</p>}
-          <button className={styles.deleteButton} onClick={() => handleDeleteItem(item.id)}>
+          <button className={styles.deleteButton} onClick={() => handleDeleteItem(item.key)}>
             <FontAwesomeIcon icon={faTrashAlt} /> Remove
           </button>
         </div>
