@@ -36,3 +36,9 @@ body {
 .fixed {
   z-index: 1000;
 }
+
+.content-container{
+
+  max-height: 25rem;
+  overflow: scroll;
+}

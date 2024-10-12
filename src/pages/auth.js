@@ -53,7 +53,7 @@ const Auth = () => {
       <div className="flex justify-center items-center h-screen bg-black-200">
         <div className="bg-gray-100 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-96">
           <h2 className="text-2xl font-bold mb-6 text-center text-white">
-            {isLogin ? 'Login' : 'Register'}
+            {isLogin ? 'Kirjaudu' : 'Rekisteröinti'}
           </h2>
           <form onSubmit={handleSubmit}>
             {!isLogin && (
@@ -62,7 +62,7 @@ const Auth = () => {
                   <input
                     type="text"
                     name="name"
-                    placeholder="Name"
+                    placeholder="Käyttäjänimi"
                     value={formData.name}
                     onChange={handleChange}
                     className="text-black w-full p-2 mb-4 border rounded"
@@ -72,7 +72,7 @@ const Auth = () => {
               </>
             )}
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">{isLogin ? 'Username or Email' : 'Email'}</label>
+              <label className="block text-gray-700 mb-2">{isLogin ? 'Käyttäjänimi tai sähköposti' : 'Sähköposti'}</label>
               <input
                 type={isLogin ? 'text' : 'email'}
                 name="usernameOrEmail"
@@ -83,7 +83,7 @@ const Auth = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Password</label>
+              <label className="block text-gray-700 mb-2">Salasana</label>
               <input
                 type="password"
                 name="password"
@@ -97,17 +97,17 @@ const Auth = () => {
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
             >
-              {isLogin ? 'Login' : 'Register'}
+              {isLogin ? 'Kirjaudu' : 'Rekisteröi'}
             </button>
             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
             <p className="mt-4 text-left text-white">
-              {isLogin ? 'No account? ' : 'Already have an account?'}
+              {isLogin ? 'Ei käyttäjää?' : 'Olet jo käyttäjä?'}
               <button
                 type="button"
                 className="text-blue-600 hover:underline ml-6"
                 onClick={() => setIsLogin(!isLogin)}
               >
-                {isLogin ? ' Register' : 'Login'}
+                {isLogin ? ' Rekisteröinti' : 'Kirjaudu'}
               </button>
             </p>
           </form>

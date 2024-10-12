@@ -43,10 +43,10 @@ const Products = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      alert('Product added to cart!');
+      //alert('Product added to cart!');
     } catch (error) {
       console.error('Error adding product to cart:', error);
-      alert('Failed to add product to cart.');
+      alert('Virhe, tuotetta ei voitu lisätä ostoskoriin.');
     }
   };
 

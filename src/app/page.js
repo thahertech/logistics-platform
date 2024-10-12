@@ -14,6 +14,7 @@ const Dashboard = () => {
     router.push(path);
   };
 
+
   return (
     <Layout>
       <div className={styles.hero}>
@@ -53,6 +54,24 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
+      <div className={styles.serviceSection}>
+  <div className={styles.cardContainer}>
+    {[
+      { icon: '🚚', title: 'Nopeat toimitukset', description: 'Löydä ja tilaa kuljetus nopeasti ja luotettavasti.' },
+      { icon: '🔒', title: 'Turvallisuus', description: 'Kaikki toimitukset ovat vakuutettuja ja turvallisia.' },
+      { icon: '💼', title: 'Yrityksille', description: 'Räätälöityjä ratkaisuja yrityksille ja liiketoimintaan.' },
+      { icon: '🌍', title: 'Ympäristöystävällisyys', description: 'Kestäviä kuljetusratkaisuja, jotka minimoivat hiilijalanjälkesi.' },
+      { icon: '🤝', title: '24/7 Asiakastuki', description: 'Asiakastukemme auttaa sinua milloin tahansa.' }
+    ].map((card, index) => (
+      <div key={index} className={styles.serviceCard}>
+        <div className={styles.icon}>{card.icon}</div>
+        <h3 className={styles.infoCardtitle}>{card.title}</h3>
+        <p className={styles.cardDescription}>{card.description}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
       <div className={`${styles.section} ${styles.whyChooseUs}`}>
 <div className={styles.sectionHeader}>
   <h2 className={styles.sectionTitle}>Miksi valita palvelumme?</h2>
