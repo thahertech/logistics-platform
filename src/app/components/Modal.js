@@ -3,6 +3,11 @@ import React from 'react';
 const Modal = ({ isOpen, onClose, product }) => {
   if (!isOpen) return null;
 
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose(); // Close the modal if the click is on the overlay
+    }
+  };
     const deliveryDateMeta = product.meta_data.find(meta => meta.key === 'delivery_date');
     const deliveryDate = deliveryDateMeta ? deliveryDateMeta.value : 'ei saatavilla'
 
@@ -13,8 +18,10 @@ const Modal = ({ isOpen, onClose, product }) => {
     const transport_units = transport_UnitsMeta ? transport_UnitsMeta.value : 'ei saatavilla'
     
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-4 rounded-lg max-w-sm w-full">
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={handleOverlayClick} // Detect click on the overlay
+    >      <div className="bg-white p-4 rounded-lg max-w-sm w-full">
         <button onClick={onClose} className="text-red-500 float-right">X</button>
         {product && (
           <>
