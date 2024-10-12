@@ -124,15 +124,15 @@ const CreateShipment = () => {
       });
   
       if (response.status === 201) {
-        alert('Product created successfully!');
+        alert('Ilmoitus julkaistu!');
         console.log('API Response:', response.data);
         setActiveStep(0); // Reset steps
       } else {
-        alert('Failed to create the product');
+        alert('Virhe.');
       }
     } catch (error) {
       console.error('Error creating product:', error);
-      alert('Failed to create the product');
+      alert('Virhe. ei toimi');
     }
   };
 
@@ -140,9 +140,9 @@ const CreateShipment = () => {
     let imageUrl = '';
     try {
       const formData = new FormData();
-      formData.append('file', file); // Append file to FormData
+      formData.append('file', file);
 
-      let jwtToken = localStorage.getItem('token'); // Get the token from local storage
+      let jwtToken = localStorage.getItem('token');
 
       // Upload image to WordPress
       const response = await axios.post('http://truckup.local/wp-json/wp/v2/media', formData, {
