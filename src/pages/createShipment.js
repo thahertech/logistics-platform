@@ -246,7 +246,7 @@ const CreateShipment = () => {
               type="file"
               className="w-full p-2 mb-4 border rounded"
               accept="image/*"
-              onChange={(e) => setImage(e.target.files[0])} // Store the selected file
+              onChange={(e) => setImage(e.target.files[0])}
             />
           </>
         );
