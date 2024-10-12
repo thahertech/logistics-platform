@@ -6,6 +6,7 @@ import styles from '../Styles/orderForm.module.css';
 const OrderForm = () => {
   const [cartItems, setCartItems] = useState([]);
   const [billingDetails, setBillingDetails] = useState({
+    sähköposti:'',
     yritys: '',
     osoite: '',
     postinumero: '',
@@ -61,6 +62,7 @@ const OrderForm = () => {
       payment_method_title: 'Tilisiirto',
       set_paid: true,
       billing: {
+        email: billingDetails.sähköposti,
         company: billingDetails.yritys,
         address_1: billingDetails.osoite,
         postcode: billingDetails.postinumero,
@@ -79,6 +81,7 @@ const OrderForm = () => {
       setMessage(`Tilaus onnistui! Tilausnumero: ${response.data.id}`);
       setCartItems([]);
       setBillingDetails({
+        sähköposti:'',
         yritys: '',
         osoite: '',
         postinumero: '',
@@ -99,6 +102,17 @@ const OrderForm = () => {
           {!loading && cartItems.length === 0 && <p>Ostoskorisi on tyhjä.</p>}
           {!loading && cartItems.length > 0 && (
             <form className={styles.orderForm} onSubmit={handleSubmit}>
+            <div className={styles.formGroup}>
+                <label className={styles.label}>Sähköposti:</label>
+                <input
+                  type="email"
+                  className={styles.input}
+                  placeholder="Sähköposti"
+                  value={billingDetails.sähköposti}
+                  onChange={(e) => setBillingDetails({ ...billingDetails, sähköposti: e.target.value })}
+                  required
+                />
+              </div>
               <div className={styles.formGroup}>
                 <label className={styles.label}>Yritys:</label>
                 <input
