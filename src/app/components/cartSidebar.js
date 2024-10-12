@@ -49,17 +49,23 @@ const CartSidebar = ({ isOpen, onClose }) => {
   const handleDeleteItem = async (itemId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://truckup.local/wp-json/wc/store/cart/item/${itemId}`, {
+      await axios.delete(`http://truckup.local/wp-json/wc/store/cart/remove-item/${itemId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
-      });
-      // Update state to reflect the deleted item
-      setCartData(prevData => prevData.filter(item => item.id !== itemId));
+    });
+    
+  
+      if (response.status === 204) { // Check if deletion was successful
+        // Update state to reflect the deleted item
+        setCartData(prevData => prevData.filter(item => item.id !== itemId));
+      }
     } catch (error) {
       console.error("Failed to delete the item:", error);
+      setError('Failed to delete the item.'); // Optional: set error state to display an error message
     }
   };
+  
   
 
   const handleCheckout = () => {
@@ -111,6 +117,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
             <label htmlFor="address">Address</label>
             <input type="text" id="address" name="address" required />
           </div>
+          
 
           <button type="submit" className={styles.completePurchaseButton}>Complete Purchase</button>
         </form>
