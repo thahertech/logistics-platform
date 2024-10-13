@@ -64,11 +64,15 @@ const Layout = ({ children }) => {
               <li className={styles.navItem}>
                 <Link href="/" className={styles.navLink}>etusivu</Link>
               </li>
+
               <li className={styles.navItem}>
-                <Link href="/createShipment" className={styles.navLink}>tilaus</Link>
+                <Link href="/ourService" className={styles.navLink}>Palvelu</Link>
               </li>
               {isAuthenticated && (
                 <>
+                <li className={styles.navItem}>
+                <Link href="/createShipment" className={styles.navLink}>tilaus</Link>
+                </li>
                   <li className={styles.navItem}>
                     <Link href="/products" className={styles.navLink}>Tuotteet</Link>
                   </li>

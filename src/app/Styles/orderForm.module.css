@@ -1,0 +1,105 @@
+
+  .orderForm {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+    width: 100%; 
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+  }
+
+  .rightColumn h3{
+    color:white;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #2c2c2c; 
+    color: #ffffff;
+  }
+  
+  .input:focus {
+    border-color: #6200ea; 
+    outline: none;
+  }
+  
+  .submitButton {
+    background-color: #6200ea;
+    color: #ffffff; 
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .submitButton:hover {
+    background-color: #3700b3;
+  }
+  
+  .message {
+    margin-top: 10px;
+    color: #76ff03; 
+    text-align: center;
+  }
+
+  .mainContent {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .leftColumn {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .rightColumn {
+    flex: 1;
+    border-left: 2px solid #ddd;
+    padding-left: 20px;
+  }
+  
+  .cartDetails {
+    background-color: #1d1d1d;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .cartItem {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    color: white;
+  }
+  
+  .submitButton {
+    background-color: #6200ea;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .submitButton:hover {
+    background-color: #6200ea;
+  }
+  
+  .error, .message {
+    color: red;
+    font-weight: bold;
+  }
+  
