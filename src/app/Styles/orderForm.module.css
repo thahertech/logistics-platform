@@ -16,6 +16,11 @@
   .label {
     display: block;
     margin-bottom: 5px;
+    color: white;
+  }
+
+  .rightColumn h3{
+    color:white;
   }
   
   .input {
