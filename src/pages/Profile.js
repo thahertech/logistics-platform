@@ -13,54 +13,74 @@ const Profile = () => {
   const [deliveriesPosted, setDeliveriesPosted] = useState([]);
   const [deliveriesPurchased, setDeliveriesPurchased] = useState([]);
   const { register, handleSubmit, reset } = useForm();
-  const [activeTab, setActiveTab] = useState('posted');
-  
+  const [activeTab, setActiveTab] = useState('profile');
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     
     if (!token) {
       setError('User not signed in.');
       setLoading(false);
-      return; // Exit if user is not signed in
+      return;
     }
+
 
     const fetchUserDetails = async () => {
       try {
-        const decoded = jwtDecode(token);
-        const response = await axios.get('http://truckup.local/wp-json/wp/v2/users/me', {
+        const decoded = jwtDecode(token); // Decode token
+        const userId = decoded.data.user.id; // Extract user ID from decoded token
+
+        // Fetch user details, including ACF fields
+        const response = await axios.get(`http://truckup.local/wp-json/wp/v2/users/${userId}?_fields=name,email,acf`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUserDetails(response.data);
-        reset(response.data);
+
+        const userData = response.data;
+
+        // Populate form with user details and ACF fields
+        reset({
+          name: userData.name,
+          email: userData.email,
+          'y-tunnus': userData.acf['y-tunnus'], // Access ACF fields
+          nettisivut: userData.acf['nettisivut'],
+        });
+
+        setUserDetails(userData); // Store user details
       } catch (error) {
-        console.error('Error fetching user details', error);
         setError('Failed to fetch user details.');
       } finally {
         setLoading(false);
       }
     };
 
-    const fetchUserProducts = async () => {
+    const fetchDeliveries = async () => {
       try {
         const decoded = jwtDecode(token);
-        const userId = decoded.id;
-        const response = await axios.get(`http://truckup.local/wp-json/wc/v3/products?author=${userId}`, {
+        console.log(decoded);
+        const userId = decoded.data.user.id;
+
+        const postedResponse = await axios.get(`http://truckup.local/wp-json/wc/v3/products?author=${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setDeliveriesPosted(response.data);
-        console.log(response.data);
+        setDeliveriesPosted(postedResponse.data);
+
+        const purchasedResponse = await axios.get(`http://truckup.local/wp-json/wc/v3/orders?customer=${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setDeliveriesPurchased(purchasedResponse.data);
       } catch (error) {
-        console.error('Error fetching products:', error);
-        setError('Failed to fetch products.');
+        setError('Failed to fetch deliveries.');
       }
     };
 
     fetchUserDetails();
-    fetchUserProducts();
+    fetchDeliveries();
   }, [reset]);
 
   const onSubmit = async (data) => {
@@ -75,12 +95,11 @@ const Profile = () => {
       setUserDetails(response.data);
       alert('Profile updated successfully!');
     } catch (error) {
-      console.error('Error updating profile', error);
       setError('Failed to update profile.');
     }
   };
 
-  const isBuyer = userDetails?.user_type === 'buyer';
+  const isBuyer = userDetails?.user_type !== 'buyer';
   const isSeller = userDetails?.user_type !== 'seller';
 
   return (
@@ -94,85 +113,104 @@ const Profile = () => {
             <p className="text-red-500 text-center">{error}</p>
           ) : (
             <>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-4">
-                  <label htmlFor="name" className="block mb-2 text-gray-700">Nimi:</label>
-                  <input
-                    type="text"
-                    {...register('name')}
-                    className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="email" className="block mb-2 text-gray-700">Sähköposti:</label>
-                  <input
-                    type="email"
-                    {...register('email')}
-                    className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
-                  />
-                </div>
-                <button type="submit" className="bg-blue-500 text-white rounded p-2 mt-4 w-full hover:bg-blue-600 transition">Päivitä profiili</button>
-              </form>
-
-              {userDetails && (
-                <div className="mt-8 flex justify-center">
-                  {isSeller && (
-                    <button
-                      onClick={() => setActiveTab('posted')}
-                      className={`mr-4 p-2 rounded transition ${activeTab === 'posted' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-                      Kaikki julkaistut kuljetukset
-                    </button>
-                  )}
-                  {isBuyer && (
-                    <button
-                      onClick={() => setActiveTab('purchased')}
-                      className={`mr-4 p-2 rounded transition ${activeTab === 'purchased' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-                      Kaikki ostetut kuljetukset
-                    </button>
-                  )}
+              <div className="mb-6 flex">
+                <button
+                  onClick={() => setActiveTab('profile')}
+                  className={`mr-4 p-2 rounded ${activeTab === 'profile' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                  Profiilin tiedot
+                </button>
+                <button
+                  onClick={() => setActiveTab('orders')}
+                  className={`mr-4 p-2 rounded ${activeTab === 'orders' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                  Tilaukset
+                </button>
+                {isSeller && (
                   <button
-                    onClick={() => setActiveTab('rating')}
-                    className={`mr-4 p-2 rounded transition ${activeTab === 'rating' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-                    Arvostelut
+                    onClick={() => setActiveTab('posted')}
+                    className={`mr-4 p-2 rounded ${activeTab === 'posted' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                    Julkaistut kuljetukset
                   </button>
+                )}
+                <button
+                  onClick={() => setActiveTab('rating')}
+                  className={`mr-4 p-2 rounded ${activeTab === 'rating' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                  Arvostelut
+                </button>
+              </div>
+
+             {activeTab === 'profile' && (
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="mb-4">
+                    <label htmlFor="name" className="block mb-2 text-gray-700">Nimi:</label>
+                    <input
+                      type="text"
+                      {...register('name')}
+                      className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="email" className="block mb-2 text-gray-700">Sähköposti:</label>
+                    <input
+                      type="email"
+                      {...register('email')}
+                      className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="companyId" className="block mb-2 text-gray-700">Y-Tunnus:</label>
+                    <input
+                      type="text"
+                      {...register('y-tunnus')}
+                      className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="url" className="block mb-2 text-gray-700">Nettisivut:</label>
+                    <input
+                      type="url"
+                      {...register('nettisivut')}
+                      className="border border-gray-300 rounded w-full p-2 focus:outline-none focus:border-blue-500 transition"
+                    />
+                  </div>
+                  <button type="submit" className="bg-blue-500 text-white rounded p-2 mt-4 w-full hover:bg-blue-600 transition">Päivitä profiili</button>
+                </form>
+              )}
+
+              {activeTab === 'orders' && (
+                <div>
+                  {deliveriesPurchased.length ? deliveriesPurchased.map(order => (
+                    <div key={order.id} className="border rounded-lg p-4 mb-4 bg-gray-50 shadow">
+                      <p><strong>Toimituksen nimi:</strong> {order.line_items[0].name}</p>
+                      <p><strong>Päivämäärä:</strong> {new Date(order.date_created).toLocaleDateString()}</p>
+                      <p><strong>Tilanne:</strong> {order.status}</p>
+                      <p><strong>Kokonaiskustannus:</strong> {order.total} €</p>
+                    </div>
+                  )) : (
+                    <p className="text-center">Ei ostettuja kuljetuksia.</p>
+                  )}
                 </div>
+              )}
+
+              {activeTab === 'posted' && isSeller && (
+                <div className="content-container">
+                  {deliveriesPosted.length ? deliveriesPosted.map(delivery => (
+                    <div key={delivery.id} className="border rounded-lg p-4 mb-4 bg-gray-50 shadow">
+                      <p><strong>Nimi:</strong> {delivery.name}</p>
+                      <p><strong>Julkaisupäivämäärä:</strong> {new Date(delivery.date_created).toLocaleDateString()}</p>
+                      <p><strong>Hinta:</strong> {delivery.price} €</p>
+                    </div>
+                  )) : (
+                    <p className="text-center">Ei julkaistuja kuljetuksia.</p>
+                  )}
+                </div>
+              )}
+
+
+              {activeTab === 'rating' && (
+                <UserRating />
               )}
             </>
           )}
-
-          <div className="mt-4">
-            {activeTab === 'posted' && isSeller ? (
-              <div>
-                {deliveriesPosted.length ? deliveriesPosted.map(delivery => (
-                  <div key={delivery.id} className="border rounded-lg p-4 mb-4 bg-gray-50 shadow">
-                    <p><strong>Nimi:</strong> {delivery.name}</p>
-                    <p><strong>Toimituspvm:</strong> {delivery.date}</p>
-                    <p><strong>Noutopvm:</strong> {delivery.pickup_date}</p>
-                    <p><strong>Paino:</strong> {delivery.weight} kg</p>
-                    <p><strong>Lisätietoa:</strong> {delivery.description}</p>
-                    <p><strong>Hinta:</strong> {delivery.price} €</p>
-                  </div>
-                )) : (
-                  <p className="text-center">Ei julkaistuja kuljetuksia.</p>
-                )}
-              </div>
-            ) : activeTab === 'purchased' && isBuyer ? (
-              <div>
-                {deliveriesPurchased.length ? deliveriesPurchased.map(delivery => (
-                  <div key={delivery.id} className="border rounded-lg p-4 mb-4 bg-gray-50 shadow">
-                    <p><strong>Nimi:</strong> {delivery.name}</p>
-                    <p><strong>Noutopvm:</strong> {delivery.pickup_date}</p>
-                    <p><strong>Paino:</strong> {delivery.weight} kg</p>
-                    <p><strong>Hinta:</strong> {delivery.price} €</p>
-                  </div>
-                )) : (
-                  <p className="text-center">Ei ostettuja kuljetuksia.</p>
-                )}
-              </div>
-            ) : activeTab === 'rating' ? (
-              <UserRating />
-            ) : null}
-          </div>
         </div>
       </div>
     </Layout>

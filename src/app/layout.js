@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Truck UP', // Update the title as needed
-  description: 'Your truck management platform',
+  title: 'Logistix',
+  description: 'Löydä kuljetus juuri sinulle',
 }
 
 export default function RootLayout({ children }) {
