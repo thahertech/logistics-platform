@@ -13,6 +13,8 @@
     overflow: hidden;
   }
 
+
+
   .funFactsContainer {
     overflow: hidden;
     position: relative;
@@ -23,13 +25,14 @@
   .funFactsWrapper {
     display: flex;
     animation: scroll 66s linear infinite;
-
+    margin-top: 1rem;
+    margin-bottom: 2rem;
   }
 
   .funFactCard {
     min-width: 300px;
     margin: 0 20px;
-    background: #000000e2;
+    background: #545454a4;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 
@@ -181,14 +184,20 @@
       align-content: center;
       align-self: center;
     }
+    .navLink1, .footerLink1 {
+      padding: auto;
+      justify-content: center;
+      border-left: unset;
+    }
 
     .navMenu {
       flex-direction: column;
-
+      margin-left: 0;
       gap: 10px;
       align-items: center;
       margin-top: 100px;
     }
+
 
     .mainContent {
       padding: 10px;
