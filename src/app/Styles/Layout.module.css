@@ -12,24 +12,27 @@
     padding: 0;
     overflow: hidden;
   }
-  
+
+
+
   .funFactsContainer {
-    overflow: hidden; 
+    overflow: hidden;
     position: relative;
     padding: 0 50px;
 
   }
-  
+
   .funFactsWrapper {
     display: flex;
     animation: scroll 66s linear infinite;
-
+    margin-top: 1rem;
+    margin-bottom: 2rem;
   }
-  
+
   .funFactCard {
     min-width: 300px;
     margin: 0 20px;
-    background: #000000e2;
+    background: #545454a4;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 
@@ -104,14 +107,14 @@
   top: -1rem;
   right: 2.5rem;
   background-color: rgb(0, 0, 0);
-  color: white; /* Change text color as needed */
+  color: white;
   border-radius: 50%;
-  padding: 2px 6px; /* Adjust padding as needed */
-  font-size: 12px; /* Adjust font size as needed */
+  padding: 2px 6px;
+  font-size: 12px;
 }
 
   .navLink, .navLink1, .footerLink, .footerLink1 {
-    font-size: 18px;
+    font-size: 0.7rem;
     color: #fff;
     text-decoration: none;
     padding: 10px 5px;
@@ -134,7 +137,7 @@
     border-radius: 5px;
   }
 
-  /* Main Content Styles */
+  /*————— Main Content Styles —————*/
   .mainContent {
     padding: 10px;
     max-width: 1400px;
@@ -147,7 +150,7 @@
     justify-content: space-between;
   }
 
-  /* Footer Styles */
+  /*————— Footer Styles —————*/
   .footer {
     display: flex;
     color: #fff;
@@ -167,11 +170,11 @@
   }
 
   .logoImage {
-    height: 125px; /* Adjust the height as needed */
+    height: 125px;
     display: flex;
-    width: auto; /* Maintain aspect ratio */
+    width: auto;
   }
-  
+
 
   @media (max-width: 1200px) {
     .header {
@@ -181,14 +184,20 @@
       align-content: center;
       align-self: center;
     }
+    .navLink1, .footerLink1 {
+      padding: auto;
+      justify-content: center;
+      border-left: unset;
+    }
 
     .navMenu {
       flex-direction: column;
-
+      margin-left: 0;
       gap: 10px;
       align-items: center;
       margin-top: 100px;
     }
+
 
     .mainContent {
       padding: 10px;
@@ -203,5 +212,3 @@
 .bg-opacity-50 {
   background-color: rgba(107, 114, 128, 0.5);
 }
-
-  

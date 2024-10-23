@@ -1,24 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import Layout from '../app/dashboard/Layout';
 import '../app/globals.css';
+import { jwtDecode } from 'jwt-decode';
+
+
 
 const CreateShipment = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [companyName, setCompanyName] = useState('');
+  const [contactPerson, setContactPerson] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [yTunnus, setYTunnus] = useState('');
   const [pickupAddress, setPickupAddress] = useState('');
   const [pickupLocation, setPickupLocation] = useState({ lat: '', lng: '' });
   const [pickupDate, setPickupDate] = useState(dayjs().format('YYYY-MM-DD'));
-  const [deliveryDate, setDeliveryDate] = useState('');
+  const [deliveryDate, setDeliveryDate] = useState(dayjs().format('YYYY-MM-DD'));
+  const [pickupTime, setPickupTime] = useState(''); // New pickup time state
+  const [deliveryTime, setDeliveryTime] = useState(''); // New delivery time state
   const [deliveryAddress, setDeliveryAddress] = useState('');
+  
   const [deliveryLocation, setDeliveryLocation] = useState({ lat: '', lng: '' });
   const [weight, setWeight] = useState('');
   const [transportUnits, setTransportUnits] = useState('');
+  const [unitType, setUnitType] = useState('');
   const [price, setPrice] = useState('');
   const [details, setDetails] = useState('');
   const [image, setImage] = useState(null);
+
+  // Fetch user data
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const jwtToken = localStorage.getItem('token');
+        const decoded = jwtDecode(jwtToken); // Decode token
+        console.log(jwtToken)
+        const userId = decoded.data.user.id; // Extract user ID from decoded token
+        const response = await axios.get(`http://truckup.local/wp-json/wp/v2/users/${userId}?_fields=name,email,acf`, {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        });
+
+        const userData = response.data;
+        console.log(userData);
+        setCompanyName(userData.name || '');
+        setContactPerson(userData.name || '');
+        setEmail(userData.email || '');
+        setPhoneNumber(userData.acf?.phoneNumber || '');
+        setYTunnus(userData.acf?.['y-tunnus'] || '');
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        alert('Failed to fetch user data.');
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const getCoordinates = async (address) => {
+    // Fetch coordinates from address
     try {
       const response = await axios.get('https://nominatim.openstreetmap.org/search', {
         params: {
@@ -65,12 +108,12 @@ const CreateShipment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     let imageUrl = '';
     if (image) {
       imageUrl = await uploadImage(image);
     }
-  
+
     const shipmentData = {
       status: 'publish',
       name: companyName,
@@ -80,52 +123,29 @@ const CreateShipment = () => {
       weight: weight,
       short_description: details,
       meta_data: [
-        {
-          key: 'pickup_location',
-          value: pickupLocation,
-        },
-        {
-          key: 'delivery_location',
-          value: deliveryLocation,
-        },
-        {
-          key: 'pickup_date',
-          value: pickupDate,
-        },
-        {
-          key: 'delivery_date',
-          value: deliveryDate,
-        },
-        {
-          key: 'transport_units',
-          value: transportUnits,
-        },
-        {
-          key: 'price',
-          value: price,
-        },
+        { key: 'pickup_location', value: pickupLocation },
+        { key: 'delivery_location', value: deliveryLocation },
+        { key: 'pickup_date', value: pickupDate },
+        { key: 'delivery_date', value: deliveryDate },
+        { key: 'transport_units', value: transportUnits },
+        { key: 'unit_type', value: unitType },
+        { key: 'price', value: price },
+        { key: 'y_tunnus', value: yTunnus }, // Added Y-tunnus
       ],
-      images: imageUrl ? [{ src: imageUrl }] : [], // Add image URL to product data
+      images: imageUrl ? [{ src: imageUrl }] : [],
     };
-  
-    console.log('Product Data:', shipmentData);
-  
+
     try {
-      let jwtToken = null;
-      if (typeof window !== "undefined") {
-        jwtToken = localStorage.getItem('token');
-      }
-  
+      const jwtToken = localStorage.getItem('token');
       const response = await axios.post('http://truckup.local/wp-json/wc/v3/products', shipmentData, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
           'Content-Type': 'application/json',
         },
       });
-  
+
       if (response.status === 201) {
         alert('Ilmoitus julkaistu!');
-        console.log('API Response:', response.data);
         setActiveStep(0); // Reset steps
       } else {
         alert('Virhe.');
@@ -137,14 +157,13 @@ const CreateShipment = () => {
   };
 
   const uploadImage = async (file) => {
+    // Upload image
     let imageUrl = '';
     try {
       const formData = new FormData();
       formData.append('file', file);
 
-      let jwtToken = localStorage.getItem('token');
-
-      // Upload image to WordPress
+      const jwtToken = localStorage.getItem('token');
       const response = await axios.post('http://truckup.local/wp-json/wp/v2/media', formData, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
@@ -153,7 +172,7 @@ const CreateShipment = () => {
       });
 
       if (response.status === 201) {
-        imageUrl = response.data.source_url; // Get image URL from response
+        imageUrl = response.data.source_url;
       } else {
         alert('Failed to upload image');
       }
@@ -181,6 +200,34 @@ const CreateShipment = () => {
             <input
               type="text"
               className="w-full p-2 mb-4 border rounded"
+              placeholder="Yhteyshenkilö"
+              value={contactPerson}
+              onChange={(e) => setContactPerson(e.target.value)}
+            />
+            <input
+              type="email"
+              className="w-full p-2 mb-4 border rounded"
+              placeholder="Sähköposti"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="tel"
+              className="w-full p-2 mb-4 border rounded"
+              placeholder="Puhelinnumero"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+            <input
+              type="text"
+              className="w-full p-2 mb-4 border rounded"
+              placeholder="Y-tunnus"
+              value={yTunnus}
+              onChange={(e) => setYTunnus(e.target.value)}
+            />
+            <input
+              type="text"
+              className="w-full p-2 mb-4 border rounded"
               placeholder="Nouto Osoite"
               value={pickupAddress}
               onChange={(e) => setPickupAddress(e.target.value)}
@@ -190,6 +237,13 @@ const CreateShipment = () => {
               className="w-full p-2 mb-4 border rounded"
               value={pickupDate}
               onChange={(e) => setPickupDate(e.target.value)}
+            />
+          <input
+              type="time"
+              className="w-full p-2 mb-4 border rounded"
+              value={pickupTime}
+              onChange={(e) => setPickupTime(e.target.value)}
+              aria-label="Nouto Aika"
             />
           </>
         );
@@ -209,11 +263,19 @@ const CreateShipment = () => {
               value={deliveryDate}
               onChange={(e) => setDeliveryDate(e.target.value)}
             />
+            <input
+              type="time"
+              className="w-full p-2 mb-4 border rounded"
+              value={deliveryTime}
+              onChange={(e) => setDeliveryTime(e.target.value)}
+              aria-label="Toimitus Aika"
+            />
           </>
         );
       case 2:
         return (
           <>
+          <div className="flex items-center">
             <input
               type="number"
               className="w-full p-2 mb-4 border rounded"
@@ -221,6 +283,26 @@ const CreateShipment = () => {
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
             />
+            <span className="ml-2 text-gray-500">kg</span>
+          </div>
+
+            <select
+              className="w-full p-2 mb-4 border rounded"
+              value={unitType}
+              onChange={(e) => setUnitType(e.target.value)}
+            >
+              <option value="">Valitse yksikkö tyyppi</option>
+              <option value="Kolli">Kolli</option>
+              <option value="Eurolava">Eurolava</option>
+              <option value="Lava">Lava</option>
+              <option value="Kärry">Kärry</option>
+              <option value="Kontti">Kontti</option>
+              <option value="Rullakko">Rullakko</option>
+              <option value="Pikkukontti">Pikkukontti</option>
+              <option value="Lava-auto">Lava-auto</option>
+              <option value="Bulk">Bulk</option>
+              <option value="Raskas kuorma">Raskas kuorma</option>
+            </select>
             <input
               type="text"
               className="w-full p-2 mb-4 border rounded"
@@ -256,7 +338,7 @@ const CreateShipment = () => {
   };
 
   return (
-    <Layout>
+     <Layout>
       <div className="flex flex-col items-center justify-center h-screen bg-black-800">
         <form
           onSubmit={handleSubmit}
@@ -281,6 +363,7 @@ const CreateShipment = () => {
               type="button"
               className={`bg-gray-300 text-white px-4 py-2 rounded ${activeStep === 0 ? 'hidden' : ''}`}
               onClick={handleBack}
+              aria-label="Takaisin"
             >
               Takaisin
             </button>
@@ -288,6 +371,7 @@ const CreateShipment = () => {
               <button
                 type="submit"
                 className="bg-blue-500 text-white px-4 py-2 rounded"
+                aria-label="Julkaise"
               >
                 Julkaise
               </button>
@@ -296,6 +380,7 @@ const CreateShipment = () => {
                 type="button"
                 className="bg-blue-500 text-white px-4 py-2 rounded"
                 onClick={handleNext}
+                aria-label="Seuraava"
               >
                 Seuraava
               </button>
