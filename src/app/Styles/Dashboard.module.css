@@ -2,7 +2,7 @@
   font-family: 'Inter';
 }
 .whyChooseUs {
-  background-color: #f9f9f9;
+  background-color: #2c2c2c;
   border-radius: 8px;
   padding: 0;
   margin: 20px 0;
@@ -17,13 +17,16 @@
 .benefitsList h4 {
   font-size: 24px;
   font-variant: small-caps;
+  color: #fff;
+
+  
   
 }
 
 .benefitsList li {
   margin: 10px 0;
   font-size: 14px;
-  color: #333;
+  color: #fff;
 }
 
 .hero {
@@ -40,7 +43,7 @@
   }
 
   .line {
-    font-size: 4rem;
+    font-size: 2rem;
     font-variant: small-caps;
     color: #ffffff;
     border-radius: 10px;
@@ -53,18 +56,16 @@
 
   }
   .line h3, .line h4 {
-    font-weight: 350;
     max-width: 60%;
     letter-spacing: 0.05rem;
-    border-right: 1px solid rgba(255, 255, 255, 0.445);
   }
-  
+
   .line h4 {
     font-weight: 200;
     font-size: 32px;
   }
 
-  .container {
+  .containerHero {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -128,7 +129,7 @@
   .section {
     padding: 40px 20px;
     flex-direction: row-reverse;
-    background-color: #fafafa;
+    background-color: #2c2c2c;
     border-radius: 5px;
   }
 
@@ -163,27 +164,24 @@
   .sectionTitle {
     font-size: 42px;
     text-align: left;
-    color: #71d5f3;
+    color: #fff;
     margin-bottom: 20px;
-    padding-left: 1vw;
+    padding-left: 1rem;
   }
 
   .sectionContent {
     font-size: 18px;
-    color: #11111151;
-    text-align: center;
+    color: white;
+    text-align: left;
     max-width: 800px;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 30px 1rem;
   }
   .sectionContent1 {
     font-size: 18px;
-    color: #11111151;
+    color: white;
     text-align: left;
     max-width: 800px;
-    margin: 0 auto 30px auto;
-    padding-bottom: 25px;
-    width: 100%;
-    border-left: 2px solid #00000022;
+    margin: 0 auto 30px 1rem;
   }
 
   .contactButton {
@@ -205,7 +203,7 @@
   }
 
   .hero2 {
-    background-color: #f5f5f5;
+    background-color: #000;
     padding: 60px 20px;
     text-align: center;
     border-top: 1px solid #ddd;
@@ -214,44 +212,28 @@
 
   .hero2 h2 {
     font-size: 36px;
-    color: #333;
+    color: #eee;
     margin: 0;
   }
 
 
 
 .line h3 {
-  font-weight: 400;
-  margin-left: 3.5vw;
   letter-spacing: 0.05rem;
 }
 
 .line h4 {
   font-weight: 200;
   font-size: 24px;
-  margin-left: 3.5vw;
 }
 
 /* Contact Section */
 .contactSection {
   padding: 40px 20px;
-  background-color: #fafafa;
   border-radius: 5px;
   margin: 0 auto;
 }
 
-
-
-.sectionContent1 {
-  font-size: 18px;
-  color: #11111171;
-  text-align: left;
-  max-width: 800px;
-  margin: 0 auto 30px auto;
-  padding-bottom: 25px;
-  border-left: 2px solid #00000022;
-  text-align: center;
-}
 
 /* Contact Details */
 .contactDetails {
@@ -265,7 +247,7 @@
   flex: 1;
   margin: 10px;
   padding: 20px;
-  background-color: #000000b7;
+  background-color: #575757b7;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-radius: 8px;
@@ -281,11 +263,11 @@
 
 .contactInfo {
   font-size: 16px;
-  color: #0070f3;
+  color: #fff;
 }
 
 .contactInfo a {
-  color: #0070f3;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -347,9 +329,9 @@
 }
 
 .serviceCard {
-  background-color: #2c2c2c; /* Darker card background */
+  background-color: #2c2c2c;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Adjusted shadow for dark theme */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
   padding: 20px;
   width: 250px;
   text-align: center;
@@ -398,3 +380,126 @@
   background-color: #0070f3;
 }
 
+.body {
+  font-family: 'Inter', sans-serif;
+  background-color: #080808;
+  color: #ffffff;
+}
+
+/* Hero Section */
+.hero {
+  background-color: #080808;
+  background-image: url('../../../public/assets/truckupBG.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  border-radius: 12px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.line {
+  font-size: 2rem;
+  color: #ffffff;
+  border-radius: 12px;
+  background-color: rgba(8, 8, 8, 0.85);
+  backdrop-filter: blur(1px);
+  padding: 150px 50px;
+}
+
+.line h3 {
+  max-width: 60%;
+  letter-spacing: 0.1rem;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.line h4 {
+  font-weight: 300;
+  font-size: 1.8rem;
+  max-width: 50%;
+  opacity: 0.9;
+}
+
+
+/* Footer/Hero2 Section */
+.hero2 {
+  background: linear-gradient(45deg, #1a1a1a, #2c2c2c);
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 12px;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.hero2 h2 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 4rem;
+  justify-items: center;
+}
+
+.footerSection {
+  text-align: left;
+}
+
+.footerSection h3 {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.footerSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerSection ul li {
+  color: #999;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.footerSection ul li:hover {
+  color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero2 {
+    padding: 3rem 1rem;
+  }
+
+  .hero2 h2 {
+    font-size: 2rem;
+  }
+
+  .footerGrid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footerSection {
+    text-align: center;
+  }
+}

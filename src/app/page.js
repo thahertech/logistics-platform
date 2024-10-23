@@ -19,15 +19,15 @@ const Dashboard = () => {
     <Layout>
       <div className={styles.hero}>
         <div className={styles.line}>
-        <h3>  Kasvata tehokkuutta
+        <h3> Tehosta toimintaasi ja löydä seuraava kuljetus
         </h3>
         <h4>
-        ja löydä seuraava kuljetus
+        Lähellä olevat toimitukset käden ulottuvilla.
         </h4>
         </div>
       </div>
 
-      <div className={styles.container}>
+      <div className={styles.containerHero}>
         {[
           { src: '/assets/TruckImg.jpeg', title: 'Lähellä', path: '/deliveries-nearby' },
           { src: '/assets/Newimage.jpeg', title: 'Kuljetustilaus', path: '/createShipment' },
@@ -88,7 +88,7 @@ const Dashboard = () => {
 </div>
 
 
-      <div className={styles.section}>
+      <div className={styles.sectionFun}>
         <FunFacts />
       </div>
 
@@ -102,9 +102,30 @@ const Dashboard = () => {
     </button>
   </div>
 
-  <div className={styles.hero2}>
-    <h2>Löydä ja myy kuljetus omilla ehdoilla</h2>
+  <footer className={styles.footer}>
+  <div className={styles.footerContent}>
+    <div className={styles.footerMain}>
+      <div className={styles.footerGrid}>
+        <div className={styles.footerSection}>
+          <h3>Lähettäjille</h3>
+          <ul>
+            <li>Jätä kuljetusilmoitus</li>
+            <li>Vertaile hintoja</li>
+            <li>Seuraa lähetystä</li>
+          </ul>
+        </div>
+        <div className={styles.footerSection}>
+          <h3>Kuljettajille</h3>
+          <ul>
+            <li>Löydä kuljetuksia</li>
+            <li>Hallinnoi tilauksia</li>
+            <li>Kasvata liiketoimintaa</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
+</footer>
 </Layout>
   );
 };

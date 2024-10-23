@@ -13,8 +13,9 @@ const AboutUs = () => {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Kuka Me Olemme?</h2>
         <p className={styles.sectionContent}>
-          Olemme johtava kuljetuspalveluyritys Suomessa, joka on erikoistunut tarjoamaan asiakkaillemme tehokkaita ja luotettavia kuljetusratkaisuja.
-          Tiimimme koostuu kokeneista ammattilaisista, jotka ovat sitoutuneet tarjoamaan parasta mahdollista palvelua.
+          Olemme johtava kuljetuspalveluyritys Suomessa, erikoistunut tarjoamaan asiakkaillemme 
+          tehokkaita ja luotettavia kuljetusratkaisuja. Tiimimme koostuu kokeneista ammattilaisista, 
+          jotka ovat sitoutuneet tarjoamaan parasta mahdollista palvelua.
         </p>
       </div>
 
@@ -22,18 +23,30 @@ const AboutUs = () => {
         <h2 className={styles.sectionTitle}>Missiomme</h2>
         <p className={styles.sectionContent}>
           Missiomme on tehdä kuljetusprosesseista mahdollisimman sujuvia ja ympäristöystävällisiä. 
-          Uskomme, että voimme parantaa asiakaskokemusta tarjoamalla innovatiivisia ratkaisuja ja läpinäkyvyyttä kaikissa toiminnoissamme.
+          Uskomme voivamme parantaa asiakaskokemusta tarjoamalla innovatiivisia ratkaisuja ja läpinäkyvyyttä kaikissa toiminnoissamme.
         </p>
       </div>
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Arvomme</h2>
-        <ul className={styles.benefitsList}>
-          <li>🔧 **Luotettavuus**: Meille on tärkeää, että asiakkaamme voivat luottaa palveluihimme.</li>
-          <li>🌱 **Kestävyys**: Pyrimme minimoimaan ympäristövaikutuksemme kaikissa toiminnoissamme.</li>
-          <li>🤝 **Asiakaskeskeisyys**: Asiakkaamme ovat kaiken toimintamme keskiössä, ja teemme työtä heidän tarpeidensa mukaisesti.</li>
-          <li>💡 **Innovaatio**: Etsimme jatkuvasti uusia tapoja parantaa palveluitamme ja prosessejamme.</li>
-        </ul>
+        <div className={`${styles.cardContainer}`}>
+          <div className={styles.card}>
+            <h3>🔧 Luotettavuus</h3>
+            <p>Asiakkaamme voivat luottaa palveluihimme.</p>
+          </div>
+          <div className={styles.card}>
+            <h3>🌱 Kestävyys</h3>
+            <p>Minimoimme ympäristövaikutuksemme kaikissa toiminnoissamme.</p>
+          </div>
+          <div className={styles.card}>
+            <h3>🤝 Asiakaskeskeisyys</h3>
+            <p>Asiakkaamme ovat kaiken toimintamme keskiössä.</p>
+          </div>
+          <div className={styles.card}>
+            <h3>💡 Innovaatio</h3>
+            <p>Etsimme jatkuvasti uusia tapoja parantaa palveluitamme ja prosessejamme.</p>
+          </div>
+        </div>
       </div>
 
       <div className={styles.section}>

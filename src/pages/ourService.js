@@ -9,7 +9,6 @@ const MeidanPalvelusta = () => {
       <div className={`${styles.hero} ${styles.serviceHero}`}>
         <h2 className={styles.DashboardTitle}>Meidän Palvelusta</h2>
       </div>
-
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Mikä Tämä Palvelu On?</h2>
         <p className={styles.sectionContent}>
@@ -17,17 +16,18 @@ const MeidanPalvelusta = () => {
           Palvelumme on suunniteltu tekemään toimitukset helpoiksi, olitpa yksityishenkilö tai yritys.
         </p>
       </div>
+      <div className={styles.MasonryContainer}>
 
-      <div className={styles.section}>
+      <div className={styles.masonryItem}>
         <h2 className={styles.sectionTitle}>Miten Se Toimii?</h2>
         <p className={styles.sectionContent}>
-          1. **Julkaise Toimitus**: Tuotteen omistajat voivat julkaista toimitustarpeensa nopeasti.
+          1. <strong>Julkaise Toimitus</strong>: Tuotteen omistajat voivat julkaista toimitustarpeensa nopeasti.
           <br /> 2. <strong>Tarjoa Kuljetus</strong>: Kuljetusyritykset voivat selata avoimia toimituksia ja tarjota palveluitaan.
-          <br /> 3. **Varmista Toimitus**: Kun kuljetus on hyväksytty, toimitusprosessi alkaa sujuvasti.
+          <br /> 3. <strong>Varmista Toimitus</strong>: Kun kuljetus on hyväksytty, toimitusprosessi alkaa sujuvasti.
         </p>
       </div>
 
-      <div className={styles.section}>
+      <div className={styles.masonryItem}>
         <h2 className={styles.sectionTitle}>Kenelle Tämä On?</h2>
         <p className={styles.sectionContent}>
           Palvelumme on ihanteellinen sekä yrityksille että yksityishenkilöille, jotka tarvitsevat luotettavan tavan hallita toimituksiaan. 
@@ -35,14 +35,15 @@ const MeidanPalvelusta = () => {
         </p>
       </div>
 
-      <div className={styles.section}>
+      <div className={styles.masonryItem}>
         <h2 className={styles.sectionTitle}>Miksi Valita Meidät?</h2>
         <ul className={styles.benefitsList}>
-          <li>⚡ **Nopeus**: Julkaise ja varmista toimituksesi muutamalla klikkauksella.</li>
-          <li>🔒 **Turvallisuus**: Kaikki tiedonsiirto ja maksut ovat suojattuja ja luotettavia.</li>
-          <li>📈 **Kasvata Bisnestäsi**: Kuljetusyritykset voivat laajentaa asiakaskuntaansa tehokkaasti.</li>
-          <li>💼 **Helppokäyttöisyys**: Palvelu on selkeä ja käyttäjäystävällinen kaikille.</li>
+          <li>⚡ Nopeus: Julkaise ja varmista toimituksesi muutamalla klikkauksella.</li>
+          <li>🔒 Turvallisuus: Kaikki tiedonsiirto ja maksut ovat suojattuja ja luotettavia.</li>
+          <li>📈 Kasvata Bisnestäsi: Kuljetusyritykset voivat laajentaa asiakaskuntaansa tehokkaasti.</li>
+          <li>💼 Helppokäyttöisyys: Palvelu on selkeä ja käyttäjäystävällinen kaikille.</li>
         </ul>
+      </div>
       </div>
 
       <div className={styles.section}>
