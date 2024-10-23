@@ -1,54 +1,106 @@
 .aboutUsHero {
-    background-image: url('../../../public/assets/aboutUsBG.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    background-color: #3333332c;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    opacity: 0.8;
-  }
+  background-image: url('../../../public/assets/aboutUsBG.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgba(51, 51, 51, 0.8);
+  backdrop-filter: blur(10px);
+  opacity: 0.9;
+}
 
-  .DashboardTitle {
-    font-size: 48px;
-    font-family: 'Inter', sans-serixf;
-    font-variant: small-caps;
-    border-radius: 5px;
-    font-weight: bold;
-    margin: 0;
-    color: #ffffff;
-  }
+.section {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  padding: 40px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
 
-  .section {
-    background-color: #fafafa;
-    padding: 40px 20px;
-    border-radius: 5px;
-    margin: 20px 0;
-  }
+.sectionTitle {
+  font-size: 28px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #444;
+  padding-bottom: 8px;
+}
 
-  .sectionTitle {
-    font-size: 32px;
-    color: #333;
-    margin-bottom: 20px;
-  }
+.sectionContent {
+  font-size: 16px;
+  line-height: 1.6;
+}
 
-  .sectionContent {
-    font-size: 18px;
-    color: #11111151;
-    margin-bottom: 30px;
-  }
+.benefitsList {
+  list-style-type: none;
+  padding: 0;
+}
 
-  .benefitsList {
-    list-style-type: none;
-    padding: 0;
-  }
+.benefitsList li {
+  margin: 10px 0;
+  font-size: 16px;
+}
 
-  .benefitsList li {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #333;
-  }
+.contactButton {
+  background-color: #444;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contactButton:hover {
+  background-color: #666;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background-color: #2a2a2a; /* Dark background */
+  color: #f0f0f0;           /* Light text */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.MasonryContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Adjust the min width as needed */
+  gap: 16px; /* Space between items */
+  justify-items: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.masonryItem {
+  background-color: #2a2a2a; /* Card background color */
+  color: #f0f0f0;           /* Text color */
+  padding: 20px;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.masonryItem:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
