@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import styles from './Styles/Dashboard.module.css';
 import './globals.css';
 import FunFacts from './dashboard/funfacts';
+import Footer from './components/Footer';
 
 const Dashboard = () => {
   const router = useRouter();
@@ -14,16 +15,12 @@ const Dashboard = () => {
     router.push(path);
   };
 
-
   return (
     <Layout>
       <div className={styles.hero}>
         <div className={styles.line}>
-        <h3> Tehosta toimintaasi ja löydä seuraava kuljetus
-        </h3>
-        <h4>
-        Lähellä olevat toimitukset käden ulottuvilla.
-        </h4>
+          <h3> Tehosta toimintaasi ja löydä seuraava kuljetus</h3>
+          <h4>Lähellä olevat toimitukset käden ulottuvilla.</h4>
         </div>
       </div>
 
@@ -54,6 +51,7 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
+
       <div className={styles.serviceSection}>
   <div className={styles.cardContainer}>
     {[
@@ -101,32 +99,11 @@ const Dashboard = () => {
       Ota yhteyttä
     </button>
   </div>
-
-  <footer className={styles.footer}>
-  <div className={styles.footerContent}>
-    <div className={styles.footerMain}>
-      <div className={styles.footerGrid}>
-        <div className={styles.footerSection}>
-          <h3>Lähettäjille</h3>
-          <ul>
-            <li>Jätä kuljetusilmoitus</li>
-            <li>Vertaile hintoja</li>
-            <li>Seuraa lähetystä</li>
-          </ul>
-        </div>
-        <div className={styles.footerSection}>
-          <h3>Kuljettajille</h3>
-          <ul>
-            <li>Löydä kuljetuksia</li>
-            <li>Hallinnoi tilauksia</li>
-            <li>Kasvata liiketoimintaa</li>
-          </ul>
-        </div>
+      <div className={styles.sectionFun}>
       </div>
-    </div>
-  </div>
-</footer>
-</Layout>
+
+      <Footer />
+    </Layout>
   );
 };
 

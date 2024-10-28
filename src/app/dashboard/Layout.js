@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CartSidebar from '../components/cartSidebar';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const Layout = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -14,29 +14,19 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
-
     setIsAuthenticated(!!token);
-
     if (token) {
       jwtDecode(token);
       fetchCartCount(token);
-    }
-    else {
-
     }
   }, []);
 
   const fetchCartCount = async (token) => {
     try {
-
       const response = await axios.get('http://truckup.local/wp-json/wc/store/cart', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
       setCartCount(response.data.items.length);
-      console.log(response.data.items);
     } catch (error) {
       console.error('Error fetching cart count:', error);
     }
@@ -52,56 +42,61 @@ const Layout = ({ children }) => {
     setIsCartOpen(!isCartOpen);
   };
 
-
-
   return (
     <>
-      <header>
-        <div className={styles.header}>
-          <Link href="/" className={styles.headerLogo}>Logistix</Link>
-          <nav>
-            <ul className={styles.navMenu}>
-              <li className={styles.navItem}>
-                <Link href="/" className={styles.navLink}>etusivu</Link>
-              </li>
+ <header className={styles.header}>
+  <div className={styles.topRow}>
+    <Link href="/" className={styles.headerLogo}>Logistix</Link>
 
-              <li className={styles.navItem}>
-                <Link href="/ourService" className={styles.navLink}>Palvelu</Link>
-              </li>
-              {isAuthenticated && (
-                <>
+    <div className={styles.rightControls}>
+      <div className={styles.cartContainer} onClick={toggleCart}>
+        <FontAwesomeIcon icon={faShoppingCart} className={styles.cartIcon} />
+        {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
+      </div>
+      <div className={styles.authButton}>
+        {isAuthenticated ? (
+          <button className={styles.logoutButton} onClick={handleLogout}>
+            Kirjaudu Ulos
+          </button>
+        ) : (
+          <Link href="/auth" className={styles.loginLink}>Kirjaudu</Link>
+        )}
+      </div>
+    </div>
+    </div>
+
+
+        {/* Bottom Row */}
+        <nav className={styles.bottomRow}>
+          <ul className={styles.navMenu}>
+            <li className={styles.navItem}>
+              <Link href="/" className={styles.navLink}>Etusivu</Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link href="/ourService" className={styles.navLink}>Palvelu</Link>
+            </li>
+            {isAuthenticated && (
+              <>
                 <li className={styles.navItem}>
-                <Link href="/createShipment" className={styles.navLink}>tilaus</Link>
+                  <Link href="/createShipment" className={styles.navLink}>Tilaus</Link>
                 </li>
-                  <li className={styles.navItem}>
-                    <Link href="/products" className={styles.navLink}>Tuotteet</Link>
-                  </li>
-                  <li className={styles.navItem}>
-                    <Link href="/Profile" className={styles.navLink}>oma tili</Link>
-                  </li>
-                </>
-              )}
-            </ul>
-          </nav>
-          <div className={styles.cartContainer} onClick={toggleCart}>
-            <FontAwesomeIcon icon={faShoppingCart} className={styles.cartIcon} />
-            {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
-          </div>
-          <li className={styles.navItem}>
-            {isAuthenticated ? (
-              <button className={styles.navLink1} onClick={handleLogout}>
-                Kirjaudu Ulos
-              </button>
-            ) : (
-              <Link href="/auth" className={styles.navLink1}>Kirjaudu</Link>
+                <li className={styles.navItem}>
+                  <Link href="/products" className={styles.navLink}>Tuotteet</Link>
+                </li>
+                <li className={styles.navItem}>
+                  <Link href="/Profile" className={styles.navLink}>Oma Tili</Link>
+                </li>
+              </>
             )}
-          </li>
-        </div>
+          </ul>
+        </nav>
       </header>
+
       <main className={styles.mainContent}>
         {children}
       </main>
       <CartSidebar isOpen={isCartOpen} onClose={toggleCart} />
+      
       <footer className={styles.footer}>
         <p className={styles.footerText}>© 2024 Logistix OY | All rights reserved. Designed by Sensei Studios</p>
         <nav>
