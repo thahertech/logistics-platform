@@ -6,7 +6,6 @@ import '../app/globals.css';
 import { jwtDecode } from 'jwt-decode';
 
 
-
 const CreateShipment = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [companyName, setCompanyName] = useState('');
@@ -21,7 +20,7 @@ const CreateShipment = () => {
   const [pickupTime, setPickupTime] = useState(''); // New pickup time state
   const [deliveryTime, setDeliveryTime] = useState(''); // New delivery time state
   const [deliveryAddress, setDeliveryAddress] = useState('');
-  
+
   const [deliveryLocation, setDeliveryLocation] = useState({ lat: '', lng: '' });
   const [weight, setWeight] = useState('');
   const [transportUnits, setTransportUnits] = useState('');

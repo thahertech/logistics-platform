@@ -42,3 +42,8 @@ body {
   max-height: 25rem;
   overflow: scroll;
 }
+
+button {
+color:  #eee;
+
+}
