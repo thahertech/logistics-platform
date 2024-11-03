@@ -9,38 +9,38 @@ import { jwtDecode } from 'jwt-decode';
 
 const Layout = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  //const [cartCount, setCartCount] = useState(0);
+  //const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsAuthenticated(!!token);
     if (token) {
       jwtDecode(token);
-      fetchCartCount(token);
+  //     fetchCartCount(token);
     }
   }, []);
 
-  const fetchCartCount = async (token) => {
-    try {
-      const response = await axios.get('http://truckup.local/wp-json/wc/store/cart', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setCartCount(response.data.items.length);
-    } catch (error) {
-      console.error('Error fetching cart count:', error);
-    }
-  };
+  // const fetchCartCount = async (token) => {
+  //   try {
+  //     const response = await axios.get('http://truckup.local/wp-json/wc/store/cart', {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  //     setCartCount(response.data.items.length);
+  //   } catch (error) {
+  //     console.error('Error fetching cart count:', error);
+  //   }
+  // };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsAuthenticated(false);
-    window.location.href = '/auth';
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('token');
+  //   setIsAuthenticated(false);
+  //   window.location.href = '/auth';
+  // };
 
-  const toggleCart = () => {
-    setIsCartOpen(!isCartOpen);
-  };
+  // const toggleCart = () => {
+  //   setIsCartOpen(!isCartOpen);
+  // };
 
   return (
     <>
@@ -86,7 +86,7 @@ const Layout = ({ children }) => {
       <main className={styles.mainContent}>
         {children}
       </main>
-      <CartSidebar isOpen={isCartOpen} onClose={toggleCart} />
+   {  /* <CartSidebar isOpen={isCartOpen} onClose={toggleCart} /> */}
       
       <footer className={styles.footer}>
         <p className={styles.footerText}>© 2024 Logistix OY | All rights reserved. Designed by Sensei Studios</p>
