@@ -11,7 +11,6 @@ const AboutUs = () => {
   return (
     <Layout>
       <div className={`${styles.hero} ${styles.aboutUsHero}`}>
-        <h2 className={styles.DashboardTitle}>Tietoa Meistä</h2>
       </div>
 
       <div className={styles.section}>
