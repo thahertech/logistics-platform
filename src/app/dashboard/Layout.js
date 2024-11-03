@@ -47,22 +47,6 @@ const Layout = ({ children }) => {
  <header className={styles.header}>
   <div className={styles.topRow}>
     <Link href="/" className={styles.headerLogo}>Logistix</Link>
-
-    <div className={styles.rightControls}>
-      <div className={styles.cartContainer} onClick={toggleCart}>
-        <FontAwesomeIcon icon={faShoppingCart} className={styles.cartIcon} />
-        {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
-      </div>
-      <div className={styles.authButton}>
-        {isAuthenticated ? (
-          <button className={styles.logoutButton} onClick={handleLogout}>
-            Kirjaudu Ulos
-          </button>
-        ) : (
-          <Link href="/auth" className={styles.loginLink}>Kirjaudu</Link>
-        )}
-      </div>
-    </div>
     </div>
 
 
@@ -75,6 +59,13 @@ const Layout = ({ children }) => {
             <li className={styles.navItem}>
               <Link href="/ourService" className={styles.navLink}>Palvelu</Link>
             </li>
+            <li className={styles.navItem}>
+              <Link href="/contact" className={styles.navLink}>Ota Yhteyttä</Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link href="/aboutUs" className={styles.navLink}>Meistä</Link>
+            </li>
+
             {isAuthenticated && (
               <>
                 <li className={styles.navItem}>

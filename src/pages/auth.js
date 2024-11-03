@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import '../app/globals.css';
@@ -30,8 +30,8 @@ const Auth = () => {
       const response = await axios.post(endpoint, {
         username: formData.usernameOrEmail,
         password: formData.password,
-        email: formData.usernameOrEmail,
-        name: formData.name,
+        email: isLogin ? undefined : formData.usernameOrEmail,
+        name: isLogin ? undefined : formData.name,
       });
 
       if (isLogin) {
@@ -41,9 +41,12 @@ const Auth = () => {
         router.push('/Profile');
       } else {
         console.log('Registered!', response.data);
+        router.push('/Profile');
       }
     } catch (error) {
-      setError(error.response?.data?.message || 'Authentication failed');
+      // Remove all HTML tags to ensure only plain text is shown
+      const plainTextError = error.response?.data?.message.replace(/<\/?[^>]+(>|$)/g, '') || 'Authentication failed';
+      setError(plainTextError);
       console.error('Error during authentication', error.response?.data);
     }
   };
@@ -51,28 +54,26 @@ const Auth = () => {
   return (
     <Layout>
       <div className="flex justify-center items-center h-screen bg-black-200">
-        <div className="bg-gray-100 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-96">
+        <div className="bg-gray-500 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-96">
           <h2 className="text-2xl font-bold mb-6 text-center text-white">
             {isLogin ? 'Kirjaudu' : 'Rekisteröinti'}
           </h2>
           <form onSubmit={handleSubmit}>
             {!isLogin && (
-              <>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Käyttäjänimi"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="text-black w-full p-2 mb-4 border rounded"
-                    required
-                  />
-                </div>
-              </>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Käyttäjänimi"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="text-black w-full p-2 mb-4 border rounded"
+                  required
+                />
+              </div>
             )}
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">{isLogin ? 'Käyttäjänimi tai sähköposti' : 'Sähköposti'}</label>
+              <label className="block text-white mb-2">{isLogin ? 'Käyttäjänimi tai sähköposti' : 'Sähköposti'}</label>
               <input
                 type={isLogin ? 'text' : 'email'}
                 name="usernameOrEmail"
@@ -83,7 +84,7 @@ const Auth = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Salasana</label>
+              <label className="block text-white mb-2">Salasana</label>
               <input
                 type="password"
                 name="password"
@@ -93,13 +94,52 @@ const Auth = () => {
                 required
               />
             </div>
+
+            {/* Google Login Section */}
+            <p className="galogin" style={{ cursor: 'pointer', background: 'none', boxShadow: 'none' }}>
+              <a href="?error=ga_needs_configuring" style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src="https://developers.google.com/identity/images/g-logo.png"
+                  alt="Sign in with Google"
+                  style={{ width: '3rem', height: '3rem', marginRight: '10px', marginBottom: '20px' }}
+                />
+                <span className="google-apps-header dark-pressed light">
+                  <span className="inner">
+                    <span className="icon dark-pressed light"></span>
+                    <span style={{ marginLeft: '10px', color: 'white' }}>Kirjaudu Googlella</span>
+                  </span>
+                </span>
+              </a>
+            </p>
+
+            <p className="forgetmenot text-white mb-5">
+              <input name="rememberme" type="checkbox" id="rememberme" value="forever" />
+              <label htmlFor="rememberme">Muista minut</label>
+            </p>
+
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
             >
               {isLogin ? 'Kirjaudu' : 'Rekisteröi'}
             </button>
-            {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+
+          {/* Display error message and Forgot Password link */}
+{error && (
+  <div className="text-red-500 mt-4 text-center">
+    <p>{error}</p> {/* Sanitize error message */}
+    {isLogin && (
+      <button
+        className="text-blue-600 hover:underline mt-2"
+        onClick={() => router.push('/forgot-password')}
+      >
+        Unohditko salasanan?
+      </button>
+    )}
+  </div>
+)}
+
+
             <p className="mt-4 text-left text-white">
               {isLogin ? 'Ei käyttäjää?' : 'Olet jo käyttäjä?'}
               <button

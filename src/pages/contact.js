@@ -22,16 +22,16 @@ const Contact = () => {
         <div className={styles.contactDetails}>
           <div className={styles.contactCard}>
             <h3 className={styles.contactHeading}>Sähköposti</h3>
-            <p className={styles.contactInfo}><a href="mailto:support@truckup.fi">support@truckup.fi</a></p>
+            <p className={styles.contactInfo}><a href="mailto:info@gmail.com">info@logistix.fi</a></p>
           </div>
           <div className={styles.contactCard}>
             <h3 className={styles.contactHeading}>Puhelin</h3>
-            <p className={styles.contactInfo}><a href="tel:+358401234567">+358 40 123 4567</a></p>
+            <p className={styles.contactInfo}><a href="tel:+358401234567">+358 44 26565 27</a></p>
           </div>
-          <div className={styles.contactCard}>
+          {/* <div className={styles.contactCard}>
             <h3 className={styles.contactHeading}>Osoite</h3>
             <p className={styles.contactInfo}>Esimerkkikatu 10, 00100 Helsinki, Suomi</p>
-          </div>
+          </div> */}
         </div>
 
         <h3 className={styles.sectionTitle}>Lähetä viesti</h3>
