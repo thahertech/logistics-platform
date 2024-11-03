@@ -3,20 +3,21 @@
 }
 
 
-/* Hero Section */
-.hero {
+.heroImg {
   background-color: #080808;
-  background-image: url('../../../public/assets/truckupBG.jpeg');
-  background-size: cover;
   background-position: center;
+  position: relative;
   background-repeat: no-repeat;
   width: 100%;
   border-radius: 12px;
   margin: 20px auto;
   position: relative;
-  border: 1px solid #ddd;
   border-top: 0;
+  border-radius: 10px;
+}
 
+.heroImg img {
+  border-radius: 12px;
 }
 
 .whyChooseUs {
@@ -48,24 +49,15 @@
     font-size: 2rem;
     font-variant: small-caps;
     color: #ffffff;
-    border-radius: 10px;
     margin-top: 10px;
-    background-color: #08080894;
-    -webkit-backdrop-filter: blur(0.1px);
-    backdrop-filter: blur(0.1px);
-    padding: 150px 0;
+    background-color: #08080860;
+    -webkit-backdrop-filter: blur(0.01px);
+    backdrop-filter: blur(0.01px);
+    padding: 150px 12.5rem;
+    text-align: center;
+
 
   }
-  .line h3, .line h4 {
-    max-width: 60%;
-    letter-spacing: 0.05rem;
-  }
-
-  .line h4 {
-    font-weight: 200;
-    font-size: 32px;
-  }
-
   .containerHero {
     display: flex;
     flex-wrap: wrap;
@@ -134,7 +126,7 @@
   }
 
   .section {
-    padding: 4rem 10rem;
+    padding: 4rem 10rem 0 10rem;
     flex-direction: row-reverse;
     border-radius: 5px;
     margin: 0 auto;
@@ -169,7 +161,8 @@
   }
 
   .sectionTitle {
-    font-size: 42px;
+    font-size: 36px;
+    letter-spacing: 0.15rem;
     text-align: left;
     max-width: 600px;
     color: #fff;
@@ -187,11 +180,12 @@
   }
 
   .sectionContent1 {
-    font-size: 18px;
+    font-size: 28px;
     color: white;
-    text-align: left;
+    text-align: center;
     max-width: 800px;
-    margin: 0 auto 30px 1rem;
+    margin: auto;
+    margin-bottom: 2rem;
   }
 
 
@@ -274,17 +268,21 @@
   resize: vertical;
 }
 
-/* Card Section */
 .serviceSection {
   text-align: center;
-  padding: 4rem 10rem;
+  padding: 4rem 12.5rem;
 }
 
 .cardContainer {
+  position: relative;
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
   gap: 20px;
+  margin-top: -150px;
+  z-index: 1;
+  /* -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); */
 }
 
 .serviceCard {
@@ -329,18 +327,7 @@
 }
 
 
-.line {
-  font-size: 2rem;
-  color: #ffffff;
-  border-radius: 12px;
-  background-color: rgba(8, 8, 8, 0.85);
-  -webkit-backdrop-filter: blur(1px);
-  backdrop-filter: blur(1px);
-  padding: 150px 50px;
-}
-
 .line h3 {
-  max-width: 60%;
   letter-spacing: 0.1rem;
   font-size: 3.5rem;
   margin-bottom: 1rem;
@@ -350,7 +337,6 @@
 .line h4 {
   font-weight: 300;
   font-size: 1.8rem;
-  max-width: 50%;
   opacity: 0.9;
 }
 
@@ -418,10 +404,61 @@
   cursor: pointer;
 }
 
-/* Responsive adjustments */
+@media (max-width: 1340px) {
+  .cardContainer {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 960px) {
+  .line h3, .line h4{
+    max-width: unset;
+    text-align: center;
+  }
+  .serviceCard{
+    width: 500px;
+  }
+
+  .sectionTitle{
+    padding: 4rem 0;
+    border-radius: 5px;
+    margin: 0 auto;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .sectionContent{
+    max-width: 500px;
+    font-size: 15px;
+  }
+
+}
+
 @media (max-width: 768px) {
+  .line {
+    padding: 150px 0;
+  }
+  .line h3{
+    max-width: unset;
+    text-align: center;
+  }
+  .line h4{
+    max-width: unset;
+    text-align: center;
+    font-size: 1.4rem;
+  }
+
   .hero2 {
     padding: 3rem 1rem;
+  }
+
+  .cardContainer{
+    flex-direction: column;
+    align-content: center;
+  }
+
+  .section{
+    padding: unset;
   }
 
   .hero2 h2 {
@@ -435,5 +472,44 @@
 
   .footerSection {
     text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .line {
+    padding: 150px 0;
+
+  }
+
+  .line h4{
+    max-width: unset;
+    text-align: center;
+    font-size: 1.4rem;
+  }
+  .line h3{
+    font-weight: 250;
+    font-size: 2.2rem;
+    opacity: 1;
+    text-align: center;
+    max-width: unset;
+  }
+
+  .serviceSection{
+    padding: 20px;
+  }
+
+  .sectionTitle{
+    padding: 20px;
+  }
+
+  .sectionContent{
+    padding: 20px;
+    text-align: center;
+  }
+
+  .serviceCard{
+    width: 300px;
+    margin: auto;
   }
 }
