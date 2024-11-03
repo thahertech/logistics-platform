@@ -131,6 +131,7 @@
 .footerText {
   margin: 0;
   padding-bottom: 10px;
+  letter-spacing: 0.2rem;
 }
 
 .footerMenu {
@@ -152,11 +153,15 @@
 }
 
 
+.footerLogo{
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+
 /* Hover Effect */
 .navLink:hover, .navLink1:hover {
   color: #9b9b9b; /* Change color on hover */
-  border-color: rgba(255, 255, 255, 0.5); /* Light border on hover */
-  box-shadow: 0px 1px 2px 0.5px rgba(255, 255, 255, 0.71);
 }
 
 /* Responsive Adjustments */
@@ -165,7 +170,7 @@
     padding: 20px;
   }
   .navMenu {
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
   }
   .headerTop {

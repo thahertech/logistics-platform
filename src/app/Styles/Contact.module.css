@@ -46,6 +46,8 @@
   text-decoration: underline;
 }
 
+
+
 /* Contact Form */
 .contactForm {
   display: flex;
@@ -53,6 +55,12 @@
   max-width: 600px;
   margin: 5rem auto;
 
+}
+
+@media (max-width: 960px){
+  .contactForm{
+  max-width: 500px;
+  }
 }
 
 .inputField, .textArea {
@@ -76,9 +84,9 @@
 .submitButton {
   padding: 15px 20px;
   font-size: 20px;
-  color: #000;
-  background-color: #fff;
-  border: none;
+  color: #ffffff;
+  background-color: #595959;
+  border: 1px solid #fff;
   margin: 0 auto;
   width: 200px;
   border-radius: 5px;
@@ -87,6 +95,6 @@
 }
 
 .submitButton:hover {
-  background-color: #555555;
+  background-color: #1c1c1c;
   color: white;
 }
