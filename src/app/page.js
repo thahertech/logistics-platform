@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ContactForm from './components/contactForm';
 import serviceData from './components/serviceData-cards';
-
+import heroImg from '../../public/assets/truckupBG.jpeg';
 const Dashboard = () => {
   const router = useRouter();
 
@@ -21,12 +21,18 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <div className={styles.hero}>
+    <div className={styles.heroImg}>
+        <Image
+          src= {heroImg}
+          alt="Background image"
+          layout="fill"
+          objectFit="cover"
+          priority={true}
+        />
         <div className={styles.line}>
-          <h3> Me olemme täällä</h3>
-          <h4>Tervetuloa Logistixin alustalle</h4>
+          <h3> Tulevaisuuden työkalu</h3>
         </div>
-      </div>
+    </div>
 
 
             <div className={styles.serviceSection}>
@@ -76,10 +82,8 @@ const Dashboard = () => {
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Haluatko ilmoituksen kun olemme valmiina?</h2>
-          <p className={styles.sectionContent}>
-            Lisää yhteystiedot alle, niin laitamme sähköpostin kun olemme valmiina.
-          </p>
+        <h2 className={styles.sectionTitle}>Haluatko pysyä ajantasalla?</h2>
+
         {/* <button className={styles.contactButton} onClick={() => router.push('/contact')}>
           Ota yhteyttä
         </button> */}
