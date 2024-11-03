@@ -2,6 +2,7 @@ import './globals.css';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import AnalyticsClient from './components/analyticsClient';
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
   title: 'Logistix',
@@ -22,7 +23,7 @@ export default function RootLayout({ children }) {
         {children}
         <Analytics /> {/* NextJS */}
         <SpeedInsights /> {/* NextJS */}
-        <AnalyticsClient /> {/* Google */}
+        <GoogleAnalytics gaId="G-KS6NFLFQKS" /> {/* Google */}
       </body>
     </html>
   );
