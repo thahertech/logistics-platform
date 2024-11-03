@@ -22,7 +22,7 @@ const Contact = () => {
         <div className={styles.contactDetails}>
           <div className={styles.contactCard}>
             <h3 className={styles.contactHeading}>Sähköposti</h3>
-            <p className={styles.contactInfo}><a href="mailto:info@gmail.com">info@logistix.fi</a></p>
+            <p className={styles.contactInfo}><a href="mailto:info@logistix.fi">info@logistix.fi</a></p>
           </div>
           <div className={styles.contactCard}>
             <h3 className={styles.contactHeading}>Puhelin</h3>
@@ -34,18 +34,15 @@ const Contact = () => {
           </div> */}
         </div>
 
-        <h3 className={styles.sectionTitle}>Lähetä viesti</h3>
         <form className={styles.contactForm}>
-          <input className={styles.inputField} type="text" placeholder="Nimi" required />
+          <input className={styles.inputField} type="name" placeholder="Nimi" required />
+          <input className={styles.inputField} type="name" placeholder="Yritys" optional />
           <input className={styles.inputField} type="email" placeholder="Sähköpostiosoite" required />
           <textarea className={styles.textArea} placeholder="Viesti" required></textarea>
           <button className={styles.submitButton} type="submit">Lähetä</button>
         </form>
       </div>
 
-      <div className={styles.hero2}>
-        <h2>Pidetään yhteyttä!</h2>
-      </div>
     </Layout>
   );
 };

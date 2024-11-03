@@ -2,7 +2,8 @@
 
 .header {
   background-color: #000000a1;
-  padding: 2rem 4rem;
+  padding: 3rem 4rem;
+  padding-bottom: 1rem;
   width: 100%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
