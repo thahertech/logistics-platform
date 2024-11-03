@@ -2,19 +2,19 @@ import React from 'react';
 import styles from '../app/Styles/Dashboard.module.css';
 import Layout from '../app/dashboard/Layout';
 import '../app/globals.css';
+import ContactForm from '@/app/components/contactForm';
 
 const Contact = () => {
   return (
     <Layout>
-      <div className={styles.hero}>
+      {/* <div className={styles.hero}>
         <div className={styles.line}>
           <h3>Yhteystiedot</h3>
           <h4>Olemme täällä auttamassa sinua kaikissa kysymyksissäsi. Ota rohkeasti yhteyttä!</h4>
         </div>
-      </div>
+      </div> */}
 
       <div className={styles.contactSection}>
-        <h2 className={styles.sectionTitle}>Ota yhteyttä</h2>
         <p className={styles.sectionContent1}>
           Haluatko tietää lisää palveluistamme tai tarvitsetko apua? Ota yhteyttä meihin käyttämällä alla olevia yhteystietoja tai lomaketta. Vastaamme mahdollisimman pian.
         </p>
@@ -34,15 +34,16 @@ const Contact = () => {
           </div> */}
         </div>
 
-        <form className={styles.contactForm}>
+        {/* <form className={styles.contactForm}>
           <input className={styles.inputField} type="name" placeholder="Nimi" required />
           <input className={styles.inputField} type="name" placeholder="Yritys" optional />
           <input className={styles.inputField} type="email" placeholder="Sähköpostiosoite" required />
           <textarea className={styles.textArea} placeholder="Viesti" required></textarea>
           <button className={styles.submitButton} type="submit">Lähetä</button>
         </form>
-      </div>
-
+       */}
+       </div>
+          <ContactForm />
     </Layout>
   );
 };

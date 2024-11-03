@@ -6,7 +6,8 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CartSidebar from '../components/cartSidebar';
 import { jwtDecode } from 'jwt-decode';
-
+import Image from 'next/image';
+import footerImg from '../../../public/assets/logistix-logos/svg/logo.svg';
 const Layout = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   //const [cartCount, setCartCount] = useState(0);
@@ -87,22 +88,29 @@ const Layout = ({ children }) => {
         {children}
       </main>
    {  /* <CartSidebar isOpen={isCartOpen} onClose={toggleCart} /> */}
-      
+
       <footer className={styles.footer}>
-        <p className={styles.footerText}>© 2024 Logistix OY | All rights reserved. Designed by Sensei Studios</p>
-        <nav>
+      <Image
+          src= {footerImg}
+          alt="Logistix Logo"
+          width={75}
+          height={75}
+          className={styles.footerLogo}
+        />
+        <p className={styles.footerText}>Logistix OY 3487288-6 | All rights reserved | Designed by Sensei Studios</p>
+        {/* <nav>
           <ul className={styles.footerMenu}>
             <li className={styles.footerItem}>
               <Link href="/contact" className={styles.footerLink}>Ota Yhteyttä</Link>
-            </li>
+            </li> */}
             {/* <li className={styles.footerItem}>
               <Link href="/marketplace" className={styles.footerLink}>Tietosuoja</Link>
             </li> */}
-            <li className={styles.footerItem}>
+            {/* <li className={styles.footerItem}>
               <Link href="/about-us" className={styles.footerLink}>Meistä</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </footer>
     </>
   );
