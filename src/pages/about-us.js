@@ -1,9 +1,8 @@
 import React from 'react';
-import Layout from '@/app/dashboard/Layout'; 
+import Layout from '@/app/dashboard/Layout';
 import styles from '../app/Styles/page.module.css';
 import '../app/globals.css';
 
-// Import Font Awesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench, faSeedling, faHandsHelping, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
@@ -16,8 +15,8 @@ const AboutUs = () => {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Kuka Me Olemme?</h2>
         <p className={styles.sectionContent}>
-          Olemme johtava kuljetuspalveluyritys Suomessa, erikoistunut tarjoamaan asiakkaillemme 
-          tehokkaita ja luotettavia kuljetusratkaisuja. Tiimimme koostuu kokeneista ammattilaisista, 
+          Olemme johtava kuljetuspalveluyritys Suomessa, erikoistunut tarjoamaan asiakkaillemme
+          tehokkaita ja luotettavia kuljetusratkaisuja. Tiimimme koostuu kokeneista ammattilaisista,
           jotka ovat sitoutuneet tarjoamaan parasta mahdollista palvelua.
         </p>
       </div>
@@ -25,7 +24,7 @@ const AboutUs = () => {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Missiomme</h2>
         <p className={styles.sectionContent}>
-          Missiomme on tehdä kuljetusprosesseista mahdollisimman sujuvia ja ympäristöystävällisiä. 
+          Missiomme on tehdä kuljetusprosesseista mahdollisimman sujuvia ja ympäristöystävällisiä.
           Uskomme voivamme parantaa asiakaskokemusta tarjoamalla innovatiivisia ratkaisuja ja läpinäkyvyyttä kaikissa toiminnoissamme.
         </p>
       </div>
