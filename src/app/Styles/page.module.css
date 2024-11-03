@@ -1,5 +1,5 @@
 .aboutUsHero {
-  background-image: url('../../../public/assets/aboutUsBG.jpg');
+  background-image: url('../../../public/assets/TruckImg.jpeg');
   background-size: cover;
   background-position: center;
   height: 300px;
@@ -13,14 +13,12 @@
   opacity: 0.9;
 }
 
-
-
-
 .section {
   color: #f0f0f0;
-  padding: 40px;
+  padding: 20px;
   border-radius: 8px;
-  margin: 20px 0;
+  margin: auto;
+  max-width: 620px;
 }
 
 .sectionTitle {
@@ -57,17 +55,23 @@
   gap: 16px;
 }
 
+
 .card {
-  background-color: #2a2a2a; /* Dark background */
-  color: #f0f0f0;           /* Light text */
-  padding: 20px;
+  background-color: #f1eeee21;
+  border: 1px solid #fff;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-radius: 8px;
+  color: #f0f0f0;
+  padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+
 }
 
 .card h3 {
@@ -87,16 +91,59 @@
   justify-items: center;
   margin-bottom: 2rem;
   margin-top: 2rem;
+  color: white;
+}
+
+@media (max-width: 1260px) {
+  .MasonryContainer{
+        flex-direction: column;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .masonryItem{
+      max-width: 600px;
+    }
 }
 
 .masonryItem {
-  background-color: #2a2a2a; /* Card background color */
-  color: #f0f0f0;           /* Text color */
+  background-color: #f1eeee21;
+  border: 1px solid #fff;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   padding: 20px;
-  border-radius: 8px;
-  transition: transform 0.3s;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .masonryItem:hover {
   transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2); /* Light hover effect */
+
+}
+
+.joinButton {
+  padding: 10px 20px;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #595959;
+  border: 1px solid #fff;
+  margin: 0 auto;
+  margin-top: 2rem;
+  width: 200px;
+  height: 50px;
+  align-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: center;
+}
+
+.joinButton:hover {
+  background-color: #1c1c1c;
+  color: white;
 }

@@ -15,18 +15,6 @@
   margin-bottom: 30px;
 }
 
-.contactCard {
-  flex: 1;
-  margin: 10px;
-  padding: 20px;
-  background-color: #000000b7;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
 .contactHeading {
   font-size: 20px;
   color: #ffffff;
