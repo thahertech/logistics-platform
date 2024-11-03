@@ -57,19 +57,19 @@ const Layout = ({ children }) => {
               <Link href="/" className={styles.navLink}>Etusivu</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/ourService" className={styles.navLink}>Palvelu</Link>
+              <Link href="/our-service" className={styles.navLink}>Palvelu</Link>
             </li>
             <li className={styles.navItem}>
               <Link href="/contact" className={styles.navLink}>Ota Yhteyttä</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/aboutUs" className={styles.navLink}>Meistä</Link>
+              <Link href="/about-us" className={styles.navLink}>Meistä</Link>
             </li>
 
             {isAuthenticated && (
               <>
                 <li className={styles.navItem}>
-                  <Link href="/createShipment" className={styles.navLink}>Tilaus</Link>
+                  <Link href="/create-shipment" className={styles.navLink}>Tilaus</Link>
                 </li>
                 <li className={styles.navItem}>
                   <Link href="/products" className={styles.navLink}>Tuotteet</Link>
@@ -95,11 +95,11 @@ const Layout = ({ children }) => {
             <li className={styles.footerItem}>
               <Link href="/contact" className={styles.footerLink}>Ota Yhteyttä</Link>
             </li>
-            <li className={styles.footerItem}>
+            {/* <li className={styles.footerItem}>
               <Link href="/marketplace" className={styles.footerLink}>Tietosuoja</Link>
-            </li>
+            </li> */}
             <li className={styles.footerItem}>
-              <Link href="/aboutUs" className={styles.footerLink}>Meistä</Link>
+              <Link href="/about-us" className={styles.footerLink}>Meistä</Link>
             </li>
           </ul>
         </nav>
