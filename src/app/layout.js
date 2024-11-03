@@ -6,8 +6,9 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
   title: 'Logistix',
-  description: 'Löydä kuljetus juuri sinulle',
-}
+  description: 'Logistix - Yhdistämme lähetykset luotettaviin kuljetuspalveluihin sujuvaa logistiikkaa varten.',
+};
+
 
 export default function RootLayout({ children }) {
   return (
