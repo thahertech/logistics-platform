@@ -6,7 +6,6 @@
   margin: 0 auto;
 }
 
-
 /* Contact Details */
 .contactDetails {
   display: flex;
@@ -52,17 +51,22 @@
   display: flex;
   flex-direction: column;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 5rem auto;
+
 }
 
 .inputField, .textArea {
   width: 100%;
   padding: 15px;
   margin-bottom: 20px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+  border-radius: 7px;
+  background-color: rgba(56, 56, 56, 0.75);
+  color: white;
   font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
+
+
 
 .textArea {
   height: 150px;
@@ -71,15 +75,18 @@
 
 .submitButton {
   padding: 15px 20px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #0070f3;
+  font-size: 20px;
+  color: #000;
+  background-color: #fff;
   border: none;
+  margin: 0 auto;
+  width: 200px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .submitButton:hover {
-  background-color: #005bb5;
+  background-color: #555555;
+  color: white;
 }
