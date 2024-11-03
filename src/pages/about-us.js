@@ -3,6 +3,10 @@ import Layout from '@/app/dashboard/Layout';
 import styles from '../app/Styles/page.module.css';
 import '../app/globals.css';
 
+// Import Font Awesome icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWrench, faSeedling, faHandsHelping, faLightbulb } from '@fortawesome/free-solid-svg-icons';
+
 const AboutUs = () => {
   return (
     <Layout>
@@ -31,30 +35,30 @@ const AboutUs = () => {
         <h2 className={styles.sectionTitle}>Arvomme</h2>
         <div className={`${styles.cardContainer}`}>
           <div className={styles.card}>
-            <h3>🔧 Luotettavuus</h3>
+            <h3><FontAwesomeIcon icon={faWrench} /> Luotettavuus</h3>
             <p>Asiakkaamme voivat luottaa palveluihimme.</p>
           </div>
           <div className={styles.card}>
-            <h3>🌱 Kestävyys</h3>
+            <h3><FontAwesomeIcon icon={faSeedling} /> Kestävyys</h3>
             <p>Minimoimme ympäristövaikutuksemme kaikissa toiminnoissamme.</p>
           </div>
           <div className={styles.card}>
-            <h3>🤝 Asiakaskeskeisyys</h3>
+            <h3><FontAwesomeIcon icon={faHandsHelping} /> Asiakaskeskeisyys</h3>
             <p>Asiakkaamme ovat kaiken toimintamme keskiössä.</p>
           </div>
           <div className={styles.card}>
-            <h3>💡 Innovaatio</h3>
+            <h3><FontAwesomeIcon icon={faLightbulb} /> Innovaatio</h3>
             <p>Etsimme jatkuvasti uusia tapoja parantaa palveluitamme ja prosessejamme.</p>
           </div>
         </div>
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Ota Yhteyttä</h2>
+         <div className={styles.sectionTitle}></div>
         <p className={styles.sectionContent}>
           Haluatko tietää lisää? Ota rohkeasti yhteyttä tiimiimme, ja autamme sinua mielellämme kaikissa kysymyksissäsi.
         </p>
-        <button className={styles.contactButton} onClick={() => window.location.href='/contact'}>
+        <button className={styles.joinButton} onClick={() => window.location.href='/contact'}>
           Ota Yhteyttä
         </button>
       </div>
