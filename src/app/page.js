@@ -23,8 +23,8 @@ const Dashboard = () => {
     <Layout>
       <div className={styles.hero}>
         <div className={styles.line}>
-          <h3> Tehosta toimintaasi ja löydä seuraava kuljetus</h3>
-          <h4>Lähellä olevat toimitukset käden ulottuvilla.</h4>
+          <h3> Me olemme täällä</h3>
+          <h4>Tervetuloa Logistixin alustalle</h4>
         </div>
       </div>
 
