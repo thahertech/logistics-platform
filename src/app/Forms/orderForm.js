@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Layout from '../Dashboard/Layout';
+import Layout from '../dashboard/Layout';
 import styles from '../Styles/orderForm.module.css';
-import CartItem from '../Cart/cartItem';
+import CartItem from '../cart/cartItem';
 import BillingForm from './billingForm';
-import PdfPreview from '../Components/pdfPreview';
+import PdfPreview from '../components/pdfPreview';
 
 const OrderForm = () => {
     const [cartItems, setCartItems] = useState([]);
