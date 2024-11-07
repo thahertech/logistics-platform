@@ -1,7 +1,7 @@
 import './globals.css';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import AnalyticsClient from './Components/analyticsClient';
+import AnalyticsClient from './components/analyticsClient';
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
