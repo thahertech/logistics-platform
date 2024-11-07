@@ -1,12 +1,12 @@
 'use client';
-import Layout from './dashboard/Layout';
+import Layout from './Dashboard/Layout';
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Styles/Dashboard.module.css';
 import './globals.css';
-import FunFacts from './dashboard/funfacts';
-import Footer from './components/Footer';
+import FunFacts from './Dashboard/funfacts';
+import Footer from './Components/Footer';
 
 const Dashboard = () => {
   const router = useRouter();
