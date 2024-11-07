@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../app/Styles/Dashboard.module.css';
 import Layout from '../app/Dashboard/Layout';
 import '../app/globals.css';
-import ContactForm from '@/app/Forms/contactForm';
+import ContactForm from '../app/Forms/contactForm';
 
 const Contact = () => {
   return (
