@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Layout from '../app/Dashboard/Layout';
+import Layout from '../app/dashboard/Layout';
 import '../app/globals.css';
-import Modal from '../app/Components/Modal';
-import FilterSidebar from '@/app/Components/sideBar';
+import Modal from '../app/components/Modal';
+import FilterSidebar from '@/app/components/sideBar';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
