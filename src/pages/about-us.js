@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '@/app/dashboard/Layout';
+import Layout from '@/app/Dashboard/Layout';
 import styles from '../app/Styles/page.module.css';
 import '../app/globals.css';
 
