@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '@/app/dashboard/Layout';
+import Layout from '@/app/Dashboard/Layout';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import '../app/globals.css';
@@ -13,6 +13,8 @@ const Profile = () => {
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
   const { register, handleSubmit, reset } = useForm();
+  const [orders, setOrders] = useState([]); // State for orders
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -68,22 +70,58 @@ const Profile = () => {
       }
     };
 
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://truckup.local/wp-json/wc/v3/products', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setProducts(response.data);
-      } catch (error) {
-        setError('Failed to fetch products.');
-      }
-    };
+    // const fetchProducts = async () => {
+    //   try {
+    //     const response = await axios.get('http://truckup.local/wp-json/wc/v3/products', {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     });
+    //     setProducts(response.data);
+    //   } catch (error) {
+    //     setError('Failed to fetch products.');
+    //   }
+    // };
+  //   const fetchOrders = async () => {  // New function to fetch orders
+  //     try {
+  //         const response = await axios.get('http://truckup.local/wp-json/wc/v3/orders', {
+  //             headers: {
+  //                 Authorization: `Bearer ${token}`,
+  //             },
+  //         });
+  //         setOrders(response.data);
+  //         console.log(response.data);
+  //     } catch (error) {
+  //         setError('Failed to fetch orders.');
+  //     }
+  // };
 
-    fetchUserDetails();
-    fetchProducts();
-  }, [reset]);
+  const fetchUserOrders = async () => {
+    const token = localStorage.getItem('token');
+    const decoded = jwtDecode(token);
+    const userId = decoded.data.user.id;
+
+  
+    try {
+      const response = await axios.get('http://truckup.local/wp-json/wc/v3/orders', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Ensure token is correct and not expired
+        },
+        params: {
+          customer: userId, // replace 'user_id_here' with the actual user ID if needed
+        }
+      });
+      console.log('User Orders:', response.data);
+    } catch (error) {
+      console.error('Error fetching user orders:', error.response?.data);
+    }
+  };
+  
+
+  fetchUserDetails();
+  // fetchProducts();
+  fetchUserOrders(); // Call the fetch orders function
+}, [reset]);
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem('token');
@@ -151,19 +189,26 @@ const Profile = () => {
         <h2 className="text-2xl text-center font-bold mb-6">Profiili</h2>
 
         <div className="flex justify-between mb-4">
-          <button
-            className={`px-4 py-2 rounded ${activeTab === 'profile' ? 'bg-blue-600' : 'bg-gray-700'}`}
-            onClick={() => setActiveTab('profile')}
-          >
-            Profiili
-          </button>
-          <button
-            className={`px-4 py-2 rounded ${activeTab === 'products' ? 'bg-blue-600' : 'bg-gray-700'}`}
-            onClick={() => setActiveTab('products')}
-          >
-            Tuotteet
-          </button>
-        </div>
+    <button
+        className={`px-4 py-2 rounded ${activeTab === 'profile' ? 'bg-blue-600' : 'bg-gray-700'}`}
+        onClick={() => setActiveTab('profile')}
+    >
+        Profiili
+    </button>
+    <button
+        className={`px-4 py-2 rounded ${activeTab === 'products' ? 'bg-blue-600' : 'bg-gray-700'}`}
+        onClick={() => setActiveTab('products')}
+    >
+        Tuotteet
+    </button>
+    <button
+        className={`px-4 py-2 rounded ${activeTab === 'orders' ? 'bg-blue-600' : 'bg-gray-700'}`}
+        onClick={() => setActiveTab('orders')}
+    >
+        Tilaukset
+    </button>
+</div>
+
 
         {activeTab === 'profile' && (
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -263,6 +308,25 @@ const Profile = () => {
             </div>
           </div>
         )}
+        {activeTab === 'orders' && (
+    <div>
+        <h3 className="text-lg font-bold mb-4">Omat tilaukset</h3>
+        {orders.length > 0 ? (
+            orders.map((order) => (
+                <div key={order.id} className="border rounded-lg p-4 mb-4 bg-gray-800 shadow">
+                    <p><strong>Tilausnumero:</strong> {order.number}</p>
+                    <p><strong>Status:</strong> {order.status}</p>
+                    <p><strong>Yhteensä:</strong> {order.total} €</p>
+                    <p><strong>Päivämäärä:</strong> {new Date(order.date_created).toLocaleDateString()}</p>
+                    {/* Add more fields as necessary */}
+                </div>
+            ))
+        ) : (
+            <p className="text-center">Ei tilauksia.</p>
+        )}
+    </div>
+)}
+
       </div>
     </Layout>
   );
