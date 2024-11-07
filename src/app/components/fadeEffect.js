@@ -1,4 +1,3 @@
-// components/fadeEffect.js
 import { useEffect } from 'react';
 
 const FadeEffect = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '@/app/dashboard/Layout';
+import Layout from '@/app/Dashboard/Layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket, faLock, faChartLine, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import styles from '../app/Styles/page.module.css';
