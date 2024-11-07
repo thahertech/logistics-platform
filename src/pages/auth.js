@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import '../app/globals.css';
-import Layout from '../app/dashboard/Layout';
+import Layout from '../app/dashboardTEMP/Layout';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
