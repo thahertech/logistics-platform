@@ -4,7 +4,7 @@ import styles from '../Styles/Layout.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import CartSidebar from '../components/cartSidebar';
+import CartSidebar from '../Cart/cartSidebar';
 import { jwtDecode } from 'jwt-decode';
 import Image from 'next/image';
 import footerImg from '../../../public/assets/logistix-logos/svg/logo.svg';
