@@ -3,7 +3,7 @@ import axios from 'axios';
 import Layout from '../Dashboard/Layout';
 import styles from '../Styles/orderForm.module.css';
 import CartItem from '../Cart/cartItem';
-import BillingForm from '../Components/billingForm';
+import BillingForm from '../Forms/billingForm';
 import PdfPreview from '../Components/pdfPreview';
 
 const OrderForm = () => {
