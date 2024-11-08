@@ -17,8 +17,8 @@ const Contact = () => {
 
       <div className={styles.contactSection}>
       <Image
-              src={contactImg}
-              alt="contact-image"
+              src="/assets/Sunset-logistics.jpg"
+              alt="Sunset Logistics"
               width={styles.contactImg}
               height={styles.contactImg}
               className={styles.contactImg}
