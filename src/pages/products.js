@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Layout from '../app/dashboard/Layout';
+import Layout from '../app/dashboardTEMP/Layout';
 import '../app/globals.css';
-import Modal from '../app/components/Modal';
-import FilterSidebar from '@/app/components/sideBar';
+import Modal from '../app/ComponentsTEMP/Modal';
+import FilterSidebar from '@/app/ComponentsTEMP/sideBar';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -25,6 +25,7 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const token = localStorage.getItem('token');
+      console.log(token);
       try {
         const response = await axios.get('http://truckup.local/wp-json/wc/v3/products', {
           headers: {
@@ -45,32 +46,44 @@ const Products = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = products.filter(product => {
-      const pickupDateMeta = product.meta_data.find(meta => meta.key === 'pickup_date');
-      const deliveryDateMeta = product.meta_data.find(meta => meta.key === 'delivery_date');
-
+    const filtered = products.filter((product) => {
+      const pickupLocationMeta = product.meta_data.find((meta) => meta.key === 'pickup_location');
+      const deliveryLocationMeta = product.meta_data.find((meta) => meta.key === 'delivery_location');
+      const priceMeta = product.meta_data.find((meta) => meta.key === 'price');
+      const pickupDateMeta = product.meta_data.find((meta) => meta.key === 'pickup_date');
+      const deliveryDateMeta = product.meta_data.find((meta) => meta.key === 'delivery_date');
+const dateCreated = product.date_created;
+  
       const pickupLocationMatches = 
         !filters.pickupLocation || 
-        (product.pickup_location && product.pickup_location.includes(filters.pickupLocation));
-      
+        (pickupLocationMeta && pickupLocationMeta.value.includes(filters.pickupLocation));
+  
       const deliveryLocationMatches = 
         !filters.deliveryLocation || 
-        (product.delivery_location && product.delivery_location.includes(filters.deliveryLocation));
-
-      const priceMatches = !filters.price || product.price <= filters.price;
-
+        (deliveryLocationMeta && deliveryLocationMeta.value.includes(filters.deliveryLocation));
+  
+      const priceMatches = !filters.price || (priceMeta && priceMeta.value <= filters.price);
+  
       const dateMatches = 
         filters.date === 'now' || 
         (deliveryDateMeta && deliveryDateMeta.value.includes(filters.date));
-
+  
       const transportTypeMatches = 
         !filters.transportType.length || 
         filters.transportType.includes(product.transport_type);
-
-      return pickupLocationMatches && deliveryLocationMatches && priceMatches && dateMatches && transportTypeMatches;
+  
+      return (
+        dateCreated &&
+        pickupLocationMatches &&
+        deliveryLocationMatches &&
+        priceMatches &&
+        dateMatches &&
+        transportTypeMatches
+      );
     });
-    setFilteredProducts(filtered); // Update the filtered products
-  }, [filters, products]); // Only depend on filters and products
+    setFilteredProducts(filtered);
+  }, [filters, products]);
+  
 
   const handleAddToCart = async (productId) => {
     const token = localStorage.getItem('token');
@@ -91,10 +104,11 @@ const Products = () => {
   };
 
   const openModal = (product) => {
+    console.log("Selected Product:", product);  // Verify product data
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
-
+  
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedProduct(null);

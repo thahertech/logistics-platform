@@ -1,8 +1,10 @@
 /* Contact Section */
 .contactSection {
   padding: 40px 20px;
-  background-color: #fafafa;
   border-radius: 5px;
+  background-image: url('../../../public/assets/3d.jpg');
+  height: 300px;
+
   margin: 0 auto;
 }
 
