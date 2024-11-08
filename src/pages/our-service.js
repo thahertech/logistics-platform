@@ -22,8 +22,8 @@ const MeidanPalvelusta = () => {
       <Image
               src="/assets/Sunset-logistics.jpg"
               alt="sunset-image"
-              width={styles.serviceImage}
-              height={styles.serviceImage}
+              width="1000"
+              height="500"
               className={styles.serviceImage}
             />
       <div className={styles.MasonryContainer}>
@@ -32,7 +32,7 @@ const MeidanPalvelusta = () => {
           <h2 className={styles.sectionTitle}>Toimintatapa?</h2>
           <p className={styles.sectionContent}>
             1. <strong>Julkaise toimitus</strong>: Lähettäjä voi julkaista toimitustarpeen nopeasti.
-            <br /> 2. <strong>Etsi toimitus</strong>: Kuljetusyritykset selaa avoimia toimituksia ja tarjoaa.
+            <br /> 2. <strong>Etsi toimitus</strong>: Kuljetusyritys selaa avoimia toimituksia ja tarjoaa.
             <br /> 3. <strong>Hyväksy toimitus</strong>: Varmistuksen jälkeen automaattinen dokumentointi
           </p>
         </div>
