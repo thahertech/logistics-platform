@@ -67,8 +67,9 @@
 }
 
 .sectionContent {
-  font-size: 16px;
   line-height: 1.6;
+  font-size: 18px;
+
 }
 
 .benefitsList {
@@ -150,6 +151,7 @@
 
 .masonryItem {
   background-color: #f1eeee21;
+  flex:1;
   border: 1px solid #fff;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
