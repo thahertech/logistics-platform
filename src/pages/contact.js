@@ -3,7 +3,8 @@ import styles from '../app/Styles/Dashboard.module.css';
 import Layout from '../app/dashboardTEMP/Layout';
 import '../app/globals.css';
 import ContactForm from '../app/formsTEMP/contactForm';
-
+import Image from 'next/image';
+import contactImg from '../../public/assets/contactservice.jpg';
 const Contact = () => {
   return (
     <Layout>
@@ -15,6 +16,13 @@ const Contact = () => {
       </div> */}
 
       <div className={styles.contactSection}>
+      <Image
+              src={contactImg}
+              alt="contact-image"
+              width={styles.contactImg}
+              height={styles.contactImg}
+              className={styles.contactImg}
+            />
         <p className={styles.sectionContent1}>
           Haluatko tietää lisää palveluistamme tai tarvitsetko apua? Ota yhteyttä meihin käyttämällä alla olevia yhteystietoja tai lomaketta. Vastaamme mahdollisimman pian.
         </p>

@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket, faLock, faChartLine, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import styles from '../app/Styles/page.module.css';
 import '../app/globals.css';
+import Image from 'next/image';
+import serviceImage from '../../public/assets/Sunset-logistics.jpg';
 
 const MeidanPalvelusta = () => {
   return (
@@ -18,10 +20,18 @@ const MeidanPalvelusta = () => {
           Palvelumme on suunniteltu tekemään toimitukset helpoiksi, olitpa yksityishenkilö tai yritys.
         </p>
       </div>
+      <div className={styles.ServiceContainers}>
+      <Image
+              src={serviceImage}
+              alt="sunset-image"
+              width={styles.serviceImage}
+              height={styles.serviceImage}
+              className={styles.serviceImage}
+            />
       <div className={styles.MasonryContainer}>
 
         <div className={styles.masonryItem}>
-          <h2 className={styles.sectionTitle}>Miten Se Toimii?</h2>
+          <h2 className={styles.sectionTitle}>Miten?</h2>
           <p className={styles.sectionContent}>
             1. <strong>Julkaise Toimitus</strong>: Tuotteen omistajat voivat julkaista toimitustarpeensa nopeasti.
             <br /> 2. <strong>Tarjoa Kuljetus</strong>: Kuljetusyritykset voivat selata avoimia toimituksia ja tarjota palveluitaan.
@@ -30,18 +40,18 @@ const MeidanPalvelusta = () => {
         </div>
 
         <div className={styles.masonryItem}>
-          <h2 className={styles.sectionTitle}>Kenelle Tämä On?</h2>
+          <h2 className={styles.sectionTitle}>Kenelle?</h2>
           <p className={styles.sectionContent}>
-            Palvelumme on ihanteellinen sekä yrityksille että yksityishenkilöille, jotka tarvitsevat luotettavan tavan hallita toimituksiaan. 
+            Palvelumme on ihanteellinen sekä yrityksille että yksityishenkilöille, jotka tarvitsevat luotettavan tavan hallita toimituksiaan.
             Kuljetusyrityksille tarjoamme helpon tavan löytää uusia asiakkaita ja kasvattaa liiketoimintaansa.
           </p>
         </div>
 
         <div className={styles.masonryItem}>
-          <h2 className={styles.sectionTitle}>Miksi Valita Meidät?</h2>
+          <h2 className={styles.sectionTitle}>Miksi Logistix?</h2>
           <ul className={styles.benefitsList}>
-            <li><FontAwesomeIcon icon={faRocket} /> Nopeus: Julkaise ja varmista toimituksesi muutamalla klikkauksella.</li>
-            <li><FontAwesomeIcon icon={faLock} /> Turvallisuus: Kaikki tiedonsiirto ja maksut ovat suojattuja ja luotettavia.</li>
+            <li><FontAwesomeIcon icon={faRocket} /> Nopeus: Julkaise ja kilpailuta toimituksesi muutamalla klikkauksella.</li>
+            <li><FontAwesomeIcon icon={faLock} /> Ekologisuus: Yksinkertaisesti säästät luontoa.</li>
             <li><FontAwesomeIcon icon={faChartLine} /> Kasvata Bisnestäsi: Kuljetusyritykset voivat laajentaa asiakaskuntaansa tehokkaasti.</li>
             <li><FontAwesomeIcon icon={faBriefcase} /> Helppokäyttöisyys: Palvelu on selkeä ja käyttäjäystävällinen kaikille.</li>
           </ul>
@@ -57,6 +67,8 @@ const MeidanPalvelusta = () => {
           Liity Nyt
         </button>
       </div>
+      </div>
+
     </Layout>
   );
 };
