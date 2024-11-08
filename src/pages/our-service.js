@@ -40,8 +40,8 @@ const MeidanPalvelusta = () => {
         <div className={styles.masonryItem}>
           <h2 className={styles.sectionTitle}>Sopivuus?</h2>
           <p className={styles.sectionContent}>
-            Palvelumme on ihanteellinen sekä yrityksille että yksityishenkilöille, jotka tarvitsevat ekologisen tavan hallita toimituksiaan.<br/>
-            Kuljetusyrityksille helppo tapa löytää uusia asiakkaita ja optimoida tyhjiä kilometrejä.
+            Palvelu on ihanteellinen yrityksille sekä yksityishenkilöille, jotka tarvitsevat ekologisen ja luotettavan tavan hallita toimituksiaan.<br/>
+            Kuljetusyritykselle helppo tapa löytää uusia asiakkaita ja optimoida tyhjiä kilometrejä.
 
           </p>
         </div>
@@ -51,8 +51,8 @@ const MeidanPalvelusta = () => {
           <ul className={styles.benefitsList}>
             <li><FontAwesomeIcon icon={faRocket} /> Nopeus: Julkaise ja kilpailuta toimituksesi muutamalla klikkauksella.</li>
             <li><FontAwesomeIcon icon={faLeaf} /> Ekologisuus: Yksinkertaisesti säästät luontoa.</li>
-            <li><FontAwesomeIcon icon={faChartLine} /> Kasvata Bisnestäsi: Kuljetusyritykset voivat laajentaa asiakaskuntaansa tehokkaasti.</li>
-            <li><FontAwesomeIcon icon={faBriefcase} /> Helppokäyttöisyys: Palvelu on selkeä ja käyttäjäystävällinen kaikille.</li>
+            <li><FontAwesomeIcon icon={faChartLine} /> Kasvata Bisnestäsi: Yritykset voivat laajentaa asiakaskuntaansa tehokkaasti.</li>
+            <li><FontAwesomeIcon icon={faBriefcase} /> Helppokäyttöisyys: Palvelu on selkeä ja käyttäjäkeskeinen.</li>
           </ul>
         </div>
       </div>
