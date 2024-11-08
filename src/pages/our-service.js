@@ -5,7 +5,6 @@ import { faRocket, faLeaf, faChartLine, faBriefcase } from '@fortawesome/free-so
 import styles from '../app/Styles/page.module.css';
 import '../app/globals.css';
 import Image from 'next/image';
-import serviceImage from '../../public/assets/Sunset-logistics.jpg';
 
 const MeidanPalvelusta = () => {
   return (
