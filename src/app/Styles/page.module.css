@@ -1,5 +1,5 @@
 .aboutUsHero {
-  background-image: url('../../../public/assets/TruckImg.jpeg');
+  background-image: url('../../../public/assets/containers.jpg');
   background-size: cover;
   background-position: center;
   height: 300px;
@@ -21,6 +21,33 @@
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   opacity: 0.9;
+}
+
+.serviceImage{
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #080808;
+  background-position: center;
+  position: relative;
+  background-repeat: no-repeat;
+  width: 100%;
+  border-radius: 12px;
+  margin: 20px auto;
+  position: relative;
+  border-top: 0;
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  opacity: 0.9;
+  position: absolute;
+  height: 500px;
+  overflow: hidden;
+  left:0;
+  right:0;
 }
 
 .section {
@@ -98,6 +125,7 @@
 .MasonryContainer {
   display: flex;
   gap: 16px;
+  padding-top: 19rem;
   min-width: 400px;
   justify-items: center;
   justify-content: center;
