@@ -234,7 +234,36 @@
 .contactSection {
   padding: 40px 20px;
   border-radius: 5px;
+  height: 300px;
+
   margin: 0 auto;
+}
+
+.contactImg{
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #080808;
+  background-position: center;
+  position: relative;
+  background-repeat: no-repeat;
+  width: 100%;
+  border-radius: 12px;
+  margin: 20px auto;
+  position: relative;
+  border-top: 0;
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  opacity: 0.9;
+  position: absolute;
+  height: 500px;
+  overflow: hidden;
+  left:0;
+  right:0;
 }
 
 
