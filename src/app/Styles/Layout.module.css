@@ -30,6 +30,7 @@
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
+  margin-top: 2rem;
 }
 
 /* Cart and Auth Button Container on Right Side */
