@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '@/app/dashboardTEMP/Layout';
+import Layout from '@/app/Dashboard/Layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket, faLeaf, faChartLine, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import styles from '../app/Styles/page.module.css';
@@ -22,8 +22,8 @@ const MeidanPalvelusta = () => {
       <Image
               src="/assets/Sunset-logistics.jpg"
               alt="sunset-image"
-              width={styles.serviceImage}
-              height={styles.serviceImage}
+              width="1000"
+              height="500"
               className={styles.serviceImage}
             />
       <div className={styles.MasonryContainer}>
@@ -32,7 +32,7 @@ const MeidanPalvelusta = () => {
           <h2 className={styles.sectionTitle}>Toimintatapa?</h2>
           <p className={styles.sectionContent}>
             1. <strong>Julkaise toimitus</strong>: Lähettäjä voi julkaista toimitustarpeen nopeasti.
-            <br /> 2. <strong>Etsi toimitus</strong>: Kuljetusyritykset selaa avoimia toimituksia ja tarjoaa.
+            <br /> 2. <strong>Etsi toimitus</strong>: Kuljetusyritys selaa avoimia toimituksia ja tarjoaa.
             <br /> 3. <strong>Hyväksy toimitus</strong>: Varmistuksen jälkeen automaattinen dokumentointi
           </p>
         </div>
@@ -40,8 +40,8 @@ const MeidanPalvelusta = () => {
         <div className={styles.masonryItem}>
           <h2 className={styles.sectionTitle}>Sopivuus?</h2>
           <p className={styles.sectionContent}>
-            Palvelumme on ihanteellinen sekä yrityksille että yksityishenkilöille, jotka tarvitsevat ekologisen tavan hallita toimituksiaan.<br/>
-            Kuljetusyrityksille helppo tapa löytää uusia asiakkaita ja optimoida tyhjiä kilometrejä.
+            Palvelu on ihanteellinen yrityksille sekä yksityishenkilöille, jotka tarvitsevat ekologisen ja luotettavan tavan hallita toimituksiaan.<br/>
+            Kuljetusyritykselle helppo tapa löytää uusia asiakkaita ja optimoida tyhjiä kilometrejä.
 
           </p>
         </div>
@@ -51,8 +51,8 @@ const MeidanPalvelusta = () => {
           <ul className={styles.benefitsList}>
             <li><FontAwesomeIcon icon={faRocket} /> Nopeus: Julkaise ja kilpailuta toimituksesi muutamalla klikkauksella.</li>
             <li><FontAwesomeIcon icon={faLeaf} /> Ekologisuus: Yksinkertaisesti säästät luontoa.</li>
-            <li><FontAwesomeIcon icon={faChartLine} /> Kasvata Bisnestäsi: Kuljetusyritykset voivat laajentaa asiakaskuntaansa tehokkaasti.</li>
-            <li><FontAwesomeIcon icon={faBriefcase} /> Helppokäyttöisyys: Palvelu on selkeä ja käyttäjäystävällinen kaikille.</li>
+            <li><FontAwesomeIcon icon={faChartLine} /> Kasvata Bisnestäsi: Yritykset voivat laajentaa asiakaskuntaansa tehokkaasti.</li>
+            <li><FontAwesomeIcon icon={faBriefcase} /> Helppokäyttöisyys: Palvelu on selkeä ja käyttäjäkeskeinen.</li>
           </ul>
         </div>
       </div>

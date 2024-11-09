@@ -1,15 +1,15 @@
 'use client';
-import Layout from './dashboardTEMP/Layout';
+import Layout from './Dashboard/Layout';
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './Styles/Dashboard.module.css';
 import './globals.css';
-import FunFacts from './dashboardTEMP/funfacts';
-import Footer from './ComponentsTEMP/Footer';
+import FunFacts from './Dashboard/funfacts';
+import Footer from './Components/Footer';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import ContactForm from './formsTEMP/contactForm';
-import serviceData from './ComponentsTEMP/serviceData-cards';
+import ContactForm from './Forms/contactForm';
+import serviceData from './Components/serviceData-cards';
 import heroImg from '../../public/assets/truckupBG.jpeg';
 const Dashboard = () => {
   const router = useRouter();
@@ -31,8 +31,6 @@ const Dashboard = () => {
                 />
                 <div className={styles.line}>
                   <h3> Tulevaisuuden työkalu</h3>
-                  <a href="/invoice">Laskutus</a>
-                  <a href="/freight-log">Rahtikirja</a>
 
                 </div>
             </div>
