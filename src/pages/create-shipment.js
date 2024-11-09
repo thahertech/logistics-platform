@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import Layout from '../app/dashboardTEMP/Layout';
+import Layout from '../app/Dashboard/Layout';
 import '../app/globals.css';
 import { jwtDecode } from 'jwt-decode';
 
