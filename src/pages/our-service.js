@@ -20,7 +20,7 @@ const MeidanPalvelusta = () => {
       </div>
       <div className={styles.ServiceContainers}>
       <Image
-              src="/assets/Sunset-logistics.jpg"
+              src={"/assets/ourServices.jpg"}
               alt="sunset-image"
               width="1000"
               height="500"
