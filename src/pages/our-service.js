@@ -18,6 +18,8 @@ const MeidanPalvelusta = () => {
           Digitaalinen alusta, joka yhdistää tavaran ja kuljettajat,<br/> mahdollistaen suoraviivaivsen ja luotettavan toimitusprosessin.
         </p>
       </div>
+
+      
       <div className={styles.ServiceContainers}>
       <Image
               src={"/assets/ourServices.jpg"}
