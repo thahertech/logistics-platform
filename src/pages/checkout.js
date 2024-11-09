@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderForm from '../app/formsTEMP/orderForm';
+import OrderForm from '../app/Forms/orderForm';
 
 const CheckoutPage = () => {
   return (

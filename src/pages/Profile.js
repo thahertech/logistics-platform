@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '@/app/dashboardTEMP/Layout';
+import Layout from '@/app/Dashboard/Layout';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import '../app/globals.css';
