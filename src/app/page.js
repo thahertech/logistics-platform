@@ -31,8 +31,6 @@ const Dashboard = () => {
                 />
                 <div className={styles.line}>
                   <h3> Tulevaisuuden työkalu</h3>
-                  <a href="/invoice">Laskutus</a>
-                  <a href="/freight-log">Rahtikirja</a>
 
                 </div>
             </div>
