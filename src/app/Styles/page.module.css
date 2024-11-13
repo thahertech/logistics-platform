@@ -66,7 +66,7 @@
 }
 
 .sectionContent {
-  line-height: 1.6;
+  line-height: 2rem;
   font-size: 18px;
 
 }
@@ -74,6 +74,7 @@
 .benefitsList {
   list-style-type: none;
   padding: 0;
+  line-height: 2rem;
 }
 
 .benefitsList li {
