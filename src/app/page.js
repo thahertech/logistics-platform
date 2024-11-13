@@ -3,14 +3,17 @@ import Layout from './Dashboard/Layout';
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import styles from './Styles/Dashboard.module.css';
-import './globals.css';
-import FunFacts from './Dashboard/funfacts';
-import Footer from './Components/Footer';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import ContactForm from './Forms/contactForm';
 import serviceData from './Components/serviceData-cards';
 import heroImg from '../../public/assets/truckupBG.jpeg';
+import ContactForm from './Forms/contactForm';
+
+import ServiceCards from './Components/serviceCards';
+
+import './globals.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 const Dashboard = () => {
   const router = useRouter();
 
@@ -18,37 +21,40 @@ const Dashboard = () => {
     router.push(path);
   };
 
-
   return (
     <Layout>
-            <div className={styles.heroImg}>
-                <Image
-                  src= {heroImg}
-                  alt="Background image"
-                  layout="fill"
-                  objectFit="cover"
-                  priority={true}
-                />
-                <div className={styles.line}>
-                  <h3> Tulevaisuuden työkalu</h3>
+      <div className={styles.heroImg}>
+        <Image
+          src={heroImg}
+          alt="Background image"
+          layout="fill"
+          objectFit="cover"
+          priority={true}
+        />
+        <div className={styles.line}>
+          <h3>Tulevaisuuden työkalu</h3>
+        </div>
+      </div>
 
-                </div>
-            </div>
-
-
-            <div className={styles.serviceSection}>
-            <div className={styles.cardContainer}>
-            {serviceData.map((card, index) => (
-              <div key={index} className={styles.serviceCard}>
-                <div className={styles.icon}>
-                  <i className={card.icon + ' text-white'}></i>
-                </div>
-                <h3 className={styles.infoCardtitle}>{card.title}</h3>
-                <p className={styles.cardDescription}>{card.description}</p>
+      <div className={styles.serviceSection}>
+        <div className={styles.cardContainer}>
+          {serviceData.map((card, index) => (
+            <motion.div
+              key={index}
+              className={styles.serviceCard}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.4 }}
+            >
+              <div className={styles.icon}>
+                <i className={`${card.icon} text-white`}></i>
               </div>
-            ))}
-          </div>
-          </div>
+              <h3 className={styles.infoCardtitle}>{card.title}</h3>
+              <p className={styles.cardDescription}>{card.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
 
         {/* <div className={`${styles.section} ${styles.whyChooseUs}`}>
           <div className={styles.sectionHeader}>
@@ -84,7 +90,7 @@ const Dashboard = () => {
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Haluatko pysyä ajantasalla?</h2>
-
+        <h4 className={styles.serviceContent}>Jos haluat mukaan Beta testiin - Lisää yhteystiedot ja saat ilmoituksen kun olemme valmiina.</h4>
         {/* <button className={styles.contactButton} onClick={() => router.push('/contact')}>
           Ota yhteyttä
         </button> */}
