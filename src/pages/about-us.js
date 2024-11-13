@@ -15,7 +15,7 @@ const AboutUs = () => {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Kuka Me Olemme?</h2>
         <p className={styles.sectionContent}>
-          Olemme johtava kuljetuspalveluyritys Suomessa, erikoistunut tarjoamaan asiakkaillemme
+          Olemme kuljetuspalveluyritys Suomessa, erikoistunut tarjoamaan asiakkaillemme
           tehokkaita ja luotettavia kuljetusratkaisuja. Tiimimme koostuu kokeneista ammattilaisista,
           jotka ovat sitoutuneet tarjoamaan parasta mahdollista palvelua.
         </p>

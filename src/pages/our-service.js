@@ -15,11 +15,11 @@ const MeidanPalvelusta = () => {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Mitä tämä palvelu tarjoaa?</h2>
         <p className={styles.sectionContent}>
-          Digitaalinen alusta, joka yhdistää tavaran ja kuljettajat,<br/> mahdollistaen suoraviivaivsen ja luotettavan toimitusprosessin.
+          Digitaalinen alusta, joka yhdistää tavaran ja kuljettajat,<br/> mahdollistaen suoraviivaisen ja luotettavan toimitusprosessin.
         </p>
       </div>
 
-      
+
       <div className={styles.ServiceContainers}>
       <Image
               src={"/assets/ourServices.jpg"}
@@ -34,7 +34,9 @@ const MeidanPalvelusta = () => {
           <h2 className={styles.sectionTitle}>Toimintatapa?</h2>
           <p className={styles.sectionContent}>
             1. <strong>Julkaise toimitus</strong>: Lähettäjä voi julkaista toimitustarpeen nopeasti.
+            <br />
             <br /> 2. <strong>Etsi toimitus</strong>: Kuljetusyritys selaa avoimia toimituksia ja tarjoaa.
+            <br />
             <br /> 3. <strong>Hyväksy toimitus</strong>: Varmistuksen jälkeen automaattinen dokumentointi
           </p>
         </div>
@@ -42,9 +44,8 @@ const MeidanPalvelusta = () => {
         <div className={styles.masonryItem}>
           <h2 className={styles.sectionTitle}>Sopivuus?</h2>
           <p className={styles.sectionContent}>
-            Palvelu on ihanteellinen yrityksille sekä yksityishenkilöille, jotka tarvitsevat ekologisen ja luotettavan tavan hallita toimituksiaan.<br/>
+            Palvelu on ihanteellinen yrityksille, jotka tarvitsevat ekologisen ja luotettavan tavan kilpailuttaa toimituskustannuksia.<br/><br />
             Kuljetusyritykselle helppo tapa löytää uusia asiakkaita ja optimoida tyhjiä kilometrejä.
-
           </p>
         </div>
 

@@ -1,8 +1,0 @@
-User-agent: *
-Disallow: /sign-up
-Disallow: /login
-Disallow: /profile
-Disallow: /checkout
-
-
-Sitemap: https://www.logistix.fi/api/sitemap
