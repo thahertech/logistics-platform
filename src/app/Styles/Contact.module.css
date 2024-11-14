@@ -67,10 +67,10 @@
 /* Contact Form */
 .contactForm {
   display: flex;
-  flex-direction: row;
-  max-width: 600px;
+  flex-direction: column;
+  max-width: 500px;
   gap: 40px;
-  margin: 5rem auto;
+  margin: 2rem auto;
   transition: opacity 1s ease-in-out;
   position: relative;
   z-index: 2;
@@ -107,6 +107,17 @@
 .inputField, .textArea {
   width: 100%;
   height: 50px;
+  padding: 15px;
+  border-radius: 7px;
+  background-color: rgba(56, 56, 56, 0.75);
+  color: white;
+  font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.inputField2, .textArea{
+  width: 100%;
+  height: 200px;
   padding: 15px;
   border-radius: 7px;
   background-color: rgba(56, 56, 56, 0.75);

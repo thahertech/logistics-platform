@@ -6,11 +6,12 @@ const ContactForm = () => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showForm, setShowForm] = useState(true);
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = { company, email };
+    const formData = { company, email, message };
 
     try {
       const response = await fetch('/api/news-letter', {
@@ -23,11 +24,12 @@ const ContactForm = () => {
 
       if (response.ok) {
         setIsSubmitted(true);
-        // Google Analytics event
-        gtag('event', 'conversion_event_signup', {
-          'event_category': 'Signup',
-          'event_label': 'Newsletter',
-        });
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion_event_signup', {
+            event_category: 'Signup',
+            event_label: 'Newsletter',
+          });
+        }
 
         setTimeout(() => {
           setShowForm(false);
@@ -41,8 +43,8 @@ const ContactForm = () => {
 
     setCompany('');
     setEmail('');
+    setMessage('');
   };
-
 
   return (
     <div>
@@ -52,22 +54,30 @@ const ContactForm = () => {
         <form
           className={`${styles.contactForm} ${isSubmitted ? styles.fadeOut : ''}`}
           onSubmit={handleSubmit}
-
         >
+          <div className={styles.contactFields}>
+            <input
+              className={styles.inputField}
+              type="text"
+              placeholder="Yritys"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
+            <input
+              className={styles.inputField}
+              type="email"
+              placeholder="Sähköposti"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
           <input
-            className={styles.inputField}
+            className={styles.inputField2}
             type="text"
-            placeholder="Yritys"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-          />
-          <input
-            className={styles.inputField}
-            type="email"
-            placeholder="Sähköposti"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            placeholder="Vapaa sana"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
           <button className={styles.submitButton} type="submit">
             Lähetä

@@ -2,19 +2,24 @@ import React from 'react';
 import Layout from '../app/Dashboard/Layout';
 import styles from '../app/Styles/page.module.css';
 import '../app/globals.css';
-
+import Head from 'next/head';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench, faSeedling, faHandsHelping, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 const AboutUs = () => {
   return (
     <Layout>
+        <Head>
+    <title>Meistä - Logistix</title>
+    <meta name="description" content="Lisätietoa Logistixistä" />
+  </Head>
       <div className={`${styles.hero} ${styles.aboutUsHero}`}>
       </div>
 
-      <div className={styles.section}>
+      <div className={styles.sectionHero}>
+      <h2 className={styles.sectionTitle}>Olemme palveluyritys Suomesta.</h2>
         <p className={styles.sectionContent}>
-          Olemme palveluyritys Suomesta. Erikoistumme tarjoamaan tehokkaan ja luotettavan palvelualustan.
+          Erikoistumme tarjoamaan tehokkaan ja luotettavan palvelualustan.
           Tiimimme koostuu ongelmanratkaisijoista, jotka ovat sitoutuneet tarjoamaan parasta mahdollista palvelua.
         </p>
       </div>
@@ -54,7 +59,7 @@ const AboutUs = () => {
           Haluatko tietää lisää? Ota yhteyttä tiimiin ja autamme sinua.
         </p>
         <button className={styles.joinButton} onClick={() => window.location.href='/contact'}>
-          Ota Yhteyttä
+          Ota yhteyttä
         </button>
       </div>
     </Layout>
