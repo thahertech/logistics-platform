@@ -10,12 +10,11 @@ const MeidanPalvelusta = () => {
   return (
     <Layout>
       <div className={`${styles.hero} ${styles.serviceHero}`}>
-        <h2 className={styles.DashboardTitle}>Meidän Palvelusta</h2>
       </div>
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Mitä tämä palvelu tarjoaa?</h2>
+        <h2 className={styles.sectionTitle}>Palvelu tarjoaa</h2>
         <p className={styles.sectionContent}>
-          Digitaalinen alusta, joka yhdistää tavaran ja kuljettajat,<br/> mahdollistaen suoraviivaisen ja luotettavan toimitusprosessin.
+          Keskeisen markkinapaikan yhdistäen tavaran ja kuljettajat.<br/> 
         </p>
       </div>
 
@@ -31,7 +30,7 @@ const MeidanPalvelusta = () => {
       <div className={styles.MasonryContainer}>
 
         <div className={styles.masonryItem}>
-          <h2 className={styles.sectionTitle}>Toimintatapa?</h2>
+          <h2 className={styles.sectionTitle}>Toimintatapa</h2>
           <p className={styles.sectionContent}>
             1. <strong>Julkaise toimitus</strong>: Lähettäjä voi julkaista toimitustarpeen nopeasti.
             <br />
@@ -42,7 +41,7 @@ const MeidanPalvelusta = () => {
         </div>
 
         <div className={styles.masonryItem}>
-          <h2 className={styles.sectionTitle}>Sopivuus?</h2>
+          <h2 className={styles.sectionTitle}>Sopivuus</h2>
           <p className={styles.sectionContent}>
             Palvelu on ihanteellinen yrityksille, jotka tarvitsevat ekologisen ja luotettavan tavan kilpailuttaa toimituskustannuksia.<br/><br />
             Kuljetusyritykselle helppo tapa löytää uusia asiakkaita ja optimoida tyhjiä kilometrejä.
@@ -50,7 +49,7 @@ const MeidanPalvelusta = () => {
         </div>
 
         <div className={styles.masonryItem}>
-          <h2 className={styles.sectionTitle}>Miksi Logistix?</h2>
+          <h2 className={styles.sectionTitle}>Miksi Logistix</h2>
           <ul className={styles.benefitsList}>
             <li><FontAwesomeIcon icon={faRocket} /> Nopeus: Julkaise ja kilpailuta toimituksesi muutamalla klikkauksella.</li>
             <li><FontAwesomeIcon icon={faLeaf} /> Ekologisuus: Yksinkertaisesti säästät luontoa.</li>
@@ -61,12 +60,12 @@ const MeidanPalvelusta = () => {
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Haluatko Aloittaa?</h2>
+        <h2 className={styles.sectionTitle}>Mukaan kehitykseen?</h2>
         <p className={styles.sectionContent}>
-          Rekisteröidy ja aloita nyt. Olemme täällä auttamassa sinua kaikissa vaiheissa. Klikkaa alla olevaa painiketta ja liity joukkoomme.
+          Olemme täällä auttamassa sinua kaikissa vaiheissa. Klikkaa alla olevaa painiketta ja liity yhteistyökumppaniksi.
         </p>
         <button className={styles.joinButton} onClick={() => window.location.href='/contact'}>
-          Liity Nyt
+          Liity nyt
         </button>
       </div>
       </div>

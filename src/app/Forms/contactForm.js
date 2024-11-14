@@ -23,10 +23,15 @@ const ContactForm = () => {
 
       if (response.ok) {
         setIsSubmitted(true);
-        // Delay hiding the form to allow fade-out effect to complete
+        // Google Analytics event
+        gtag('event', 'conversion_event_signup', {
+          'event_category': 'Signup',
+          'event_label': 'Newsletter',
+        });
+
         setTimeout(() => {
           setShowForm(false);
-        }, 1000); // Match this duration with the CSS transition duration
+        }, 1000);
       } else {
         console.error('Failed to submit the form.');
       }
@@ -34,10 +39,10 @@ const ContactForm = () => {
       console.error('An error occurred:', error);
     }
 
-    // Clear the fields only after a successful submission
     setCompany('');
     setEmail('');
   };
+
 
   return (
     <div>
@@ -47,6 +52,7 @@ const ContactForm = () => {
         <form
           className={`${styles.contactForm} ${isSubmitted ? styles.fadeOut : ''}`}
           onSubmit={handleSubmit}
+
         >
           <input
             className={styles.inputField}
@@ -58,7 +64,7 @@ const ContactForm = () => {
           <input
             className={styles.inputField}
             type="email"
-            placeholder="Sähköpostiosoite"
+            placeholder="Sähköposti"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required

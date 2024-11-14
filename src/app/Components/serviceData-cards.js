@@ -6,17 +6,17 @@ const serviceData = [
   },
   {
     icon: 'fas fa-exchange-alt',
-    title: 'Valitse Lähettäjä tai Kuljettaja rooli',
+    title: 'Valitse rooli',
     description: 'Valitse profiilisi tarpeidesi mukaan — lähetä tai toimita kuljetuksia.'
   },
   {
     icon: 'fas fa-shipping-fast',
-    title: 'Luo kuljetuspyyntö',
+    title: 'Luo kuljetus',
     description: 'Syötä kuljetustiedot ja löydä luotettava toimittaja.'
   },
   {
     icon: 'fas fa-truck',
-    title: 'Kuljetuspalvelut',
+    title: 'Kuljetus verkosto',
     description: 'Laaja valikoima kuljetusyrityksiä eri tarpeisiin.'
   },
   {
