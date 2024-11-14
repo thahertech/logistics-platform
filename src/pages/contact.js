@@ -4,23 +4,22 @@ import Layout from '../app/Dashboard/Layout';
 import '../app/globals.css';
 import ContactForm from '../app/Forms/contactForm';
 import Image from 'next/image';
-
+import Head from 'next/head';
 const Contact = () => {
   return (
     <Layout>
+    <Head>
+    <title>Yhteystiedot - Logistix</title>
+    <meta name="description" content="Ota yhteyttä Logistixiin, olemme täällä auttamassa kaikissa kysymyksissäsi." />
+  </Head>
       {/* Hero Image Section */}
       <div className={styles.hero}>
-        <Image
-          src="/assets/highrise.jpg"  // Replace with your actual hero image path
-          alt="Hero Image"
-          width={1440}  // Adjust width as needed
-          height={500}  // Adjust height as needed
-          className={styles.heroImage}
-        />
-            <div className={styles.contactSection}>
-        <p className={styles.sectionContent1}>
-          Haluatko lisätietoja tai apua?<br/> Ota yhteyttä sähköpostilla tai liity betatestaajaksi.
-        </p></div>
+              <div className={`${styles.hero} ${styles.contactHero}`}>
+              </div>
+            <div className={styles.sectionHero}>
+        <h4 className={styles.sectionContent2}>
+          Haluatko lisätietoja tai apua?<br/> Ota yhteyttä sähköpostilla tai liity BETA-testaajaksi
+        </h4></div>
 
 
         <div className={styles.contactDetails}>

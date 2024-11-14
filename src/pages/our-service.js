@@ -5,16 +5,22 @@ import { faRocket, faLeaf, faChartLine, faBriefcase } from '@fortawesome/free-so
 import styles from '../app/Styles/page.module.css';
 import '../app/globals.css';
 import Image from 'next/image';
+import Head from 'next/head';
 
 const MeidanPalvelusta = () => {
   return (
+
     <Layout>
+    <Head>
+    <title>Yrityksille - Logistix</title>
+    <meta name="description" content="Ota yhteyttä Logistixiin, olemme täällä auttamassa kaikissa kysymyksissäsi." />
+  </Head>
       <div className={`${styles.hero} ${styles.serviceHero}`}>
       </div>
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Palvelu tarjoaa</h2>
         <p className={styles.sectionContent}>
-          Keskeisen markkinapaikan yhdistäen tavaran ja kuljettajat.<br/> 
+          Keskeisen markkinapaikan yhdistäen tavaran ja kuljettajat<br/>
         </p>
       </div>
 
