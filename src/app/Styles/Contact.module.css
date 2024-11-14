@@ -8,6 +8,31 @@
   margin: 0 auto;
 }
 
+.heroImage{
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #080808;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  border-radius: 12px;
+  margin: 20px auto;
+  border-top: 0;
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  opacity: 0.9;
+  position: absolute;
+  overflow: hidden; /* Ensure anything overflowing is hidden */
+  max-height: 500px; /* Set maximum height */
+  left:0;
+  right:0;
+}
+
 /* Contact Details */
 .contactDetails {
   display: flex;
@@ -47,6 +72,8 @@
   gap: 40px;
   margin: 5rem auto;
   transition: opacity 1s ease-in-out;
+  position: relative;
+  z-index: 2;
 }
 
 .fadeOut {
@@ -67,6 +94,13 @@
 @media (max-width: 960px){
   .contactForm{
   max-width: 500px;
+  flex-direction: column;
+  }
+}
+@media (max-width: 600px){
+  .contactForm{
+  max-width: 300px;
+  flex-direction: column;
   }
 }
 

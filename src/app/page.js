@@ -44,7 +44,7 @@ const Dashboard = () => {
               className={styles.serviceCard}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.4 }}
+              transition={{ duration: 0.8, delay: index * 0.8 }}
             >
               <div className={styles.icon}>
                 <i className={`${card.icon} text-white`}></i>
@@ -89,8 +89,8 @@ const Dashboard = () => {
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Haluatko pysyä ajantasalla?</h2>
-        <h4 className={styles.serviceContent}>Jos haluat mukaan Beta testiin - Lisää yhteystiedot ja saat ilmoituksen kun olemme valmiina.</h4>
+        <h2 className={styles.sectionTitle}>BETA testaajaksi?</h2>
+        <h4 className={styles.serviceContent}>Lisää yhteystiedot ja pääset vaikuttamaan alustan kehitykseen</h4>
         {/* <button className={styles.contactButton} onClick={() => router.push('/contact')}>
           Ota yhteyttä
         </button> */}
