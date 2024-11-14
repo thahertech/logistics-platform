@@ -4,20 +4,21 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { company, email } = req.body;
+    const { company, email, message } = req.body;
 
     // Check for required fields
     if (!email || !company) {
-      return res.status(400).json({ error: 'Email and company are required' });
+      return res.status(400).json({ error: 'Sähköposti ja yritys vaaditaan.' });
     }
 
     const msg = {
       to: 'info@logistix.fi',
       from: 'info@logistix.fi',
       subject: `New Pre Sign-up Form Submission from ${email}`,
-      text: `You have received a new submission from ${email}\n\nCompany: ${company}`,
+      text: `You have received a new submission from ${email}\n\nCompany: ${company}\n\nMessage: ${message || 'N/A'}`,
       html: `<p>You have received a new submission from <strong>${email}</strong></p>
-             <p><strong>Company:</strong> ${company || 'N/A'}</p>`,
+             <p><strong>Company:</strong> ${company || 'N/A'}</p>
+             <p><strong>Message:</strong> ${message || 'N/A'}</p>`,
     };
 
     try {

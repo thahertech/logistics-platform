@@ -7,7 +7,7 @@ const serviceData = [
   {
     icon: 'fas fa-exchange-alt',
     title: 'Valitse rooli',
-    description: 'Valitse profiilisi tarpeidesi mukaan — lähetä tai toimita kuljetuksia.'
+    description: 'Valitse profiili tarpeidesi mukaan — lähetä tai toimita kuljetuksia.'
   },
   {
     icon: 'fas fa-shipping-fast',
@@ -16,7 +16,7 @@ const serviceData = [
   },
   {
     icon: 'fas fa-truck',
-    title: 'Kuljetus verkosto',
+    title: 'Kuljetusverkosto',
     description: 'Laaja valikoima kuljetusyrityksiä eri tarpeisiin.'
   },
   {

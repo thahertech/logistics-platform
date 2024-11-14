@@ -122,7 +122,6 @@
   min-height: 100vh; /* Ensures the layout takes full viewport height */
 }
 .mainContent {
-  padding: 20px;
   flex-grow: 1;
 }
 

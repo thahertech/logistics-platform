@@ -1,3 +1,17 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.aboutUsHero,
+.serviceImage {
+  animation: fadeIn 2s ease forwards;
+}
 .heroImg {
   background-color: #080808;
   background-position: center;
@@ -5,14 +19,14 @@
   background-repeat: no-repeat;
   width: 100%;
   border-radius: 12px;
-  margin: 20px auto;
+  margin: 0 auto;
   border-top: 0;
   border-radius: 10px;
-  overflow: hidden; /* Ensure anything overflowing is hidden */
-  max-height: 500px; /* Set maximum height */
+  overflow: hidden;
+  max-height: 300px;
 }
 .aboutUsHero {
-  background-image: url('../../../public/assets/containers.jpg');
+  background-image: url('../../../public/assets/satama.jpg');
   background-size: cover;
   background-position: center;
   height: 300px;
@@ -20,9 +34,8 @@
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: #080808;
   background-position: center;
-  position: relative;
+  position: absolute;
   background-repeat: no-repeat;
   width: 100%;
   border-radius: 12px;
@@ -31,9 +44,10 @@
   border-radius: 10px;
   overflow: hidden; /* Ensure anything overflowing is hidden */
   max-height: 500px; /* Set maximum height */
+  height: 300px;
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .serviceImage{
@@ -56,7 +70,7 @@
   opacity: 0.9;
   position: absolute;
   overflow: hidden; /* Ensure anything overflowing is hidden */
-  max-height: 500px; /* Set maximum height */
+  max-height: 300px; /* Set maximum height */
   left:0;
   right:0;
 }
@@ -68,13 +82,23 @@
 }
 
 
-.section {
+.section, .sectionHero{
   color: #f0f0f0;
   padding: 20px;
   border-radius: 8px;
   margin: auto;
   max-width: 620px;
   text-align: center;
+}
+
+.sectionHero {
+  z-index: 2;
+  position: relative;
+  top: 4rem;
+  margin-bottom: 7rem;
+  background-color: #00000042;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 .sectionTitle {
@@ -86,7 +110,7 @@
 
 .sectionContent {
   line-height: 2rem;
-  font-size: 18px;
+  font-size: 1rem;
 
 }
 
@@ -154,6 +178,11 @@
   color: white;
 }
 
+@media (max-width: 540px){
+  .aboutUsHero{
+    position: relative;
+  }
+}
 @media (max-width: 1260px) {
   .MasonryContainer{
         flex-direction: column;
