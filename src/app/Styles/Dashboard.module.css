@@ -110,22 +110,33 @@
 .card {
   animation: fadeIn 2s ease forwards;
 }
-.heroImg {
+/* .heroImg {
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
   background-color: #080808;
   background-position: center;
-  position: relative;
   background-repeat: no-repeat;
-  width: 100%;
-  border-radius: 12px;
   margin: 20px auto;
-  position: relative;
   border-top: 0;
   border-radius: 10px;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  opacity: 0.9;
+  position: absolute;
+  overflow: hidden;
+  max-height: 500px;
+  left: 0;
+  right: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
+*/
 
-.heroImg img {
-  border-radius: 12px;
-}
 
 .whyChooseUs {
   border-radius: 8px;
@@ -286,7 +297,7 @@
   }
 
   .sectionContent1 {
-    font-size: 28px;
+    font-size: 18px;
     color: white;
     text-align: center;
     max-width: 800px;
@@ -304,16 +315,8 @@
   font-size: 24px;
 }
 
-/* Contact Section */
-.contactSection {
-  padding: 40px 20px;
-  border-radius: 5px;
-  height: 300px;
-
-  margin: 0 auto;
-}
-
-.contactImg{
+/*Contact page*/
+.heroImage{
   background-size: cover;
   background-position: center;
   display: flex;
@@ -322,36 +325,49 @@
   color: white;
   background-color: #080808;
   background-position: center;
-  position: relative;
   background-repeat: no-repeat;
   width: 100%;
   border-radius: 12px;
   margin: 20px auto;
-  position: relative;
   border-top: 0;
   border-radius: 10px;
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   opacity: 0.9;
   position: absolute;
-  height: 500px;
-  overflow: hidden;
+  overflow: hidden; /* Ensure anything overflowing is hidden */
+  max-height: 500px; /* Set maximum height */
   left:0;
   right:0;
+}
+
+.heroImage img{
+
+}
+
+.contactSection {
+  padding: 40px 20px;
+  border-radius: 5px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 
 .contactDetails {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
 }
 
 .contactCard {
     flex: 1;
     margin: 10px;
     padding: 20px;
+    max-width: 500px;
     background-color: #f1eeee21;
     border: 1px solid #fff;
     -webkit-backdrop-filter: blur(10px);

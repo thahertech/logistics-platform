@@ -1,5 +1,3 @@
-/* Layout.module.css */
-
 .header {
   background-color: #000000a1;
   padding: 3rem 4rem;
@@ -9,7 +7,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 
 .topRow {
@@ -118,8 +115,15 @@
 }
 
 /* Main Content and Footer Styling */
+
+.layoutContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the layout takes full viewport height */
+}
 .mainContent {
   padding: 20px;
+  flex-grow: 1;
 }
 
 .footer {
@@ -128,7 +132,6 @@
   padding: 20px;
   text-align: center;
   z-index: 2;
-
 }
 
 .footerText {
