@@ -1,3 +1,16 @@
+.heroImg {
+  background-color: #080808;
+  background-position: center;
+  position: relative;
+  background-repeat: no-repeat;
+  width: 100%;
+  border-radius: 12px;
+  margin: 20px auto;
+  border-top: 0;
+  border-radius: 10px;
+  overflow: hidden; /* Ensure anything overflowing is hidden */
+  max-height: 500px; /* Set maximum height */
+}
 .aboutUsHero {
   background-image: url('../../../public/assets/containers.jpg');
   background-size: cover;
@@ -14,10 +27,10 @@
   width: 100%;
   border-radius: 12px;
   margin: 20px auto;
-  position: relative;
   border-top: 0;
   border-radius: 10px;
-  height: 300px;
+  overflow: hidden; /* Ensure anything overflowing is hidden */
+  max-height: 500px; /* Set maximum height */
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   opacity: 0.9;
@@ -36,18 +49,24 @@
   width: 100%;
   border-radius: 12px;
   margin: 20px auto;
-  position: relative;
   border-top: 0;
   border-radius: 10px;
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   opacity: 0.9;
   position: absolute;
-  height: 500px;
-  overflow: hidden;
+  overflow: hidden; /* Ensure anything overflowing is hidden */
+  max-height: 500px; /* Set maximum height */
   left:0;
   right:0;
 }
+
+.serviceImage {
+  object-fit: cover;   /* Ensure the image covers the container */
+  width: 100%;          /* Make the image scale to 100% of the container */
+  height: 100%;         /* Ensure the height is 100% of the container */
+}
+
 
 .section {
   color: #f0f0f0;

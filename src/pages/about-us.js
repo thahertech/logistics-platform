@@ -13,40 +13,37 @@ const AboutUs = () => {
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Kuka Me Olemme?</h2>
         <p className={styles.sectionContent}>
-          Olemme kuljetuspalveluyritys Suomessa, erikoistunut tarjoamaan asiakkaillemme
-          tehokkaita ja luotettavia kuljetusratkaisuja. Tiimimme koostuu kokeneista ammattilaisista,
-          jotka ovat sitoutuneet tarjoamaan parasta mahdollista palvelua.
+          Olemme palveluyritys Suomesta. Erikoistumme tarjoamaan tehokkaan ja luotettavan palvelualustan.
+          Tiimimme koostuu ongelmanratkaisijoista, jotka ovat sitoutuneet tarjoamaan parasta mahdollista palvelua.
         </p>
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Missiomme</h2>
+        <h2 className={styles.sectionTitle}>Tavoite</h2>
         <p className={styles.sectionContent}>
-          Missiomme on tehdä kuljetusprosesseista mahdollisimman sujuvia ja ympäristöystävällisiä.
-          Uskomme voivamme parantaa asiakaskokemusta tarjoamalla innovatiivisia ratkaisuja ja läpinäkyvyyttä kaikissa toiminnoissamme.
+          Kuljetusprosessien suoraviivaisuus ja ympäristöystävällisyys. Kehitämme asiakaskokemusta tarjoamalla innovatiivisia ratkaisuja ja läpinäkyvyyttä.
         </p>
       </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Arvomme</h2>
+        <h2 className={styles.sectionTitle}>Arvot</h2>
         <div className={`${styles.cardContainer}`}>
           <div className={styles.card}>
             <h3><FontAwesomeIcon icon={faWrench} /> Luotettavuus</h3>
-            <p>Asiakkaamme voivat luottaa palveluihimme.</p>
+            <p>Asiakkaat voivat luottaa alustaan</p>
           </div>
           <div className={styles.card}>
             <h3><FontAwesomeIcon icon={faSeedling} /> Kestävyys</h3>
-            <p>Minimoimme ympäristövaikutuksemme kaikissa toiminnoissamme.</p>
+            <p>Korostamme ekologisuutta kaikessa toiminnassa</p>
           </div>
           <div className={styles.card}>
             <h3><FontAwesomeIcon icon={faHandsHelping} /> Asiakaskeskeisyys</h3>
-            <p>Asiakkaamme ovat kaiken toimintamme keskiössä.</p>
+            <p>Asiakkaat ovat toiminnan keskiössä</p>
           </div>
           <div className={styles.card}>
             <h3><FontAwesomeIcon icon={faLightbulb} /> Innovaatio</h3>
-            <p>Etsimme jatkuvasti uusia tapoja parantaa palveluitamme ja prosessejamme.</p>
+            <p>Etsimme jatkuvasti uusia tapoja parantaa palveluita ja prosesseja. </p>
           </div>
         </div>
       </div>
@@ -54,7 +51,7 @@ const AboutUs = () => {
       <div className={styles.section}>
          <div className={styles.sectionTitle}></div>
         <p className={styles.sectionContent}>
-          Haluatko tietää lisää? Ota rohkeasti yhteyttä tiimiimme, ja autamme sinua mielellämme kaikissa kysymyksissäsi.
+          Haluatko tietää lisää? Ota yhteyttä tiimiin ja autamme sinua.
         </p>
         <button className={styles.joinButton} onClick={() => window.location.href='/contact'}>
           Ota Yhteyttä

@@ -3,21 +3,25 @@ import styles from '../app/Styles/Dashboard.module.css';
 import Layout from '../app/Dashboard/Layout';
 import '../app/globals.css';
 import ContactForm from '../app/Forms/contactForm';
+import Image from 'next/image';
 
 const Contact = () => {
   return (
     <Layout>
-      {/* <div className={styles.hero}>
-        <div className={styles.line}>
-          <h3>Yhteystiedot</h3>
-          <h4>Olemme täällä auttamassa sinua kaikissa kysymyksissäsi. Ota rohkeasti yhteyttä!</h4>
-        </div>
-      </div> */}
-
-      <div className={styles.contactSection}>
+      {/* Hero Image Section */}
+      <div className={styles.hero}>
+        <Image
+          src="/assets/highrise.jpg"  // Replace with your actual hero image path
+          alt="Hero Image"
+          width={1440}  // Adjust width as needed
+          height={500}  // Adjust height as needed
+          className={styles.heroImage}
+        />
+            <div className={styles.contactSection}>
         <p className={styles.sectionContent1}>
-          Haluatko tietää lisää palveluistamme tai tarvitsetko apua? Ota yhteyttä meihin käyttämällä alla olevia yhteystietoja tai lomaketta. Vastaamme mahdollisimman pian.
-        </p>
+          Haluatko lisätietoja tai apua?<br/> Ota yhteyttä sähköpostilla tai liity betatestaajaksi.
+        </p></div>
+
 
         <div className={styles.contactDetails}>
           <div className={styles.contactCard}>
