@@ -35,15 +35,15 @@
   justify-content: center;
   color: white;
   background-position: center;
-  position: absolute;
+  position: relative;
   background-repeat: no-repeat;
   width: 100%;
   border-radius: 12px;
   margin: 20px auto;
   border-top: 0;
   border-radius: 10px;
-  overflow: hidden; /* Ensure anything overflowing is hidden */
-  max-height: 500px; /* Set maximum height */
+  overflow: hidden;
+  max-height: 500px;
   height: 300px;
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
@@ -82,7 +82,7 @@
 }
 
 
-.section, .sectionHero{
+.section, .sectionHero, .sectionHero2{
   color: #f0f0f0;
   padding: 20px;
   border-radius: 8px;
@@ -93,12 +93,37 @@
 
 .sectionHero {
   z-index: 2;
-  position: relative;
-  top: 4rem;
-  margin-bottom: 7rem;
+  position: absolute;
+  margin-bottom: auto;
+  margin-top: 5rem;
+  display: flex;
+  left: 50%;
+  justify-content: space-between;
   background-color: #00000042;
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  transform: translateX(-50%);
+}
+
+
+
+.sectionHero2{
+  z-index: 2;
+  position: absolute;
+  display: flex;
+  left: 50%;
+  background-color: #00000042;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  max-width: 600px;
+  top: 12rem;
+  margin-top: 1.5rem;
+  transform: translateX(-50%);
+  flex-direction: column;
 }
 
 .sectionTitle {
@@ -107,6 +132,8 @@
   border-bottom: 2px solid #444;
   padding-bottom: 8px;
 }
+
+
 
 .sectionContent {
   line-height: 2rem;
@@ -178,11 +205,6 @@
   color: white;
 }
 
-@media (max-width: 540px){
-  .aboutUsHero{
-    position: relative;
-  }
-}
 @media (max-width: 1260px) {
   .MasonryContainer{
         flex-direction: column;
@@ -192,14 +214,43 @@
         justify-content: center;
     }
 
+    .sectionHero2{
+      width: 600px;
+    }
+
     .masonryItem{
       max-width: 600px;
     }
 }
 
+@media (max-width: 620px){
+  .sectionHero2{
+    width: 100%;
+  }
+}
+@media(max-width:500px){
+  .sectionHero{
+    width: 100%;
+
+  }
+  .sectionHero2{
+    font-size: 1rem;
+    top: 9rem;
+  }
+
+  .aboutUsHero{
+      position: relative;
+    }
+
+  .MasonryContainer{
+    min-width: 300px;
+  }
+  }
+
 .masonryItem {
   background-color: #f1eeee21;
   flex:1;
+  width: 100%;
   border: 1px solid #fff;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
@@ -212,7 +263,7 @@
 }
 
 .masonryItem:hover {
-  transform: scale(1.05); /* Slightly enlarge on hover */
+  transform: translateY(-10px); /* Slightly enlarge on hover */
   box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2); /* Light hover effect */
 
 }

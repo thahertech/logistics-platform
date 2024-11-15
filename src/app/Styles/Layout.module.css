@@ -109,6 +109,9 @@
   font-variant: small-caps;
 
 }
+.navLink:focus{
+  border: none;
+}
 
 .navLink:hover {
   color: #f0f0f0;
