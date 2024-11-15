@@ -23,6 +23,13 @@ const Dashboard = () => {
 
   return (
     <Layout>
+     <Head>
+        <title>Logistix - Älykkäät logistiikkaratkaisut</title>
+        <meta
+          name="description"
+          content="Tehosta logistiikkaratkaisuja, säästä kustannuksissa ja paranna tehokkuutta Logistixin avulla."
+          />
+      </Head>
       <div className={styles.heroImg}>
         <Image
           src={heroImg}
