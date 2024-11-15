@@ -15,9 +15,7 @@ const MeidanPalvelusta = () => {
     <title>Yrityksille - Logistix</title>
     <meta name="description" content="Ota yhteyttä Logistixiin, olemme täällä auttamassa kaikissa kysymyksissäsi." />
   </Head>
-      <div className={`${styles.hero} ${styles.serviceHero}`}>
-      </div>
-      <div className={styles.section}>
+      <div className={styles.sectionHero}>
         <h2 className={styles.sectionTitle}>Palvelu tarjoaa</h2>
         <p className={styles.sectionContent}>
           Keskeisen markkinapaikan yhdistäen tavaran ja kuljettajat<br/>
@@ -27,10 +25,10 @@ const MeidanPalvelusta = () => {
 
       <div className={styles.ServiceContainers}>
       <Image
-              src={"/assets/ourServices.jpg"}
+              src={"/assets/harbour.jpg"}
               alt="sunset-image"
-              width="1000"
-              height="500"
+              width="2000"
+              height="400"
               className={styles.serviceImage}
             />
       <div className={styles.MasonryContainer}>

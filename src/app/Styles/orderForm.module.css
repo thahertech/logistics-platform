@@ -33,12 +33,12 @@
   }
   
   .input:focus {
-    border-color: #6200ea; 
+    border-color: #003366; 
     outline: none;
   }
   
   .submitButton {
-    background-color: #6200ea;
+    background-color: #003366;
     color: #ffffff; 
     padding: 10px 15px;
     border: none;
