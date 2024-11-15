@@ -16,7 +16,7 @@ const AboutUs = () => {
       <div className={`${styles.hero} ${styles.aboutUsHero}`}>
       </div>
 
-      <div className={styles.sectionHero}>
+      <div className={styles.sectionHero2}>
       <h2 className={styles.sectionTitle}>Olemme palveluyritys Suomesta.</h2>
         <p className={styles.sectionContent}>
           Erikoistumme tarjoamaan tehokkaan ja luotettavan palvelualustan.

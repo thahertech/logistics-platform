@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 :root {
+  --primary-color: #003366; /* Define your primary color */
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -46,4 +48,8 @@ body {
 button {
 color:  #eee;
 
+}
+
+:focus {
+  border: 1px solid var(--primary-color);
 }

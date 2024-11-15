@@ -42,7 +42,7 @@
 }
 
 .contactHero {
-  background-image: url('/assets/highrise.jpg');
+  background-image: url('/assets/storage-space.jpg');
   background-size: cover;
   background-position: center;
   height: 300px;
@@ -116,18 +116,36 @@
   max-width: 620px;
   text-align: center;
 }
+.section {
+  padding: 2rem 10rem 0 10rem;
+  flex-direction: row-reverse;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
 
 .sectionHero {
   z-index: 2;
   position: relative;
   top: 4rem;
-  margin-bottom: 7rem;
+  margin-bottom: 10rem;
   background-color: #00000042;
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   max-width: 500px;
 }
 
+.sectionHero h4{
+  font-size: 22px;
+}
+
+.sectionContent {
+  font-size: 18px;
+  color: white;
+  max-width: 600px;
+  margin: auto;
+  margin-top: 2.5rem;
+}
 
 
 .serviceCard {
@@ -289,13 +307,7 @@
     opacity: 0.9;
   }
 
-  .section {
-    padding: 2rem 10rem 0 10rem;
-    flex-direction: row-reverse;
-    border-radius: 5px;
-    margin: 0 auto;
-  }
-
+ 
 
   .testimonialContainer {
     display: flex;
@@ -335,13 +347,12 @@
     line-height: 2.5rem;
   }
 
-  .sectionContent {
-    font-size: 18px;
-    color: white;
-    max-width: 600px;
-    margin: auto;
-    margin-top: 2.5rem;
+  .sectionTitle {
+    text-wrap: nowrap;
+    max-width: 800px;
   }
+
+ 
 
   .sectionContentContact {
     font-size: 1.3rem;

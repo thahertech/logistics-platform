@@ -24,16 +24,18 @@ const ContactForm = () => {
 
       if (response.ok) {
         setIsSubmitted(true);
+
+        setTimeout(() => {
+          setShowForm(false);
+        }, 1000);
+
+        // Trigger Google Tag event after form is successfully submitted
         if (typeof gtag === 'function') {
           gtag('event', 'conversion_event_signup', {
             event_category: 'Signup',
             event_label: 'Newsletter',
           });
         }
-
-        setTimeout(() => {
-          setShowForm(false);
-        }, 1000);
       } else {
         console.error('Failed to submit the form.');
       }
@@ -48,37 +50,42 @@ const ContactForm = () => {
 
   return (
     <div>
-      {isSubmitted && <p className={styles.successMessage}>Kiitos ja nähdään pian.</p>}
+      {isSubmitted && (
+        <p className={styles.successMessage}>Kiitos viestistäsi!</p>
+      )}
 
       {showForm && (
         <form
-          className={`${styles.contactForm} ${isSubmitted ? styles.fadeOut : ''}`}
+          className={`${styles.contactForm} ${
+            isSubmitted ? styles.fadeOut : ''
+          }`}
           onSubmit={handleSubmit}
         >
           <div className={styles.contactFields}>
             <input
               className={styles.inputField}
               type="text"
-              placeholder="Yritys"
+              placeholder="Yrityksen nimi"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
             />
             <input
               className={styles.inputField}
               type="email"
-              placeholder="Sähköposti"
+              placeholder="Sähköpostiosoite"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
-          <input
-            className={styles.inputField2}
-            type="text"
-            placeholder="Vapaa sana"
+          <textarea
+            className={styles.textArea}
+            placeholder="Viesti"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-          />
+            rows={5}
+          ></textarea>
+
           <button className={styles.submitButton} type="submit">
             Lähetä
           </button>
