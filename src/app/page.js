@@ -8,6 +8,7 @@ import styles from './Styles/Dashboard.module.css';
 import serviceData from './Components/serviceData-cards';
 import heroImg from '../../public/assets/truckupBG.jpeg';
 import ContactForm from './Forms/contactForm';
+import Head from 'next/head';
 
 import ServiceCards from './Components/serviceCards';
 
