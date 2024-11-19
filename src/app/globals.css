@@ -4,28 +4,14 @@
 
 :root {
   --primary-color: #003366; /* Define your primary color */
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --foreground-rgb: 255, 255, 255; /* White for text */
+  --background-start-rgb: 0, 0, 0; /* Start with black */
+  --background-end-rgb: 0, 0, 0;   /* End with black */
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -34,20 +20,17 @@ body {
   }
 }
 
-
 .fixed {
   z-index: 1000;
 }
 
-.content-container{
-
+.content-container {
   max-height: 25rem;
   overflow: scroll;
 }
 
 button {
-color:  #eee;
-
+  color: #eee;
 }
 
 :focus {
