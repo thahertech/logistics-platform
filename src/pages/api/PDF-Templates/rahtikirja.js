@@ -1,7 +1,7 @@
 import FreightLog from './freight-log';
-import { mockShipment } from '../../../app/fakeData/mockShipment';
-import { generateFreightLogPDF } from '../../../app/Invoicing/pdf-generator';
-import PDFstyles from '../app/Styles/PDF.modules.css';
+import { mockShipment } from '@/app/fakeData/mockShipment';
+import { generateFreightLogPDF } from '@/app/Invoicing/pdf-generator';
+import PDFstyles from '@/app/Styles/PDF.modules.css';
 
 const Rahtikirja = () => {
     return (
