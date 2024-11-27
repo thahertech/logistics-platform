@@ -1,6 +1,6 @@
 import React from 'react';;
 import Barcode from 'react-barcode';
-import '../app/Styles/PDF.modules.css';
+import '@/app/Styles/PDF.modules.css';
 
 const FreightLog = ({ shipment }) => {
     return (
