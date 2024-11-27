@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../Styles/sideBar.module.css';
+import '@/app/globals.css';
+import SideBarcomponent from './filterSideBar';
 
 const FilterSidebar = ({ applyFilters }) => {
   const [filters, setFilters] = useState({
@@ -35,8 +37,22 @@ const FilterSidebar = ({ applyFilters }) => {
   };
 
   const handleSubmit = () => {
+    // For "Today" and "Tomorrow", you could add date manipulation logic
+    if (filters.time === 'today') {
+      filters.specificTime = new Date().toISOString().split('T')[1]; // Set current time
+    } else if (filters.time === 'tomorrow') {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      filters.specificTime = tomorrow.toISOString().split('T')[1]; // Set tomorrow's time
+    } else if (filters.time === 'nextWeek') {
+      const nextWeek = new Date();
+      nextWeek.setDate(nextWeek.getDate() + 7);
+      filters.specificTime = nextWeek.toISOString().split('T')[1]; // Set next week's time
+    }
+  
     applyFilters(filters);
   };
+  
 
   const resetFilters = () => {
     setFilters({
@@ -105,6 +121,7 @@ const FilterSidebar = ({ applyFilters }) => {
 
   return (
     <div className={styles.sidebar}>
+    <SideBarcomponent/>
       <div className={styles.filterGroup}>
         <label htmlFor="pickupLocation">Nouto Sijainti</label>
         <input
@@ -135,15 +152,30 @@ const FilterSidebar = ({ applyFilters }) => {
 
 
       <div className={styles.filterGroup}>
-        <label htmlFor="price">Hinta</label>
-        <input
-          type="number"
-          name="price"
-          value={filters.price}
-          onChange={handleInputChange}
-          placeholder="Hinta"
-        />
-      </div>
+  <label htmlFor="price">Hinta</label>
+  <div className={styles.sliderContainer}>
+    <input
+      type="range"
+      min="0"
+      max="5000"
+      step="10"
+      value={filters.priceMin}
+      onChange={(e) => setFilters({ ...filters, priceMin: e.target.value })}
+    />
+    <input
+      type="range"
+      min="0"
+      max="5000"
+      step="10"
+      value={filters.priceMax}
+      onChange={(e) => setFilters({ ...filters, priceMax: e.target.value })}
+    />
+    <div className={styles.priceDisplay}>
+      <span>{filters.priceMin} € - {filters.priceMax} €</span>
+    </div>
+  </div>
+</div>
+
 
       <div className={styles.filterGroup}>
         <label htmlFor="distance">Etäisyys</label>
@@ -156,15 +188,30 @@ const FilterSidebar = ({ applyFilters }) => {
       </div>
 
       <div className={styles.filterGroup}>
-        <label htmlFor="weight">Painokapasiteetti (kg)</label>
-        <input
-          type="number"
-          name="weight"
-          value={filters.weight}
-          onChange={handleInputChange}
-          placeholder="Max. Paino"
-        />
-      </div>
+  <label htmlFor="weight">Painokapasiteetti (kg)</label>
+  <div className={styles.sliderContainer}>
+    <input
+      type="range"
+      min="0"
+      max="1000"
+      step="1"
+      value={filters.weightMin}
+      onChange={(e) => setFilters({ ...filters, weightMin: e.target.value })}
+    />
+    <input
+      type="range"
+      min="0"
+      max="1000"
+      step="1"
+      value={filters.weightMax}
+      onChange={(e) => setFilters({ ...filters, weightMax: e.target.value })}
+    />
+    <div className={styles.weightDisplay}>
+      <span>{filters.weightMin} kg - {filters.weightMax} kg</span>
+    </div>
+  </div>
+</div>
+
 
       {/* <div className={styles.filterGroup}>
         <label htmlFor="vehicleCondition">Ajoneuvon kunto</label>
@@ -194,51 +241,24 @@ const FilterSidebar = ({ applyFilters }) => {
       </div>
 
       <div className={styles.filterGroup}>
-        <label>Aikataulu</label>
-        <select name="time" value={filters.time} onChange={handleInputChange}>
-          <option value="now">ASAP</option>
-          <option value="specific">Määrätty</option>
-        </select>
-        {filters.time === 'specific' && (
-          <input
-            type="time"
-            name="specificTime"
-            value={filters.specificTime}
-            onChange={handleInputChange}
-          />
-        )}
-      </div>
+  <label htmlFor="time">Aikataulu</label>
+  <select name="time" value={filters.time} onChange={handleInputChange}>
+    <option value="asap">ASAP</option>
+    <option value="today">Tänään</option>
+    <option value="tomorrow">Huomenna</option>
+    <option value="nextWeek">Ensi viikolla</option>
+    <option value="specific">Määrätty aika</option>
+  </select>
+  {filters.time === 'specific' && (
+    <input
+      type="time"
+      name="specificTime"
+      value={filters.specificTime}
+      onChange={handleInputChange}
+    />
+  )}
+</div>
 
-      <div className={styles.filterGroup}>
-        <label>Kuljetustyypit</label>
-        <label>
-          <input
-            type="checkbox"
-            value="auto"
-            checked={filters.transportType.includes('auto')}
-            onChange={handleCheckboxChange}
-          />
-          Auto
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="mopo"
-            checked={filters.transportType.includes('mopo')}
-            onChange={handleCheckboxChange}
-          />
-          Mopo
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="kuorma-auto"
-            checked={filters.transportType.includes('kuorma-auto')}
-            onChange={handleCheckboxChange}
-          />
-          Kuorma-auto
-        </label>
-      </div>
 
       <div className={styles.buttonGroup}>
         <button

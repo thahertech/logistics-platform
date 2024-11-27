@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Layout from '../Dashboard/Layout';
 import styles from '../Styles/orderForm.module.css';
 import CartItem from '../cartTEMP/cartItem';
 import BillingForm from './billingForm';
 import PdfPreview from '../Components/pdfPreview';
+import { supabase } from '@/supabaseClient';
 
 const OrderForm = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -20,65 +20,37 @@ const OrderForm = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [pdfUrl, setPdfUrl] = useState('');
-
-    const fetchCartData = async () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setError('Token ei löydy.');
-            setLoading(false);
-            return;
-        }
-
-        try {
-            const response = await axios.get('http://truckup.local/wp-json/wc/store/cart', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            const items = response.data.items || [];
-            setCartItems(items);
-            await fetchProductDetails(items);
-        } catch (err) {
-            setError('Ostoskoria ei voitu ladata.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchProductDetails = async (items) => {
-        const token = localStorage.getItem('token');
-        const productIds = items.map(item => item.id); // Extract product IDs
-
-        try {
-            // Fetch product details using product IDs
-            const response = await axios.get(`http://truckup.local/wp-json/wc/store/products?include=${productIds.join(',')}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            const productDetails = response.data;
-
-            const updatedCartItems = items.map(cartItem => {
-                const productDetail = productDetails.find(product => product.id === cartItem.id);
-                return {
-                    ...cartItem,
-                    ...productDetail, 
-                };
-            });
-
-            setCartItems(updatedCartItems);
-        } catch (err) {
-            setError('Tuotetietoja ei voitu ladata.');
-        }
-    };
+    const [formErrors, setFormErrors] = useState({});
 
     useEffect(() => {
+        const fetchCartData = async () => {
+            const { data, error } = await supabase
+                .from('cart')
+                .select('*')
+                .eq('user_id', supabase.auth.getUser()?.id);
+
+            if (error) {
+                setError('Ostoskoria ei voitu ladata.');
+                setLoading(false);
+                return;
+            }
+
+            setCartItems(data || []);
+            setLoading(false);
+        };
+
         fetchCartData();
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const token = localStorage.getItem('token');
+
+        // Validate form data
+        const errors = validateBillingDetails(billingDetails);
+        if (Object.keys(errors).length > 0) {
+            setFormErrors(errors);
+            return;
+        }
 
         if (cartItems.length === 0) {
             setMessage('Ostoskorisi on tyhjä.');
@@ -86,70 +58,67 @@ const OrderForm = () => {
         }
 
         const lineItems = cartItems.map(item => ({
-            product_id: item.id,
+            product_id: item.product_id,
             quantity: item.quantity,
         }));
 
         const orderData = {
-            payment_method: 'bacs',
-            payment_method_title: 'Tilisiirto',
-            set_paid: true,
-            billing: {
-                email: billingDetails.sähköposti,
-                company: billingDetails.yritys,
-                address_1: billingDetails.osoite,
-                postcode: billingDetails.postinumero,
-                city: billingDetails.kaupunki,
-                country: billingDetails.maa,
-            },
+            user_id: supabase.auth.user()?.id,
+            billing: billingDetails,
             line_items: lineItems,
+            status: 'pending', // Order status
         };
 
-        try {
-            const response = await axios.post('http://truckup.local/wp-json/wc/v3/orders', orderData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+        // Insert order into Supabase
+        const { data, error } = await supabase
+            .from('orders')
+            .insert([orderData]);
 
-            const itemsForPdf = cartItems.map(item => ({
-                id: item.id,
-                name: item.name,
-                quantity: item.quantity,
-                price: item.prices.price || '0',
-                weight: item.weight || '0',
-            }));
-
-            const pdfResponse = await axios.post('http://truckup.local/wp-json/truckup/v1/generate-pdf', {
-                orderId: response.data.id,
-                customerName: billingDetails.yritys,
-                email: billingDetails.sähköposti,
-                items: itemsForPdf,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            const blob = new Blob([pdfResponse.data], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(blob);
-            setPdfUrl(url);
-
-            setMessage(`Tilaus onnistui! Tilausnumero: ${response.data.id}`);
-            setCartItems([]);
-            setBillingDetails({
-                sähköposti: '',
-                yritys: '',
-                osoite: '',
-                postinumero: '',
-                kaupunki: '',
-                maa: '',
-            });
-        } catch (error) {
+        if (error) {
             console.error(error);
             setMessage('Tilauksen tekeminen epäonnistui. Yritä uudelleen.');
+            return;
         }
+
+        // Assuming you have a function to generate a PDF
+        const pdfResponse = await generatePdf(data.id, billingDetails, cartItems);
+        setPdfUrl(pdfResponse.url);
+
+        setMessage(`Tilaus onnistui! Tilausnumero: ${data.id}`);
+        setCartItems([]);
+        setBillingDetails({
+            sähköposti: '',
+            yritys: '',
+            osoite: '',
+            postinumero: '',
+            kaupunki: '',
+            maa: '',
+        });
+    };
+
+    const validateBillingDetails = (details) => {
+        const errors = {};
+        if (!details.sähköposti) {
+            errors.sähköposti = 'Sähköposti on pakollinen.';
+        } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[\w-]{2,7}$/.test(details.sähköposti)) {
+            errors.sähköposti = 'Sähköposti on virheellinen.';
+        }
+        if (!details.yritys) {
+            errors.yritys = 'Yritys on pakollinen.';
+        }
+        if (!details.osoite) {
+            errors.osoite = 'Osoite on pakollinen.';
+        }
+        if (!details.postinumero) {
+            errors.postinumero = 'Postinumero on pakollinen.';
+        }
+        if (!details.kaupunki) {
+            errors.kaupunki = 'Kaupunki on pakollinen.';
+        }
+        if (!details.maa) {
+            errors.maa = 'Maa on pakollinen.';
+        }
+        return errors;
     };
 
     return (
@@ -164,6 +133,9 @@ const OrderForm = () => {
                             <BillingForm billingDetails={billingDetails} setBillingDetails={setBillingDetails} />
                             <button type="submit" className={styles.submitButton}>Lähetä tilaus</button>
                             {message && <p className={styles.message}>{message}</p>}
+                            {Object.keys(formErrors).map((key) => (
+                                <p key={key} className={styles.error}>{formErrors[key]}</p>
+                            ))}
                         </form>
                     )}
                 </div>

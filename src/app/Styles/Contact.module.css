@@ -112,6 +112,18 @@
   border: 1px solid #003366;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 /*——— Contact Form ———*/
 .contactForm {
   display: flex;
@@ -122,6 +134,8 @@
   transition: opacity 1s ease-in-out;
   position: relative;
   z-index: 2;
+  animation: fadeIn 2s ease forwards;
+
 }
 
 .fadeOut {
