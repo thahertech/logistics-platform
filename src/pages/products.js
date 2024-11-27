@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Layout from '../app/Dashboard/Layout';
 import '../app/globals.css';
 import Modal from '../app/Components/Modal';
 import FilterSidebar from '@/app/Components/sideBar';
+import { supabase } from '../supabaseClient'; // Import Supabase client
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState({
     pickupLocation: '',
     deliveryLocation: '',
@@ -23,99 +21,54 @@ const Products = () => {
   });
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const token = localStorage.getItem('token');
-      console.log(token);
-      try {
-        const response = await axios.get('http://truckup.local/wp-json/wc/v3/products', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setProducts(response.data);
-        setFilteredProducts(response.data); // Initialize filtered products with all products
-      } catch (error) {
-        console.error('Virhe tuotteiden hakemisessa:', error);
-        setError('Tuotteiden haku epäonnistui.');
-      } finally {
-        setLoading(false);
+    const fetchShipments = async () => {
+      // Fetch shipments data from Supabase
+      const { data, error } = await supabase
+        .from('shipments')  // Your Supabase table name
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error("Error fetching shipments: ", error);
+      } else {
+        setProducts(data);  // Store the fetched shipments in the state
+        setFilteredProducts(data);  // Initialize filtered products
       }
     };
 
-    fetchProducts();
+    fetchShipments();  // Fetch shipments on component mount
   }, []);
 
   useEffect(() => {
+    // Apply filters on products (you can enhance this as needed)
     const filtered = products.filter((product) => {
-      const pickupLocationMeta = product.meta_data.find((meta) => meta.key === 'pickup_location');
-      const deliveryLocationMeta = product.meta_data.find((meta) => meta.key === 'delivery_location');
-      const priceMeta = product.meta_data.find((meta) => meta.key === 'price');
-      const pickupDateMeta = product.meta_data.find((meta) => meta.key === 'pickup_date');
-      const deliveryDateMeta = product.meta_data.find((meta) => meta.key === 'delivery_date');
-const dateCreated = product.date_created;
-  
       const pickupLocationMatches = 
         !filters.pickupLocation || 
-        (pickupLocationMeta && pickupLocationMeta.value.includes(filters.pickupLocation));
-  
+        product.pickup_address.includes(filters.pickupLocation);
+
       const deliveryLocationMatches = 
         !filters.deliveryLocation || 
-        (deliveryLocationMeta && deliveryLocationMeta.value.includes(filters.deliveryLocation));
-  
-      const priceMatches = !filters.price || (priceMeta && priceMeta.value <= filters.price);
-  
-      const dateMatches = 
-        filters.date === 'now' || 
-        (deliveryDateMeta && deliveryDateMeta.value.includes(filters.date));
-  
-      const transportTypeMatches = 
-        !filters.transportType.length || 
-        filters.transportType.includes(product.transport_type);
-  
-      return (
-        dateCreated &&
-        pickupLocationMatches &&
-        deliveryLocationMatches &&
-        priceMatches &&
-        dateMatches &&
-        transportTypeMatches
-      );
+        product.delivery_address.includes(filters.deliveryLocation);
+
+      const priceMatches = !filters.price || product.price <= filters.price;
+
+      return pickupLocationMatches && deliveryLocationMatches && priceMatches;
     });
     setFilteredProducts(filtered);
   }, [filters, products]);
-  
-
-  const handleAddToCart = async (productId) => {
-    const token = localStorage.getItem('token');
-    try {
-      await axios.post('http://truckup.local/wp-json/wc/store/cart/add-item', {
-        id: productId,
-        quantity: 1,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert('Tuote lisätty ostoskoriin!');
-    } catch (error) {
-      console.error('Virhe tuotteen lisäämisessä ostoskoriin:', error);
-      alert('Virhe: tuotetta ei voitu lisätä ostoskoriin.');
-    }
-  };
 
   const openModal = (product) => {
-    console.log("Selected Product:", product);  // Verify product data
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
-  
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    onClose(); // Close the modal after adding to the cart
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedProduct(null);
-  };
-
-  const applyFilters = (newFilters) => {
-    setFilters(newFilters);
   };
 
   return (
@@ -125,54 +78,44 @@ const dateCreated = product.date_created;
 
         <div className="flex">
           <div className="w-1/4">
-            <FilterSidebar applyFilters={applyFilters} />
+            <FilterSidebar applyFilters={setFilters} />
           </div>
           <div className="flex-1">
-            {loading ? (
-              <p>Ladataan tuotteita...</p>
-            ) : error ? (
-              <p className="text-red-400">{error}</p>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
-                {filteredProducts.map((product) => {
-                  const pickupDateMeta = product.meta_data.find(meta => meta.key === 'pickup_date');
-                  const pickupdate = pickupDateMeta ? pickupDateMeta.value : 'ei saatavilla';
-
-                  const deliveryDateMeta = product.meta_data.find(meta => meta.key === 'delivery_date');
-                  const deliveryDate = deliveryDateMeta ? deliveryDateMeta.value : 'ei saatavilla';
-
-                  return (
-                    <div key={product.id} className="bg-gray-900 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl" onClick={() => openModal(product)}>
-                      <h3 className="text-white mb-2"><strong>Toimitus: </strong>{deliveryDate}</h3>
-                      <p className="text-white mb-2"><strong>Nouto: </strong>{pickupdate}</p>
-                      <p className="text-white mb-2"><strong>Hinta: </strong>{product.price} €</p>
-                      <p className="text-white mb-2"><strong>Lisätietoja: </strong></p>
-                      <div className="text-gray-400 mb-2" dangerouslySetInnerHTML={{ __html: product.description }} />
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleAddToCart(product.id);
-                        }}
-                        className="bg-gray-700 hover:bg-gray-600 text-white rounded p-2 w-full transition-all"
-                        aria-label={`Lisää ${product.name} ostoskoriin`}
-                      >
-                        Lisää ostoskoriin
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+              {filteredProducts.map((product) => (
+                <div
+                  key={product.id}
+                  className="bg-gray-900 p-6 rounded-lg shadow-lg cursor-pointer"
+                  onClick={() => openModal(product)}
+                >
+                  <h3 className="text-white mb-2">{product.shipment_identifier}</h3>
+                  <p className="text-white mb-2">{product.price} €</p>
+                  <p className="text-gray-400 mb-2">{product.details}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        product={selectedProduct}
-      />
+      {/* Modal for product details */}
+      {isModalOpen && selectedProduct && (
+        <Modal onClose={closeModal}>
+          <div className="p-6">
+            <h3 className="text-xl font-bold text-white">{selectedProduct.shipment_identifier}</h3>
+            <p className="text-white">{selectedProduct.price} €</p>
+            <p className="text-gray-400 mb-4">{selectedProduct.details}</p>
+            <div className="text-gray-300">
+              <p><strong>Nouto</strong> {selectedProduct.pickup_address}</p>
+              <p><strong>Toimitus</strong> {selectedProduct.delivery_address}</p>
+              <p><strong>Ajankohta</strong> {new Date(selectedProduct.pickup_date).toLocaleString()}</p>
+              <p><strong>Toimitus Ajankohta</strong> {new Date(selectedProduct.delivery_date).toLocaleString()}</p>
+            </div>
+            <button onClick={closeModal} className="mt-4 bg-red-500 text-white px-4 py-2 rounded">Poistu</button>
+            <button onClick={handleAddToCart} className='mt-4 bg-blue-500 ml-2 text-white px-4 py-2 rounded'>Osta</button>
+          </div>
+        </Modal>
+      )}
     </Layout>
   );
 };

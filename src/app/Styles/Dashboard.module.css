@@ -172,7 +172,8 @@
 .img,
 .whyChooseUs,
 .card, .serviceImage,
-.contactHero {
+.contactHero,
+.contactDetails {
   animation: fadeIn 2s ease forwards;
 }
 /* .heroImg {

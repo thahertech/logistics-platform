@@ -1,164 +1,175 @@
-import React, { useState, useEffect, useRef } from 'react';
-import QRCode from 'qrcode'; // Importing the QRCode library
-import { jsPDF } from 'jspdf'; // Importing jsPDF library
+import JsBarcode from "jsbarcode";
+import React, { useState } from "react";
+import { jsPDF } from "jspdf"; // jsPDF library
+import virtuaaliviivakoodi from "virtuaaliviivakoodi";
 
 const InvoicePage = () => {
   const [invoiceData, setInvoiceData] = useState({
-    invoiceNumber: '12345',
-    invoiceDate: '2024-11-06', // Invoice Date
-    customerName: 'Nana Laulumaa',
-    customerAddress: 'Testikatu 1, 00100 Helsinki',
+    invoiceNumber: "12345",
+    invoiceDate: "2024-11-06",
+    customerName: "Nana Laulumaa",
+    customerAddress: "Testikatu 1, 00100 Helsinki",
     items: [
-      { name: "Thaher's dick", description: 'Kuvaus', price: 1393900.00 }, // Updated product details
+      { name: "Tuote 1", description: "Kuvaus", price: 1200.0 },
     ],
-    bankAccountNumber: 'FI2112345600000785', // Example IBAN
-    referenceNumber: '1234567890', // Example reference number
-    amount: 139390.00, // Total amount
-    dueDate: '2024-11-30', // Due date
+    bankAccountNumber: "FI55 5741 3620 5454 49",
+    referenceNumber: "12345678",
+    amount: 1200.0, // Amount in euros
+    dueDate: "2024-11-30",
   });
 
-  const qrCodeRef = useRef(null); // Reference to the QR code canvas
+  // Calculate commission for each item as 10% of the price
+  const calculateCommission = (price) => price * 0.1;
 
-  // Function to generate the payment QR code in Finnish payment barcode format
-  const generatePaymentQRCode = (invoiceData) => {
-    return `
-      BCD
-      001
-      1
-      SVEF00
-      KORTTILASKU
-      ${invoiceData.bankAccountNumber}
-      ${invoiceData.referenceNumber}
-      ${invoiceData.amount.toFixed(2).replace('.', ',')}
-      ${invoiceData.dueDate}
-    `.trim();
+  const generateVirtuaaliviivakoodi = () => {
+    try {
+      const options = {
+        iban: invoiceData.bankAccountNumber.replace(/\s/g, ""), // Remove spaces
+        reference: invoiceData.referenceNumber,
+        cents: Math.round(invoiceData.amount * 100), // Convert amount to cents
+        due: invoiceData.dueDate.replace(/-/g, "").slice(2), // Convert to YYMMDD
+      };
+
+      const barcodeData = virtuaaliviivakoodi(options);
+      return barcodeData;
+    } catch (error) {
+      console.error("Error generating Virtuaaliviivakoodi:", error);
+      return null;
+    }
   };
 
-  // Generate QR Code when invoiceData changes
-  useEffect(() => {
-    const qrData = generatePaymentQRCode(invoiceData);
-    if (qrCodeRef.current) {
-      QRCode.toCanvas(qrCodeRef.current, qrData, { width: 256 }, (error) => {
-        if (error) console.error(error);
-      });
-    }
-  }, [invoiceData]);
-
-  // Save Invoice Function
-  const saveInvoice = async () => {
+  const saveInvoice = () => {
     const doc = new jsPDF();
-    
-    // Add logo
-    const logoUrl = '/assets/logistix-logos/png/logo.png'; // Ensure this is the correct path to your PNG logo
+  
+    // Logo path
+    const logoUrl = "/assets/logistix-logos/png/logo.png";
     const img = new Image();
     img.src = logoUrl;
-    
+  
     img.onload = () => {
-      doc.addImage(img, 'PNG', 20, 20, 50, 50); // Add logo to the PDF at specified position
-
-      // Add content to the PDF
-      doc.setFont('Arial', 'normal');
-      doc.text('Lasku', 20, 80); // Title
-      doc.text(`Laskun numero: ${invoiceData.invoiceNumber}`, 20, 90);
-      doc.text(`Päivämäärä: ${invoiceData.invoiceDate}`, 20, 100);
-      doc.text(`Erottuva erä: ${invoiceData.dueDate}`, 20, 110);
-      
-      // Customer Information
-      doc.text(`Asiakas: ${invoiceData.customerName}`, 20, 130);
-      doc.text(`Osoite: ${invoiceData.customerAddress}`, 20, 140);
-      
-      // Item Table Header
+      doc.addImage(img, "PNG", 20, 20, 50, 50);
+  
+      // Invoice details to the right of the logo
       doc.setFontSize(12);
-      doc.text('Tuote', 20, 160);
-      doc.text('Kuvaus', 70, 160);
-      doc.text('Hinta (€)', 140, 160);
-      
-      // Item Table Rows
-      let y = 170;
-      invoiceData.items.forEach(item => {
+      doc.text(`Laskun numero: ${invoiceData.invoiceNumber}`, 80, 40);
+      doc.text(`Päivämäärä: ${invoiceData.invoiceDate}`, 80, 50);
+      doc.text(`Eräpäivä: ${invoiceData.dueDate}`, 80, 60);
+  
+      // Add customer information
+      doc.text(`Asiakas: ${invoiceData.customerName}`, 80, 70);
+      doc.text(`Osoite: ${invoiceData.customerAddress}`, 80, 80);
+  
+      // Add items table
+      doc.text("Tuote", 20, 100);
+      doc.text("Kuvaus", 70, 100);
+      doc.text("Hinta (€)", 140, 100);
+      doc.text("Logistix palkkio (€)", 180, 100)
+      let y = 110;
+
+      invoiceData.items.forEach((item) => {
+        const commission = calculateCommission(item.price);
         doc.text(item.name, 20, y);
         doc.text(item.description, 70, y);
-        doc.text(item.price.toFixed(2).replace('.', ',') + ' €', 140, y);
-        y += 10; // Move to the next row
+        doc.text(item.price.toFixed(2).replace(".", ",") + " €", 140, y);
+        doc.text(commission.toFixed(2).replace(".", ",") + " €", 180, y);
+        y += 10;
       });
 
-      // Total Amount
-      doc.text(`Yhteensä: ${invoiceData.amount.toFixed(2).replace('.', ',')} €`, 20, y + 10);
-      
-      // QR Code
-      const qrCanvas = qrCodeRef.current;
-      if (qrCanvas) {
-        const qrDataUrl = qrCanvas.toDataURL('image/png');
-        doc.addImage(qrDataUrl, 'PNG', 140, y + 20, 50, 50); // Adjust position and size
+      const totalAmountWithCommission = invoiceData.items.reduce((total, item) => total + item.price + calculateCommission(item.price), 0);
+      doc.text(`Yhteensä: ${totalAmountWithCommission.toFixed(2).replace(".", ",")} €`, 20, y + 10);
+
+      const barcodeData = generateVirtuaaliviivakoodi();
+
+      let barcodeTextY = y + 30;
+
+      const startX = 5;  // Start X position (margin)
+      const tableWidth = 80; // Table width that fits inside the page
+      const endX = startX + tableWidth;  // Calculate the end X position
+
+      const paymentInfoY = barcodeTextY + 60; // Adjust this to start below the barcode
+      const paymentInfoData = [
+        ["Saaja", "Thaher Al Amir"],
+        ["Tilinumero", "FI55 5741 3620 5454 49"],
+        ["Viitenumero", invoiceData.referenceNumber],
+        ["Eräpäivä", invoiceData.dueDate],
+        ["Summa (€)", totalAmountWithCommission.toFixed(2).replace(".", ",")],
+      ];
+  
+      const tableColumnWidths = [30, 70]; // Column widths
+      const rowHeight = 5; // Row height
+
+      // Draw the grid-style table with borders and labels/values side by side
+      doc.setFontSize(12);
+      doc.setFillColor(200, 200, 200); // Set gray background for headers
+
+      let startY = paymentInfoY;
+
+      // Draw the table with the margins
+      paymentInfoData.forEach((row, index) => {
+        const rowY = startY + Math.floor(index / 2) * (rowHeight + 5); // Adjust Y for each row
+        const colX = startX + (index % 2) * (tableColumnWidths[0] + tableColumnWidths[1]); // Alternate column placement
+
+        // Draw boxes for each cell with the margin
+        doc.rect(colX, rowY, tableColumnWidths[0] + tableColumnWidths[1], rowHeight + 5);
+        doc.text(row[0], colX + 5, rowY + 6); // Label
+        doc.text(row[1], colX + 5 + tableColumnWidths[0], rowY + 6); // Value
+      });
+
+      // Check if the barcode can be generated
+      if (barcodeData) {
+        // Create a canvas to render the barcode
+        const barcodeCanvas = document.createElement("canvas");
+        JsBarcode(barcodeCanvas, barcodeData, {
+          format: "CODE128", // Use CODE128 for Virtuaaliviivakoodi
+          displayValue: true, // Automatically show the barcode text below it
+          height: 50, // Set barcode height (you can adjust this as needed)
+          width: 2,
+        });
+
+        // Convert the barcode to a Data URL
+        const barcodeImage = barcodeCanvas.toDataURL("image/png");
+
+        // Get the page width and calculate barcode width
+        const pageWidth = doc.internal.pageSize.width;
+        const barcodeWidth = pageWidth * 0.7;
+        const barcodeHeight = 50; // Define a fixed height for the barcode
+
+        // Calculate the x position to center the barcode
+        const barcodeX = (pageWidth - barcodeWidth) / 2; // Center barcode on the page
+
+        // Add barcode image to the PDF
+        doc.addImage(barcodeImage, "PNG", barcodeX, y + 20, barcodeWidth, barcodeHeight);
+      } else {
+        doc.text("Virtuaaliviivakoodi: Error generating barcode", 20, y + 20);
       }
-      
-      // Payment Details Table
-      const paymentDetailsStartY = y + 80;
-      doc.text('Maksutiedot', 20, paymentDetailsStartY);
-      
-      // Payment Table Borders
-      const paymentTableX = 20;
-      const paymentTableY = paymentDetailsStartY + 10;
-      const paymentTableWidth = 180; // Table width
-      const paymentTableRowHeight = 10; // Row height
-
-      // Draw the payment details table
-      doc.rect(paymentTableX, paymentTableY, paymentTableWidth, paymentTableRowHeight * 3); // Outer border
-      doc.rect(paymentTableX, paymentTableY, paymentTableWidth / 2, paymentTableRowHeight); // First row
-      doc.rect(paymentTableX + paymentTableWidth / 2, paymentTableY, paymentTableWidth / 2, paymentTableRowHeight); // Second row
-      doc.rect(paymentTableX, paymentTableY + paymentTableRowHeight, paymentTableWidth / 2, paymentTableRowHeight); // Third row
-      doc.rect(paymentTableX + paymentTableWidth / 2, paymentTableY + paymentTableRowHeight, paymentTableWidth / 2, paymentTableRowHeight); // Fourth row
-
-      // Payment Details Content
-      doc.text('Pankkitili:', paymentTableX + 5, paymentTableY + 6);
-      doc.text(invoiceData.bankAccountNumber, paymentTableX + paymentTableWidth / 2 + 5, paymentTableY + 6);
-      doc.text('Viitenumero:', paymentTableX + 5, paymentTableY + 16);
-      doc.text(invoiceData.referenceNumber, paymentTableX + paymentTableWidth / 2 + 5, paymentTableY + 16);
-
-      // Contact Information
-      doc.text('Yhteystiedot', paymentTableX, paymentTableY + 30);
-      doc.text('Logistix OY', paymentTableX, paymentTableY + 40);
-      doc.text('Testikatu 1', paymentTableX, paymentTableY + 50);
-      doc.text('00100 Helsinki', paymentTableX, paymentTableY + 60);
-      doc.text('Puhelin: +358 123 4567', paymentTableX, paymentTableY + 70);
-      doc.text('Sähköposti: info@logistix.fi', paymentTableX, paymentTableY + 80);
 
       // Save PDF
-      doc.save(`invoice_${invoiceData.invoiceNumber}.pdf`);
+      doc.save(`Logistix_lasku_${invoiceData.invoiceNumber}.pdf`);
     };
   };
 
   return (
     <div style={styles.page}>
       <div style={styles.header}>
-        <img
-          src="/assets/logistix-logos/svg/logo.svg" // Using relative path from the 'public' directory
-          alt="Logo"
-          style={styles.logo}
-        />
+        <img src="/assets/logistix-logos/svg/logo.svg" alt="Logo" style={styles.logo} />
         <div style={styles.invoiceDetails}>
-          <h2 style={styles.invoiceTitle}>Lasku</h2> {/* "Invoice" in Finnish */}
-          <p><strong>Laskun numero:</strong> {invoiceData.invoiceNumber}</p> {/* Invoice Number */}
-          <p><strong>Päivämäärä:</strong> {invoiceData.invoiceDate}</p> {/* Invoice Date */}
-          <p><strong>Erottuva erä:</strong> {invoiceData.dueDate}</p> {/* Due Date */}
-        </div>
-        <div style={styles.qrCodeContainer}>
-          <h3>Skannaa maksuviivakoodi</h3> {/* "Scan the payment barcode" in Finnish */}
-          <canvas ref={qrCodeRef} style={styles.qrCode} /> {/* Canvas element for QR Code */}
+          <h2>Lasku</h2>
+          <p><strong>Laskun numero:</strong> {invoiceData.invoiceNumber}</p>
+          <p><strong>Päivämäärä:</strong> {invoiceData.invoiceDate}</p>
+          <p><strong>Eräpäivä:</strong> {invoiceData.dueDate}</p>
         </div>
       </div>
-
       <div style={styles.customerInfo}>
-        <p><strong>Asiakas:</strong> {invoiceData.customerName}</p> {/* Customer Name */}
-        <p><strong>Osoite:</strong> {invoiceData.customerAddress}</p> {/* Customer Address */}
+        <p><strong>Asiakas:</strong> {invoiceData.customerName}</p>
+        <p><strong>Osoite:</strong> {invoiceData.customerAddress}</p>
       </div>
-
       <table style={styles.table}>
         <thead>
           <tr>
-            <th>Tuote</th> {/* "Item" in Finnish */}
-            <th>Kuvaus</th> {/* "Description" in Finnish */}
-            <th>Hinta</th> {/* "Price" in Finnish */}
+            <th>Tuote</th>
+            <th>Kuvaus</th>
+            <th>Hinta</th>
+            <th>Logistix palkkio</th>
           </tr>
         </thead>
         <tbody>
@@ -166,43 +177,69 @@ const InvoicePage = () => {
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.description}</td>
-              <td>{item.price.toFixed(2).replace('.', ',')} €</td> {/* Price with currency */}
+              <td>{item.price.toFixed(2).replace(".", ",")} €</td>
+              <td>{calculateCommission(item.price).toFixed(2).replace(".", ",")} €</td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      <div style={styles.total}>
-        <p><strong>Yhteensä:</strong> {invoiceData.amount.toFixed(2).replace('.', ',')} €</p> {/* Total amount */}
-      </div>
-
       <div style={styles.footer}>
-        <h4>Yhteystiedot</h4> {/* "Contact Information" in Finnish */}
-        <p><strong>Logistix OY</strong></p>
-        <p>Testikatu 1</p>
-        <p>00100 Helsinki</p>
-        <p>Puhelin: +358 123 4567</p>
-        <p>Sähköposti: info@logistix.fi</p>
+        <button onClick={saveInvoice} style={styles.downloadButton}>Lataa Lasku PDF</button>
       </div>
-
-      <button onClick={saveInvoice}>Tallenna lasku PDF:ksi</button> {/* "Save invoice as PDF" in Finnish */}
     </div>
   );
 };
 
-// Define your styles here
 const styles = {
-  page: { padding: '20px' },
-  header: { display: 'flex', alignItems: 'center' },
-  logo: { width: '50px', height: '50px' },
-  invoiceDetails: { marginLeft: '20px' },
-  invoiceTitle: { margin: 0 },
-  qrCodeContainer: { marginLeft: 'auto', textAlign: 'center' },
-  customerInfo: { margin: '20px 0' },
-  table: { width: '100%', borderCollapse: 'collapse', marginTop: '20px' },
-  total: { marginTop: '20px' },
-  footer: { marginTop: '40px' },
-  qrCode: { marginTop: '20px' },
+  page: {
+    fontFamily: "Arial, sans-serif",
+    margin: "0 auto",
+    padding: "20px",
+    maxWidth: "800px",
+    border: "1px solid #ddd",
+  },
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "30px",
+  },
+  logo: {
+    width: "50px",
+    height: "50px",
+  },
+  invoiceDetails: {
+    textAlign: "right",
+  },
+  customerInfo: {
+    marginBottom: "20px",
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+    marginBottom: "20px",
+  },
+  tableHeader: {
+    backgroundColor: "#f4f4f4",
+  },
+  tableData: {
+    borderBottom: "1px solid #ddd",
+    padding: "8px",
+    textAlign: "left",
+  },
+  footer: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  downloadButton: {
+    backgroundColor: "#4CAF50",
+    color: "white",
+    border: "none",
+    padding: "10px 20px",
+    fontSize: "16px",
+    cursor: "pointer",
+    borderRadius: "5px",
+  },
 };
 
 export default InvoicePage;
