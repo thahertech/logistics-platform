@@ -30,7 +30,7 @@ const Auth = () => {
         });
 
         if (error) throw error;
-        router.push('/Profile'); // Redirect after successful login
+        router.push('/profile'); // Redirect after successful login
       } else {
         const { user, error } = await supabase.auth.signUp({
           email: formData.usernameOrEmail,
@@ -38,7 +38,7 @@ const Auth = () => {
         });
 
         if (error) throw error;
-        router.push('/Profile'); // Redirect after successful signup
+        router.push('/profile'); // Redirect after successful signup
       }
     } catch (error) {
       setError(error.message); // Show the error message from Supabase
