@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import { supabase } from '../supabaseClient';  // Import Supabase client
 import { useRouter } from 'next/router';
-import '../app/globals.css';
 import Layout from '../app/Dashboard/Layout';
 
 const Auth = () => {
@@ -19,35 +18,30 @@ const Auth = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handle form submission (login/signup)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const endpoint = isLogin
-      ? process.env.NEXT_PUBLIC_LOGIN_ENDPOINT
-      : process.env.NEXT_PUBLIC_REGISTER_ENDPOINT;
-
     try {
-      const response = await axios.post(endpoint, {
-        username: formData.usernameOrEmail,
-        password: formData.password,
-        email: isLogin ? undefined : formData.usernameOrEmail,
-        name: isLogin ? undefined : formData.name,
-      });
-
       if (isLogin) {
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('token', response.data.token);
-        }
-        router.push('/Profile');
+        const { user, error } = await supabase.auth.signInWithPassword({
+          email: formData.usernameOrEmail,
+          password: formData.password,
+        });
+
+        if (error) throw error;
+        router.push('/profile'); // Redirect after successful login
       } else {
-        console.log('Registered!', response.data);
-        router.push('/Profile');
+        const { user, error } = await supabase.auth.signUp({
+          email: formData.usernameOrEmail,
+          password: formData.password,
+        });
+
+        if (error) throw error;
+        router.push('/profile'); // Redirect after successful signup
       }
     } catch (error) {
-      // Remove all HTML tags to ensure only plain text is shown
-      const plainTextError = error.response?.data?.message.replace(/<\/?[^>]+(>|$)/g, '') || 'Authentication failed';
-      setError(plainTextError);
-      console.error('Error during authentication', error.response?.data);
+      setError(error.message); // Show the error message from Supabase
     }
   };
 
@@ -95,28 +89,6 @@ const Auth = () => {
               />
             </div>
 
-            {/* Google Login Section */}
-            <p className="galogin" style={{ cursor: 'pointer', background: 'none', boxShadow: 'none' }}>
-              <a href="?error=ga_needs_configuring" style={{ display: 'flex', alignItems: 'center' }}>
-                <img
-                  src="https://developers.google.com/identity/images/g-logo.png"
-                  alt="Sign in with Google"
-                  style={{ width: '3rem', height: '3rem', marginRight: '10px', marginBottom: '20px' }}
-                />
-                <span className="google-apps-header dark-pressed light">
-                  <span className="inner">
-                    <span className="icon dark-pressed light"></span>
-                    <span style={{ marginLeft: '10px', color: 'white' }}>Kirjaudu Googlella</span>
-                  </span>
-                </span>
-              </a>
-            </p>
-
-            <p className="forgetmenot text-white mb-5">
-              <input name="rememberme" type="checkbox" id="rememberme" value="forever" />
-              <label htmlFor="rememberme">Muista minut</label>
-            </p>
-
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
@@ -124,21 +96,12 @@ const Auth = () => {
               {isLogin ? 'Kirjaudu' : 'Rekisteröi'}
             </button>
 
-          {/* Display error message and Forgot Password link */}
-{error && (
-  <div className="text-red-500 mt-4 text-center">
-    <p>{error}</p> {/* Sanitize error message */}
-    {isLogin && (
-      <button
-        className="text-blue-600 hover:underline mt-2"
-        onClick={() => router.push('/forgot-password')}
-      >
-        Unohditko salasanan?
-      </button>
-    )}
-  </div>
-)}
-
+            {/* Display error message */}
+            {error && (
+              <div className="text-red-500 mt-4 text-center">
+                <p>{error}</p>
+              </div>
+            )}
 
             <p className="mt-4 text-left text-white">
               {isLogin ? 'Ei käyttäjää?' : 'Olet jo käyttäjä?'}

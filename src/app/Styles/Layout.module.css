@@ -9,6 +9,7 @@
   align-items: center;
 }
 
+
 .topRow {
   display: flex;
   justify-content: space-between;
@@ -126,6 +127,8 @@
 }
 .mainContent {
   flex-grow: 1;
+  /* justify-content: center;
+  display: flex; */
 }
 
 .footer {

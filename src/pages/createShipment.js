@@ -27,7 +27,7 @@ const CreateShipment = () => {
   const [unitType, setUnitType] = useState('');
   const [price, setPrice] = useState('');
   const [details, setDetails] = useState('');
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
 
   // Fetch user data
   useEffect(() => {
@@ -52,7 +52,7 @@ const CreateShipment = () => {
         setYTunnus(userData.acf?.['y-tunnus'] || '');
       } catch (error) {
         console.error('Error fetching user data:', error);
-        alert('Failed to fetch user data.');
+        //alert('Failed to fetch user data.');
       }
     };
 
@@ -108,10 +108,10 @@ const CreateShipment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let imageUrl = '';
-    if (image) {
-      imageUrl = await uploadImage(image);
-    }
+    // let imageUrl = '';
+    // if (image) {
+    //   imageUrl = await uploadImage(image);
+    // }
 
     const shipmentData = {
       status: 'publish',
@@ -131,7 +131,7 @@ const CreateShipment = () => {
         { key: 'price', value: price },
         { key: 'y_tunnus', value: yTunnus }, // Added Y-tunnus
       ],
-      images: imageUrl ? [{ src: imageUrl }] : [],
+      // images: imageUrl ? [{ src: imageUrl }] : [],
     };
 
     try {
@@ -155,32 +155,32 @@ const CreateShipment = () => {
     }
   };
 
-  const uploadImage = async (file) => {
-    // Upload image
-    let imageUrl = '';
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
+  // const uploadImage = async (file) => {
+  //   // Upload image
+  //   let imageUrl = '';
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('file', file);
 
-      const jwtToken = localStorage.getItem('token');
-      const response = await axios.post('http://truckup.local/wp-json/wp/v2/media', formData, {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+  //     const jwtToken = localStorage.getItem('token');
+  //     const response = await axios.post('http://truckup.local/wp-json/wp/v2/media', formData, {
+  //       headers: {
+  //         Authorization: `Bearer ${jwtToken}`,
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     });
 
-      if (response.status === 201) {
-        imageUrl = response.data.source_url;
-      } else {
-        alert('Failed to upload image');
-      }
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      alert('Failed to upload image');
-    }
-    return imageUrl;
-  };
+  //     if (response.status === 201) {
+  //       imageUrl = response.data.source_url;
+  //     } else {
+  //       alert('Failed to upload image');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error uploading image:', error);
+  //     alert('Failed to upload image');
+  //   }
+  //   return imageUrl;
+  // };
 
   const steps = ['Noutotiedot', 'Toimitustiedot', 'Kuljetustiedot'];
 
@@ -207,6 +207,7 @@ const CreateShipment = () => {
               type="email"
               className="w-full p-2 mb-4 border rounded"
               placeholder="Sähköposti"
+              autoComplete='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -282,7 +283,7 @@ const CreateShipment = () => {
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
             />
-            <span className="ml-2 text-gray-500">kg</span>
+            {/* <span className="ml-2 text-gray-500">kg</span> */}
           </div>
 
             <select
@@ -323,12 +324,12 @@ const CreateShipment = () => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
-            <input
+            {/* <input
               type="file"
               className="w-full p-2 mb-4 border rounded"
               accept="image/*"
               onChange={(e) => setImage(e.target.files[0])}
-            />
+            /> */}
           </>
         );
       default:

@@ -9,7 +9,8 @@
   }
 }
 .aboutUsHero,
-.serviceImage {
+.serviceImage,
+.masonryItem {
   animation: fadeIn 2s ease forwards;
 }
 .heroImg {
