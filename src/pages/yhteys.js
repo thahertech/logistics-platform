@@ -27,10 +27,10 @@ const Contact = () => {
             <h3 className={styles.contactHeading}>Sähköposti</h3>
             <p className={styles.contactInfo}><a href="mailto:info@logistix.fi">info@logistix.fi</a></p>
           </div>
-          {/* <div className={styles.contactCard}>
+          <div className={styles.contactCard}>
             <h3 className={styles.contactHeading}>Puhelin</h3>
-            <p className={styles.contactInfo}><a href="tel:+358401234567">+358 44 26565 27</a></p>
-          </div> */}
+            <p className={styles.contactInfo}><a href="tel:+358447937803">+358 447937803</a></p>
+          </div>
           {/* <div className={styles.contactCard}>
             <h3 className={styles.contactHeading}>Osoite</h3>
             <p className={styles.contactInfo}>Esimerkkikatu 10, 00100 Helsinki, Suomi</p>

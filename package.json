@@ -16,6 +16,7 @@
     "@mui/material": "^6.1.1",
     "@mui/styles": "^6.1.1",
     "@next/third-parties": "^15.0.2",
+    "@react-google-maps/api": "^2.20.3",
     "@react-pdf/renderer": "^4.0.0",
     "@sendgrid/mail": "^8.1.4",
     "@supabase/supabase-js": "^2.46.1",
@@ -30,6 +31,7 @@
     "framer-motion": "^11.11.15",
     "fs": "^0.0.1-security",
     "geoip-lite": "^1.4.10",
+    "google-maps": "^4.3.3",
     "jquery": "^3.7.1",
     "jsbarcode": "^3.11.6",
     "jspdf": "^2.5.2",
@@ -37,7 +39,7 @@
     "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
     "mongoose": "^8.6.0",
-    "next": "^13.5.7",
+    "next": "^14.0.0",
     "next-auth": "^4.24.7",
     "pdfmake": "^0.2.15",
     "pg": "^8.13.1",
@@ -48,15 +50,17 @@
     "react-dom": "^18.0.0",
     "react-ga4": "^2.1.0",
     "react-hook-form": "^7.53.0",
+    "react-icons": "^5.3.0",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.26.2",
+    "react-toastify": "^10.0.6",
     "sharp": "^0.33.5",
     "supabase": "^1.223.10",
     "virtuaaliviivakoodi": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.11.1",
+    "eslint": "^9.16.0",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13"
   }

@@ -8,19 +8,19 @@ const Sitemap = (req, res) => {
       <priority>1.0</priority>
     </url>
     <url>
-      <loc>https://www.logistix.fi/our-service</loc>
+      <loc>https://www.logistix.fi/yrityksille</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
     <url>
-      <loc>https://www.logistix.fi/contact</loc>
+      <loc>https://www.logistix.fi/yhteys</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
     </url>
     <url>
-      <loc>https://www.logistix.fi/about-us</loc>
+      <loc>https://www.logistix.fi/me</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
