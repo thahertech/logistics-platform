@@ -64,6 +64,7 @@
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   opacity: 0.9;
+  border: 2px solid #003366;
 }
 
 .serviceCard {
@@ -233,7 +234,7 @@
     font-size: 2rem;
     font-variant: small-caps;
     color: #ffffff;
-    margin-top: 10px;
+    margin-top: 2rem;
     background-color: #08080882;
     -webkit-backdrop-filter: blur(0.01px);
     backdrop-filter: blur(0.01px);
@@ -617,7 +618,8 @@
 
   .line {
     padding: 150px 0;
-
+    font-size: 0.75rem;
+    margin-bottom: 20px;
   }
 
   .line h4{
@@ -631,6 +633,10 @@
     opacity: 1;
     text-align: center;
     max-width: unset;
+  }
+  .cardContainer{
+    flex-direction: row;
+    align-content: center;
   }
 
   .serviceSection{
@@ -647,7 +653,7 @@
   }
 
   .serviceCard{
-    width: 300px;
+    width: 150px;
     margin: auto;
   }
 }

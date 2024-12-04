@@ -75,7 +75,6 @@ const MeidanPalvelusta = () => {
             />
       </div>
 
-
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Mukaan kehitykseen?</h2>
         <p className={styles.sectionContent}>

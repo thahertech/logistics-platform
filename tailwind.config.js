@@ -9,8 +9,11 @@ module.exports = {
 
 
   ],
-  theme: {
+ theme: {
     extend: {
+      screens: {
+        'custom': '880px', // Custom breakpoint at 880px
+      },
       colors: {
         primary: '#003366',
       },
@@ -18,3 +21,4 @@ module.exports = {
   },
   plugins: [],
 };
+
