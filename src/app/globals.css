@@ -33,6 +33,7 @@ input{
 
 select{
   color:black;
+  padding:10px;
 }
 
 .content-container {
@@ -41,9 +42,12 @@ select{
 }
 
 button {
-  background-color: #003366;
 }
 
 :focus {
   border: 1px solid var(--primary-color);
+}
+
+input {
+  padding: 10px;
 }
