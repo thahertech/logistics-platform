@@ -31,6 +31,7 @@ const MeidanPalvelusta = () => {
               height="400"
               className={styles.serviceImage}
             />
+
       <div className={styles.MasonryContainer}>
 
         <div className={styles.masonryItem}>
@@ -61,7 +62,19 @@ const MeidanPalvelusta = () => {
             <li><FontAwesomeIcon icon={faBriefcase} /> Helppokäyttöisyys: Palvelu on selkeä ja käyttäjäkeskeinen.</li>
           </ul>
         </div>
+</div>
+
+      <div className={styles.Herosection}>
+
+<Image
+              src={"/assets/asiakas-matka.png"}
+              alt="customer-journey"
+              width="2000"
+              height="700"
+              className={styles.customerImage}
+            />
       </div>
+
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Mukaan kehitykseen?</h2>
