@@ -2,7 +2,6 @@
 import './globals.css';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import AnalyticsClient from './Components/utils/analyticsClient';
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Head from 'next/head';
 import Script from 'next/script';
