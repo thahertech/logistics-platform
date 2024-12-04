@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -29,9 +28,9 @@ const Layout = ({ children }) => {
     }
   }, [pathname]);
 
-  const addToCart = (item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
-  };
+  // const addToCart = (item) => {
+  //   setCartItems((prevItems) => [...prevItems, item]);
+  // };
 
   return (
     <div className={styles.layoutContainer}>

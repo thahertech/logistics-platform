@@ -12,7 +12,9 @@ import Head from 'next/head';
 
 import './globals.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+ 
 
+ 
 const Dashboard = () => {
   const router = useRouter();
 
