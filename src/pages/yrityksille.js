@@ -80,7 +80,7 @@ const MeidanPalvelusta = () => {
         <p className={styles.sectionContent}>
           Olemme täällä auttamassa sinua kaikissa vaiheissa. Klikkaa alla olevaa painiketta ja liity yhteistyökumppaniksi.
         </p>
-        <button className={styles.joinButton} onClick={() => window.location.href='/contact'}>
+        <button className={styles.joinButton} onClick={() => window.location.href='/yhteys'}>
           Liity nyt
         </button>
       </div>
