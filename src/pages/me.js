@@ -58,7 +58,7 @@ const AboutUs = () => {
         <p className={styles.sectionContent}>
           Haluatko tietää lisää? Ota yhteyttä tiimiin ja autamme sinua.
         </p>
-        <button className={styles.joinButton} onClick={() => window.location.href='/contact'}>
+        <button className={styles.joinButton} onClick={() => window.location.href='/yhteys'}>
           Ota yhteyttä
         </button>
       </div>
