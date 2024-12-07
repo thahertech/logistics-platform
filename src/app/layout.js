@@ -13,6 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fi">
+      <head>
       <GoogleTagManager gtmId="GTM-T7GRXLNQ" />
 
         <link rel="icon" href="/favicon.ico" />
@@ -23,14 +24,14 @@ export default function RootLayout({ children }) {
         <meta property="og:description" content={metadata.description} />
         <meta property="og:image" content="/assets/logistix-logos/png/Logo.png" />
         <meta property="og:url" content="https://www.logistix.fi" />
-
+        </head>
       <body>
       
         
         {children}
         <Analytics />
         <SpeedInsights />
-        <GoogleAnalytics />
+        <GoogleAnalytics gaId="G-KS6NFLFQKS" />
       </body>
     </html>
   );
