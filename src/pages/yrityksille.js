@@ -87,35 +87,35 @@ const MeidanPalvelusta = () => {
     <>
       {/* Images */}
       <Image
-        src="/assets/Kuljetta.png"
+        src="/assets/kuljettaja.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
         className={styles.customerImage}
       />
       <Image
-        src="/assets/etsi.png"
+        src="/assets/etsitoimitus.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
         className={styles.customerImage}
       />
       <Image
-        src="/assets/nouto.png"
+        src="/assets/kuljetusnouto.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
         className={styles.customerImage}
       />
       <Image
-        src="/assets/Kuljetus.png"
+        src="/assets/toimitus.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
         className={styles.customerImage}
       />
       <Image
-        src="/assets/Kohde.png"
+        src="/assets/kohteessa.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
@@ -156,35 +156,35 @@ const MeidanPalvelusta = () => {
 {selectedRole === 'Lähettäjä' && (
   <div className={styles.phaseContainer}>
     <Image
-      src={"/assets/TavaranOmistaja.png"}
+      src={"/assets/tavaranlähettäjä.png"}
       alt="customer-journey Lähettäjä"
       width="2000"
       height="700"
       className={styles.customerImage}
     />
      <Image
-      src={"/assets/etsi.png"}
+      src={"/assets/etsitoimitus.png"}
       alt="customer-journey Lähettäjä"
       width="2000"
       height="700"
       className={styles.customerImage}
     />
      <Image
-      src={"/assets/Tavarat.png"}
+      src={"/assets/tavaranluovutus.png"}
       alt="customer-journey Lähettäjä"
       width={400}
       height={700}
       className={styles.customerImage}
     />
           <Image
-        src="/assets/Kuljetus.png"
+        src="/assets/toimitus.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
         className={styles.customerImage}
       />
      <Image
-      src={"/assets/Kohde.png"}
+      src={"/assets/kohteessa.png"}
       alt="customer-journey Lähettäjä"
       width="2000"
       height="700"
