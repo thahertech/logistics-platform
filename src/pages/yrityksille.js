@@ -46,7 +46,7 @@ const MeidanPalvelusta = () => {
     Logistix tarjoaa ratkaisun tähän ongelmaan. Alustamme mahdollistaa kuljetusyrityksille tehokkaamman 
     reittien suunnittelun ja vähentää tyhjiä kilometrejä yhdistämällä lähettäjät ja kuljetusyritykset 
     helposti. Tämä ei ainoastaan pienennä kuljetuskustannuksia, vaan tarjoaa myös lähettäjille mahdollisuuden 
-    tehdä ympäristöystävällisempiä valintoja kilpailukykyisin hinnoin. Kustannustehokkaat, kilpailetut ja kestävämmät kuljetukset 
+    tehdä ympäristöystävällisempiä valintoja kilpailukykyisin hinnoin. Kustannustehokkaat, kilpailutetut ja kestävämmät kuljetukset 
     hyödyttävät sekä yrityksiä että ympäristöä.
   </p>
 </div>
