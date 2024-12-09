@@ -5,10 +5,12 @@ import '../app/globals.css';
 import ContactForm from '../app/Forms/contactForm';
 import Image from 'next/image';
 import Head from 'next/head';
+import { GoogleTagManager } from '@next/third-parties/google';
 const Contact = () => {
   return (
     <Layout>
     <Head>
+
     <title>Yhteystiedot - Logistix</title>
     <meta name="description" content="Ota yhteyttä Logistixiin, olemme täällä auttamassa kaikissa kysymyksissäsi." />
   </Head>
@@ -18,7 +20,7 @@ const Contact = () => {
               </div>
             <div className={styles.sectionHero}>
         <h4 className={styles.sectionContent2}>
-          Haluatko lisätietoja tai apua?<br/> Ota yhteyttä sähköpostilla tai liity BETA-testaajaksi
+          Haluatko lisätietoja tai apua?<br/> Ota yhteyttä ja tiimimme vastaa sinulle pikaisesti.
         </h4></div>
 
 

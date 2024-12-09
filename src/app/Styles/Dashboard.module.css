@@ -65,6 +65,7 @@
   backdrop-filter: blur(1px);
   opacity: 0.9;
   border: 2px solid #003366;
+  margin-top: 5px;
 }
 
 .serviceCard {
@@ -234,7 +235,7 @@
     font-size: 2rem;
     font-variant: small-caps;
     color: #ffffff;
-    margin-top: 2rem;
+    margin-top: 0.1rem;
     background-color: #08080882;
     -webkit-backdrop-filter: blur(0.01px);
     backdrop-filter: blur(0.01px);
@@ -431,7 +432,7 @@
     flex: 1;
     margin: 10px;
     padding: 20px;
-    max-width: 500px;
+    max-width: 240px;
     background-color: #00000060;
     border: 1px solid #fff;
     -webkit-backdrop-filter: blur(10px);
@@ -655,5 +656,12 @@
   .serviceCard{
     width: 150px;
     margin: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactHero{
+    border-radius: 0;
+    margin-top: 5px;
   }
 }
