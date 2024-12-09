@@ -131,14 +131,14 @@
 .imageContainer img {
   width: 100%;
   max-width: 800px;
-  height: auto;
   margin: 0 auto; 
+  max-height: 90px;
 }
 
 .customerImage {
   display: block;
   margin: 0 auto;
-  max-height: 200px;
+  max-height: 80px;
   object-fit: contain;
 }
 
