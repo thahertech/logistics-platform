@@ -457,7 +457,7 @@
 
 @media (max-width: 1080px) {
   .phaseContainer{
-    padding: 2rem;
+    padding: 0 2rem;
   }
 }
 
@@ -510,9 +510,9 @@ box-shadow: 0 2px 4px rgba(255, 255, 255, 0.775);
 
   .phaseDescriptions{
     margin-left: 130px;
-    margin-top: -29rem;
     padding: 0;
     width: unset;
+    position: absolute;
   }
 
   .buttonGroup{
