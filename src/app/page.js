@@ -43,7 +43,6 @@ const Dashboard = () => {
         />
         <div className={styles.line}>
           <h3>Tulevaisuuden työkalu</h3>
-          <h5>Kuljetus - Osta tai myy</h5>
         </div>
       </div>
 
@@ -74,7 +73,8 @@ const Dashboard = () => {
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>BETA-testaajaksi?</h2>
-        <h4 className={styles.serviceContent}>Lisää yhteystiedot niin pääset vaikuttamaan alustan kehitykseen</h4>
+        <h4 className={styles.serviceContent}>
+          Liity BETA-testaajaksi niin pääset vaikuttamaan alustan kehitykseen</h4>
       </div>
 
 
