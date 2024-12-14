@@ -27,6 +27,7 @@ const RollingNumber = ({ start, end, duration }) => {
         requestAnimationFrame(step);
       }
     };
+
     requestAnimationFrame(step);
   }, [start, end, duration]);
 
@@ -51,18 +52,31 @@ const Dashboard = () => {
       </Head>
 
       <div className={styles.heroImg}>
-        <Image
-          src={heroImg}
-          alt="Background image"
-          layout="fill"
-          objectFit="cover"
-          priority={true}
-        />
-        <div className={styles.line}>
-          <h3>Tulevaisuuden työkalu</h3>
-        </div>
-      </div>
-
+  <Image
+    src={heroImg}
+    alt="Background image"
+    layout="fill"
+    objectFit="cover"
+    priority={true}
+  />
+  <div className={styles.line}>
+    <h3>
+      Yhdistä rahdin lähettäjät ja kuljetusyritykset — tehokkaasti ja ekologisesti.
+      <br/>
+    </h3>
+    <div className={styles.heroButton}>
+      <button className={styles.betaButton}>
+        Liity beta-ohjelmaan
+      </button>
+      <button
+        className={styles.heroContactButton}
+        onClick={() => window.location.href = '/yhteys'}
+      >
+        Ota yhteyttä 
+      </button>
+    </div>
+  </div>
+</div>
      
 
       <div className={styles.serviceSection}>
@@ -119,9 +133,9 @@ const Dashboard = () => {
 </div>
 
       <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Mukaan BETA-testiin?</h2>
+        <h2 className={styles.sectionTitle}>Liity BETA-ohjelmaan</h2>
         <h4 className={styles.serviceContent}>
-          Liity BETA-testaajaksi niin pääset vaikuttamaan alustan kehitykseen.
+            Ole mukana luomassa logistiikan tulevaisuutta!
         </h4>
 
       </div>
