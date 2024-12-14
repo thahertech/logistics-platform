@@ -15,6 +15,8 @@
   animation: fadeIn 2s ease forwards;
 }
 
+
+
 .heroImg {
   background-color: #080808;
   background-position: center;
@@ -30,17 +32,17 @@
 }
 
 .animatedIcon {
-  animation: pulse 10.5s infinite;
+  animation: pulse 40.5s infinite;
   margin-right: 10px;
 }
 
 @keyframes pulse {
-  0%, 100% {
+   100% {
     transform: scale(1);
     color: #003366;
   }
-  50% {
-    transform: scale(1.2);
+  0% {
+    transform: translateY(-10px);
     color: #fff;
   }
 }
@@ -187,6 +189,10 @@
 .sectionYrityksille{
   max-width: 800px;
   text-align: left;
+  border-radius: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #fff;
+
 }
 .sectionHero {
   z-index: 2;
@@ -306,50 +312,6 @@
   margin-top: 2rem;
   color: white;
 }
-
-@media (max-width: 1260px) {
-  .MasonryContainer{
-        flex-direction: column;
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .sectionHero2{
-      width: 600px;
-    }
-
-    .masonryItem{
-      max-width: 600px;
-    }
-}
-
-@media (max-width: 620px){
-  .sectionHero2{
-    width: 100%;
-  }
-}
-@media(max-width:500px){
-  .sectionHero{
-    width: 100%;
-
-  }
-  .sectionHero2{
-    font-size: 1rem;
-    top: 9rem;
-  }
-
-  .aboutUsHero{
-      position: relative;
-      margin-top: 5px;
-      border-radius: 0;
-    }
-
-  .MasonryContainer{
-    min-width: 300px;
-  }
-  }
 
 .masonryItem {
   background-color: #f1eeee21;
@@ -534,7 +496,7 @@ box-shadow: 0 2px 4px rgba(255, 255, 255, 0.775);
   }
 
   .sectionContentYrityksille{
-    padding: 0 40px;
+    padding: 0 4rem;
   }
   
 
@@ -548,3 +510,48 @@ box-shadow: 0 2px 4px rgba(255, 255, 255, 0.775);
     padding: 0.5rem;
   }
 }
+
+@media (max-width: 1260px) {
+  .MasonryContainer{
+        flex-direction: column;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sectionHero2{
+      width: 600px;
+    }
+
+    .masonryItem{
+      max-width: 600px;
+    }
+}
+
+@media (max-width: 620px){
+  .sectionHero2{
+    width: 100%;
+  }
+}
+@media(max-width:500px){
+  .sectionHero{
+    width: 100%;
+
+  }
+  .sectionHero2{
+    font-size: 1rem;
+    top: 10rem;
+  }
+
+  .aboutUsHero{
+      position: relative;
+      margin-top: 5px;
+      border-radius: 0;
+    }
+
+  .MasonryContainer{
+    min-width: 300px;
+  }
+
+  }

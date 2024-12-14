@@ -13,10 +13,10 @@ const MeidanPalvelusta = () => {
   return (
 
     <Layout>
-    <Head>
-    <title>Yrityksille - Logistix</title>
-    <meta name="description" content="Ota yhteyttä Logistixiin, olemme täällä auttamassa kaikissa kysymyksissäsi." />
-  </Head>
+      <Head>
+      <title>Logistiikkaratkaisut Yrityksille - Logistix</title>
+      <meta name="description" content="Vähennä logistiikkakustannuksia ja paranna ympäristöystävällisyyttä innovatiivisilla Logistix-palveluilla." />
+    </Head>
       <div className={styles.sectionHero}>
         <h2 className={styles.sectionTitle}>Tehokkaampi ja kestävämpi kuljetusratkaisu yrityksille</h2>
         <p className={styles.sectionContent}>
