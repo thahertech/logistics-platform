@@ -1,6 +1,6 @@
 'use client';
 import Layout from './Dashboard/Layout';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -36,10 +36,19 @@ const RollingNumber = ({ start, end, duration }) => {
 
 const Dashboard = () => {
   const router = useRouter();
+  const contactFormRef = useRef(null);
 
   const navigateTo = (path) => {
     router.push(path);
   };
+
+  const scrollToContactForm = () => {
+    if (contactFormRef.current) {
+      contactFormRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  
 
   return (
     <Layout>
@@ -65,7 +74,10 @@ const Dashboard = () => {
       <br/>
     </h3>
     <div className={styles.heroButton}>
-      <button className={styles.betaButton}>
+      <button className={styles.betaButton}
+              onClick={scrollToContactForm}
+              >
+        
         Liity beta-ohjelmaan
       </button>
       <button
@@ -104,28 +116,28 @@ const Dashboard = () => {
 
 <div className={styles.rollingNumbersSection}>
   <div className={styles.rollingNumberCard}>
-    <RollingNumber start={0} end={Math.min(44, 200)} duration={3000} />
+    <RollingNumber start={0} end={Math.min(59, 200)} duration={3000} />
     <p className={styles.rollingNumberDescription}>
       Kuljetukseen erikoistuneita yrityksiä, jotka osallistuvat BETA testiin
     </p>
   </div>
 
   <div className={styles.rollingNumberCard}>
-    <RollingNumber start={0} end={Math.min(39, 200)} duration={3000} />
+    <RollingNumber start={0} end={Math.min(44, 200)} duration={3000} />
     <p className={styles.rollingNumberDescription}>
       Lähettäjiä, jotka osallistuvat BETA testiin
     </p>
   </div>
 
   <div className={styles.rollingNumberCard}>
-    <RollingNumber start={0} end={Math.max(44 + 39)} duration={3000} />
+    <RollingNumber start={0} end={Math.max(59 + 44)} duration={3000} />
     <p className={styles.rollingNumberDescription}>
       Yhteensä BETA-testaajia, jotka ovat mukana alustan kehityksessä
     </p>
   </div>
 
   <div className={styles.rollingNumberCard}>
-    <RollingNumber start={0} end={Math.max(200 - 44 - 39, 0)} duration={3000} />
+    <RollingNumber start={0} end={Math.max(200 - 59 - 44, 0)} duration={3000} />
     <p className={styles.rollingNumberDescription}>
       Paikkoja jäljellä - lisää yrityksesi mukaan!
     </p>
@@ -133,14 +145,16 @@ const Dashboard = () => {
 </div>
 
       <div className={styles.section}>
+      <div ref={contactFormRef}>
+
         <h2 className={styles.sectionTitle}>Liity BETA-ohjelmaan</h2>
         <h4 className={styles.serviceContent}>
             Ole mukana luomassa logistiikan tulevaisuutta!
         </h4>
 
       </div>
-      <ContactForm />
-
+        <ContactForm />
+      </div>
     </Layout>
   );
 };
