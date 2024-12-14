@@ -24,7 +24,42 @@
   }
 
 }
+@keyframes subtleBlink {
+  0% {
+    background-color: #00000044;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+  }
 
+  100% {
+    background-color: #000000;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3);
+  }
+}
+
+.heroButton{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.line Button:hover{
+  box-shadow: none !important;
+}
+
+.heroContactButton{
+  color: #fff;
+}
+.line Button {
+  margin: 3rem 0;
+  background-color: #f1eeee21;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  text-align: center;
+  animation: subtleBlink 30s infinite;
+}
 
 .serviceSection {
   text-align: center;
@@ -174,7 +209,9 @@
 
 
 
-
+.heroImg{
+  border-top:1px solid #fff;
+}
 .heroImg,
 .img,
 .whyChooseUs,
@@ -235,10 +272,8 @@
   color: #fff;
 }
 
-
 .line {
     font-size: 2rem;
-    font-variant: small-caps;
     color: #ffffff;
     margin-top: 0.1rem;
     background-color: #08080882;
@@ -476,7 +511,7 @@
 
 .line h3 {
   letter-spacing: 0.1rem;
-  font-size: 3.5rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
   line-height: 1.2;
 }
@@ -686,6 +721,9 @@
   .serviceCard{
     width: 175px;
   }
+  .line h3{
+    font-size: 1.5rem ;
+  }
 }
 
 @media (max-width: 480px) {
@@ -712,6 +750,7 @@
   justify-content: space-around;
   margin: 3rem 0;
   padding: 8rem;
+  border-bottom: 1px solid #eee;
 }
 
 .rollingNumberCard {
