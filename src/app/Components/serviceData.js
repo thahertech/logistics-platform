@@ -3,7 +3,7 @@ const serviceData = [
     icon: 'fas fa-user-plus',
     title: 'Luo käyttäjätili',
     description: 'Rekisteröidy nopeasti ja aloita palvelun käyttö.',
-    path: '/yrityksille',
+    path: '/auth',
   },
   {
     icon: 'fas fa-exchange-alt',
@@ -15,13 +15,13 @@ const serviceData = [
     icon: 'fas fa-shipping-fast',
     title: 'Luo kuljetus',
     description: 'Syötä kuljetustiedot ja löydä luotettava toimittaja.',
-    path: '/yrityksille',
+    path: '/auth',
   },
   {
     icon: 'fas fa-truck',
     title: 'Kuljetusverkosto',
     description: 'Laaja valikoima kuljetusyrityksiä eri tarpeisiin.',
-    path: '/yrityksille',
+    path: '/auth',
   },
   {
     icon: 'fas fa-briefcase',
