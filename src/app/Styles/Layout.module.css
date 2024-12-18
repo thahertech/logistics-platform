@@ -24,12 +24,6 @@
 }
 
 
-.topHeaderLink:hover{
-  border-bottom: 3px solid #ffffff;
-  border-radius: 1px;
-
-}
-
 .topHeaderNav {
   position: relative;
   display: flex;
@@ -53,12 +47,16 @@
 .topHeaderLink {
   display: flex;
   position: relative;
-  flex-direction: row-reverse;
   gap: 10px;
   align-items: center;
   padding: 10px;
-  transition: 1s ease-in-out;
+  transition: 0.3s ease-out;
+}
 
+.topHeaderLink:hover {
+  color: #ddd;
+  border-bottom: 3px solid #fff;
+  border-radius: 2px;
 }
 
 .topRow {
@@ -190,20 +188,41 @@
   display: flex; */
 }
 
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.socialIcon {
+  font-size: 1.5rem;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.socialIcon:hover {
+  color: #0070f3;
+}
 .footer {
   background-color: #000;
   color: #fff;
-  padding: 20px;
+  padding: 3rem 1rem;
   text-align: center;
-  z-index: 2;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
 
+.footerLogo {
+  width: 80px;
+  margin-bottom: 1rem;
 }
 
 .footerText {
-  margin: 0;
-  padding-bottom: 10px;
-  letter-spacing: 0.2rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
 }
 
 .footerMenu {
@@ -222,12 +241,6 @@
 
 .footerLink:hover {
   color: #fff;
-}
-
-
-.footerLogo{
-  margin: auto;
-  margin-bottom: 2rem;
 }
 
 .bottomFooter {

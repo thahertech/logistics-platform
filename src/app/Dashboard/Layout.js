@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 import Image from 'next/image';
 import footerImg from '../../../public/assets/logistix-logos/svg/logo.svg';
 import '../globals.css';
-import { FaPlusCircle, FaUser, FaSearch, FaShoppingCart, FaShieldAlt, FaFileContract } from 'react-icons/fa';
+import { FaFacebook, FaChartBar, FaInstagram, FaLinkedin ,FaPlusCircle, FaUser, FaSearch, FaShoppingCart, FaShieldAlt, FaFileContract, FaCogs, FaUserCircle, FaComment } from 'react-icons/fa';
 
 const Layout = ({ children }) => {
   const pathname = usePathname();
@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
   return (
     <div className={styles.layoutContainer}>
       <div className={styles.topHeader}>
-        {isAuthenticated ? (
+        {!isAuthenticated ? (
           <nav className={styles.topHeaderNav}>
             <Link
               href="/checkout"
@@ -128,6 +128,17 @@ const Layout = ({ children }) => {
       </header>
       <main className={styles.mainContent}>{children}</main>
       <footer className={styles.footer}>
+      <div className={styles.socialLinks}>
+        <Link href="https://facebook.com" className={styles.socialIcon}>
+          <FaFacebook />
+        </Link>
+        <Link href="https://twitter.com" className={styles.socialIcon}>
+          <FaLinkedin />
+        </Link>
+        <Link href="https://instagram.com" className={styles.socialIcon}>
+          <FaInstagram />
+        </Link>
+      </div>
         <Image
           src={footerImg}
           alt="Logistix Logo"
@@ -138,8 +149,24 @@ const Layout = ({ children }) => {
         <p className={styles.footerText}>Logistix OY 3487288-6</p>
         <p className={styles.footerText}>Designed by Sensei Studios</p>
       </footer>
-      {/* <div className={styles.bottomFooter}>
+      <div className={styles.bottomFooter}>
         <nav className={styles.bottomFooterNav}>
+          <Link
+          href="/asiakastarinat"
+                className={`${styles.bottomFooterLink} ${
+                  pathname === '/asiakastarinat' ? styles.activeLink : ''
+                }`}
+          >
+              <FaComment className={styles.icon} /> Asiakastarinat
+          </Link>
+          <Link
+          href="/miten-toimii"
+                className={`${styles.bottomFooterLink} ${
+                  pathname === '/miten-toimii' ? styles.activeLink : ''
+                }`}
+          >
+              <FaCogs className={styles.icon} /> Miten Logistix toimii
+          </Link>
           <Link
             href="/tietosuoja"
             className={`${styles.bottomFooterLink} ${
@@ -157,7 +184,7 @@ const Layout = ({ children }) => {
             <FaFileContract className={styles.icon} /> Ehdot
           </Link>
         </nav>
-      </div> */}
+      </div>
     </div>
   );
 };

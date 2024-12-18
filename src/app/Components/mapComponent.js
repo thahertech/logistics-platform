@@ -1,67 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import React, { useState, useCallback } from 'react';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 
-const MapComponent = ({ applyFilters }) => {
+const containerStyle = {
+  width: '100%',
+  height: '400px',
+  borderRadius: '10px',
+};
+
+const center = {
+  lat: 60.1695,
+  lng: 24.9354,
+};
+
+const MapComponent = ({ setFilters }) => {
   const [selectedLatLng, setSelectedLatLng] = useState(null);
   const [address, setAddress] = useState('');
 
-  const handleMapClick = async (e) => {
-    console.log('Map clicked at coordinates:', e.latlng); // Debug coordinates
-    const { lat, lng } = e.latlng;
-    setSelectedLatLng([lat, lng]);
-  
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+  });
+
+  const fetchAddress = async (lat, lng) => {
     try {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
       );
-  
+
       if (!response.ok) {
-        console.error('Failed to fetch address');
         throw new Error('Failed to fetch address');
       }
-  
+
       const data = await response.json();
-      console.log('API response:', data); // Debug the response
-  
-      if (data && data.address) {
-        const formattedAddress = `${data.address.road || ''}, ${data.address.city || data.address.town || data.address.village || ''}, ${data.address.country || ''}`;
-        setAddress(formattedAddress);
+      if (data.results && data.results.length > 0) {
+        setAddress(data.results[0].formatted_address);
+        return data.results[0].formatted_address;
       } else {
         setAddress('Address not found');
+        return 'Address not found';
       }
     } catch (error) {
       console.error('Error fetching address:', error);
       setAddress('Error fetching address');
+      return 'Error fetching address';
     }
   };
-  
+
+  const handleClick = useCallback((event) => {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    setSelectedLatLng({ lat, lng });
+    fetchAddress(lat, lng).then((fetchedAddress) => {
+      // Pass the address to FilterSidebar through setFilters
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        pickupLocation: fetchedAddress,
+      }));
+    });
+  }, [setFilters]);
+
+  if (!isLoaded) {
+    return <p>Loading Map...</p>;
+  }
 
   return (
     <div>
-   <MapContainer
-  center={[60.1695, 24.9354]} // Default center point
-  zoom={13}
-  style={{ height: '400px', width: '100%' }}
-  onClick={handleMapClick} // Make sure this is set correctly
->
-
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-        {selectedLatLng && (
-          <Marker position={selectedLatLng}>
-            <Popup>
-              <div>
-                <strong>Selected Location:</strong>
-                <p>{address}</p>
-              </div>
-            </Popup>
-          </Marker>
-        )}
-      </MapContainer>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={9}
+        onClick={handleClick}
+        options={{
+          disableDefaultUI: true,
+          zoomControl: true,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: false,
+          styles: [
+            { featureType: 'poi', stylers: [{ visibility: 'off' }] },
+            { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+          ],
+        }}
+      >
+        {selectedLatLng && <Marker position={selectedLatLng} />}
+      </GoogleMap>
+      {/* {selectedLatLng && (
+        <p>Selected location: {address}</p>
+      )} */}
     </div>
   );
 };

@@ -236,10 +236,26 @@
 
 .käyttöehdot{
   padding: 5rem;
+  margin: 0 auto;
+  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
 }
 
+.käyttöehdot h1{
+  font-weight: 700;
+}
+ 
 .käyttöehdot h2 {
   margin-top: 2rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.käyttöehdot p {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .sectionContent, .sectionContentYrityksille {
   line-height: 2rem;
