@@ -1,0 +1,29 @@
+.hello{
+    font-size: 12px;
+   max-width:800px ;
+    justify-content: center;
+    display: flex;
+    margin: auto;
+    text-align: center;
+
+}
+
+.hello h3{
+    font-size: 19px;
+    word-spacing: 0.3rem;
+}
+
+.container p{
+    font-size: 15px;
+    font-family: 'Inter';
+}
+
+.container h1{
+    font-size: 24px;
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.container h2 {
+    margin: 2rem;
+}
