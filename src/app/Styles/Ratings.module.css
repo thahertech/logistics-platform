@@ -1,0 +1,71 @@
+/* DeliveryRatingForm.module.css */
+
+.formContainer {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .formTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #333;
+  }
+  
+  .formGroup {
+    margin-bottom: 20px;
+  }
+  
+  .label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .select, .textarea, .button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin-top: 8px;
+  }
+  
+  .select:focus, .textarea:focus, .button:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .textarea {
+    min-height: 120px;
+  }
+  
+  .button {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 8px;
+  }

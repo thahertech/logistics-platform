@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
   return (
     <div className={styles.layoutContainer}>
       <div className={styles.topHeader}>
-        {!isAuthenticated ? (
+        {isAuthenticated ? (
           <nav className={styles.topHeaderNav}>
             <Link
               href="/checkout"
@@ -127,7 +127,7 @@ const Layout = ({ children }) => {
         </nav>
       </header>
       <main className={styles.mainContent}>{children}</main>
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
       <div className={styles.socialLinks}>
         <Link href="https://facebook.com" className={styles.socialIcon}>
           <FaFacebook />
@@ -173,7 +173,7 @@ const Layout = ({ children }) => {
               pathname === '/tietosuoja' ? styles.activeLink : ''
             }`}
           >
-            <FaShieldAlt className={styles.icon} /> Tietosuoja
+            <FaShieldAlt className={ styles.icon} /> Tietosuoja
           </Link>
           <Link
             href="/ehdot"
@@ -184,9 +184,9 @@ const Layout = ({ children }) => {
             <FaFileContract className={styles.icon} /> Ehdot
           </Link>
         </nav>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default Layout;
+export default Layout;  
