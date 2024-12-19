@@ -1,6 +1,32 @@
 .loginImg{
     border-radius: 7px;
     height: 100%;
+    max-height: 400px;
+}
+
+/* login.module.css */
+.authPageBackground {
+  background-image: url('/assets/northern-lights.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(10px);
+}
+
+.authPageBackground::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Optional dark overlay */
+  backdrop-filter: blur(25px); /* Apply blur effect */
+  z-index: -1; /* Ensure this doesn't cover the content */
+}
+
+.mainContent {
+  background: rgba(0, 0, 0, 0.5); /* Add a dark overlay if needed */
 }
 
 @media (max-width:480px){
