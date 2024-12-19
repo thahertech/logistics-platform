@@ -1,0 +1,133 @@
+/* General styles */
+.profileDetails {
+    padding: 20px;
+    background-color: #2D2D2D;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    color: #fff;
+
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.profileForm{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+}
+
+.h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+/* Buttons */
+.profileDetails button {
+    padding: 8px 16px;
+    margin-top: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    opacity: 0.8;
+}
+
+/* Edit Button */
+.btnEdit {
+    background-color: #0000008d;
+    color: white;
+    border: none;
+}
+
+.btnEdit:hover {
+    background-color: #003366;
+}
+
+/* Save and Cancel Buttons */
+.btnSave {
+    background-color: #003366;
+    color: white;
+    border: none;
+}
+
+.btnSave:hover {
+    background-color: #0056b3;
+}
+
+.btnCancel {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+}
+
+.btnCancel:hover {
+    background-color: #ffffff;
+}
+
+/* Input fields */
+.profileDetails input[type="text"],
+.profileDetails input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #000;
+    color: white;
+}
+
+.profileDetails input[type="text"]:focus,
+.profileDetails .input[type="email"]:focus {
+    outline: none;
+    border-color: #003366;
+}
+
+.profileDetails label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.profileDetails input:disabled {
+    background-color: #616161;
+    cursor: not-allowed;
+}
+
+/* Form layout */
+.profileDetails div > label {
+    margin-bottom: 12px;
+}
+
+.profileDetails div {
+    margin-bottom: 10px;
+}
+
+/* Edit Mode Form */
+.editForm {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profileDetails input[type="text"],
+.profileDetails input[type="email"] {
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    color: white;
+}
+
+.profileDetails input[type="text"]:focus,
+.profileDetails input[type="email"]:focus {
+    border: 1px solid #007BFF;
+}
+

@@ -1,47 +1,116 @@
-import React, { useEffect, useState } from 'react';
-import { supabase } from '@/supabaseClient';
-const UserProfile = ({ userId }) => {
-    const [profile, setProfile] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+import React, { useState } from "react";
+import styles from "@/app/Styles/profile.module.css";
 
-    useEffect(() => {
-        const fetchProfileData = async () => {
-            try {
+const InputField = ({ label, type, name, value, onChange }) => (
+    <label className={styles.inputLabel}>
+        {label}:
+        <input
+            type={type}
+            name={name}
+            value={value || ""}
+            onChange={onChange}
+            className={styles.inputField}
+        />
+    </label>
+);
 
-                // Get the current session and user details
-                const { data: user, error: userError } = await supabase.auth.getUser();
-                if (userError) {
-                    throw new Error(`User fetch error: ${userError.message}`);
-                }
-                console.log('here');
+const UserProfile = ({ profile, onProfileUpdate }) => {
+    const [isEditing, setIsEditing] = useState(false);
+    const [updatedProfile, setUpdatedProfile] = useState(profile);
 
-                setProfile(user.user);
-                console.log(user.user);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUpdatedProfile((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
-        if (userId) {
-            fetchProfileData();
-        }
-    }, [userId]);
+    const handleSave = () => {
+        onProfileUpdate(updatedProfile);
+        setIsEditing(false);
+    };
 
-    if (loading) return <p>Loading profile...</p>;
-    if (error) return <p>Error: {error}</p>;
-    if (!profile) return <p>No profile data available.</p>;
+    const handleCancel = () => {
+        setUpdatedProfile(profile);
+        setIsEditing(false);
+    };
+
+    if (!profile) {
+        return <p>Loading profile...</p>;
+    }
 
     return (
-        <div className="profile-details">
-            <h2>{profile.name}</h2>
-            <p>Username: {profile.username}</p>
-            <p>Sähköposti: {profile.email}</p>
-            {profile.avatar_url && <img src={profile.avatar_url} alt={`${profile.full_name}'s avatar`} />}
-            <p>Last updated: {new Date(profile.profile_updated_at).toLocaleString()}</p>
-        </div>
+        <section className={styles.profileDetails}>
+            {isEditing ? (
+                <>
+                    <div className={styles.profileForm}>
+                        <InputField
+                            label="Full Name"
+                            type="text"
+                            name="full_name"
+                            value={updatedProfile.full_name}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            label="Username"
+                            type="text"
+                            name="username"
+                            value={updatedProfile.username}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            label="Email"
+                            type="email"
+                            name="email"
+                            value={updatedProfile.email}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            label="Company"
+                            type="text"
+                            name="yritys_nimi"
+                            value={updatedProfile.yritys_nimi}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            label="Phone"
+                            type="text"
+                            name="phone_number"
+                            value={updatedProfile.phone_number}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            label="VAT Number"
+                            type="text"
+                            name="vat_number"
+                            value={updatedProfile.vat_number}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.actionButtons}>
+                        <button onClick={handleSave} className={styles.btnSave}>
+                            Save
+                        </button>
+                        <button onClick={handleCancel} className={styles.btnCancel}>
+                            Cancel
+                        </button>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <h2>{profile.full_name || "N/A"}</h2>
+                    <p>Email: {profile.email || "N/A"}</p>
+                    <p>Company: {profile.yritys_nimi || "N/A"}</p>
+                    <p>Phone: {profile.phone_number || "N/A"}</p>
+                    <p>VAT Number: {profile.vat_number || "N/A"}</p>
+                    <p>Last updated: {new Date(profile.profile_updated_at).toLocaleString()}</p>
+                    <button onClick={() => setIsEditing(true)} className={styles.btnEdit}>
+                        Edit Profile
+                    </button>
+                </>
+            )}
+        </section>
     );
 };
 

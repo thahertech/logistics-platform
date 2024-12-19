@@ -76,25 +76,32 @@ const Auth = () => {
       if (!isLogin && data?.user?.id) {
         await supabase
           .from('profiles')
-          .insert([{ user_id: data.user.id, full_name: formData.name.trim(), phone_number: formData.phone.trim() }]);
+          .insert([{ user_id: data.user.id, full_name: formData.name.trim(), yritys_nimi: formData.yritys_nimi.trim(), phone_number: formData.phone, vat_number: formData.vat_number.trim() }]);
         setShowModal(true); // Show the verification modal
+      
       }
 
-      router.push('/profile');
     } catch (err) {
       console.error(err);
       setError('Virhe. Yritä uudelleen!');
     } finally {
       setIsLoading(false);
+      router.push('/profile');
+
     }
   };
 
+
   const closeModal = () => {
+
     setShowModal(false);
+
   };
 
   return (
     <Layout>
+            <div className={`${styles.authPageBackground} flex justify-center items-center h-screen`}>
+
       <div className="flex justify-center items-center h-screen bg-black-200">
         <div className="bg-gray-500 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex p-6 rounded-lg shadow-md w-full max-w-4xl">
           {/* Left Section - Image */}
@@ -109,8 +116,8 @@ const Auth = () => {
           </div>
 
           {/* Right Section - Form */}
-          <div className="flex flex-col flex-1 p-6">
-  <h2 className="text-3xl font-bold mb-6 text-left text-white border-b">
+          <div className="flex flex-col flex-1 p-4">
+  <h2 className="text-4xl font-bold mb-12 text-left text-white mb-8 pb-2.5 border-b border-white/90">
     {isLogin ? 'Kirjaudu' : 'Luo Käyttäjä'}
   </h2>
             <form onSubmit={handleSubmit}>
@@ -170,7 +177,7 @@ const Auth = () => {
                   />
                 </div>
               )}
-              <div className="mb-4">
+              <div className="mb-4 mt-12">
                 <input
                   type="email"
                   name="email"
@@ -234,7 +241,7 @@ const Auth = () => {
                 {isLogin ? 'Ei käyttäjää?' : 'Oletko jo käyttäjä?'}
                 <button
                   type="button"
-                  className="text-black hover:underline ml-6"
+                  className="text-black underline font-bold	 ml-6"
                   onClick={() => setIsLogin(!isLogin)}
                 >
                   {isLogin ? ' Luo käyttäjä' : 'Kirjaudu'}
@@ -260,6 +267,7 @@ const Auth = () => {
           </div>
         </div>
       )}
+      </div>
     </Layout>
   );
 };
