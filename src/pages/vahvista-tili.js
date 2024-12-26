@@ -1,38 +1,24 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { supabase } from '../supabaseClient';
-import styles from '../app/Styles/Dashboard.module.css';
 
+export default function AuthRedirect() {
+  const router = useRouter();
 
-const ConfirmEmail = () => {
-    const router = useRouter();
+  useEffect(() => {
+    const { token } = router.query; // Extract token
 
-    useEffect(() => {
-        const confirmEmail = async () => {
-            // Extract the token from the URL hash
-            const hash = window.location.hash;
-            const params = new URLSearchParams(hash.substring(1));
-            const accessToken = params.get('access_token');
+    if (token) {
+      supabase.auth
+        .verifyOtp({ token }) // Verify
+        .then(() => {
+          router.push('/auth'); // Redirect
+        })
+        .catch((error) => {
+          console.error('Verification failed:', error.message);
+        });
+    }
+  }, [router.query]);
 
-            if (accessToken) {
-                // Confirm the email with the token
-                const { error } = await supabase.auth.updateUser(accessToken);
-
-                if (error) {
-                    console.error('Error confirming email:', error.message);
-                } else {
-
-                    router.push('/auth'); 
-                }
-            } else {
-                console.error('No access token found in URL.');
-            }
-        };
-
-        confirmEmail();
-    }, [router]);
-
-    return <div>Confirming your email...</div>;
-};
-
-export default ConfirmEmail;
+  return <p>Lataa...</p>;
+}

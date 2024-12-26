@@ -15,6 +15,7 @@ const Auth = () => {
     phone: '',
     vat_number: '',
     termsAccepted: false,
+    user_role: '',
   });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,18 +32,19 @@ const Auth = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
   
-    // Automatically format vat_number with a dash after the fourth number
     if (name === 'vat_number') {
-      const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+      const numericValue = value.replace(/[^0-9]/g, '');
       const formattedValue =
         numericValue.length > 7
           ? numericValue.slice(0, 7) + '-' + numericValue.slice(7)
-          : numericValue; // Add dash after the 4th number if applicable
+          : numericValue;
   
       setFormData((prev) => ({
         ...prev,
         vat_number: formattedValue,
       }));
+    } else if (name === 'user_role') {
+      setFormData((prev) => ({ ...prev, user_role: value }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
@@ -58,7 +60,6 @@ const Auth = () => {
       setIsLoading(false);
       return;
     }
-
     try {
       const { data, error } = isLogin
         ? await supabase.auth.signInWithPassword({
@@ -66,27 +67,34 @@ const Auth = () => {
             password: formData.password,
           })
         : await supabase.auth.signUp({
-            display_name: formData.name,
-            email: formData.email,
-            password: formData.password,
-          });
+          email: formData.email,
+          password: formData.password,
+          options: {
+            data: {
+              phone: formData.phone,
+              display_name: formData.name,
+            },
+          },
+        });
+        console.log(data);
 
       if (error) throw error;
 
       if (!isLogin && data?.user?.id) {
         await supabase
           .from('profiles')
-          .insert([{ user_id: data.user.id, full_name: formData.name.trim(), yritys_nimi: formData.yritys_nimi.trim(), phone_number: formData.phone, vat_number: formData.vat_number.trim() }]);
-        setShowModal(true); // Show the verification modal
-      
+          .insert([{ user_id: data.user.id, user_role: formData.user_role, full_name: formData.name.trim(), yritys_nimi: formData.yritys_nimi.trim(), phone_number: formData.phone, vat_number: formData.vat_number.trim() }]);
+        setShowModal(true);
+      } else {
+        router.push('/profile');
+
       }
 
     } catch (err) {
       console.error(err);
-      setError('Virhe. Yritä uudelleen!');
+      setError('Tarkista sähköposti ja salasana!');
     } finally {
       setIsLoading(false);
-      router.push('/profile');
 
     }
   };
@@ -94,16 +102,17 @@ const Auth = () => {
 
   const closeModal = () => {
 
-    setShowModal(false);
-
-  };
+      setShowModal(false);
+      router.push('/auth');
+    };
+  
 
   return (
     <Layout>
             <div className={`${styles.authPageBackground} flex justify-center items-center h-screen`}>
 
       <div className="flex justify-center items-center h-screen bg-black-200">
-        <div className="bg-gray-500 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex p-6 rounded-lg shadow-md w-full max-w-4xl">
+        <div className="bg-gray-500 mt-6 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex p-6 rounded-lg shadow-md w-full max-w-4xl">
           {/* Left Section - Image */}
           <div className="hidden md:flex flex-1 items-center justify-center">
             <Image
@@ -115,7 +124,6 @@ const Auth = () => {
             />
           </div>
 
-          {/* Right Section - Form */}
           <div className="flex flex-col flex-1 p-4">
   <h2 className="text-4xl font-bold mb-12 text-left text-white mb-8 pb-2.5 border-b border-white/90">
     {isLogin ? 'Kirjaudu' : 'Luo Käyttäjä'}
@@ -160,6 +168,22 @@ const Auth = () => {
                     className={`text-black w-full p-2 mb-2 border rounded ${styles.inputField}`}
                     required
                   />
+                </div>
+              )}
+
+              {!isLogin && (
+                <div className="mb-4 mt-4">
+                 <select
+                    name="user_role"
+                    value={formData.user_role}
+                    onChange={handleChange}
+                    className={`text-black w-full p-2 mb-2 border rounded ${styles.inputField}`}
+                    required
+                >
+                    <option value="">Valitse rooli</option>
+                    <option value="kuljettaja">Kuljettaja</option>
+                    <option value="lähettäjä">Lähettäjä</option>
+                  </select>
                 </div>
               )}
 
@@ -237,11 +261,11 @@ const Auth = () => {
                   <p>{error}</p>
                 </div>
               )}
-              <p className="mt-12 text-left text-white">
+              <p className="mt-12 text-left text-gray-300">
                 {isLogin ? 'Ei käyttäjää?' : 'Oletko jo käyttäjä?'}
                 <button
                   type="button"
-                  className="text-black underline font-bold	 ml-6"
+                  className="text-gray-100 underline font-bold	 ml-6"
                   onClick={() => setIsLogin(!isLogin)}
                 >
                   {isLogin ? ' Luo käyttäjä' : 'Kirjaudu'}
@@ -253,6 +277,7 @@ const Auth = () => {
       </div>
 
             {showModal && (
+              
         <div className={styles.modalBackdrop}>
           <div className={styles.modalContainer}>
             <h3 className={styles.modalTitle}>Vahvista sähköpostiosoitteesi</h3>

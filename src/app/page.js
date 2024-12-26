@@ -78,7 +78,7 @@ const Dashboard = () => {
               onClick={scrollToContactForm}
               >
         
-        Liity beta-ohjelmaan
+        Liity verkostoon
       </button>
       <button
         className={styles.heroContactButton}
