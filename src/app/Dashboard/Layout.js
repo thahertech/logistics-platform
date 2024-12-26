@@ -80,9 +80,9 @@ const Layout = ({ children }) => {
               <FaSearch className={styles.icon} /> Löydä kuljetuksia
             </Link>
             <Link
-              href="/profile"
+              href="/oma-tili"
               className={`${styles.topHeaderLink} ${
-                pathname === '/profile' ? styles.activeLink : ''
+                pathname === '/oma-tili' ? styles.activeLink : ''
               }`}
             >
               <FaUser className={styles.icon} /> Oma tili
