@@ -2,42 +2,58 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from '../Styles/Layout.module.css';
-import { jwtDecode } from 'jwt-decode';
 import Image from 'next/image';
 import footerImg from '../../../public/assets/logistix-logos/svg/logo.svg';
 import '../globals.css';
-import { FaFacebook, FaChartBar, FaInstagram, FaLinkedin ,FaPlusCircle, FaUser, FaSearch, FaShoppingCart, FaShieldAlt, FaFileContract, FaCogs, FaUserCircle, FaComment } from 'react-icons/fa';
+
+import {FaQuestionCircle, FaFacebook, FaChartBar, FaInstagram, FaLinkedin ,FaPlusCircle, FaUser, FaSearch, FaShoppingCart, FaShieldAlt, FaFileContract, FaCogs, FaUserCircle, FaComment } from 'react-icons/fa';
+import { supabase } from '@/supabaseClient';
 
 const Layout = ({ children }) => {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [isLogoInTopHeader, setIsLogoInTopHeader] = useState(false);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
     setCartItems(savedCart);
+
+    const fetchSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      setIsAuthenticated(!!session);
+    };
+
+    fetchSession();
+
+    const handleScroll = () => {
+      const headerHeight = document.querySelector(`.${styles.header}`).offsetHeight;
+      setIsLogoInTopHeader(window.scrollY > headerHeight);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-  
-    const token = localStorage.getItem('token');
-    setIsAuthenticated(!!token);
-
-    if (token) {
-      jwtDecode(token);
-    }
-  }, [pathname]);
-
-  // const addToCart = (item) => {
-  //   setCartItems((prevItems) => [...prevItems, item]);
-  // };
 
   return (
     <div className={styles.layoutContainer}>
-      <div className={styles.topHeader}>
-        {isAuthenticated ? (
+  <div className={`${styles.topHeader} ${isLogoInTopHeader ? styles.withLogo : ''}`}>
+        {isLogoInTopHeader && (
+          <Link href="/" className={styles.logoInTopHeader}>
+            <Image
+              src={footerImg}
+              alt="Logistix Logo"
+              width={100}
+              height={100}
+              className={styles.logoInTopHeaderImg}
+            />
+          </Link>
+        )}        {isAuthenticated ? (
           <nav className={styles.topHeaderNav}>
-            <Link
+            {/* <Link
               href="/checkout"
               className={`${styles.topHeaderLink} ${
                 pathname === '/checkout' ? styles.activeLink : ''
@@ -46,7 +62,7 @@ const Layout = ({ children }) => {
               <FaShoppingCart className={styles.icon} />
               <span className={styles.cartCount}>{cartItems.length}</span>
               Ostoskori
-            </Link>
+            </Link> */}
             <Link
               href="/luo-ilmoitus"
               className={`${styles.topHeaderLink} ${
@@ -82,7 +98,12 @@ const Layout = ({ children }) => {
       <header className={styles.header}>
         <div className={styles.topRow}>
           <Link href="/" className={styles.headerLogo}>
-            Logistix
+          <Image
+          src={footerImg}
+          alt="Logistix Logo"
+          width={125}
+          height={125}
+          />
           </Link>
         </div>
         <nav className={styles.bottomRow}>
@@ -127,7 +148,14 @@ const Layout = ({ children }) => {
         </nav>
       </header>
       <main className={styles.mainContent}>{children}</main>
-      {/* <footer className={styles.footer}>
+      <footer className={styles.footer}>
+      <Image
+          src={footerImg}
+          alt="Logistix Logo"
+          width={85}
+          height={85}
+          className={styles.footerLogo}
+          />
       <div className={styles.socialLinks}>
         <Link href="https://facebook.com" className={styles.socialIcon}>
           <FaFacebook />
@@ -139,13 +167,7 @@ const Layout = ({ children }) => {
           <FaInstagram />
         </Link>
       </div>
-        <Image
-          src={footerImg}
-          alt="Logistix Logo"
-          width={75}
-          height={75}
-          className={styles.footerLogo}
-          />
+       
         <p className={styles.footerText}>Logistix OY 3487288-6</p>
         <p className={styles.footerText}>Designed by Sensei Studios</p>
       </footer>
@@ -159,6 +181,14 @@ const Layout = ({ children }) => {
           >
               <FaComment className={styles.icon} /> Asiakastarinat
           </Link>
+          <Link
+          href="/usein-kysytyt-kysymykset"
+          className={`${styles.bottomFooterLink} ${
+            pathname === '/usein-kysytyt-kysymykset' ? styles.activeLink : ''
+          }`}
+        >
+          <FaQuestionCircle className={styles.icon} /> Usein Kysytyt Kysymykset
+        </Link>
           <Link
           href="/miten-toimii"
                 className={`${styles.bottomFooterLink} ${
@@ -184,7 +214,7 @@ const Layout = ({ children }) => {
             <FaFileContract className={styles.icon} /> Ehdot
           </Link>
         </nav>
-      </div> */}
+      </div>
     </div>
   );
 };

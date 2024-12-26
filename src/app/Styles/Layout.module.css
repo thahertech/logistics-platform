@@ -1,5 +1,5 @@
 .header {
-  box-shadow: 3px 1px 2px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.4); /* Optional: subtle shadow for better visibility */
   padding: 3rem 4rem;
   padding-bottom: 1rem;
   width: 100%;
@@ -11,16 +11,24 @@
 
 .topHeaderNav{
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   padding-right: 1rem;
   gap: 2rem;
   margin: 1rem;
   min-height: 30px;
 }
 
+.topHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #000;
+  border-radius: 0 0 10px 10px;
+}
+
 
 .activeLink {
-  border-bottom: 2px solid #fff; /* Same as hover color for the active state */
+  border-bottom: 1px solid #fff; /* Same as hover color for the active state */
 }
 
 
@@ -51,6 +59,7 @@
   align-items: center;
   padding: 10px;
   transition: 0.3s ease-out;
+  text-wrap: nowrap;
 }
 
 .topHeaderLink:hover {
@@ -68,6 +77,13 @@
   flex-direction: row-reverse;
 }
 
+
+.logoInTopHeaderImg {
+  width: 80px;
+  height: 80px;
+  transition: max-width 0.5s ease-out;
+}
+
 .headerLogo {
   font-size: 42px;
   font-weight: 600;
@@ -77,7 +93,27 @@
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
-  margin-top: 2rem;
+  transition: left 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Style for the logo when it's in the top header (after scroll) */
+.logoInTopHeader {
+  position: absolute;
+  left: 10%; /* Start position from the left */
+  top: 0;
+  transition: left 0.5s ease-out; /* Smooth transition to move left */
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the logo image */
+.logoInTopHeader img {
+  width: 75px; /* Set logo size */
+  height: 75px;
+  transition: width 0.5s ease-out; /* Smooth transition for resizing */
+  object-fit: contain; /* Ensure the logo scales without distortion */
 }
 
 /* Cart and Auth Button Container on Right Side */
@@ -267,6 +303,8 @@
   color: #fff;
   display: flex;
   align-items: center;
+  text-wrap: nowrap;
+
 }
 
 .bottomFooterLink:hover,
@@ -280,11 +318,34 @@
 }
 
 
-/* Hover Effect */
 .navLink:hover, .navLink1:hover {
-  color: #9b9b9b; /* Change color on hover */
+  color: #9b9b9b;
+}
+@media (max-width: 680px) {
+  .logoInTopHeader{
+    position: relative;
+    left: 0; /* Start position from the left */
+
+  }
+}
+@media (max-width: 500px) {
+
+.bottomFooterNav {
+flex-wrap: wrap;
+margin-left: 2rem;
+justify-content: space-between;
+  }
+
+  .topHeaderNav{
+    gap: 0px;
+    font-size: 13px;
+  }
+
+.logoInTopHeaderImg {
+  margin-right: 20px;
 }
 
+}
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
   .header {

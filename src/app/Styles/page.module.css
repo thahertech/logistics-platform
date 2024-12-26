@@ -112,8 +112,8 @@
   padding: 10px 20px;
   margin: 0 2rem;
   border: 2px solid #003366;
-  background-color: white;
-  color: #003366;
+  background-color: rgb(25, 25, 25);
+  color: #ffffff;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
@@ -221,7 +221,7 @@
   backdrop-filter: blur(4px);
   align-items: center;
   max-width: 600px;
-  top: 12rem;
+  top: 6rem;
   margin-top: 4.5rem;
   transform: translateX(-50%);
   flex-direction: column;
@@ -413,11 +413,11 @@
 }
 
 .phase {
-  background-color: #003366;
+  background-color: #f1eeee21;
   backdrop-filter: blur(20px);
   padding: 0.75rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.546);
+  box-shadow: 0 2px 4px rgba(126, 126, 126, 0.546);
   text-align: center;
   flex: 1 1 calc(16% - 1rem);
   max-width: 200px; 
@@ -550,14 +550,14 @@ box-shadow: 0 2px 4px rgba(255, 255, 255, 0.775);
     width: 100%;
   }
 }
-@media(max-width:500px){
+@media(max-width:580px){
   .sectionHero{
     width: 100%;
 
   }
   .sectionHero2{
     font-size: 1rem;
-    top: 10rem;
+    top: 4rem;
   }
 
   .aboutUsHero{
