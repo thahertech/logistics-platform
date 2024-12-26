@@ -12,12 +12,12 @@ import { supabase } from '@/supabaseClient';
 const Layout = ({ children }) => {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const [isLogoInTopHeader, setIsLogoInTopHeader] = useState(false);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCartItems(savedCart);
+    // setCartItems(savedCart);
 
     const fetchSession = async () => {
       const {
@@ -40,59 +40,54 @@ const Layout = ({ children }) => {
 
   return (
     <div className={styles.layoutContainer}>
-  <div className={`${styles.topHeader} ${isLogoInTopHeader ? styles.withLogo : ''}`}>
-        {isLogoInTopHeader && (
-          <Link href="/" className={styles.logoInTopHeader}>
-            <Image
-              src={footerImg}
-              alt="Logistix Logo"
-              width={100}
-              height={100}
-              className={styles.logoInTopHeaderImg}
-            />
-          </Link>
-        )}        {isAuthenticated ? (
-          <nav className={styles.topHeaderNav}>
-            {/* <Link
-              href="/checkout"
-              className={`${styles.topHeaderLink} ${
-                pathname === '/checkout' ? styles.activeLink : ''
-              }`}
-            >
-              <FaShoppingCart className={styles.icon} />
-              <span className={styles.cartCount}>{cartItems.length}</span>
-              Ostoskori
-            </Link> */}
-            <Link
-              href="/luo-ilmoitus"
-              className={`${styles.topHeaderLink} ${
-                pathname === '/luo-ilmoitus' ? styles.activeLink : ''
-              }`}
-            >
-              <FaPlusCircle className={styles.icon} /> Luo ilmoitus
-            </Link>
-            <Link
-              href="/kuljetukset"
-              className={`${styles.topHeaderLink} ${
-                pathname === '/kuljetukset' ? styles.activeLink : ''
-              }`}
-            >
-              <FaSearch className={styles.icon} /> Löydä kuljetuksia
-            </Link>
-            <Link
-              href="/oma-tili"
-              className={`${styles.topHeaderLink} ${
-                pathname === '/oma-tili' ? styles.activeLink : ''
-              }`}
-            >
-              <FaUser className={styles.icon} /> Oma tili
-            </Link>
-          </nav>
-        ) : (
-          <p className={styles.topHeaderPrompt}></p>
-        )}
-      </div>
-
+ <div className={`${styles.topHeader} ${isLogoInTopHeader ? styles.withLogo : ''}`}>
+  {isLogoInTopHeader && (
+    <div className={styles.topHeaderContent}>
+      <Link href="/" className={styles.logoInTopHeader}>
+        <Image
+          src={footerImg}
+          alt="Logistix Logo"
+          width={100}
+          height={100}
+          className={styles.logoInTopHeaderImg}
+        />
+      </Link>
+      {!isAuthenticated && (
+        <Link href="/auth" className={styles.registerButton}>
+          Rekisteröidy nyt
+        </Link>
+      )}
+    </div>
+  )}
+  {isAuthenticated && (
+    <nav className={styles.topHeaderNav}>
+      <Link
+        href="/luo-ilmoitus"
+        className={`${styles.topHeaderLink} ${
+          pathname === '/luo-ilmoitus' ? styles.activeLink : ''
+        }`}
+      >
+        <FaPlusCircle className={styles.icon} /> Luo ilmoitus
+      </Link>
+      <Link
+        href="/kuljetukset"
+        className={`${styles.topHeaderLink} ${
+          pathname === '/kuljetukset' ? styles.activeLink : ''
+        }`}
+      >
+        <FaSearch className={styles.icon} /> Löydä kuljetuksia
+      </Link>
+      <Link
+        href="/oma-tili"
+        className={`${styles.topHeaderLink} ${
+          pathname === '/oma-tili' ? styles.activeLink : ''
+        }`}
+      >
+        <FaUser className={styles.icon} /> Oma tili
+      </Link>
+    </nav>
+  )}
+</div>
 
 
       <header className={styles.header}>
@@ -173,7 +168,7 @@ const Layout = ({ children }) => {
       </footer>
       <div className={styles.bottomFooter}>
         <nav className={styles.bottomFooterNav}>
-          <Link
+          {/* <Link
           href="/asiakastarinat"
                 className={`${styles.bottomFooterLink} ${
                   pathname === '/asiakastarinat' ? styles.activeLink : ''
@@ -188,7 +183,7 @@ const Layout = ({ children }) => {
           }`}
         >
           <FaQuestionCircle className={styles.icon} /> Usein Kysytyt Kysymykset
-        </Link>
+        </Link> */}
           <Link
           href="/miten-toimii"
                 className={`${styles.bottomFooterLink} ${
