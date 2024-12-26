@@ -86,7 +86,7 @@ const Auth = () => {
           .insert([{ user_id: data.user.id, user_role: formData.user_role, full_name: formData.name.trim(), yritys_nimi: formData.yritys_nimi.trim(), phone_number: formData.phone, vat_number: formData.vat_number.trim() }]);
         setShowModal(true);
       } else {
-        router.push('/profile');
+        router.push('/oma-tili');
 
       }
 

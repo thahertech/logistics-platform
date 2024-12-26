@@ -14,15 +14,16 @@ const AboutUs = () => {
     <meta name="description" content="Lisätietoa Logistixistä" />
   </Head>
       <div className={`${styles.hero} ${styles.aboutUsHero}`}>
-      </div>
 
-      <div className={styles.sectionHero2}>
+      <div className={styles.aboutUsSectionHero}>
       <h2 className={styles.sectionTitle}>Olemme palveluyritys Suomesta.</h2>
         <p className={styles.sectionContent}>
           Erikoistumme tarjoamaan tehokkaan ja luotettavan palvelualustan.
           Tiimimme koostuu ongelmanratkaisijoista, jotka ovat sitoutuneet tarjoamaan parasta mahdollista palvelua.
         </p>
       </div>
+      </div>
+
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Tavoite</h2>
@@ -48,7 +49,7 @@ const AboutUs = () => {
           </div>
           <div className={styles.card}>
             <h3><FontAwesomeIcon icon={faLightbulb} /> Innovaatio</h3>
-            <p>Etsimme jatkuvasti uusia tapoja parantaa palveluita ja prosesseja. </p>
+            <p>Etsimme jatkuvasti uusia tapoja parantaa palveluita ja prosesseja</p>
           </div>
         </div>
       </div>
