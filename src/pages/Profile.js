@@ -1,245 +1,196 @@
+// pages/Profile.js
 import React, { useEffect, useState } from 'react';
 import Layout from '@/app/Dashboard/Layout';
 import { supabase } from '@/supabaseClient';
-import Ratings from '../app/Forms/new-rating';
-import UserProfile from '@/app/Components/UserProfile';
-import '@/app/globals.css';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+
+import Sidebar from '@/app/Components/profile/profile-sidebar';
+import ProfileContent from '@/app/Components/profile/profile-content';
+import OrdersContent from '@/app/Components/profile/orders-content';
+import OrderDetails from '@/app/Components/profile/order-details';
+import { FaSignOutAlt } from 'react-icons/fa';
+import CustomAlert from '@/app/Components/alert-box/profile-alert';
+
+const UserLocationMap = dynamic(() => import('../app/Components/userLocationMap'), { ssr: false });
 
 const Profile = () => {
-    const [profile, setProfile] = useState(null);
-    const [orders, setOrders] = useState([]);
-    const [ratings, setRatings] = useState([]);
-    const [selectedOrder, setSelectedOrder] = useState(null);
-    const [loadingProfile, setLoadingProfile] = useState(true);
-    const [loadingOrders, setLoadingOrders] = useState(true);
-    const [error, setError] = useState(null);
-    const [activeTab, setActiveTab] = useState('profile');
+  const [profile, setProfile] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [loadingOrders, setLoadingOrders] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeTab, setActiveTab] = useState('profile');
+  const [alertMessage, setAlertMessage] = useState('');  // Add state for alert message
 
-    useEffect(() => {
-        const fetchProfileData = async () => {
-            try {
-                const { data: user, error: userError } = await supabase.auth.getUser();
-                if (userError) throw new Error(`User fetch error: ${userError.message}`);
-        
-                if (user && user.user) {
-                    setProfile(user.user);
-                    console.log(user.user);
-        
-                    const { data: userProfile, error } = await supabase
-                        .from('profiles')
-                        .select('*')
-                        .eq('user_id', user.user.id)
-                        .single();
-        
-                    if (error) throw new Error(`Error fetching profile: ${error.message}`);
-        
-                    setProfile(prevProfile => ({
-                        ...prevProfile,
-                        ...userProfile,
-                    }));
-                } else {
-                    console.warn('No user found');
-                }
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoadingProfile(false);
-            }
-        };
-        fetchProfileData();
-        
-    }, []);
+  const router = useRouter();
 
-
-    const handleProfileUpdate = async (updatedProfile) => {
+  useEffect(() => {
+    const fetchProfileData = async () => {
         try {
-            const { data, error } = await supabase
+            const { data: user, error: userError } = await supabase.auth.getUser();
+            if (userError || !user || !user.user) {
+                setError("Auth session missing!"); // Handle error if no user found
+                router.push('/auth'); // Redirect to login page
+                return;
+            }
+
+            setProfile(user.user);
+            console.log(user.user);
+
+            const { data: userProfile, error } = await supabase
                 .from('profiles')
-                .upsert([{ ...updatedProfile, user_id: profile.user_id}]);
+                .select('*')
+                .eq('user_id', user.user.id)
+                .single();
 
-            if (error) throw new Error(error.message);
+            if (error) throw new Error(`Error fetching profile: ${error.message}`);
 
-            setProfile(data[0]);
-            alert('Profile updated successfully!');
+            setProfile(prevProfile => ({
+                ...prevProfile, // Don't overwrite the existing profile entirely
+                ...userProfile, // Merge the fetched profile data
+            }));
         } catch (err) {
-            console.error('Error updating profile:', err);
-            alert('Failed to update profile.');
+            setError(err.message);
+        } finally {
+            setLoadingProfile(false);
         }
     };
+    fetchProfileData();
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const { data: user, error: userError } = await supabase.auth.getUser();
-                if (userError) throw new Error(`User fetch error: ${userError.message}`);
-                if (!user) return;
+}, [router]); // Add router as a dependency to make sure it stays up to date
 
-                const { data: userOrders, error: ordersError } = await supabase
-                    .from('shipment_purchases')
-                    .select('*')
-                    .eq('user_id', user.user.id);
+const handleProfileUpdate = async (updatedProfile) => {
+    try {
+        // Destructure and filter unnecessary properties
+        const { app_metadata, phone, aud, confirmation_sent_at, email, email_confirmed_at, identities, is_anonymous, last_sign_in_at, role, user_metadata, id, ...filteredProfile } = updatedProfile;
 
-                if (ordersError) throw new Error(`Orders fetch error: ${ordersError.message}`);
-                setOrders(userOrders || []);
-                console.log(userOrders);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoadingOrders(false);
-            }
-        };
-        fetchOrders();
-        
-    }, []);
-    const handleViewDetails = (order) => {
-        setSelectedOrder(order);
-        
-    };
-    
-    const closeDetails = () => {
-        setSelectedOrder(null);
-    };
-    const handleRatingSubmit = async (ratingData) => {
-        if (!selectedOrder || !profile?.user_id) return;
-
-        try {
-            const { error } = await supabase
-                .from('user_ratings')
-                .insert({
-                    user_id: profile.user_id,
-                    shipment_id: selectedOrder.shipment_id,
-                    rating: ratingData.rating,
-                    comment: ratingData.comment || null,
-                });
-
-            if (error) throw new Error(`Failed to submit rating: ${error.message}`);
-
-            alert('Rating submitted successfully!');
-            setSelectedOrder(null);
-            setRatings(prevRatings => [...prevRatings, { ...ratingData, shipment_id: selectedOrder.shipment_id }]);
-        } catch (err) {
-            console.error('Error submitting rating:', err);
-            setError('Failed to submit rating. Please try again.');
-        }
-    };
-
-    if (loadingProfile || loadingOrders) return <p>Loading...</p>;
-    if (error) return <p className="text-red-500">{error}</p>;
-
-    return (
-        <Layout>
-            <div className="flex justify-center min-h-screen">
-                <div className="flex-col bg-black text-white p-8 rounded-lg shadow-lg w-full max-w-6xl">
-                    <div className="flex justify-between space-x-4 border-b border-gray-600 pb-2 mb-4">
-                        <button
-                            className={`px-4 py-2 rounded ${activeTab === 'profile' ? 'bg-blue-600' : 'bg-gray-700'}`}
-                            onClick={() => setActiveTab('profile')}
-                        >
-                            Profiili
-                        </button>
-                        <button
-                            className={`px-4 py-2 rounded ${activeTab === 'orders' ? 'bg-blue-600' : 'bg-gray-700'}`}
-                            onClick={() => setActiveTab('orders')}
-                        >
-                            Tilaukset
-                        </button>
-                        <button
-                            className={`px-4 py-2 rounded ${activeTab === 'ratings' ? 'bg-blue-600' : 'bg-gray-700'}`}
-                            onClick={() => setActiveTab('ratings')}
-                        >
-                            Arvostelut
-                        </button>
-                    </div>
-
-                    {profile && 
-                    <UserProfile profile={profile} onProfileUpdate={handleProfileUpdate} />
+        // Perform the upsert operation
+        const { error } = await supabase
+            .from('profiles')
+            .upsert([
+                {
+                    user_id: profile?.user_id,
+                    ...filteredProfile,
                 }
+            ], { onConflict: ['user_id'] });
 
-                    {activeTab === 'orders' && (
-                        <div>
-                            <h3 className="text-lg font-bold mb-4">Omat tilaukset</h3>
-                            {orders.length > 0 ? (
-                                <table className="w-full border-collapse">
-                                    <thead>
-                                        <tr className="bg-gray-900 text-white">
-                                            <th className="border px-4 py-2">Tilausnumero</th>
-                                            <th className="border px-4 py-2">Eräpäivä</th>
-                                            <th className="border px-4 py-2">Päivämäärä</th>
-                                            <th className="border px-4 py-2">Status</th>
-                                            <th className="border px-4 py-2">Arvio</th>
-                                            <th className="border px-4 py-2">Toiminto</th>
-                                            <th className="border px-4 py-2">Muokkaa</th>
-                                            <th className="border px-4 py-2">Hinta</th>
-                                            <th className="border px-4 py-2">Maksutilanne</th>
-                                            
-                                            
-                                            
+        if (error) {
+            console.error("Error during upsert:", error);
+            throw new Error(error.message);
+        }
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {orders.map(order => (
-                                            <tr key={order.id} className="text-white">
-                                                <td className="border px-4 py-2">{order.shipment_id}</td>
-                                                <td className="border px-4 py-2">{new Date(order.due_date).toLocaleDateString()}</td>
+        // Fetch the updated profile from the database
+        const { data, error: selectError } = await supabase
+            .from('profiles')
+            .select('*')  // Select all columns to get the updated profile
+            .eq('user_id', profile?.user_id) // Filter by user_id to get the right row
+            .single(); // Assumes only one row per user_id
 
-                                                <td className="border px-4 py-2">{new Date(order.purchase_date).toLocaleDateString()}</td>
-                                                <td className="border px-4 py-2">{order.status}</td>
-                                                <td className="border px-4 py-2">
-                                                    {ratings.some(rating => rating.shipment_id === order.shipment_id) ? 'Reviewed' : 'Not reviewed'}
-                                                </td>
-                                                <td className="border px-4 py-2">
-                                                    {order.status === 'Completed' && !ratings.some(rating => rating.shipment_id === order.shipment_id) && (
-                                                        <button
-                                                            onClick={() => setSelectedOrder(order)}
-                                                            className="bg-blue-600 text-white p-2 rounded"
-                                                        >
-                                                            Arvostele
-                                                        </button>
-                                                    )}
-                                                </td>
-                                                <td className="border px-4 py-2">
-                                                        <button
-                                                            onClick={() => handleViewDetails(order)}
-                                                            className="bg-green-600 text-white p-2 rounded"
-                                                        >
-                                                            Näytä tiedot
-                                                        </button>
-                                                    </td>
+        if (selectError) {
+            console.error("Error fetching updated profile:", selectError);
+            throw new Error(selectError.message);
+        }
 
-                                                    <td className="border px-4 py-2">
-                                                        {order.total_price} Eur.
-                                                    </td>
+        // Log and update the profile
+        console.log("Upsert successful. Updated profile:", data);
+        setProfile(data);
 
-                                                    <td className="border px-4 py-2">
-                                                        {order.payment_status} 
-                                                    </td>
-                                        
-                                        
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            ) : (
-                                <p className="text-center">Ei tilauksia.</p>
-                            )}
-                        </div>
-                    )}
+        // Success alert
+        setAlertMessage('Oma tili päivitetty!');
+        } catch (err) {
+        console.error('Error updating profile:', err);
+    }
+};
 
-                    {selectedOrder && (
-                        <div className="mt-4">
-                            <h3 className="text-xl font-bold">Arvioi toimitus</h3>
-                            <Ratings
-                                onSubmit={handleRatingSubmit}
-                                selectedOrder={selectedOrder}
-                                resetForm={() => setSelectedOrder(null)}
-                            />
-                        </div>
-                    )}
-                </div>
-            </div>
-        </Layout>
-    );
+useEffect(() => {
+    const fetchOrders = async () => {
+        try {
+            const { data: user, error: userError } = await supabase.auth.getUser();
+            if (userError) throw new Error(`User fetch error: ${userError.message}`);
+            if (!user) return;
+
+            const { data: userOrders, error: ordersError } = await supabase
+                .from('shipment_purchases')
+                .select('*')
+                .eq('user_id', user.user.id);
+
+            if (ordersError) throw new Error(`Orders fetch error: ${ordersError.message}`);
+            setOrders(userOrders || []);
+            console.log(userOrders);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoadingOrders(false);
+        }
+    };
+    fetchOrders();
+    
+}, []);
+const handleViewDetails = (order) => {
+    setSelectedOrder(order);
+    
+};
+
+const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Error signing out:', error.message);
+    } else {
+      console.log('Successfully signed out');
+      // Redirect to login page or home page
+      window.location.href = '/auth';
+    }
+  };
+
+const closeDetails = () => {
+    setSelectedOrder(null);
+};
+const handleRatingSubmit = async (ratingData) => {
+    if (!selectedOrder || !profile?.user_id) return;
+
+    try {
+        const { error } = await supabase
+            .from('user_ratings')
+            .insert({
+                user_id: profile.user_id,
+                shipment_id: selectedOrder.shipment_id,
+                rating: ratingData.rating,
+                comment: ratingData.comment || null,
+            });
+
+        if (error) throw new Error(`Failed to submit rating: ${error.message}`);
+
+        alert('Rating submitted successfully!');
+        setSelectedOrder(null);
+        setRatings(prevRatings => [...prevRatings, { ...ratingData, shipment_id: selectedOrder.shipment_id }]);
+    } catch (err) {
+        console.error('Error submitting rating:', err);
+        setError('Failed to submit rating. Please try again.');
+    }
+};
+
+
+
+  if (loadingProfile || loadingOrders) return <p>Loading...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
+
+  return (
+    <Layout>
+
+
+      <div className="flex min-h-screen bg-gray-900 text-white">
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} handleSignOut={handleSignOut} />
+        <main className="flex-1 p-8">
+          {activeTab === 'profile' && profile && <ProfileContent profile={profile} onProfileUpdate={handleProfileUpdate} /> }
+          {activeTab === 'orders' && <OrdersContent orders={orders} handleViewDetails={handleViewDetails} />}
+          {selectedOrder && <OrderDetails selectedOrder={selectedOrder} closeDetails={closeDetails} />}
+          {activeTab === 'map' && <UserLocationMap />}
+        </main>
+      </div>
+    </Layout>
+  );
 };
 
 export default Profile;

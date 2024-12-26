@@ -1,5 +1,5 @@
 .modal {
-    position: fixed;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -9,7 +9,7 @@
     backdrop-filter: blur(50px);
     padding: 1rem;
     border-radius: 8px;
-    max-width: 500px;
+    max-width: 780px;
     width: 100%;
     border: 2px solid #003366;
   }

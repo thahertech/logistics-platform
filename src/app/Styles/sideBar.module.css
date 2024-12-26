@@ -1,46 +1,292 @@
-/* Sidebar styles */
 .sidebar {
-  position: fixed;
-  left: 0;
-  width: 250px; /* Set a fixed width for the sidebar */
-  height: 100vh;
-  background-color: #000000c0;
+  
+  background: linear-gradient(to bottom, #003366, #000000c0);
   padding: 20px;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   overflow-y: auto;
-  z-index: 1000; /* Ensure the sidebar is always on top */
+  z-index: 1000;
+  color: #f5f5f5;
+  border-radius: 0 12px 12px 0;
+  border-right: 2px solid #007acc;
+  font-family: 'Roboto', sans-serif;
+  transition: transform 0.3s ease-in-out;
+  color: black;
+  margin-right: 2rem;
+}
+/* Sidebar */
+.sidebar aside {
+  min-height: 100vh;
+  background-color: #1f2937;
+  padding: 1rem;
+}
+
+.sidebar aside button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  background-color: #374151;
   color: white;
-  border-radius: 0 12px 0 0;
-  border: 1px solid #003366;
+  margin-bottom: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar aside button:hover {
+  background-color: #4b5563;
+}
+
+.sidebar aside button.active {
+  background-color: #3b82f6;
+}
+
+.sidebar:active {
+  cursor: grabbing;
 }
 
 .filterGroup {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.buttonGroup {
-  margin-top: 1rem;
+/* Additional styles for buttons and inputs */
+.locationButton{
+  position: absolute;
+    margin-top: 42px;
+    right: 40px;
+}
+/* Sidebar hidden state */
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+/* Filter group */
+.filterGroup {
+  margin-bottom: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
   display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+/* Filter group labels */
+.filterGroup label {
+  font-size: 14px;
+  color: #cce7ff;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+/* Filter group inputs */
+.filterGroup input[type="text"],
+.filterGroup input[type="range"],
+.filterGroup select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 14px;
+}
+
+/* Range display text */
+.weightDisplay {
+  text-align: center;
+  color: #cce7ff;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* Checkbox styling */
+.filterGroup input[type="checkbox"] {
+  accent-color: #007acc;
+  margin-right: 10px;
+}
+
+/* Button Group */
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.buttonGroup button {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #007acc;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.buttonGroup button:hover {
+  background-color: #005f99;
+}
+
+/* Toggle button */
+.toggleButton {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  padding: 10px;
+  background-color: #007acc;
+  color: white;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.toggleButton:hover {
+  background-color: #005f99;
+}
+
+/* Map container */
+.mapContainer {
+  margin: 20px 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mapContainer h4 {
+  text-align: center;
+  font-size: 14px;
+  color: #cce7ff;
+  padding: 10px 0;
+  background-color: #003366;
+  margin: 0;
+  border-bottom: 1px solid #007acc;
+}
+
+/* Content area (main) */
+.content {
+  margin-left: 300px; /* Matches sidebar width */
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+
+}
+
+.dateFilter {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; /* Allows items to wrap if the container is too narrow */
+  justify-content: space-between; /* Distribute space evenly between elements */
+}
+
+.dateFilter div {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Make each input field take up equal space */
+  min-width: 120px; /* Prevent inputs from being too small */
+}
+
+.input[type="date"] {
+  width: 100%; /* Ensure inputs take up full available width */
+  padding: 8px;
+}
+
+
+.timeFilter {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.timeButton {
+  background-color: #003366;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+}
+
+.timeButton:hover {
+  background-color: #0055cc;
+}
+
+.timeIntervals {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
   gap: 10px;
 }
-
-/* Content area that holds the cards */
-.content {
-  margin-left: 250px; /* Make space for the sidebar */
-  padding: 20px;
-  color: white;
-  transition: margin-left 0.3s ease;
+.selected {
+  background-color: #00bfff; /* Highlight selected button */
 }
 
-/* Media query for smaller screens */
+.customTime {
+  display: flex;
+  flex-direction: column;
+}
+
+.input[type="time"] {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.selectedTimeText {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .timeFilter {
+    flex-direction: column;
+  }
+
+  .timeButton {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .sidebar {
-    width: 200px; /* Reduce sidebar width on smaller screens */
+    width: 250px;
   }
 
   .content {
-    margin-left: 200px; /* Adjust content area width accordingly */
+    margin-left: 250px;
+  }
+
+  .toggleButton {
+    left: 10px;
+    top: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .content {
+    margin-left: 200px;
+  }
+
+  .filterGroup label,
+  .buttonGroup button {
+    font-size: 12px;
   }
 }

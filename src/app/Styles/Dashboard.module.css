@@ -169,7 +169,7 @@
 .sectionHero {
   z-index: 2;
   position: relative;
-  top: 4rem;
+  top: 1rem;
   margin-bottom: 10rem;
   background-color: #00000042;
   -webkit-backdrop-filter: blur(4px);
@@ -730,6 +730,12 @@
   .contactHero{
     border-radius: 0;
     margin-top: 5px;
+  }
+
+  .sectionHero{
+    height: 19rem;
+    top: 0;
+    margin-bottom: 2rem;
   }
   
   .rollingNumbersSection .rollingNumber{

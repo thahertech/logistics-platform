@@ -30,6 +30,7 @@ const MeidanPalvelusta = () => {
               width="1000"
               height="200"
               className={styles.serviceImage}
+              priority
             />
 
 </div>

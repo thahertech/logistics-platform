@@ -4,27 +4,28 @@ const Sitemap = (req, res) => {
     <url>
       <loc>https://www.logistix.fi/</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
-      <changefreq>daily</changefreq>
+      <changefreq>weekly</changefreq>
       <priority>1.0</priority>
     </url>
     <url>
       <loc>https://www.logistix.fi/yrityksille</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
+      <priority>0.9</priority>
     </url>
     <url>
       <loc>https://www.logistix.fi/yhteys</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.6</priority>
+      <priority>0.8</priority>
     </url>
     <url>
       <loc>https://www.logistix.fi/me</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.6</priority>
+      <priority>0.4</priority>
     </url>
+    
   </urlset>`;
 
   res.setHeader('Content-Type', 'text/xml');
