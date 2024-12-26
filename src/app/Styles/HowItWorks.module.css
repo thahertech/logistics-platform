@@ -1,0 +1,60 @@
+.container {
+    padding: 2rem;
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .stepContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+  
+  .stepCard {
+    background-color: #333;
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .stepCard h2 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+  
+  .icon {
+    font-size: 3rem;
+    color: #ccc;
+  }
+  
+  .footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    color: #ccc;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .stepCard {
+      width: 48%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .stepCard {
+      width: 100%;
+    }
+  }
