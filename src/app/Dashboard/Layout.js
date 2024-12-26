@@ -61,7 +61,7 @@ const Layout = ({ children }) => {
   )}
   {isAuthenticated && (
     <nav className={styles.topHeaderNav}>
-      <Link
+      {/* <Link
         href="/luo-ilmoitus"
         className={`${styles.topHeaderLink} ${
           pathname === '/luo-ilmoitus' ? styles.activeLink : ''
@@ -76,7 +76,7 @@ const Layout = ({ children }) => {
         }`}
       >
         <FaSearch className={styles.icon} /> Löydä kuljetuksia
-      </Link>
+      </Link> */}
       <Link
         href="/oma-tili"
         className={`${styles.topHeaderLink} ${
@@ -144,14 +144,14 @@ const Layout = ({ children }) => {
       </header>
       <main className={styles.mainContent}>{children}</main>
       <footer className={styles.footer}>
-      <Image
+      {/* <Image
           src={footerImg}
           alt="Logistix Logo"
           width={85}
           height={85}
           className={styles.footerLogo}
-          />
-      <div className={styles.socialLinks}>
+          /> */}
+      {/* <div className={styles.socialLinks}>
         <Link href="https://facebook.com" className={styles.socialIcon}>
           <FaFacebook />
         </Link>
@@ -161,7 +161,7 @@ const Layout = ({ children }) => {
         <Link href="https://instagram.com" className={styles.socialIcon}>
           <FaInstagram />
         </Link>
-      </div>
+      </div> */}
        
         <p className={styles.footerText}>Logistix OY 3487288-6</p>
         <p className={styles.footerText}>Designed by Sensei Studios</p>
