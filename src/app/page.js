@@ -114,35 +114,35 @@ const Dashboard = () => {
 
 
 
-<div className={styles.rollingNumbersSection}>
-  <div className={styles.rollingNumberCard}>
-    <RollingNumber start={0} end={Math.min(59, 200)} duration={3000} />
-    <p className={styles.rollingNumberDescription}>
-      Kuljetukseen erikoistuneita yrityksiä, jotka osallistuvat BETA testiin
-    </p>
-  </div>
+      <div className={styles.rollingNumbersSection}>
+        <div className={styles.rollingNumberCard}>
+          <RollingNumber start={0} end={Math.min(64, 200)} duration={3000} />
+          <p className={styles.rollingNumberDescription}>
+            Kuljetukseen erikoistuneita yrityksiä, jotka osallistuvat BETA testiin
+          </p>
+        </div>
 
-  <div className={styles.rollingNumberCard}>
-    <RollingNumber start={0} end={Math.min(44, 200)} duration={3000} />
-    <p className={styles.rollingNumberDescription}>
-      Lähettäjiä, jotka osallistuvat BETA testiin
-    </p>
-  </div>
+        <div className={styles.rollingNumberCard}>
+          <RollingNumber start={0} end={Math.min(52, 200)} duration={3000} />
+          <p className={styles.rollingNumberDescription}>
+            Lähettäjiä, jotka osallistuvat BETA testiin
+          </p>
+        </div>
 
-  <div className={styles.rollingNumberCard}>
-    <RollingNumber start={0} end={Math.max(59 + 44)} duration={3000} />
-    <p className={styles.rollingNumberDescription}>
-      Yhteensä BETA-testaajia, jotka ovat mukana alustan kehityksessä
-    </p>
-  </div>
+        <div className={styles.rollingNumberCard}>
+          <RollingNumber start={0} end={Math.max(52 + 64)} duration={3000} />
+          <p className={styles.rollingNumberDescription}>
+            Yhteensä BETA-testaajia, jotka ovat mukana alustan kehityksessä
+          </p>
+        </div>
 
-  <div className={styles.rollingNumberCard}>
-    <RollingNumber start={0} end={Math.max(200 - 59 - 44, 0)} duration={3000} />
-    <p className={styles.rollingNumberDescription}>
-      Paikkoja jäljellä - lisää yrityksesi mukaan!
-    </p>
-  </div>
-</div>
+        <div className={styles.rollingNumberCard}>
+          <RollingNumber start={0} end={Math.max(200 - 52 - 64, 0)} duration={3000} />
+          <p className={styles.rollingNumberDescription}>
+            Paikkoja jäljellä - lisää yrityksesi mukaan!
+          </p>
+        </div>
+      </div>
 
       <div className={styles.section}>
       <div ref={contactFormRef}>
