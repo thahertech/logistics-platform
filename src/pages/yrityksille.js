@@ -17,14 +17,9 @@ const MeidanPalvelusta = () => {
       <title>Logistiikkaratkaisut Yrityksille - Logistix</title>
       <meta name="description" content="Vähennä logistiikkakustannuksia ja paranna ympäristöystävällisyyttä innovatiivisilla Logistix-palveluilla." />
     </Head>
-      <div className={styles.sectionHero}>
-        <h2 className={styles.sectionTitle}>Tehokkaampi ja kestävämpi kuljetusratkaisu yrityksille</h2>
-        <p className={styles.sectionContent}>
-        Logistix tarjoaa innovatiivisen ja tehokkaan alustan yrityksille, jotka haluavat löytää kuljetuksen vaivattomasti ja kilpailukykyisesti.
-        </p>
-      </div>
-      <div className={styles.ServiceContainers}>
-      <Image
+
+    <div className={`${styles.hero} ${styles.yrityksilleHero}`}>
+    <Image
               src={"/assets/harbour.jpg"}
               alt="sunset-image"
               width="1000"
@@ -32,6 +27,13 @@ const MeidanPalvelusta = () => {
               className={styles.serviceImage}
               priority
             />
+
+<div className={styles.sectionHero}>
+        <h2 className={styles.sectionTitle}>Tehokkaampi ja kestävämpi kuljetusratkaisu yrityksille</h2>
+        <p className={styles.sectionContent}>
+        Logistix tarjoaa innovatiivisen ja tehokkaan alustan yrityksille, jotka haluavat löytää kuljetuksen vaivattomasti ja kilpailukykyisesti.
+        </p>
+      </div>
 
 </div>
 

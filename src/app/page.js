@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import styles from './Styles/Dashboard.module.css';
 import serviceData from './Components/serviceData';
 import heroImg from '../../public/assets/truckupBG.jpeg';
-import ContactForm from './Forms/contactForm';
+import BetaForm from './Forms/BetaForm';
 import Head from 'next/head';
 
 import './globals.css';
@@ -69,26 +69,20 @@ const Dashboard = () => {
     priority={true}
   />
   <div className={styles.line}>
-    <h3>
-      Yhdistä rahdin lähettäjät ja kuljetusyritykset — tehokkaasti ja ekologisesti.
-      <br/>
-    </h3>
-    <div className={styles.heroButton}>
-      <button className={styles.betaButton}
-              onClick={scrollToContactForm}
-              >
-        
-        Liity verkostoon
-      </button>
-      <button
-        className={styles.heroContactButton}
-        onClick={() => window.location.href = '/yhteys'}
-      >
-        Ota yhteyttä 
-      </button>
-    </div>
+   
+  <h2 className={styles.sectionTitle}>Liity BETA-ohjelmaan</h2>
+        <h4 className={styles.serviceContent}>
+            Ole mukana luomassa logistiikan tulevaisuutta!
+        </h4>
+
+        <p className={styles.additionalInfo}>
+    Liittymällä saat uutiskirjeemme. Tämä ei sido sinua mihinkään.
+        </p>
+      <BetaForm />
+      </div>
+
   </div>
-</div>
+
      
 
       <div className={styles.serviceSection}>
@@ -144,17 +138,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className={styles.section}>
-      <div ref={contactFormRef}>
 
-        <h2 className={styles.sectionTitle}>Liity BETA-ohjelmaan</h2>
-        <h4 className={styles.serviceContent}>
-            Ole mukana luomassa logistiikan tulevaisuutta!
-        </h4>
-
-      </div>
-        <ContactForm />
-      </div>
     </Layout>
   );
 };

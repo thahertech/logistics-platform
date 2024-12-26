@@ -1,5 +1,5 @@
 .header {
-  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.4); /* Optional: subtle shadow for better visibility */
+  box-shadow: 0 3px 0px rgba(255, 255, 255, 0.4);
   padding: 3rem 4rem;
   padding-bottom: 1rem;
   width: 100%;
@@ -9,6 +9,20 @@
   position: relative;
 }
 
+.registerButton{
+  min-height: 75px;
+  align-content: center;
+  font-size: 14px;
+  
+}
+.topHeaderContent{
+  display: flex;
+  position: relative;
+  /* left: 10%; */
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 .topHeaderNav{
   display: flex;
   justify-content: flex-end;
