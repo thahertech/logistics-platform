@@ -11,7 +11,7 @@
 
 .topHeaderNav{
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   padding-right: 1rem;
   gap: 2rem;
   margin: 1rem;
@@ -28,14 +28,14 @@
 
 
 .activeLink {
-  border-bottom: 1px solid #fff; /* Same as hover color for the active state */
+  border-bottom: 1px solid #fff;
 }
 
 
 .topHeaderNav {
   position: relative;
   display: flex;
-  gap: 20px; /* Adjust spacing as needed */
+  gap: 20px;
 }
 
 
@@ -325,8 +325,11 @@
   .logoInTopHeader{
     position: relative;
     left: 0; /* Start position from the left */
-
   }
+    .topHeaderNav{
+      font-size: 12px;
+    }
+  
 }
 @media (max-width: 500px) {
 
@@ -334,11 +337,6 @@
 flex-wrap: wrap;
 margin-left: 2rem;
 justify-content: space-between;
-  }
-
-  .topHeaderNav{
-    gap: 0px;
-    font-size: 13px;
   }
 
 .logoInTopHeaderImg {

@@ -1,4 +1,3 @@
-// pages/Profile.js
 import React, { useEffect, useState } from 'react';
 import Layout from '@/app/Dashboard/Layout';
 import { supabase } from '@/supabaseClient';
@@ -22,7 +21,7 @@ const Profile = () => {
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('profile');
-  const [alertMessage, setAlertMessage] = useState('');  // Add state for alert message
+  const [alertMessage, setAlertMessage] = useState('');
 
   const router = useRouter();
 
@@ -31,8 +30,8 @@ const Profile = () => {
         try {
             const { data: user, error: userError } = await supabase.auth.getUser();
             if (userError || !user || !user.user) {
-                setError("Auth session missing!"); // Handle error if no user found
-                router.push('/auth'); // Redirect to login page
+                setError("Auth session missing!");
+                router.push('/auth');
                 return;
             }
 
@@ -48,8 +47,8 @@ const Profile = () => {
             if (error) throw new Error(`Error fetching profile: ${error.message}`);
 
             setProfile(prevProfile => ({
-                ...prevProfile, // Don't overwrite the existing profile entirely
-                ...userProfile, // Merge the fetched profile data
+                ...prevProfile,
+                ...userProfile,
             }));
         } catch (err) {
             setError(err.message);
@@ -59,14 +58,13 @@ const Profile = () => {
     };
     fetchProfileData();
 
-}, [router]); // Add router as a dependency to make sure it stays up to date
+}, [router]);
 
 const handleProfileUpdate = async (updatedProfile) => {
     try {
-        // Destructure and filter unnecessary properties
+
         const { app_metadata, phone, aud, confirmation_sent_at, email, email_confirmed_at, identities, is_anonymous, last_sign_in_at, role, user_metadata, id, ...filteredProfile } = updatedProfile;
 
-        // Perform the upsert operation
         const { error } = await supabase
             .from('profiles')
             .upsert([
