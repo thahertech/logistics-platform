@@ -5,14 +5,19 @@ import '../app/globals.css';
 import Head from 'next/head';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench, faSeedling, faHandsHelping, faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 
 const AboutUs = () => {
   return (
     <Layout>
+        <GoogleTagManager gtmId="GTM-T7GRXLNQ" />
+
         <Head>
     <title>Meistä - Logistix</title>
     <meta name="description" content="Lisätietoa Logistixistä" />
+    
   </Head>
+
       <div className={`${styles.hero} ${styles.aboutUsHero}`}>
 
       <div className={styles.aboutUsSectionHero}>

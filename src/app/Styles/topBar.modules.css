@@ -1,0 +1,26 @@
+.topBar {
+    background: linear-gradient(to bottom, #003366, #000000);
+    padding: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .topBar button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    background: transparent;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .topBar button:hover {
+    background-color: #003366;
+    transform: scale(1.05);
+  }
+  
+  .topBar button.active {
+    background-color: #003366;
+  }
