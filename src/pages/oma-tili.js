@@ -9,13 +9,13 @@ import ProfileContent from '@/app/Components/profile/profile-content';
 import OrdersContent from '@/app/Components/profile/orders-content';
 import OrderDetails from '@/app/Components/profile/order-details';
 import { FaSignOutAlt } from 'react-icons/fa';
-import CustomAlert from '@/app/Components/alert-box/profile-alert';
-import PaymentHistory from '@/pages/maksu-historia';
+// import CustomAlert from '@/app/Components/alert-box/profile-alert';
+// import PaymentHistory from '@/pages/maksu-historia';
 import jsPDF from 'jspdf';
 import { redirect } from 'next/dist/server/api-utils';
 
 
-const UserLocationMap = dynamic(() => import('../app/Components/maps/userLocationMap'), { ssr: false });
+// const UserLocationMap = dynamic(() => import('../app/Components/maps/userLocationMap'), { ssr: false });
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -222,7 +222,7 @@ const handleRatingSubmit = async (ratingData) => {
     handleSaveOrder={handleSaveOrder}
   />
 )}
-  {activeTab === 'map' && <UserLocationMap />}
+  {/* {activeTab === 'map' && <UserLocationMap />} */}
   <button
     className="py-3 px-6 mt-6 rounded-lg bg-white hover:bg-red-500 transition duration-300 flex items-center justify-center text-black"
     onClick={handleSignOut}

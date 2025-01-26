@@ -1,5 +1,5 @@
 import Layout from '@/app/Dashboard/Layout';
-import Ratings from '../app/Components/forms/ratings';
+// import Ratings from '../app/Components/forms/ratings';
 import styles from '../app/Styles/tietosuoja.module.css';
 import { privacyTermsContent } from '../app/user/User/tietosuojadata';
 
