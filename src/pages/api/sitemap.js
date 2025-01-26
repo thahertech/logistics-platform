@@ -23,7 +23,13 @@ const Sitemap = (req, res) => {
       <loc>https://www.logistix.fi/me</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>monthly</changefreq>
-      <priority>0.4</priority>
+      <priority>0.7</priority>
+    </url>
+        <url>
+      <loc>https://www.logistix.fi/auth</loc>
+      <lastmod>${new Date().toISOString()}</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
     </url>
     
   </urlset>`;

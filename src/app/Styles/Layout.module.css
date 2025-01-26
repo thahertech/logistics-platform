@@ -7,13 +7,19 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  background-color: #000;
+  margin-top: 20px;
 }
 
 .registerButton{
   min-height: 75px;
   align-content: center;
   font-size: 14px;
+  text-decoration: underline;
   
+}
+.registerButton:hover{
+  color: #003366;
 }
 .topHeaderContent{
   display: flex;
@@ -30,6 +36,8 @@
   gap: 2rem;
   margin: 1rem;
   min-height: 30px;
+  transition: all 0.3s ease;
+
 }
 
 .topHeader {
@@ -38,6 +46,8 @@
   z-index: 1000;
   background-color: #000;
   border-radius: 0 0 10px 10px;
+  transition: all 0.3s ease;
+
 }
 
 
