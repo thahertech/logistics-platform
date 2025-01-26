@@ -15,8 +15,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fi">
       <head>
+        
       <GoogleTagManager gtmId="GTM-T7GRXLNQ" />
 
+      
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,6 +29,7 @@ export default function RootLayout({ children }) {
         <meta property="og:url" content="https://www.logistix.fi" />
         </head>
       <body>
+
       
       <ClientTracker />
         {children}

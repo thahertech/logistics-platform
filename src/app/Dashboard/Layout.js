@@ -5,19 +5,18 @@ import styles from '../Styles/Layout.module.css';
 import Image from 'next/image';
 import footerImg from '../../../public/assets/logistix-logos/svg/logo.svg';
 import '../globals.css';
-
-import {FaQuestionCircle, FaFacebook, FaChartBar, FaInstagram, FaLinkedin ,FaPlusCircle, FaUser, FaSearch, FaShoppingCart, FaShieldAlt, FaFileContract, FaCogs, FaUserCircle, FaComment } from 'react-icons/fa';
+import { GoogleTagManager } from '@next/third-parties/google';
+import {FaQuestionCircle ,FaPlusCircle, FaUser, FaSearch, FaShoppingCart, FaShieldAlt, FaFileContract, FaCogs, FaComment } from 'react-icons/fa';
 import { supabase } from '@/supabaseClient';
+import ClientTracker from '../Components/clientTracker';
 
 const Layout = ({ children }) => {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // const [cartItems, setCartItems] = useState([]);
   const [isLogoInTopHeader, setIsLogoInTopHeader] = useState(false);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    // setCartItems(savedCart);
 
     const fetchSession = async () => {
       const {
@@ -39,29 +38,33 @@ const Layout = ({ children }) => {
   }, []);
 
   return (
+
     <div className={styles.layoutContainer}>
- <div className={`${styles.topHeader} ${isLogoInTopHeader ? styles.withLogo : ''}`}>
-  {isLogoInTopHeader && (
-    <div className={styles.topHeaderContent}>
-      <Link href="/" className={styles.logoInTopHeader}>
-        <Image
-          src={footerImg}
-          alt="Logistix Logo"
-          width={100}
-          height={100}
-          className={styles.logoInTopHeaderImg}
-        />
-      </Link>
-      {!isAuthenticated && (
-        <Link href="/auth" className={styles.registerButton}>
-          Rekisteröidy nyt
-        </Link>
-      )}
-    </div>
+              <GoogleTagManager gtmId="GTM-T7GRXLNQ" />
+      
+      <div className={`${styles.topHeader} ${isLogoInTopHeader ? styles.withLogo : ''}`}>
+        {isLogoInTopHeader && (
+          <div className={styles.topHeaderContent}>
+            <Link href="/" className={styles.logoInTopHeader}>
+              <Image
+                src={footerImg}
+                alt="Logistix Logo"
+                width={100}
+                height={100}
+                className={styles.logoInTopHeaderImg}
+              />
+            </Link>
+            {!isAuthenticated && (
+              <Link href="/auth" className={styles.registerButton}>
+                Rekisteröidy nyt
+              </Link>
+            )}
+          </div>
   )}
   {isAuthenticated && (
     <nav className={styles.topHeaderNav}>
-      {/* <Link
+
+      <Link
         href="/luo-ilmoitus"
         className={`${styles.topHeaderLink} ${
           pathname === '/luo-ilmoitus' ? styles.activeLink : ''
@@ -76,19 +79,19 @@ const Layout = ({ children }) => {
         }`}
       >
         <FaSearch className={styles.icon} /> Löydä kuljetuksia
-      </Link> */}
-      <Link
-        href="/oma-tili"
-        className={`${styles.topHeaderLink} ${
-          pathname === '/oma-tili' ? styles.activeLink : ''
-        }`}
-      >
-        <FaUser className={styles.icon} /> Oma tili
       </Link>
-    </nav>
-  )}
-</div>
 
+            <Link
+              href="/oma-tili"
+              className={`${styles.topHeaderLink} ${
+                pathname === '/oma-tili' ? styles.activeLink : ''
+              }`}
+            >
+              <FaUser className={styles.icon} /> Oma tili
+            </Link>
+          </nav>
+        )}
+      </div>
 
       <header className={styles.header}>
         <div className={styles.topRow}>
@@ -168,7 +171,7 @@ const Layout = ({ children }) => {
       </footer>
       <div className={styles.bottomFooter}>
         <nav className={styles.bottomFooterNav}>
-          {/* <Link
+          <Link
           href="/asiakastarinat"
                 className={`${styles.bottomFooterLink} ${
                   pathname === '/asiakastarinat' ? styles.activeLink : ''
@@ -183,7 +186,7 @@ const Layout = ({ children }) => {
           }`}
         >
           <FaQuestionCircle className={styles.icon} /> Usein Kysytyt Kysymykset
-        </Link> */}
+        </Link>
           <Link
           href="/miten-toimii"
                 className={`${styles.bottomFooterLink} ${
@@ -198,7 +201,7 @@ const Layout = ({ children }) => {
               pathname === '/tietosuoja' ? styles.activeLink : ''
             }`}
           >
-            <FaShieldAlt className={ styles.icon} /> Tietosuoja
+            <FaShieldAlt className={ styles.icon} /> Tietosuoja
           </Link>
           <Link
             href="/ehdot"
@@ -214,4 +217,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;  
+export default Layout;

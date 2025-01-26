@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../app/Styles/Dashboard.module.css';
 import Layout from '../app/Dashboard/Layout';
 import '../app/globals.css';
-import ContactForm from '../app/Forms/contactForm';
+import ContactForm from '../app/Components/forms/contactForm';
 import Image from 'next/image';
 import Head from 'next/head';
 import { GoogleTagManager } from '@next/third-parties/google';

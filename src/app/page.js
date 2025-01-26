@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import styles from './Styles/Dashboard.module.css';
 import serviceData from './Components/serviceData';
 import heroImg from '../../public/assets/truckupBG.jpeg';
-import BetaForm from './Forms/BetaForm';
+import BetaForm from './Components/forms/BetaForm';
 import Head from 'next/head';
 
 import './globals.css';
@@ -53,6 +53,7 @@ const Dashboard = () => {
   return (
     <Layout>
       <Head>
+        
         <title>Logistix - Älykkäät logistiikkaratkaisut</title>
         <meta
           name="description"
@@ -70,9 +71,9 @@ const Dashboard = () => {
   />
   <div className={styles.line}>
    
-  <h2 className={styles.sectionTitle}>Liity BETA-ohjelmaan</h2>
+  {/* <h2 className={styles.sectionTitle}>Haluatko uutiskirjeemme?</h2> */}
         <h4 className={styles.serviceContent}>
-            Ole mukana luomassa logistiikan tulevaisuutta!
+            Ole mukana luomassa logistiikan tulevaisuutta.
         </h4>
 
         <p className={styles.additionalInfo}>
@@ -110,32 +111,33 @@ const Dashboard = () => {
 
       <div className={styles.rollingNumbersSection}>
         <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.min(64, 200)} duration={3000} />
+          <RollingNumber start={0} end={Math.min(68, 200)} duration={3000} />
           <p className={styles.rollingNumberDescription}>
             Kuljetukseen erikoistuneita yrityksiä, jotka osallistuvat BETA testiin
           </p>
         </div>
 
+ 
         <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.min(52, 200)} duration={3000} />
-          <p className={styles.rollingNumberDescription}>
-            Lähettäjiä, jotka osallistuvat BETA testiin
-          </p>
-        </div>
-
-        <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.max(52 + 64)} duration={3000} />
+          <RollingNumber start={0} end={Math.max(60 + 68)} duration={3000} />
           <p className={styles.rollingNumberDescription}>
             Yhteensä BETA-testaajia, jotka ovat mukana alustan kehityksessä
           </p>
         </div>
 
         <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.max(200 - 52 - 64, 0)} duration={3000} />
+          <RollingNumber start={0} end={Math.min(60, 200)} duration={3000} />
+          <p className={styles.rollingNumberDescription}>
+            Lähettäjiä, jotka osallistuvat BETA testiin
+          </p>
+        </div>
+
+        {/* <div className={styles.rollingNumberCard}>
+          <RollingNumber start={0} end={Math.max(200 - 60 - 68, 0)} duration={3000} />
           <p className={styles.rollingNumberDescription}>
             Paikkoja jäljellä - lisää yrityksesi mukaan!
           </p>
-        </div>
+        </div> */}
       </div>
 
 

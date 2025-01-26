@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../Styles/Contact.module.css';
+import styles from '../../Styles/Contact.module.css';
 
 const ContactForm = () => {
   const [company, setCompany] = useState('');
@@ -72,7 +72,7 @@ const ContactForm = () => {
             <input
               className={styles.inputField}
               type="email"
-              placeholder="Sähköpostiosoite"
+              placeholder="Sähköposti"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -80,7 +80,7 @@ const ContactForm = () => {
           </div>
           <textarea
             className={styles.textArea}
-            placeholder="Viesti"
+            placeholder="Vapaa sana"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             rows={5}
