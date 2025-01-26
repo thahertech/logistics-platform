@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../Styles/Contact.module.css';
+import styles from '../../Styles/Contact.module.css';
 
 const ContactForm = () => {
   const [company, setCompany] = useState('');
@@ -29,7 +29,6 @@ const ContactForm = () => {
           setShowForm(false);
         }, 1000);
 
-        // Trigger Google Tag event after form is successfully submitted
         if (typeof gtag === 'function') {
           gtag('event', 'conversion_event_signup', {
             event_category: 'Signup',
@@ -78,16 +77,16 @@ const ContactForm = () => {
               required
             />
           </div>
-          <textarea
+          {/* <textarea
             className={styles.textArea}
             placeholder="Viesti"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             rows={5}
-          ></textarea>
+          ></textarea> */}
 
           <button className={styles.submitButton} type="submit">
-            Lähetä
+            Liity
           </button>
         </form>
       )}

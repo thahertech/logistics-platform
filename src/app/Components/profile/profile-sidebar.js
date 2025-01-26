@@ -2,41 +2,44 @@ import { FaUserCircle, FaBox, FaStar, FaMapMarkerAlt, FaSignOutAlt } from 'react
 
 const Sidebar = ({ activeTab, setActiveTab, handleSignOut }) => {
   return (
-    <aside className="w-64 bg-gray-800 p-6 space-y-4">
+    <aside className="w-full bg-gradient-to-b from-[#003366] to-black-500 p-6 flex justify-center items-center space-x-6 shadow-lg">
       <button
-        className={`w-2/3 py-3 rounded ${activeTab === 'profile' ? 'bg-blue-600' : 'bg-gray-700'}`}
+        className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${
+          activeTab === 'profile' ? 'bg-[#003366]' : 'bg-transparent'
+        }`}
         onClick={() => setActiveTab('profile')}
       >
-        <FaUserCircle className="ml-2 flex w-full" /> Profiili
+        <FaUserCircle className="mr-3 text-xl" /> Profiili
       </button>
 
-      {/* <button
-        className={`w-2/3 py-3 rounded ${activeTab === 'orders' ? 'bg-blue-600' : 'bg-gray-700'}`}
+      <button
+        className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${
+          activeTab === 'orders' ? 'bg-[#003366]' : 'bg-transparent'
+        }`}
         onClick={() => setActiveTab('orders')}
       >
-        <FaBox className="mr-2 flex w-full" /> Tilaukset
+        <FaBox className="mr-3 text-xl" /> Tilaukset
       </button>
 
       <button
-        className={`w-2/3 py-3 rounded ${activeTab === 'ratings' ? 'bg-blue-600' : 'bg-gray-700'}`}
+        className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${
+          activeTab === 'ratings' ? 'bg-[#003366]' : 'bg-transparent'
+        }`}
         onClick={() => setActiveTab('ratings')}
       >
-        <FaStar className="mr-2 flex w-full" /> Arvostelut
-      </button> */}
-
-      {/* <button
-        className={`w-2/3 py-3 rounded ${activeTab === 'map' ? 'bg-blue-600' : 'bg-gray-700'}`}
-        onClick={() => setActiveTab('map')}
-      >
-        <FaMapMarkerAlt className="mr-2 flex w-full" /> Käyttäjien kartta
-      </button> */}
+        <FaStar className="mr-3 text-xl" /> Arvostelut
+      </button>
 
       <button
-        className="w-2/3 py-3 mt-6 rounded bg-blue-900 hover:bg-blue-600 flex items-center justify-center"
-        onClick={handleSignOut}
+        className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${
+          activeTab === 'map' ? 'bg-[#003366]' : 'bg-transparent'
+        }`}
+        onClick={() => setActiveTab('map')}
       >
-        <FaSignOutAlt className="mr-2" /> Kirjaudu ulos
+        <FaMapMarkerAlt className="mr-3 text-xl" /> Käyttäjien kartta
       </button>
+
+    
     </aside>
   );
 };

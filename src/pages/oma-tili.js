@@ -9,9 +9,13 @@ import ProfileContent from '@/app/Components/profile/profile-content';
 import OrdersContent from '@/app/Components/profile/orders-content';
 import OrderDetails from '@/app/Components/profile/order-details';
 import { FaSignOutAlt } from 'react-icons/fa';
-import CustomAlert from '@/app/Components/alert-box/profile-alert';
+// import CustomAlert from '@/app/Components/alert-box/profile-alert';
+// import PaymentHistory from '@/pages/maksu-historia';
+import jsPDF from 'jspdf';
+import { redirect } from 'next/dist/server/api-utils';
 
-const UserLocationMap = dynamic(() => import('../app/Components/userLocationMap'), { ssr: false });
+
+// const UserLocationMap = dynamic(() => import('../app/Components/maps/userLocationMap'), { ssr: false });
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -24,6 +28,27 @@ const Profile = () => {
   const [alertMessage, setAlertMessage] = useState('');
 
   const router = useRouter();
+
+
+  const handleSaveOrder = (order) => {
+    const doc = new jsPDF();
+
+    // Define PDF content
+    doc.setFontSize(16);
+    doc.text('Tilausraportti', 20, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Tilausnumero: ${order.shipment_id}`, 20, 40);
+    doc.text(`Eräpäivä: ${new Date(order.due_date).toLocaleDateString()}`, 20, 50);
+    doc.text(`Päivämäärä: ${new Date(order.purchase_date).toLocaleDateString()}`, 20, 60);
+    doc.text(`Status: ${order.status}`, 20, 70);
+    doc.text(`Hinta: ${order.total_price} EUR`, 20, 80);
+    doc.text(`Maksutilanne: ${order.payment_status}`, 20, 90);
+    doc.text(`Arvio: ${order.rating ? 'Reviewed' : 'Not reviewed'}`, 20, 100);
+
+    // Save the PDF
+    doc.save(`Tilaus_${order.shipment_id}.pdf`);
+  };
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -52,6 +77,8 @@ const Profile = () => {
             }));
         } catch (err) {
             setError(err.message);
+            router.push('/auth');
+
         } finally {
             setLoadingProfile(false);
         }
@@ -121,6 +148,7 @@ useEffect(() => {
             setError(err.message);
         } finally {
             setLoadingOrders(false);
+
         }
     };
     fetchOrders();
@@ -176,18 +204,34 @@ const handleRatingSubmit = async (ratingData) => {
 
   return (
     <Layout>
-
-
-      <div className="flex min-h-screen bg-gray-900 text-white">
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} handleSignOut={handleSignOut} />
-        <main className="flex-1 p-8">
-          {activeTab === 'profile' && profile && <ProfileContent profile={profile} onProfileUpdate={handleProfileUpdate} /> }
-          {activeTab === 'orders' && <OrdersContent orders={orders} handleViewDetails={handleViewDetails} />}
-          {selectedOrder && <OrderDetails selectedOrder={selectedOrder} closeDetails={closeDetails} />}
-          {activeTab === 'map' && <UserLocationMap />}
-        </main>
-      </div>
-    </Layout>
+<div className="flex flex-col min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white">
+<Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        handleSignOut={handleSignOut} 
+      />
+<main className="flex-1 p-8 space-y-8 mt-3">
+  {activeTab === 'profile' && profile && <ProfileContent profile={profile} />}
+  {activeTab === 'orders' && (
+    <OrdersContent orders={orders} handleViewDetails={handleViewDetails} />
+  )}
+ {selectedOrder && (
+  <OrderDetails 
+    selectedOrder={selectedOrder} 
+    closeDetails={closeDetails} 
+    handleSaveOrder={handleSaveOrder}
+  />
+)}
+  {/* {activeTab === 'map' && <UserLocationMap />} */}
+  <button
+    className="py-3 px-6 mt-6 rounded-lg bg-white hover:bg-red-500 transition duration-300 flex items-center justify-center text-black"
+    onClick={handleSignOut}
+  >
+    <FaSignOutAlt className="mr-3 text-xl" /> Kirjaudu ulos
+  </button>
+</main>
+    </div>
+  </Layout>
   );
 };
 

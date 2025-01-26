@@ -26,29 +26,30 @@
     background-color: #3b82f6;
 }
 
+/* Profile Section */
 .profileDetails {
-    padding: 20px;
-    background-color: #000000;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    color: #fff;
-
-    max-width: 680px;
+    padding: 30px;
+    background-color: #00000092;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #f3f4f6;
+    max-width: 720px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
+    gap: 20px;
 }
 
-.profileForm{
+.profileForm {
     display: flex;
     flex-direction: column;
-    align-content: flex-end;
+    gap: 15px;
 }
 
 .h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: #f3f4f6;
 }
 
 .profileDetails h6 {
@@ -56,74 +57,74 @@
     color: #b4b4b4;
 }
 
-.p {
-    font-size: 1rem;
-    margin-bottom: 8px;
+.profileDetails p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
 }
 
 .profileDetails button {
-    padding: 8px 16px;
-    margin-top: 10px;
-    border-radius: 10px;
+    padding: 12px 20px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
 }
 
-.button:hover {
-    opacity: 0.8;
+.profileDetails button:hover {
+    opacity: 0.85;
 }
 
 .btnEdit {
-    background-color: #3333338d;
+    background-color: #3b82f6;
     color: white;
     border: none;
 }
 
 .btnEdit:hover {
-    background-color: #003366;
+    background-color: #2563eb;
 }
 
 .btnSave {
-    background-color: #003366;
+    background-color: #22c55e;
     color: white;
     border: none;
 }
 
 .btnSave:hover {
-    background-color: #0056b3;
+    background-color: #16a34a;
 }
 
 .btnCancel {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    background-color: #d1d5db;
+    color: black;
     border: none;
 }
 
 .btnCancel:hover {
-    background-color: #ffffff;
+    background-color: #9ca3af;
 }
 
-.profileDetails input[type="text"],
-.profileDetails input[type="email"] {
+.inputField {
+    background-color: transparent;
+    color: #f3f4f6;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #4b5563;
+    font-size: 1rem;
     width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #000;
-    color: white;
+    font-size: 20px;
 }
 
-.profileDetails input[type="text"]:focus,
-.profileDetails .input[type="email"]:focus {
+.inputField:focus {
     outline: none;
-    border-color: #003366;
+    border-color: #2563eb;
 }
 
-.profileDetails label {
-    display: block;
+.inputLabel {
     font-weight: bold;
-    margin-bottom: 5px;
+    color: #f3f4f6;
+    padding: 10px;
 }
 
 .profileDetails input:disabled {
@@ -133,27 +134,9 @@
 
 .profileDetails div > label {
     margin-bottom: 12px;
+    
 }
 
 .profileDetails div {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
-
-.editForm {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.profileDetails input[type="text"],
-.profileDetails input[type="email"] {
-    background-color: #2d2d2d;
-    border: 1px solid #444;
-    color: white;
-}
-
-.profileDetails input[type="text"]:focus,
-.profileDetails input[type="email"]:focus {
-    border: 1px solid #007BFF;
-}
-

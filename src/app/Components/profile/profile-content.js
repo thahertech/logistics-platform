@@ -1,4 +1,4 @@
-import UserProfile from '@/app/Components/UserProfile';
+import UserProfile from './UserProfile';
 
 const ProfileContent = ({ profile, onProfileUpdate }) => {
 
