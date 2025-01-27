@@ -41,7 +41,8 @@ const Layout = ({ children }) => {
 
     <div className={styles.layoutContainer}>
               <GoogleTagManager gtmId="GTM-T7GRXLNQ" />
-      
+              <ClientTracker />
+
       <div className={`${styles.topHeader} ${isLogoInTopHeader ? styles.withLogo : ''}`}>
         {isLogoInTopHeader && (
           <div className={styles.topHeaderContent}>
@@ -64,7 +65,7 @@ const Layout = ({ children }) => {
   {isAuthenticated && (
     <nav className={styles.topHeaderNav}>
 
-      <Link
+      {/* <Link
         href="/luo-ilmoitus"
         className={`${styles.topHeaderLink} ${
           pathname === '/luo-ilmoitus' ? styles.activeLink : ''
@@ -79,7 +80,7 @@ const Layout = ({ children }) => {
         }`}
       >
         <FaSearch className={styles.icon} /> Löydä kuljetuksia
-      </Link>
+      </Link> */}
 
             <Link
               href="/oma-tili"
