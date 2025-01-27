@@ -7,6 +7,10 @@
 .yarn/install-state.gz
 
 
+#page
+src/pages/kuljetukset.js
+src/pages/kuljetukset/[id].js
+src/pages/kuljetukset/muokkaa-kuljetus/[id].js
 
 # testing
 /coverage
@@ -37,3 +41,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 sendgrid.env
+
+src/pages/kuljetukset/*
