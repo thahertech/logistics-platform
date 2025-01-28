@@ -3,8 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./Styles/NotFound.module.css"; // Create a dedicated CSS module for this page.
-import heroImg from "../../public/assets/truckupBG.jpeg"; // Use a relevant image.
+import styles from "../app/Styles/NotFound.module.css";
 import ParticleBackground from '../app/Components/bg-animation';
 
 const NotFound = () => {
