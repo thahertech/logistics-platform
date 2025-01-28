@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 const ClientTracker = () => {
@@ -7,14 +7,12 @@ const ClientTracker = () => {
   const searchParams = useSearchParams();
 
   const trackPageview = (url) => {
-
     if (typeof window !== 'undefined' && window.dataLayer) {
       console.log('Tracking pageview for:', url);
       window.dataLayer.push({
         event: 'pageview',
         page: url,
       });
-
     } else {
       console.error('GTM dataLayer is not available.');
     }
@@ -28,4 +26,10 @@ const ClientTracker = () => {
   return null;
 };
 
-export default ClientTracker;
+const ClientTrackerWithSuspense = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ClientTracker />
+  </Suspense>
+);
+
+export default ClientTrackerWithSuspense;
