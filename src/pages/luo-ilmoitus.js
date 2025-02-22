@@ -5,13 +5,17 @@ import Layout from '../app/Dashboard/Layout';
 import '../app/globals.css';
 import { supabase } from '@/supabaseClient';
 import { useRouter } from 'next/router';
+import { v4 as uuidv4 } from 'uuid'; 
+import { motion } from "framer-motion";
+
 
 
 const CreateShipment = () => {
   const [activeStep, setActiveStep] = useState(0);
   const router = useRouter();
 
-  // Sender Information
+
+  const [shipmentIdentifier, setShipmentIdentifier] = useState('')
   const [companyName, setCompanyName] = useState('');
   const [contactPerson, setContactPerson] = useState('');
   const [email, setEmail] = useState('thaher.alamir@hotmail.com');
@@ -21,7 +25,6 @@ const CreateShipment = () => {
   const [senderPostalCode, setSenderPostalCode] = useState('90100');
   const [senderCity, setSenderCity] = useState('Oulu');
 
-  // Pickup Information
   const [pickupAddress, setPickupAddress] = useState('Oulu');
   const [pickupLocation, setPickupLocation] = useState({ lat: '', lng: '' });
   const [pickupDate, setPickupDate] = useState('2023-10-16 10:00:00+00');
@@ -31,7 +34,6 @@ const CreateShipment = () => {
   const [pickupLatitude, setPickupLatitude] = useState('12.49023');
   const [pickupLongitude, setPickupLongitude] = useState('30.239');
 
-  // Recipient Information
   const [recipientName, setRecipientName] = useState('Mikko');
   const [recipientAddress, setRecipientAddress] = useState('OULU');
   const [recipientPostalCode, setRecipientPostalCode] = useState('90100');
@@ -39,7 +41,6 @@ const CreateShipment = () => {
   const [recipientEmail, setRecipientEmail] = useState('thaher.alamir@hotmail.com');
   const [recipientPhone, setRecipientPhone] = useState('0405892839');
 
-  // Delivery Information
   const [deliveryAddress, setDeliveryAddress] = useState('meritullinraitti 7 b 33');
   const [deliveryPostalCode, setDeliveryPostalCode] = useState('90100');
 
@@ -49,18 +50,15 @@ const CreateShipment = () => {
   const [deliveryLatitude, setDeliveryLatitude] = useState('10.390');
   const [deliveryLongitude, setDeliveryLongitude] = useState('25.590');
   
-  // Transport Information
   const [weight, setWeight] = useState(2);
   const [transportUnits, setTransportUnits] = useState(1);
   const [unitType, setUnitType] = useState('');
   const [details, setDetails] = useState('');
 
-  // Pricing and Payment
   const [price, setPrice] = useState(1);
   const [amount, setAmount] = useState(2);
   const [status, setStatus] = useState('pending');
 
-  // Other Information
   const [items, setItems] = useState('');
 
   useEffect(() => {
@@ -74,7 +72,6 @@ const CreateShipment = () => {
         if (user) {
           console.log('User data:', user);
 
-          // Fetch user profile data
           const { data: userProfile, error } = await supabase
             .from('profiles')
             .select('*')
@@ -86,11 +83,10 @@ const CreateShipment = () => {
           } else {
             console.log('Profile details:', userProfile);
 
-            // Set form fields with the user profile data
             setCompanyName(userProfile.yritys_nimi || '');
-            setContactPerson(userProfile.full_name || ''); // Assuming there's a field for contactPerson
+            setContactPerson(userProfile.full_name || '');
             setEmail(user.user.email || '');
-            setPhoneNumber(userProfile?.phone_number || ''); // Adjust if field structure differs
+            setPhoneNumber(userProfile?.phone_number || '');
             setYTunnus(userProfile?.vat_number || '');
           }
         }
@@ -152,17 +148,17 @@ const CreateShipment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  // Ensure price and amount are valid numbers
-  const validPrice = parseFloat(price);  // Convert price to a number
-  const validAmount = parseFloat(amount);  // Convert amount to a number
+  const validPrice = parseFloat(price);
+  const validAmount = parseFloat(amount);
 
-  // If either is invalid, you can assign a default value (e.g., 0)
   if (isNaN(validPrice)) {
-    validPrice = 0;  // Default to 0 if invalid
+    validPrice = 0;
   }
   if (isNaN(validAmount)) {
-    validAmount = 0;  // Default to 0 if invalid
+    validAmount = 0;
   }
+
+
 
   const formattedPrice = validPrice.toFixed(2); 
   const formattedAmount = validAmount.toFixed(2);
@@ -178,25 +174,20 @@ const CreateShipment = () => {
       ? deliveryTimestamp
       : null;
       
+
+      const generatedShipmentId = uuidv4();
+      setShipmentIdentifier(generatedShipmentId);
+
   const shipmentData = {
-    amount: formattedAmount,
+    shipment_identifier: generatedShipmentId,
     sender_name: companyName,
     sender_email: email,
-    recipient_name: contactPerson,
-    pickup_city: pickupAddress,
     sender_address: senderAddress,
     sender_postal_code: senderPostalCode,
     sender_city: senderCity,
     sender_phone: phoneNumber,
     recipient_name: recipientName,
     recipient_address: recipientAddress,
-    pickup_date: pickupDate,
-    delivery_city: deliveryAddress,
-    delivery_date: deliveryDate,
-    weight: weight,
-    unit_type: unitType,
-    transport_units: transportUnits,
-    price: formattedPrice,
     recipient_postal_code: recipientPostalCode,
     recipient_city: recipientCity,
     recipient_email: recipientEmail,
@@ -206,15 +197,15 @@ const CreateShipment = () => {
     pickup_city:pickupCity,
     pickup_date:pickupDate,
     pickup_time: validPickupTimestamp,
-    pickup_latitude:pickupLatitude,
-    pickup_longitude:pickupLongitude,
-        delivery_address:deliveryAddress,
-         delivery_postal_code:deliveryPostalCode,
-         delivery_city:deliveryCity,
+    pickup_latitude: pickupLatitude,
+    pickup_longitude: pickupLongitude,
+        delivery_address: deliveryAddress,
+         delivery_postal_code: deliveryPostalCode,
+         delivery_city: deliveryCity,
          delivery_date: deliveryDate,
          delivery_time: validDeliveryTimestamp,
          delivery_latitude: deliveryLatitude,
-         delivery_longitude:deliveryLongitude,
+         delivery_longitude: deliveryLongitude,
          weight: weight,
          transport_units: transportUnits,
          unit_type: unitType,
@@ -224,6 +215,7 @@ const CreateShipment = () => {
          status: "pending"
   };
 
+    console.log(shipmentData);
       const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
   
       if (sessionError || !sessionData?.session?.access_token) {
@@ -241,9 +233,10 @@ const CreateShipment = () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify({ shipmentData }),
+      body: JSON.stringify(shipmentData),
     });
-  
+
+    console.log(response);
     const edgeFunctionResponse = await response.json();
     console.log(edgeFunctionResponse);
   
@@ -259,7 +252,6 @@ const CreateShipment = () => {
   
     if (data) {
       alert('Ilmoitus julkaistu!');
-      setActiveStep(0); // Reset steps
   
       const newShipmentId = data[0]?.id; 
       if (newShipmentId) {
@@ -275,7 +267,9 @@ const CreateShipment = () => {
   }
 };  
 
-const steps = ['Noutotiedot', 'Toimitustiedot', 'Kuljetustiedot'];
+const steps = ["Noutotiedot", "Toimitustiedot", "Kuljetustiedot"];
+
+
 
 const renderStepContent = (step) => {
   switch (step) {
