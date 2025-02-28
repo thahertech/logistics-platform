@@ -23,7 +23,7 @@ const TopBar = ({ activeTab, setActiveTab }) => {
         <span>Asap kuljetukset</span>
       </button>
 
-      <button
+      {/* <button
         onClick={() => setActiveTab('tracking')}
         className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${
           activeTab === 'tracking' ? 'bg-[#003366]' : 'bg-transparent'
@@ -31,7 +31,7 @@ const TopBar = ({ activeTab, setActiveTab }) => {
       >
         <FaTruck className="mr-3 text-xl" />
         <span>Ilmoitus seuranta</span>
-      </button>
+      </button> */}
     </div>
   );
 };

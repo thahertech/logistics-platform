@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
+/**
+ * hello
+ * @returns J
+ */
 const GlassBoxBackground = () => {
   const canvasRef = useRef(null);
 

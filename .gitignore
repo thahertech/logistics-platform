@@ -8,6 +8,7 @@
 
 
 #page
+src/pages/kuljetukset/**
 src/pages/kuljetukset.js
 src/pages/kuljetukset/[id].js
 src/pages/kuljetukset/muokkaa-kuljetus/[id].js

@@ -37,11 +37,11 @@ const UserProfile = ({ profile, onProfileUpdate }) => {
     };
 
     const handleCancel = () => {
-        setUpdatedProfile(profile);  // Reset to the original profile values
-        setIsEditing(false);  // Disable editing mode
+        setUpdatedProfile(profile);
+        setIsEditing(false);
     };
 
-    const isSaveDisabled = JSON.stringify(updatedProfile) === JSON.stringify(profile);  // Disable save button if no changes
+    const isSaveDisabled = JSON.stringify(updatedProfile) === JSON.stringify(profile);
 
     if (!profile) {
         return <p>Loading profile...</p>;
@@ -101,6 +101,34 @@ const UserProfile = ({ profile, onProfileUpdate }) => {
                             value={updatedProfile.vat_number}
                             onChange={handleChange}
                         />
+                        <InputField
+                            label="Kaupunki"
+                            type="text"
+                            name="city"
+                            value={updatedProfile.city}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            label="Valtio"
+                            type="text"
+                            name="state"
+                            value={updatedProfile.state}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            label="Postinumero"
+                            type="text"
+                            name="postal_code"
+                            value={updatedProfile.postal_code}
+                            onChange={handleChange}
+                        />
+                        <InputField
+                            label="Maa"
+                            type="text"
+                            name="country"
+                            value={updatedProfile.country}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className={styles.actionButtons}>
                         <button onClick={handleSave} className={styles.btnSave} disabled={isSaveDisabled}>
@@ -121,6 +149,10 @@ const UserProfile = ({ profile, onProfileUpdate }) => {
                     <p>Yritys: {profile.yritys_nimi || "N/A"}</p>
                     <p>Osoite: {profile.address || "N/A"}</p>
                     <p>Y-tunnus: <strong>{profile.vat_number || "N/A"}</strong></p>
+                    <p>Kaupunki: {profile.city || "N/A"}</p>
+                    <p>Valtio: {profile.state || "N/A"}</p>
+                    <p>Postinumero: {profile.postal_code || "N/A"}</p>
+                    <p>Maa: {profile.country || "N/A"}</p>
                     <br />
                     <h6>Viimeksi päivitetty: <strong>{new Date(profile.updated_at).toLocaleString()}</strong></h6>
                     <button onClick={() => setIsEditing(true)} className={styles.btnEdit}>

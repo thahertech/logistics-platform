@@ -31,15 +31,11 @@ const Sidebar = ({ activeTab, setActiveTab, handleSignOut }) => {
       </button>
 
       <button
-        className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${
-          activeTab === 'map' ? 'bg-[#003366]' : 'bg-transparent'
-        }`}
-        onClick={() => setActiveTab('map')}
-      >
-        <FaMapMarkerAlt className="mr-3 text-xl" /> Käyttäjien kartta
-      </button>
-
-    
+    className="py-3 px-6 rounded-lg bg-white hover:bg-gray-500 transition duration-300 flex items-center justify-center text-black"
+    onClick={handleSignOut}
+  >
+    <FaSignOutAlt className="mr-3 text-xl" /> Kirjaudu ulos
+  </button>
     </aside>
   );
 };
