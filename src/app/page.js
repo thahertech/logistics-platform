@@ -9,7 +9,6 @@ import serviceData from './Components/serviceData';
 import heroImg from '../../public/assets/truckupBG.jpeg';
 import BetaForm from './Components/forms/BetaForm';
 import Head from 'next/head';
-
 import './globals.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -76,15 +75,18 @@ const Dashboard = () => {
             Ole mukana luomassa logistiikan tulevaisuutta.
         </h4>
 
+
         <p className={styles.additionalInfo}>
-    Liittymällä saat uutiskirjeemme. Tämä ei sido sinua mihinkään.
+
+  
+        Yksinkertaista toimitustarpeesi Logistixin avulla. <br/>Yhdistämme lähetykset ja kuljetusyritykset yhdellä alustalla.
+   <br/> <br/> Haluatko uutiskirjeemme?
         </p>
       <BetaForm />
       </div>
 
   </div>
 
-     
 
       <div className={styles.serviceSection}>
         <div className={styles.cardContainer}>
@@ -111,7 +113,7 @@ const Dashboard = () => {
 
       <div className={styles.rollingNumbersSection}>
         <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.min(68, 200)} duration={3000} />
+          <RollingNumber start={0} end={Math.min(70, 200)} duration={3000} />
           <p className={styles.rollingNumberDescription}>
             Kuljetukseen erikoistuneita yrityksiä, jotka osallistuvat BETA testiin
           </p>
@@ -119,14 +121,14 @@ const Dashboard = () => {
 
  
         <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.max(60 + 68)} duration={3000} />
+          <RollingNumber start={0} end={Math.max(61 + 70)} duration={3000} />
           <p className={styles.rollingNumberDescription}>
             Yhteensä BETA-testaajia, jotka ovat mukana alustan kehityksessä
           </p>
         </div>
 
         <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.min(60, 200)} duration={3000} />
+          <RollingNumber start={0} end={Math.min(61, 200)} duration={3000} />
           <p className={styles.rollingNumberDescription}>
             Lähettäjiä, jotka osallistuvat BETA testiin
           </p>

@@ -14,7 +14,6 @@ const Contact = () => {
     <title>Yhteystiedot - Logistix</title>
     <meta name="description" content="Ota yhteyttä Logistixiin, olemme täällä auttamassa kaikissa kysymyksissäsi." />
   </Head>
-      {/* Hero Image Section */}
       <div className={styles.hero}>
               <div className={`${styles.hero} ${styles.contactHero}`}>
               </div>
