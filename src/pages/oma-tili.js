@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '@/app/Dashboard/Layout';
+import Layout from '@/app/dashboard/Layout';
 import { supabase } from '@/supabaseClient';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import Sidebar from '@/app/Components/profile/profile-sidebar';
-import ProfileContent from '@/app/Components/profile/profile-content';
-import OrdersContent from '@/app/Components/profile/orders-content';
-import OrderDetails from '@/app/Components/profile/order-details';
+import Sidebar from '@/app/components/profile/profile-sidebar';
+import ProfileContent from '@/app/components/profile/profile-content';
+import OrdersContent from '@/app/components/profile/orders-content';
+import OrderDetails from '@/app/components/profile/order-details';
 import { FaSignOutAlt } from 'react-icons/fa';
 import jsPDF from 'jspdf';
 import { redirect } from 'next/dist/server/api-utils';
