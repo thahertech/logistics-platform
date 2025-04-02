@@ -1,4 +1,4 @@
-import Layout from "@/app/dashboard/Layout";
+import Layout from "@/app/Dashboard/Layout";
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
