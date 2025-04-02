@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '../supabaseClient';
 
@@ -6,7 +6,7 @@ export default function VerifyEmail() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
 
-  const verifyAndRedirect = async () => {
+  const verifyAndRedirect = useCallback(async () => {
     setIsLoading(true);
     try {
       const { data: { session }, error } = await supabase.auth.getSession();
@@ -32,7 +32,7 @@ export default function VerifyEmail() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [router]);
 
   useEffect(() => {
     verifyAndRedirect();

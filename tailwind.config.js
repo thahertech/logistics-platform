@@ -1,5 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+   webpackDevMiddleware: config => {
+    config.headers = {
+      ...config.headers,
+      'Access-Control-Allow-Origin': '*',
+    };
+    return config;
+  },
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx}",
     "./src/pages/**/*.{js,ts,jsx,tsx}",
