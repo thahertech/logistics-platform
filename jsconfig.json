@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".", // Ensure paths are relative to the project root
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@Forms/*": ["./src/app/Forms/*"]
     },
-    "allowJs": true // Ensure JavaScript files are recognized
+    "allowJs": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "supabase/functions"]

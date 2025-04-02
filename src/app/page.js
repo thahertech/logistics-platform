@@ -1,16 +1,17 @@
 'use client';
-import Layout from './Dashboard/Layout';
+import Layout from './dashboard/Layout';
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import styles from './Styles/Dashboard.module.css';
-import serviceData from './Components/serviceData';
-import heroImg from '../../public/assets/truckupBG.jpeg';
-import BetaForm from './Components/forms/BetaForm';
+import styles from './Styles/page.module.css';
+import serviceData from './dashboard/serviceData';
+import heroImg from '../../public/assets/backgrounds/truckupBG.jpeg';
+import BetaForm from './components/forms/BetaForm';
 import Head from 'next/head';
 import './globals.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const RollingNumber = ({ start, end, duration }) => {
   const [number, setNumber] = useState(start);
@@ -48,7 +49,6 @@ const Dashboard = () => {
   };
 
   
-
   return (
     <Layout>
       <Head>
@@ -61,34 +61,38 @@ const Dashboard = () => {
       </Head>
 
       <div className={styles.heroImg}>
-  <Image
-    src={heroImg}
-    alt="Background image"
-    layout="fill"
-    objectFit="cover"
-    priority={true}
-  />
+        <Image
+          src={heroImg}
+          alt="Background image"
+          layout="fill"
+          objectFit="cover"
+          priority={true}
+        />
   <div className={styles.line}>
-   
-  {/* <h2 className={styles.sectionTitle}>Haluatko uutiskirjeemme?</h2> */}
-        <h4 className={styles.serviceContent}>
-            Ole mukana luomassa logistiikan tulevaisuutta.
+  <div className={styles.IntroHeroSection}>
+        <h4>
+          Logistiikan
         </h4>
-
-
-        <p className={styles.additionalInfo}>
-
-  
-        Yksinkertaista toimitustarpeesi Logistixin avulla. <br/>Yhdistämme lähetykset ja kuljetusyritykset yhdellä alustalla.
-   <br/> <br/> Haluatko uutiskirjeemme?
-        </p>
-      <BetaForm />
+        <h5>
+          tulevaisuus
+        </h5>
+        <p>Liity mukaan!</p>
+        </div>
       </div>
 
   </div>
+<div className={styles.FirstHeroSection}>
+  <p className={styles.additionalInfo}>  
+    Yhdistämme lähetykset ja kuljetusyritykset yhdellä alustalla
+        </p>
+  <p>
+  Haluatko kuulla lisää?
+  </p>
+  <BetaForm />
 
-
+</div>
       <div className={styles.serviceSection}>
+
         <div className={styles.cardContainer}>
           {serviceData.map((card, index) => (
             <motion.div
@@ -108,41 +112,6 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
-
-
-
-      <div className={styles.rollingNumbersSection}>
-        <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.min(70, 200)} duration={3000} />
-          <p className={styles.rollingNumberDescription}>
-            Kuljetukseen erikoistuneita yrityksiä, jotka osallistuvat BETA testiin
-          </p>
-        </div>
-
- 
-        <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.max(61 + 70)} duration={3000} />
-          <p className={styles.rollingNumberDescription}>
-            Yhteensä BETA-testaajia, jotka ovat mukana alustan kehityksessä
-          </p>
-        </div>
-
-        <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.min(61, 200)} duration={3000} />
-          <p className={styles.rollingNumberDescription}>
-            Lähettäjiä, jotka osallistuvat BETA testiin
-          </p>
-        </div>
-
-        {/* <div className={styles.rollingNumberCard}>
-          <RollingNumber start={0} end={Math.max(200 - 60 - 68, 0)} duration={3000} />
-          <p className={styles.rollingNumberDescription}>
-            Paikkoja jäljellä - lisää yrityksesi mukaan!
-          </p>
-        </div> */}
-      </div>
-
-
     </Layout>
   );
 };
