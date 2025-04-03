@@ -77,7 +77,7 @@
 }
 
 .contactHero {
-  background-image: url('/assets/storage-space.jpg');
+  background-image: url('/assets/backgrounds/storage-space.jpg');
   background-size: cover;
   background-position: center;
   height: 300px;
@@ -189,8 +189,8 @@
 }
 
 .additionalInfo {
-  font-size: 12px;
-  color: #b4b4b4;
+  font-size: 1rem;
+  color: #cfcfcf;
   margin-top: 2rem;
 }
 .serviceCard {

@@ -1,0 +1,56 @@
+/* Article.module.css */
+
+/* Container for the whole page */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Title of the Articles Page */
+.container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Style for the list of articles */
+  .container ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  /* Each article item */
+  .container li {
+    background-color: transparent;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .container li:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.02);
+  }
+  
+  /* Article links */
+  .container li a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #eee;
+    text-decoration: none;
+  }
+  
+  .container li a:hover {
+    color: #005599;
+    text-decoration: underline;
+  }
+  
+  /* Ensure Layout from @/app/dashboard/Layout is still used */

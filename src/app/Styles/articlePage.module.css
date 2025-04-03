@@ -1,0 +1,57 @@
+.articleContainer {
+    max-width: 800px;
+    margin-top: 20px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #000;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .articleTitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 15px;
+  }
+  
+  .articleDate {
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 20px;
+  }
+  
+  .articleContent {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #000;
+    white-space: pre-wrap;
+  }
+  
+  .articleContent p {
+    margin-bottom: 20px;
+  }
+  
+  .articleContent h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  .articleContent ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .articleContent li {
+    margin-bottom: 10px;
+  }
+  
+  .articleFooter {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 30px;
+    color: #000;
+  }

@@ -9,27 +9,26 @@ export default function VerifyEmail() {
   const verifyAndRedirect = async () => {
     setIsLoading(true);
     try {
-      // Fetch the current session to verify email confirmation
       const { data: { session }, error } = await supabase.auth.getSession();
 
       if (error || !session) {
         console.error('Verification failed or no session found', error);
-        router.push('/auth'); // Redirect to login page
+        router.push('/auth');
         return;
       }
 
       const user = session.user;
 
       if (user?.email_confirmed_at) {
-        router.push('/oma-tili'); // Redirect to dashboard
+        router.push('/oma-tili');
       } else {
         alert('Email verification is incomplete. Please check your email.');
-        router.push('/auth'); // Redirect to auth page
+        router.push('/auth');
       }
     } catch (error) {
       console.error('Error during verification:', error);
       alert('An unexpected error occurred. Please try again.');
-      router.push('/auth'); // Fallback redirect
+      router.push('/auth');
     } finally {
       setIsLoading(false);
     }
