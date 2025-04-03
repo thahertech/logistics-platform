@@ -547,6 +547,13 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .cardContainer {
+    flex-wrap: nowrap;
+    display: flex;
+    gap: 16px;
+  }
+  
   
   @media (max-width: 1340px) {
     .cardContainer {
@@ -724,12 +731,6 @@
   .callToAction {
     margin: auto;
     text-align: center;
-    }
-    
-    .cardContainer {
-      flex-wrap: nowrap;
-      display: flex;
-      gap: 16px;
     }
     
     .ctaButton {
