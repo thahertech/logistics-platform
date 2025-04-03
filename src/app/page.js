@@ -64,11 +64,11 @@ const Dashboard = () => {
 </div>
 </div>
 <div className={styles.callToAction}>
-    <button>
-      <a className={styles.ctaButton} href="/yhteys" onClick={scrollToContactForm}>
+
+      <Link className={styles.ctaButton} href="/yhteys" onClick={scrollToContactForm}>
         Tilaa demo
-      </a>
-    </button>
+    </Link>
+
 </div>  
   <div className="first-hero-section">
     <div className={styles.videoSection}>
