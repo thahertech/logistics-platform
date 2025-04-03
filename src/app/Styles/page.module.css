@@ -61,7 +61,7 @@
 }
 
 .aboutUsHero{
-  background-image: url('../../../public/assets/satama.jpg');
+  background-image: url('@/public/assets/background/satama.jpg');
 
 }
 .aboutUsHero, .yrityksilleHero {
