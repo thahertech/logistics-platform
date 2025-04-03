@@ -20,7 +20,7 @@ const MeidanPalvelusta = () => {
 
     <div className={`${styles.hero} ${styles.yrityksilleHero}`}>
     <Image
-              src={"/assets/harbour.jpg"}
+              src={"/assets/backgrounds/harbour.jpg"}
               alt="sunset-image"
               width="1000"
               height="200"
