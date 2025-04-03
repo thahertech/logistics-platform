@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '@/app/dashboard/Layout';
+import Layout from '@/app/Dashboard/Layout';
 import { supabase } from '@/supabaseClient';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -7,7 +7,7 @@ import Head from 'next/head';
 import Sidebar from '@/app/Components/profile/profile-sidebar';
 import ProfileContent from '@/app/Components/profile/profile-content';
 import OrdersContent from '@/app/Components/profile/orders-content';
-import OrderDetails from '@/app/Components/profile/order-details';
+import OrderDetails from '@/app/Com.ponents/profile/order-details';
 import { FaSignOutAlt } from 'react-icons/fa';
 import jsPDF from 'jspdf';
 import { redirect } from 'next/dist/server/api-utils';
