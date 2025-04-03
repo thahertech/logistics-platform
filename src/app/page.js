@@ -15,8 +15,8 @@ import dynamic from 'next/dynamic';
 const Dashboard = () => {
   const router = useRouter();
   const contactFormRef = useRef(null);
-  const VideoBackground = dynamic(() => import('src/app/components/animation/VideoBG.js'), { ssr: false });
-  const VideoBackground2 = dynamic(() => import('src/app/components/animation/hero-section-abstract.js'), { ssr: false });
+  const VideoBackground = dynamic(() => import('src/app/Components/animation/VideoBG.js'), { ssr: false });
+  const VideoBackground2 = dynamic(() => import('src/app/Components/animation/hero-section-abstract.js'), { ssr: false });
 
   const navigateTo = (path) => {
     router.push(path);
