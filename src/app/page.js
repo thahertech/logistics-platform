@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import styles from './Styles/Dashboard.module.css';
 import serviceData from './Components/serviceData';
-import heroImg from '../../public/assets/truckupBG.jpeg';
+import heroImg from '../../public/assets/backgrounds/truckupBG.jpeg';
 import BetaForm from './Components/forms/BetaForm';
 import Head from 'next/head';
 import './globals.css';
