@@ -1,7 +1,7 @@
 import { getArticleBySlug } from '@/lib/articles';
 import { useRouter } from 'next/router';
 import { getArticles } from '@/lib/articles';
-import Layout from '@/app/dashboard/Layout';
+import Layout from '@/app/Dashboard/Layout';
 import styles from '@/app/Styles/articlePage.module.css';
 
 
