@@ -35,7 +35,32 @@
       box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3);
     }
   }
-  
+
+
+  .callToAction {
+    margin: auto;
+    text-align: center;
+    }
+    
+    .cardContainer {
+      flex-wrap: nowrap;
+      display: flex;
+      gap: 16px;
+    }
+    
+    .ctaButton {
+      color: white;
+      border: 1px solid #eee;
+      padding: 10px 20px;
+      margin: 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .ctaButton:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
   .heroButton{
     display: flex;
     justify-content: center;
@@ -712,35 +737,5 @@
       margin-bottom: 2rem;
     }
     
-    .rollingNumbersSection .rollingNumber{
-      font-size: 5.5rem;
-    }
-    .rollingNumbersSection .rollingNumberDescription{
-      font-size: 1rem;
-      }
-    
   
   }
-  .callToAction {
-    margin: auto;
-    text-align: center;
-    }
-    
-    .cardContainer {
-      flex-wrap: nowrap;
-      display: flex;
-      gap: 16px;
-    }
-    
-    .ctaButton {
-      color: white;
-      border: 1px solid #eee;
-      padding: 10px 20px;
-      margin: 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-    .ctaButton:hover {
-      background-color: #fff;
-      color: #000;
-    }
