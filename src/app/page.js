@@ -9,7 +9,7 @@ import Head from 'next/head';
 import './globals.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import dynamic from 'next/dynamic';
-
+import Link from "next/link";
 
 
 const Dashboard = () => {
