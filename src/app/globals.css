@@ -63,8 +63,9 @@ input {
   flex-direction: column;
 }
 .video-container-2 {
-  max-height: 480px;
   min-height: 300px;
+  align-self: flex-start;
+  border-radius: 12px;
 }
 
 .video-container h2, .video-container-2 h2 {
@@ -88,7 +89,9 @@ input {
 
 
 
-
+.Toastify__toast-container {
+  z-index: 9999;
+}
 .first-hero-section {
   padding-top: 200px;
   margin-bottom: 20px;
@@ -112,7 +115,7 @@ input {
 
 .content {
   position: relative;
-  color: white;
+  color: #003366;
   text-align: center;
   z-index: 1;
 }
