@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from '../app/Styles/Dashboard.module.css';
 import Layout from '../app/Dashboard/Layout';
 import '../app/globals.css';
@@ -7,6 +7,10 @@ import Image from 'next/image';
 import Head from 'next/head';
 import { GoogleTagManager } from '@next/third-parties/google';
 const Contact = () => {
+
+    useEffect(() => {
+    document.title = 'Logistix | Yhteys';
+  }, []);
   return (
     <Layout>
     <Head>
