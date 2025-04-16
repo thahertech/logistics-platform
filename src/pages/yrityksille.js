@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import Layout from '@/app/Dashboard/Layout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRocket, faLeaf, faChartLine, faBriefcase, faCog } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,9 @@ import Head from 'next/head';
 const MeidanPalvelusta = () => {
   const [selectedRole, setSelectedRole] = useState('Kuljettaja');
 
+    useEffect(() => {
+      document.title = 'Logistix | Yrityksille';
+    }, []);
   return (
 
     <Layout>
@@ -73,17 +76,6 @@ const MeidanPalvelusta = () => {
         </div>
 
         <div className={styles.imageContainer}>
-        
-
-    
-
-        {/* <div className={styles.masonryItem}>
-          <h2 className={styles.sectionTitle}>Sopivuus</h2>
-          <p className={styles.sectionContent}>
-          •	<strong>Yrityksille:</strong> Luo kustannustehokas ja ympäristöystävällinen tapa kilpailuttaa kuljetukset. <br />
-•	<strong>Kuljetusyrityksille:</strong> Löydä uusia asiakkaita ja optimoi ajoreittisi tyhjien kilometrien vähentämiseksi.
-          </p>
-        </div> */}
 
 <div className={styles.phaseContainer}>
   {selectedRole === 'Kuljettaja' && (
@@ -202,10 +194,6 @@ const MeidanPalvelusta = () => {
         <strong>Luo ilmoitus</strong>
         <p>Kilpailuta kuljetustilaus yhdellä ilmoituksella ja löydä ostaja.</p>
       </div>
-      {/* <div className={styles.phase}>
-        <strong>Hyväksytty</strong>
-        <p>Saat sähköpostiin tilausvahvistuksen.</p>
-      </div> */}
       <div className={styles.phase}>
         <strong>Luovutus</strong>
         <p>Valmistele lähetys kuljetusta varten.</p>
@@ -222,17 +210,6 @@ const MeidanPalvelusta = () => {
   </div>
 )}
   <div className={styles.MasonryContainer}>
-
-{/* <div className={styles.masonryItem}>
-  <h2 className={styles.sectionTitle}>Toimintatapa</h2>
-  <p className={styles.sectionContent}>
-    1. <strong>Julkaise toimitus</strong>: Lähettäjä voi julkaista toimitustarpeen nopeasti.
-    <br />
-    <br /> 2. <strong>Etsi toimitus</strong>: Kuljetusyritys selaa avoimia toimituksia ja tarjoaa.
-    <br />
-    <br /> 3. <strong>Hyväksy toimitus</strong>: Varmistuksen jälkeen automaattinen dokumentointi
-  </p>
-</div> */}
 
 <div className={styles.masonryItem}>
   <h2 className={styles.sectionTitle}>Miksi Logistix</h2>
