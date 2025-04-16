@@ -35,7 +35,7 @@ const Auth = () => {
       <div className={`${styles.authPageBackground} flex justify-center items-center`}>
       <div className="bg-black bg-opacity-70 mt-6 backdrop-filter backdrop-blur-lg border border-gray-300 flex p-6 rounded-lg shadow-md w-full max-w-4xl">          <div className="hidden md:flex flex-1 items-center justify-center">
             <Image
-              src={"/assets/3d.jpg"}
+              src={"/assets/backgrounds/3d.jpg"}
               alt="sunset-image"
               width="2000"
               height="500"
