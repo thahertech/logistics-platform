@@ -1,8 +1,12 @@
 import Layout from '@/app/Dashboard/Layout';
 import { FaTruck, FaCogs, FaCheckCircle } from 'react-icons/fa';
 import styles from '@/app/Styles/HowItWorks.module.css';
+import {useEffect} from 'react';
 
 const HowItWorks = () => {
+    useEffect(() => {
+    document.title = 'Logistix | Miten toimii?';
+  }, []);
   return (
     <Layout>
       <div className={styles.container}>
