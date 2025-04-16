@@ -26,11 +26,14 @@ const Profile = () => {
 
   const router = useRouter();
 
+  useEffect(() => {
+    document.title = 'Logistix | Oma tili';
+  }, []);
+
 
   const handleSaveOrder = (order) => {
     const doc = new jsPDF();
 
-    // Define PDF content
     doc.setFontSize(16);
     doc.text('Tilausraportti', 20, 20);
 
@@ -151,29 +154,6 @@ const closeDetails = () => {
     setSelectedOrder(null);
 };
 
-// const handleRatingSubmit = async (ratingData) => {
-//     if (!selectedOrder || !profile?.user_id) return;
-
-//     try {
-//         const { error } = await supabase
-//             .from('user_ratings')
-//             .insert({
-//                 user_id: profile.user_id,
-//                 shipment_id: selectedOrder.shipment_id,
-//                 rating: ratingData.rating,
-//                 comment: ratingData.comment || null,
-//             });
-
-//         if (error) throw new Error(`Failed to submit rating: ${error.message}`);
-
-//         alert('Rating submitted successfully!');
-//         setSelectedOrder(null);
-//         setRatings(prevRatings => [...prevRatings, { ...ratingData, shipment_id: selectedOrder.shipment_id }]);
-//     } catch (err) {
-//         console.error('Error submitting rating:', err);
-//         setError('Failed to submit rating. Please try again.');
-//     }
-// };
 
 if (loadingProfile || loadingOrders) {
     return (
