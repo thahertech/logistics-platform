@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '../app/Dashboard/Layout';
 import styles from '../app/Styles/page.module.css';
 import '../app/globals.css';
@@ -8,6 +8,10 @@ import { faWrench, faSeedling, faHandsHelping, faLightbulb } from '@fortawesome/
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 
 const AboutUs = () => {
+  useEffect(() => {
+    document.title = 'Logistix | meistä';
+  }, []);
+  
   return (
     <Layout>
         <GoogleTagManager gtmId="GTM-T7GRXLNQ" />
