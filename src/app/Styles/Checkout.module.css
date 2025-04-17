@@ -18,6 +18,12 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
 }
 
+.editBtn{
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .checkoutTitle {
   font-size: 2.5rem;
   margin-bottom: 30px;
@@ -32,16 +38,47 @@
   text-align: center;
 }
 
-.cartItems {
-  margin-bottom: 25px;
+.agreementSection{
+  margin: 20px  0;
+  padding: 20px 0;
+  border-bottom: 1px solid #fff;
+  color: #dcdcdc;
 }
 
+.agreementSection label, .cartItems label{
+  margin-left: 20px;
+}
+.cartItems {
+  margin-bottom: 25px;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 10px;
+}
+
+.userDetails {
+  background-color: #1c1c1c; /* Slightly lighter dark gray */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: #e5e5e5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); 
+}
+
+.reminderLabel{
+  margin: 20px;
+  text-align: center;
+}
 .cartItem {
   background-color: #1c1c1c; /* Slightly lighter dark gray */
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   color: #e5e5e5;
@@ -85,7 +122,10 @@
   background-color: #8e0000; /* Even darker red on active */
 }
 
-.total {
+.totalPrice h3{
+  display: flex;
+  justify-content: end;
+  font-size: 1.4rem;
   background-color: #1c1c1c; /* Dark background for totals section */
   padding: 20px;
   margin-bottom: 30px;

@@ -3,7 +3,7 @@ const serviceData = [
     icon: 'fas fa-user-plus',
     title: 'Luo käyttäjätili',
     description: 'Rekisteröidy ilmaiseksi ja hyödy palvelusta heti.',
-    path: '/auth',
+    path: '/auth/login',
   },
   // {
   //   icon: 'fas fa-exchange-alt',
@@ -15,13 +15,13 @@ const serviceData = [
     icon: 'fas fa-shipping-fast',
     title: 'Luo ilmoitus',
     description: 'Syötä kuljetustiedot ja kilpailuta.',
-    path: '/auth',
+    path: '/auth/login',
   },
   {
     icon: 'fas fa-truck',
     title: 'Kuljetusverkosto',
     description: 'Laaja verkosto kuljetusyrityksiä eri tarpeisiin.',
-    path: '/auth',
+    path: '/auth/login',
   },
   {
     icon: 'fas fa-briefcase',

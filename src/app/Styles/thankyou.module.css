@@ -1,0 +1,63 @@
+.thankYouContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .thankYouContainer h1 {
+    font-size: 2.5rem;
+    color: #003366;
+    margin-bottom: 20px;
+  }
+  
+  .thankYouContainer p {
+    font-size: 1.2rem;
+    color: #6e6e6e;
+    margin-bottom: 40px;
+  }
+  
+  .backButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #003366;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .backButton:hover {
+    background-color: #001123;
+  }
+  
+  .truckAnimation {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+
+  .truckIcon {
+    font-size: 6rem;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: -150px;
+    animation: driveTruck 10s linear forwards;
+  }
+
+  @keyframes driveTruck {
+    0% {
+      left: -150px;
+    }
+    100% {
+      left: 110%;
+    }
+  }

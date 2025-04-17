@@ -1,7 +1,6 @@
 .header {
-  box-shadow: 0 3px 0px rgba(255, 255, 255, 0.4);
-  padding: 3rem 4rem;
-  padding-bottom: 1rem;
+  padding: 1rem 0;
+  padding-bottom: 2rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -11,58 +10,54 @@
   margin-top: 20px;
 }
 
-.registerButton{
+.registerButton {
   min-height: 75px;
   align-content: center;
   font-size: 14px;
   text-decoration: underline;
   
 }
-.registerButton:hover{
+.registerButton:hover {
   color: #003366;
 }
-.topHeaderContent{
+
+.topHeaderContent {
   display: flex;
   position: relative;
-  /* left: 10%; */
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+
 }
 .topHeaderNav{
   display: flex;
   justify-content: flex-end;
   padding-right: 1rem;
-  gap: 2rem;
   margin: 1rem;
   min-height: 30px;
-  transition: all 0.3s ease;
-
+  transition: all 0.1s ease;
 }
 
 .topHeader {
   position: sticky;
   top: 0;
   z-index: 1000;
+  min-height: 30px;
   background-color: #000;
   border-radius: 0 0 10px 10px;
   transition: all 0.3s ease;
 
 }
 
-
 .activeLink {
   border-bottom: 1px solid #fff;
 }
-
 
 .topHeaderNav {
   position: relative;
   display: flex;
   gap: 20px;
 }
-
-
 
 .topHeaderLink:hover {
   color: #ddd;
@@ -88,7 +83,6 @@
 
 .topHeaderLink:hover {
   color: #ddd;
-  border-bottom: 3px solid #fff;
   border-radius: 2px;
 }
 
@@ -100,7 +94,6 @@
   position: relative;
   flex-direction: row-reverse;
 }
-
 
 .logoInTopHeaderImg {
   width: 80px;
@@ -120,27 +113,24 @@
   transition: left 0.5s ease-out, transform 0.5s ease-out;
 }
 
-/* Style for the logo when it's in the top header (after scroll) */
 .logoInTopHeader {
   position: absolute;
-  left: 10%; /* Start position from the left */
+  left: 10%;
   top: 0;
-  transition: left 0.5s ease-out; /* Smooth transition to move left */
+  transition: left 0.5s ease-out;
   margin-top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Style for the logo image */
 .logoInTopHeader img {
-  width: 75px; /* Set logo size */
+  width: 75px;
   height: 75px;
-  transition: width 0.5s ease-out; /* Smooth transition for resizing */
-  object-fit: contain; /* Ensure the logo scales without distortion */
+  transition: width 0.5s ease-out;
+  object-fit: contain;
 }
 
-/* Cart and Auth Button Container on Right Side */
 .rightControls {
   display: flex;
   align-items: center;
@@ -171,7 +161,6 @@
   font-size: 12px;
 }
 
-/* Login/Logout Button Styling */
 .authButton {
   margin-left: 20px;
 }
@@ -193,7 +182,6 @@
 }
 
 
-/* Bottom Row Menu Styling */
 .bottomRow {
   display: flex;
   justify-content: center;
@@ -228,24 +216,18 @@
 }
 
 .custom-card {
-  background-color: #003366; /* Dark blue */
-  border-color: #1e40af; /* Blue border */
-  color: #ffffff; /* White text */
+  background-color: #003366;
+  color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-
-/* Main Content and Footer Styling */
 
 .layoutContainer {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensures the layout takes full viewport height */
+  min-height: 100vh;
 }
 .mainContent {
   flex-grow: 1;
-  /* justify-content: center;
-  display: flex; */
 }
 
 
@@ -311,8 +293,6 @@
   border-top: 2px solid #ccc;
   justify-content: flex-start;
   flex-direction: row-reverse;
-
-
 }
 
 .bottomFooterNav {
@@ -328,19 +308,48 @@
   display: flex;
   align-items: center;
   text-wrap: nowrap;
-
 }
 
 .bottomFooterLink:hover,
 .bottomFooterLink.activeLink {
   color: #ffffff;
-
 }
 
 .bottomFooterLink .icon {
   margin-right: 8px;
 }
 
+.dropdownContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: black;
+  background-color: black;
+  text-align: end;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
+}
+
+.dropdownItem {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.246);
+}
+
+.dropdownItem:hover {
+  background-color: #f1f1f1;
+}
 
 .navLink:hover, .navLink1:hover {
   color: #9b9b9b;
@@ -348,7 +357,7 @@
 @media (max-width: 680px) {
   .logoInTopHeader{
     position: relative;
-    left: 0; /* Start position from the left */
+    left: 0;
   }
     .topHeaderNav{
       font-size: 12px;
@@ -368,7 +377,7 @@ justify-content: space-between;
 }
 
 }
-/* Responsive Adjustments */
+
 @media (max-width: 1200px) {
   .header {
     padding: 20px;
@@ -383,8 +392,6 @@ justify-content: space-between;
     align-items: center;
   }
 }
-
-
 
 .section {
   padding: 0;
@@ -436,7 +443,7 @@ justify-content: space-between;
 
 .tabs {
   display: flex;
-  border-bottom: 2px solid #ccc; /* Optional border for the entire tab container */
+  border-bottom: 2px solid #ccc;
 }
 
 .tab {
@@ -448,6 +455,6 @@ justify-content: space-between;
 }
 
 .tab.active {
-  border-bottom: 2px solid #0070f3; /* Change this to match your active color */
-  color: #0070f3; /* Optional active color */
+  border-bottom: 2px solid #0070f3;
+  color: #0070f3;
 }

@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@Forms/*": ["./src/app/Forms/*"]
+      "@Forms/*": ["./src/app/Forms/*"],
+      "@src/*": ["./src/*"],
     },
     "allowJs": true
   },

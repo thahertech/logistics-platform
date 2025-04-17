@@ -1,0 +1,11 @@
+{
+    "imports": {
+      "sift": "https://deno.land/x/sift@0.6.0/mod.ts",
+      "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js",
+      "tailwindcss-animate": "https://cdn.skypack.dev/tailwindcss-animate",
+      "class-variance-authority": "https://cdn.skypack.dev/class-variance-authority",
+      "lucide-react": "https://cdn.skypack.dev/lucide-react",
+      "clsx": "https://cdn.skypack.dev/clsx",
+      "tailwind-merge": "https://cdn.skypack.dev/tailwind-merge"
+    }
+  }

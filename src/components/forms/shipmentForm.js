@@ -1,0 +1,49 @@
+export const steps = ["Omat tiedot", "Vastaanottaja", "Nouto", "Toimitus", "Yhteenveto"];
+
+export const shipmentForm = {
+  sender: {
+    name: '',
+    address: '',
+    city: '',
+    postal_code: '',
+    email: '',
+    phone: '',
+    vat_number: ''
+  },
+  pickup: {
+    date: '',
+    time: '',
+    address: '',
+    postal_code: '',
+    city: '',
+    email: '',
+    phone: '',
+    details: ''
+  },
+  recipient: {
+    name: '',
+    address: '',
+    postal_code: '',
+    city: '',
+    email: '',
+    phone: ''
+  },
+  delivery: {
+    address: '',
+    postal_code: '',
+    city: '',
+    date: '',
+    time: '',
+    details: ''
+  },
+  shipment: {
+    weight: '',
+    transportUnits: '',
+    unitType: '',
+    details: '',
+    incoTerms: '',
+    price: '',
+    amount: '',
+    status: ''
+  }
+};

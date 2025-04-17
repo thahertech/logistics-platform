@@ -4,9 +4,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    background-color: #ffffff1a;
-    -webkit-backdrop-filter: blur(50px);
-    backdrop-filter: blur(50px);
+    background-color: #000000a6;
+
     padding: 1rem;
     border-radius: 8px;
     max-width: 780px;
@@ -16,6 +15,8 @@
   
   .overlay {
     position: fixed;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     top: 0;
     left: 0;
     right: 0;

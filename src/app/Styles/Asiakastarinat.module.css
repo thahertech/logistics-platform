@@ -1,0 +1,95 @@
+.container {
+    background-color: #121212;
+    color: #fff;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+  }
+  
+  .cardsContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background-color: #1c1c1c;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 48%;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .cardIcon {
+    font-size: 40px;
+    color: #eee;
+    margin-top: 1rem;
+  }
+  
+  .sectionTitle {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #fff;
+  }
+  
+  .chartContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .chartCard {
+    width: 80%;
+    background-color: #222222;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .chartTitle {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #eee;
+  }
+  
+  .statsContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  .statCard {
+    background-color: #1c1c1c;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 48%;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .statCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .statIcon {
+    font-size: 30px;
+    color: #003366;
+    margin-top: 1rem;
+  }
