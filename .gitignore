@@ -46,4 +46,6 @@ next-env.d.ts
 sendgrid.env
 
 src/pages/kuljetukset/*
-public/assets/backgrounds
+public/assets/backgrounds/auth.mp4
+public/assets/backgrounds/ab.mp4
+public/assets/backgrounds/Triangle.mp4
