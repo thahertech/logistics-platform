@@ -11,7 +11,6 @@ import Image from 'next/image';
 
 import { handleSubmit } from '@/components/authentication/actions/handleSubmit';
 import { handleForgotPassword } from '@/components/authentication/actions/handleForgotPassword';
-import { signInWithGoogle, signInWithApple } from '@/components/authentication/actions/oAuth';
 
 
 const Auth = () => {
@@ -58,39 +57,7 @@ const Auth = () => {
                 <span>Rekisteröidy<button onClick={() => setIsLogin(true)} className="text-white rounded-[12px] py-2 px-4 ml-8 border">Kirjaudu sisään</button></span>
               )}
             </p>
-            {isLogin ? (
-  <div className="flex flex-col items-center justify-evenly mt-10">
 
-  <button
-    type="button"
-    onClick={() => signInWithGoogle(setIsLoading, setError, router)}
-    className=" flex "
-  >
-      <Image
-        src="public/assets/signin-assets/Web (mobile + desktop)/png@4x/dark/web_dark_sq_SI@4x.png"
-        alt="Sign in with Google"
-        width={250}
-        height={40}
-        className="cursor-pointer"
-      />
-
-  </button>
-  <button 
-    type="button"
-    onClick={() => signInWithApple(setIsLoading, setError, router)}
-    className=" flex justify-center items-center mt-2"
-    >
-  <Image 
-  src="public/assets/signin-assets/Web (mobile + desktop)/Logo - SIWA - Logo-only - Black@3x.png"
-  alt="sign in with apple"
-  width={70}
-  height={70}
-  className="cursor-pointer"
-/>
-</button>
-</div>
-
-) : null}
             <form 
             
             onSubmit={(e) => handleSubmit(e, isLogin, formData, setError, setIsLoading, setFormData, setShowModal, setIsLogin, router, toast)}>
