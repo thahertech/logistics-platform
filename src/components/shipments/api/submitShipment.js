@@ -2,10 +2,17 @@ import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '@/supabaseClient';
 
 export async function submitShipment(form) {
+  
   const COMMISSION_RATE = 0.9;
 
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError || !sessionData?.session?.access_token) {
+    throw new Error(sessionError?.message || "No active session");
+  }
+  const userId = sessionData.session.user.id;
+
   const shipmentData = {
-    user_id: form.userID,
+    user_id: userId,
     shipment_identifier: uuidv4(),
     sender_name: form.sender.name,
     sender_email: form.sender.email,
@@ -42,10 +49,6 @@ export async function submitShipment(form) {
     details: form.shipment.details,
   };
 
-  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-  if (sessionError || !sessionData?.session?.access_token) {
-    throw new Error(sessionError?.message || "No active session");
-  }
 
   const response = await fetch(
     "https://ccjggzpkomwjzwrawmyr.supabase.co/functions/v1/new-shipment-email",

@@ -20,7 +20,7 @@ export const renderStepContent = ({
     case 2:
       return <RecipientStep form={form} handleChange={handleChange} handleToggle={handleToggle} autoFillFlags={autoFillFlags} handleAddressSelect={handleAddressSelect} />;
     case 3:
-      return <ShipmentStep form={form} handleChange={handleChange} />;
+      return <ShipmentStep form={form} handleChange={handleChange} autoFillFlags={autoFillFlags} handleToggle={handleToggle} handleAddressSelect={handleAddressSelect} />;
     case 4:
       return <FinalStep form={form} handleChange={handleChange} />;
     default:

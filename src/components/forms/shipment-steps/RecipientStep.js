@@ -1,13 +1,9 @@
 import React from 'react';
 import AddressAutocomplete from '../../maps/addressAutocomplete';
 
-const RecipientStep = ({ form, handleChange, handleToggle, autoFillFlags, handleAddressSelect }) => {
+const RecipientStep = ({ form, handleChange, handleAddressSelect }) => {
   return (
     <div>
-      <label className="flex items-center mb-4 text-white">
-        <input type="checkbox" className="mr-2" checked={autoFillFlags.sameAsRecipient} onChange={handleToggle('sameAsRecipient')} />
-        Toimitusosoite sama kuin vastaanottajan osoite
-      </label>
       <AddressAutocomplete
           value={form.recipient.address}
           onChange={handleChange('recipient', 'address')}

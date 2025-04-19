@@ -8,7 +8,7 @@ import { useFormAutofill } from './useFormAutofill';
 import { shipmentForm } from '@/components/forms/shipmentForm';
 import { flattenForm } from '../utils/flattenForm';
 
-export const useShipmentForm = () => {
+ export const useShipmentForm = () => {
   const router = useRouter();
   const { user, profile } = useProfileData();
   const [form, setForm] = useState(shipmentForm);

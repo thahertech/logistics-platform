@@ -15,7 +15,7 @@ import BackButton from '@/components/buttons/BackButton';
 import SecondaryButton from '@/components/buttons/SecondaryButton';
 import ShipmentSidebar from '@/components/checkout/sidebar';
 import LShipmentSidebar from '@/components/checkout/sidebar-left';
-import {ROUTES} from '@/constants/routes';
+import { ROUTES } from '@/constants/routes';
 import { submitShipment } from '@/components/shipments/api/submitShipment';
 
 const CreateShipment = () => {
@@ -27,7 +27,6 @@ const CreateShipment = () => {
 
   useEffect(() => {
     if (params?.id) {
-      // Set ID from URL param, if necessary
     }
   }, [params]);
 
@@ -67,7 +66,6 @@ const CreateShipment = () => {
     <>
       <TopHeader />
       <div className="position-sticky align-items-center justify-end flex">
-        {/* <ShipmentSidebar pickup={form.sender} delivery={form.recipient} /> */}
       </div>
       <div className="flex flex-col items-center justify-center h-screen bg-black-800">
         <h2 className="text-lg font-bold mb-4 text-white">Luo uusi Lähetys</h2>

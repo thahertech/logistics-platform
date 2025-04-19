@@ -1,4 +1,4 @@
-export const steps = ["Omat tiedot", "Vastaanottaja", "Nouto", "Toimitus", "Yhteenveto"];
+export const steps = ["Omat tiedot", "Nouto", "Vastaanottaja", "Toimitus", "Yhteenveto"];
 
 export const shipmentForm = {
   sender: {

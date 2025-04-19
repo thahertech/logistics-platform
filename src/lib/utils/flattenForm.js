@@ -12,7 +12,6 @@ export const flattenForm = (form) => {
         if (field === 'unitType' && section === 'shipment') continue;
         if (field === 'details' && section === 'shipment') continue;
         if (field === 'incoTerms' && section === 'shipment') continue;
-        if (field === 'contact' && section === 'pickup') continue;
         if (field === 'email' && section === 'pickup') continue;
         if (field === 'phone' && section === 'pickup') continue;
         if (field === 'details' && section === 'delivery') continue;

@@ -22,6 +22,15 @@ const Sidebar = ({ activeTab, setActiveTab, handleSignOut, userRole }) => {
       >
         <FaBox className="mr-3 text-xl" />  {ordersText}
       </button>
+
+      <button
+        className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${
+          activeTab === 'orders' ? 'bg-[#003366]' : 'bg-transparent'
+        }`}
+        onClick={() => setActiveTab('purchase')}
+      >
+        <FaBox className="mr-3 text-xl" />  Ostot
+      </button>
       {/* <button
         className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${
           activeTab === 'orders' ? 'bg-[#003366]' : 'bg-transparent'

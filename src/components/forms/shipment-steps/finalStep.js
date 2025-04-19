@@ -22,9 +22,9 @@ const FinalStep = ({ form, handleChange }) => {
 
       <section>
         <h2 className="text-xl font-bold mb-2">Toimitustiedot</h2>
-        <Field label="Nouto-osoite" value={form.delivery.pickup_address} />
-        <Field label="Toimitusosoite" value={form.delivery.dropoff_address} />
-        <Field label="Toivottu toimitusaika" value={form.delivery.delivery_time} />
+        <Field label="Nouto-osoite" value={form.pickup.address} />
+        <Field label="Toimitusosoite" value={form.delivery.address} />
+        <Field label="Toivottu toimitusaika" value={form.delivery.time} />
         <Field label="Kuljetustyyppi" value={form.delivery.transport_type} />
       </section>
 
