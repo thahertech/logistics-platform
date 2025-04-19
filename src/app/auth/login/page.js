@@ -67,7 +67,7 @@ const Auth = () => {
     className=" flex "
   >
       <Image
-        src="/assets/signin-assets/Web (mobile + desktop)/png@4x/dark/web_dark_sq_SI@4x.png"
+        src="public/assets/signin-assets/Web (mobile + desktop)/png@4x/dark/web_dark_sq_SI@4x.png"
         alt="Sign in with Google"
         width={250}
         height={40}
@@ -81,7 +81,7 @@ const Auth = () => {
     className=" flex justify-center items-center mt-2"
     >
   <Image 
-  src="/assets/signin-assets/Web (mobile + desktop)/Logo - SIWA - Logo-only - Black@3x.png"
+  src="public/assets/signin-assets/Web (mobile + desktop)/Logo - SIWA - Logo-only - Black@3x.png"
   alt="sign in with apple"
   width={70}
   height={70}
