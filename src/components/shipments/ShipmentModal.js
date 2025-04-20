@@ -14,7 +14,7 @@ export default function ShipmentModal({ shipment, onClose }) {
         <div className="modal-header mb-4 border-b border-gray-700 pb-2"><FaTruck />
           <div className="flex justify-between mt-6 text-gray-300">
             <div>
-              <p><strong>Nouto</strong> {new Date(shipment.pickup_time).toLocaleString('fi-FI', {
+              <p><strong>Nouto</strong> {new Date(shipment.pickup_date).toLocaleString('fi-FI', {
                 month: '2-digit',
                 day: '2-digit',
                 hour: '2-digit',

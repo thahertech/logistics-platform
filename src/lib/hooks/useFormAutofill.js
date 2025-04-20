@@ -46,13 +46,11 @@ export const useFormAutofill = (profile, form, setForm) => {
         if (key === 'sameAsRecipient') {
           setForm(f => ({
             ...f,
-            recipient: {
-              ...f.recipient,
-              phone: profile.phone_number || '',
-              email: profile.email || '',
-              address: profile.address || '',
-              city: profile.city || '',
-              postal_code: profile.postal_code || '',
+            delivery: {
+              ...f.delivery,
+              address: f.recipient.address || '',
+              city: f.recipient.city || '',
+              postal_code: f.recipient.postal_code || '',
             }
           }));
         }

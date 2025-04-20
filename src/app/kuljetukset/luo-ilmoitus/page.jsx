@@ -69,6 +69,7 @@ const CreateShipment = () => {
       </div>
       <div className="flex flex-col items-center justify-center h-screen bg-black-800">
         <h2 className="text-lg font-bold mb-4 text-white">Luo uusi Lähetys</h2>
+      
         <form onSubmit={(e) => e.preventDefault()} className="bg-gray-800 bg-opacity-20 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-1/3">
           <div className="mb-4 flex justify-between items-center">
             {steps.map((label, index) => (
@@ -126,8 +127,9 @@ const CreateShipment = () => {
             </div>
           </div>
         </form>
+        <ShipmentSidebar pickup={form.pickup} delivery={form.delivery}/>
       </div>
-      {/* <LShipmentSidebar /> */}
+    
     </>
   );
 };

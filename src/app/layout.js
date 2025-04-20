@@ -6,6 +6,7 @@ import ClientTracker from '../components/clientTracker';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Script from 'next/script';
+import { Suspense } from 'react';
 
 export const metadata = {
   title: 'Logistix',
@@ -40,10 +41,10 @@ export default function RootLayout({ children }) {
       </head>
 
       <body>
-        <ClientTracker />
-        {children}
-        <Analytics />
-        <SpeedInsights />
+      <Suspense fallback={null}>
+          <ClientTracker />
+        </Suspense>
+
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -55,6 +56,10 @@ export default function RootLayout({ children }) {
           pauseOnHover
           theme="dark"
         />
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      
       </body>
 
       <GoogleAnalytics gaId="G-KS6NFLFQKS" />

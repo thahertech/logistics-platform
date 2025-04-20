@@ -8,6 +8,7 @@ import Sidebar from '@/components/profile/profile-sidebar';
 import ProfileContent from '@/components/profile/profile-content';
 import OrdersContent from '@/components/profile/orders-content';
 import OrderDetails from '@/components/profile/order-details';
+import PurchaseContent from '@/components/profile/purchase-content';
 import { ROUTES } from '@/constants/routes';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,6 +17,7 @@ export default function OmaTiliPage() {
 
   const [profile, setProfile] = useState(null);
   const [orders, setOrders] = useState([]);
+  const [purchases, setPurchases] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
   const [loadingOrders, setLoadingOrders] = useState(true);
@@ -161,6 +163,31 @@ useEffect(() => {
     fetchOrders();
 }, []);
 
+useEffect(() => {
+  const fetchPurchases = async () => {
+      try {
+          const { data: user, error: userError } = await supabase.auth.getUser();
+          if (userError) throw new Error(`User fetch error: ${userError.message}`);
+          if (!user) return;
+
+          const { data: userPurchases, error: ordersError } = await supabase
+              .from('shipment_purchases')
+              .select('*')
+              .eq('user_id', user.user.id);
+
+          if (ordersError) throw new Error(`Orders fetch error: ${ordersError.message}`);
+          setPurchases(userPurchases || []);
+      } catch (err) {
+          setError(err.message);
+          toast.error('Virhe tilauksia ladattaessa: ' + err.message);
+      } finally {
+          setLoadingOrders(false);
+
+      }
+  };
+  fetchPurchases();
+}, []);
+
 
 const handleEditDetails = (order) => {
     setSelectedOrder(order);
@@ -241,6 +268,13 @@ if (loadingProfile || loadingOrders) {
                         handleViewDetails={setSelectedOrder}
                       />
                     )}
+                    {activeTab === 'purchase' && profile && (
+                      <PurchaseContent
+                        purchases={purchases}
+                        userRole={profile?.user_role}
+                        handleViewDetails={setPurchases}
+                    />
+                      )}
 
                 {selectedOrder && (
                   <OrderDetails

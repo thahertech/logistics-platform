@@ -38,8 +38,8 @@ export const shipmentForm = {
   },
   shipment: {
     weight: '',
-    transportUnits: '',
-    unitType: '',
+    transport_units: '',
+    unit_type: '',
     details: '',
     incoTerms: '',
     price: '',

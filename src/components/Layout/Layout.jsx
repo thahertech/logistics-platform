@@ -2,8 +2,6 @@ import React from 'react';
 import '../../app/globals.css';
 import styles from '../../app/Styles/Layout.module.css';
 import { GoogleTagManager } from '@next/third-parties/google';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import TopHeader from './TopHeader';
 import MainHeader from './MainHeader';

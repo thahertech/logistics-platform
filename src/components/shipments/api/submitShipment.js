@@ -1,14 +1,45 @@
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '@/supabaseClient';
 
+export function validateShipmentForm(form) {
+  const requiredFields = [
+    'sender.name', 'sender.email', 'sender.address', 'sender.postal_code', 'sender.city', 'sender.phone',
+    'recipient.name', 'recipient.email', 'recipient.address', 'recipient.postal_code', 'recipient.city', 'recipient.phone',
+    'pickup.address', 'pickup.postal_code', 'pickup.city', 'pickup.date', 'pickup.time',
+    'delivery.address', 'delivery.postal_code', 'delivery.city', 'delivery.date', 'delivery.time',
+    'shipment.weight', 'shipment.transportUnits', 'shipment.price', 'shipment.incoTerms',
+  ];
+
+  for (const path of requiredFields) {
+    const value = path.split('.').reduce((obj, key) => obj?.[key], form);
+    if (!value || value.toString().trim() === '') {
+      throw new Error(`Puuttuva kenttä: ${path}`);
+    }
+  }
+
+  if (isNaN(form.shipment.price) || Number(form.shipment.price) <= 0) {
+    throw new Error('Hinta on virheellinen.');
+  }
+
+  // Optional: validate email format, phone number etc
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!isValidEmail(form.sender.email)) throw new Error('Lähettäjän sähköposti ei ole kelvollinen');
+  if (!isValidEmail(form.recipient.email)) throw new Error('Vastaanottajan sähköposti ei ole kelvollinen');
+
+  // Add more business-specific validation rules as needed
+}
+
 export async function submitShipment(form) {
-  
   const COMMISSION_RATE = 0.9;
+
+  // ✅ Validate first
+  validateShipmentForm(form);
 
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
   if (sessionError || !sessionData?.session?.access_token) {
     throw new Error(sessionError?.message || "No active session");
   }
+
   const userId = sessionData.session.user.id;
 
   const shipmentData = {
@@ -42,13 +73,14 @@ export async function submitShipment(form) {
     delivery_longitude: form.delivery.longitude,
     weight: form.shipment.weight,
     transport_units: form.shipment.transportUnits,
+    unit_type: form.shipment.unitType,
+    details: form.delivery.details,
     status: "pending",
     price: form.shipment.price,
     amount: form.shipment.price * COMMISSION_RATE,
     agreement_type: form.shipment.incoTerms,
-    details: form.shipment.details,
+ 
   };
-
 
   const response = await fetch(
     "https://ccjggzpkomwjzwrawmyr.supabase.co/functions/v1/new-shipment-email",

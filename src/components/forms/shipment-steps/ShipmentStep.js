@@ -7,13 +7,14 @@ const ShipmentStep = ({ form, handleChange, autoFillFlags, handleToggle }) => {
         <input
           type="checkbox"
           className="mr-2"
-          checked={!autoFillFlags.sameAsRecipient}
+          checked={autoFillFlags.sameAsRecipient}
           onChange={handleToggle('sameAsRecipient')}
         />
-        Toimitusosoite eri kuin vastaanottaja osoite
+        Toimitusosoite sama kuin vastaanottaja osoite
       </label>
 
       {!autoFillFlags.sameAsRecipient && (
+        <div>
         <input
           type="text"
           className="w-full p-2 mb-4 border rounded bg-transparent text-white"
@@ -21,6 +22,21 @@ const ShipmentStep = ({ form, handleChange, autoFillFlags, handleToggle }) => {
           value={form.delivery.address}
           onChange={handleChange('delivery', 'address')}
         />
+            <input
+          type="text"
+          className="w-full p-2 mb-4 border rounded bg-transparent text-white"
+          placeholder="Postinumero"
+          value={form.delivery.postal_code}
+          onChange={handleChange('delivery', 'postal_code')}
+        />
+             <input
+          type="text"
+          className="w-full p-2 mb-4 border rounded bg-transparent text-white"
+          placeholder="Kaupunki"
+          value={form.delivery.city}
+          onChange={handleChange('delivery', 'city')}
+        />
+</div>
       )}
 
       <input
@@ -34,7 +50,7 @@ const ShipmentStep = ({ form, handleChange, autoFillFlags, handleToggle }) => {
         type="text"
         className="w-full p-2 mb-4 border rounded bg-transparent text-white"
         placeholder="Kuljetettavat yksiköt"
-        value={form.shipment.transportUnits}
+        value={form.shipment.transportUnits || ''}
         onChange={handleChange('shipment', 'transportUnits')}
       />
       <input
