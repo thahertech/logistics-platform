@@ -1,17 +1,21 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/supabaseClient';
 import { toast } from 'react-toastify';
+import { useSession } from '@supabase/auth-helpers-react';
 
 export default function ResetPasswordPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const { data: session } = useSession();
   const [loading, setLoading] = useState(true);
 
+  if (!session) return <div>Kirjaudu sisään uudelleen</div>;
+
   useEffect(() => {
-    const accessToken = searchParams.get('access_token');
-    const type = searchParams.get('type');
+  const url = new URL(window.location.href);
+  const accessToken = url.searchParams.get('access_token');
+  const type = url.searchParams.get('type');
 
     const handlePasswordReset = async () => {
       if (type === 'recovery' && accessToken) {
@@ -33,7 +37,7 @@ export default function ResetPasswordPage() {
     };
 
     handlePasswordReset();
-  }, [router, searchParams]);
+  }, [router]);
 
   return (
     <div style={styles.container}>
