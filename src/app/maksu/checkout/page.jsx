@@ -5,51 +5,28 @@ import styles from '@/app/Styles/Checkout.module.css';
 import Layout from '@/components/Layout/Layout';
 import { supabase } from '@/supabaseClient';
 import { toast } from 'react-toastify';
+import  useUser  from '@/lib/hooks/useUser';
+import useUserProfile from '@/lib/hooks/useUserProfile';
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);
-  const router = useRouter();
   const [isAgreementChecked, setIsAgreementChecked] = useState(false);
   const [isLogistixAgreementChecked, setIsLogistixAgreementChecked] = useState(false);
   const [isPurchased, setIsPurchased] = useState(false);
-  const [userDetails, setUserDetails] = useState(null);
+
+  const router = useRouter();
+  const { user, loading: userLoading, error: userError } = useUser();
+  
+  const { userProfile, loading: profileLoading, error: profileError } = useUserProfile(user);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart'));
     if (savedCart) {
       setCart(savedCart);
     } else {
-      router.push('/kuljetukset'); // Redirect if no items in the cart
+      router.push('/kuljetukset');
     }
   }, [router]);
-
-   // Fetch user details
-   useEffect(() => {
-    const fetchUserDetails = async () => {
-      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-      if (sessionError || !sessionData?.session?.access_token) {
-        console.error("Error fetching session details:", sessionError);
-        toast.error("Failed to authenticate user. Please log in.");
-        return;
-      }
-
-      const { data: userData, error: userError } = await supabase
-        .from('profiles')
-        .select('yritys_nimi, phone_number, address, full_name, vat_number, full_name')
-        .eq('user_id', sessionData.session.user.id)
-        .single();
-
-      if (userError) {
-        console.error("Error fetching user details:", userError);
-        toast.error("Failed to fetch user details.");
-        return;
-      }
-
-      setUserDetails(userData);
-    };
-
-    fetchUserDetails();
-  }, []);
 
   const handleRemoveItem = (index) => {
     const updatedCart = cart.filter((_, i) => i !== index);
@@ -64,22 +41,8 @@ const Checkout = () => {
     return { totalPrice, commission, amountPaidToCompany };
   };
 
-  const generateFinnishReferenceNumber = (baseNumber) => {
-    const weights = [7, 3, 1];
-    const digits = baseNumber.toString().split('').reverse();
-    let sum = 0;
-
-    digits.forEach((digit, index) => {
-      sum += parseInt(digit) * weights[index % weights.length];
-    });
-
-    const checkDigit = (10 - (sum % 10)) % 10;
-    return `${baseNumber}${checkDigit}`;
-  };
-
   const handlePlaceOrder = async () => {
     const kuljetus = cart[0];
-
 
     const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
 
@@ -91,23 +54,23 @@ const Checkout = () => {
 
     const accessToken = sessionData.session.access_token;
 
-     // Check if user has completed their profile details (example: name, address)
-  if (!userDetails || !userDetails.full_name || !userDetails.vat_number || !userDetails.yritys_nimi || !userDetails.address) {
-    toast.error("Täytä ensin käyttäjätiedot.");
-    return;
-  }
+    // Check if user profile is loaded
+    if (!userProfile || !userProfile.full_name || !userProfile.vat_number || !userProfile.yritys_nimi || !userProfile.address) {
+      toast.error("Täytä ensin käyttäjätiedot.");
+      return;
+    }
 
-  if (!isAgreementChecked) {
-    toast.error("Sinun täytyy hyväksyä kuljetuksen ehdot.");
-    return;
-  }
-  if (!isLogistixAgreementChecked) {
-    toast.error("Sinun täytyy hyväksyä Logistix palveluehdot.");
-    return;
-  }
+    if (!isAgreementChecked) {
+      toast.error("Sinun täytyy hyväksyä kuljetuksen ehdot.");
+      return;
+    }
+    if (!isLogistixAgreementChecked) {
+      toast.error("Sinun täytyy hyväksyä Logistix palveluehdot.");
+      return;
+    }
 
     const { totalPrice } = calculateTotal();
-  
+
     try {
       const response = await fetch(
         "https://ccjggzpkomwjzwrawmyr.supabase.co/functions/v1/placeOrder",
@@ -134,10 +97,7 @@ const Checkout = () => {
       }
 
       const data = await response.json();
-      toast
-        .success("Tilaus onnistui! Kiitos ostoksestasi.");
-
-
+      toast.success("Tilaus onnistui! Kiitos ostoksestasi.");
 
       setIsPurchased(true);
       localStorage.removeItem("cart");
@@ -147,6 +107,10 @@ const Checkout = () => {
       toast.error("Tilaus epäonnistui. Tarkista yhteys ja yritä uudelleen.");
     }
   };
+
+  if (userLoading || profileLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Layout>
@@ -163,7 +127,6 @@ const Checkout = () => {
                 Palaa takaisin
               </button>
             </div>
-          
           ) : (
             <div className={styles.cartItems}>
               {cart.map((item, index) => (
@@ -173,7 +136,7 @@ const Checkout = () => {
                   <p>Paino: {item.weight} kg</p>
                   <div className={styles.cartGroup}>
                     <h2>{item.details}</h2>
-                    <p>Nouto {item.pickup_time}</p>   
+                    <p>Nouto {item.pickup_time}</p>
                   </div>             
                   <button
                     className={styles.removeButton}
@@ -183,69 +146,61 @@ const Checkout = () => {
                   </button>
                 </div>
               ))}
-                          <input
-              type="checkbox"
-              id="agreementCheckbox"
-              checked={isAgreementChecked}
-              onChange={() => setIsAgreementChecked(!isAgreementChecked)}
-            />
-            <label htmlFor="agreementCheckbox">
-              Hyväksyn tämän kuljetuksen <a href="/shipment-terms" target="_blank">ehdot</a>
-              <br/>
-            </label>
-          
+              <input
+                type="checkbox"
+                id="agreementCheckbox"
+                checked={isAgreementChecked}
+                onChange={() => setIsAgreementChecked(!isAgreementChecked)}
+              />
+              <label htmlFor="agreementCheckbox">
+                Hyväksyn tämän kuljetuksen <a href="/shipment-terms" target="_blank">ehdot</a>
+                <br/>
+              </label>
 
-        <div className={styles.userDetails}>
-                    {userDetails && (
-                      <div>
-                        <h3>Omat tiedot</h3>
-                        <p>Yritys: {userDetails.yritys_nimi}</p>
-                        <p>Ytunnus: {userDetails.vat_number}</p>
-                        <p>Puhelinnumero: {userDetails.phone_number}</p>
-                        <p>Yhteyshenkilö: {userDetails.full_name}</p>
-                        <p>Osoite: {userDetails.address}</p>
-                        <p>Postinumero: {userDetails.postal_code}</p>
-                        <p>Kaupunki: {userDetails.city}</p>
-                      </div>
-                    )}
-                    <button className={styles.editBtn}><a href="/oma-tili">muokkaa tiedot</a></button>
+              <div className={styles.userDetails}>
+                {userProfile && (
+                  <div>
+                    <h3>Omat tiedot</h3>
+                    <p>Yritys: {userProfile.yritys_nimi}</p>
+                    <p>Ytunnus: {userProfile.vat_number}</p>
+                    <p>Puhelinnumero: {userProfile.phone_number}</p>
+                    <p>Yhteyshenkilö: {userProfile.full_name}</p>
+                    <p>Osoite: {userProfile.address}</p>
+                    <p>Postinumero: {userProfile.postal_code}</p>
+                    <p>Kaupunki: {userProfile.city}</p>
                   </div>
+                )}
+                <button className={styles.editBtn}><a href="/oma-tili">muokkaa tiedot</a></button>
+              </div>
 
-<div className={styles.agreementSection}>
+              <div className={styles.agreementSection}>
+                <input
+                  type="checkbox"
+                  id="logistixAgreement"
+                  checked={isLogistixAgreementChecked}
+                  onChange={() => setIsLogistixAgreementChecked(!isLogistixAgreementChecked)}
+                />
+                <label htmlFor="logistixAgreement">
+                  Hyväksyn Logistix palveluehdot ja säännöt - <a href="/ehdot" target="_blank">Lue lisää ehdoista</a>
+                  <br/>
+                </label>
+              </div>
 
+              <div className={styles.totalPrice}>
+                {/* Total price section */}
+              </div>
 
-            <input
-              type="checkbox"
-              id="logistixAgreement"
-              checked={isLogistixAgreementChecked}
-              onChange={() => setIsLogistixAgreementChecked(!isLogistixAgreementChecked)}
-            />
-            <label htmlFor="logistixAgreement">
-              Hyväksyn Logistix palveluehdot ja säännöt - <a href="/ehdot" target="_blank"> Lue lisää ehdoista</a>
-              <br/>
-            </label>
-          </div>
-          
-
-          <div className={styles.totalPrice}>
-            <h3>Yhteensä: {calculateTotal().amountPaidToCompany.toFixed(2)} €</h3>
- 
-            <button
-              className={styles.placeOrderButton}
-              onClick={handlePlaceOrder}
-            >
-              Vahvista osto
-            </button>
-          </div>
-          <div className={styles.reminderLabel}>
-          <p>Ostamalla kuljetuksen olet sitoutunut toimittamaan tuotteen ehtojen mukaisesti</p>
-          <p>Varmista, että antamasi tiedot ovat oikein</p>
-          </div>
-     </div>
-)}
+              <button 
+                className={styles.placeOrderButton} 
+                onClick={handlePlaceOrder}
+                disabled={isPurchased}
+              >
+                {isPurchased ? 'Tilaus Suoritettu' : 'Vahvista tilaus'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
-    
     </Layout>
   );
 };

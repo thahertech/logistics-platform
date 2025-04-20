@@ -4,9 +4,9 @@
   padding: 20px;
   transition: all 0.3s ease;
   max-width: 300px;
-  padding-top: 0;
   border: 1px solid #eee;
   margin-right: 20px;
+  min-width: 200px;
 }
 
 .modal-price {
@@ -49,23 +49,18 @@
   cursor: grabbing;
 }
 
-.filterGroup {
-  margin-bottom: 1rem;
-}
-
-/* Additional styles for buttons and inputs */
 .locationButton{
   position: absolute;
   margin-top: 42px;
   right: 40px;
   color: white;
 }
-/* Sidebar hidden state */
+
 .sidebar.hidden {
   transform: translateX(-100%);
+  display: none;
 }
 
-/* Filter group */
 .filterGroup {
   margin-bottom: 1.5rem;
   padding: 15px;
@@ -77,7 +72,6 @@
   color: white;
 }
 
-/* Filter group labels */
 .filterGroup label {
   font-size: 14px;
   color: #c7c7c7;
@@ -86,7 +80,6 @@
   display: inline-block;
 }
 
-/* Filter group inputs */
 .filterGroup input[type="text"],
 .filterGroup input[type="range"],
 .filterGroup select {
@@ -100,7 +93,6 @@
   font-size: 14px;
 }
 
-/* Range display text */
 .weightDisplay {
   text-align: center;
   color: #cce7ff;
@@ -108,13 +100,11 @@
   margin-top: 10px;
 }
 
-/* Checkbox styling */
 .filterGroup input[type="checkbox"] {
   accent-color: #007acc;
   margin-right: 10px;
 }
 
-/* Button Group */
 .buttonGroup {
   display: flex;
   justify-content: space-between;
@@ -240,6 +230,34 @@
   flex-direction: column;
 }
 
+.select {
+  width: 100%;
+  padding: 8px;
+  background: #444;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.select:focus {
+  border-color: #007bff;
+}
+
+.sidebar input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.sidebar input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.sidebar input[type="checkbox"]:focus {
+  outline: none;
+  border-color: #0056b3;
+}
+
 .input[type="time"] {
   padding: 8px;
   border-radius: 8px;
@@ -291,4 +309,128 @@
   .buttonGroup button {
     font-size: 12px;
   }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden */
+    height: 100vh;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    left: 0; /* Slide in */
+  }
+
+  .content {
+    margin-left: 0; /* Remove left margin on smaller screens */
+  }
+
+  .toggleButton {
+    left: 10px;
+    top: 10px;
+  }
+
+  .buttonGroup button {
+    font-size: 12px; /* Smaller buttons */
+    padding: 8px 12px;
+  }
+
+  .filterGroup {
+    margin-bottom: 1rem;
+    padding: 10px;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items at the start */
+  }
+
+  .filterGroup label {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  .filterGroup select,
+  .filterGroup input[type="text"],
+  .filterGroup input[type="range"] {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .filterGroup input[type="checkbox"] {
+    margin-right: 8px;
+  }
+
+  .dateFilter {
+    flex-direction: column; /* Stack filters vertically */
+  }
+
+  .filterGroup input[type="text"],
+  .filterGroup select {
+    padding: 10px; /* Larger padding on inputs for easier touch */
+    font-size: 14px;
+  }
+}
+
+/* Show the sidebar button when it's closed on mobile */
+.sidebar.hidden {
+  display: none;
+}
+
+.sidebar:active {
+  cursor: grabbing;
+}
+
+/* Sidebar toggle button */
+.toggleButton {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  padding: 10px 15px;
+  background-color: #003366;
+  border: 1px solid #fff;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.toggleButton:hover {
+  background-color: #005f99;
+}
+
+.sidebar .filterGroup {
+  width: 100%; /* Ensure filter group takes full width */
+}
+
+.filterGroup input[type="text"],
+.filterGroup select {
+  width: 100%; /* Ensure select inputs take full available width */
+}
+
+/* Button Group adjustments */
+.buttonGroup {
+  display: flex;
+  flex-direction: column; /* Stack buttons on mobile */
+  gap: 10px;
+}
+
+.buttonGroup button {
+  width: 100%; /* Buttons take full width on mobile */
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid #ffffff93;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.buttonGroup button:hover {
+  background-color: #003366;
 }

@@ -41,7 +41,7 @@ export default function ShipmentCard({ shipment, onClick }) {
         </div>
       )}
 
-      {isUrgent && (
+      {isUrgent && !isDisabled && (
         <div className="absolute top-2 z-1 right-2 text-white bg-green-600 px-2 py-1 rounded text-xs flex items-center gap-1">
           <Bell size={14} />
           Asap

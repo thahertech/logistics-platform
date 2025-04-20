@@ -44,6 +44,11 @@
 .card{
   flex-wrap: wrap;
 }
+.sectionDivider {
+  border-top: 1px solid #ffffff15;
+  margin: 30px 0;
+  width: 100%;
+}
 
 .formContainer div input, .formContainer div textarea{
   background-color: #000;

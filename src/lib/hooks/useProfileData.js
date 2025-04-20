@@ -15,7 +15,7 @@ export const useProfileData = () => {
       console.log('userData', userData);
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
-        .select('full_name, phone_number, vat_number, address, city, postal_code')
+        .select('full_name, phone_number, vat_number, yritys_nimi, user_role, address, city, postal_code')
         .eq('user_id', userData.id)
         .single();
 
@@ -32,6 +32,7 @@ export const useProfileData = () => {
 
     fetchUserAndProfile();
   }, []);
+  console.log(user, profile);
 
   return { user, profile };
 };

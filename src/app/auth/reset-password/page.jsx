@@ -1,62 +1,62 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { supabase } from '@/supabaseClient';
-import { toast } from 'react-toastify';
-import { useSession } from '@supabase/auth-helpers-react';
+// 'use client';
+// import { useEffect, useState } from 'react';
+// import { useRouter } from 'next/navigation';
+// import { supabase } from '@/supabaseClient';
+// import { toast } from 'react-toastify';
+// import { useSession } from '@supabase/auth-helpers-react';
 
-export default function ResetPasswordPage() {
-  const router = useRouter();
-  const { data: session } = useSession();
-  const [loading, setLoading] = useState(true);
+// export default function ResetPasswordPage() {
+//   const router = useRouter();
+//   const { data: session } = useSession();
+//   const [loading, setLoading] = useState(true);
 
-  if (!session) return <div>Kirjaudu sisään uudelleen</div>;
+//   if (!session) return <div>Kirjaudu sisään uudelleen</div>;
 
-  useEffect(() => {
-  const url = new URL(window.location.href);
-  const accessToken = url.searchParams.get('access_token');
-  const type = url.searchParams.get('type');
+//   useEffect(() => {
+//   const url = new URL(window.location.href);
+//   const accessToken = url.searchParams.get('access_token');
+//   const type = url.searchParams.get('type');
 
-    const handlePasswordReset = async () => {
-      if (type === 'recovery' && accessToken) {
-        const { data, error } = await supabase.auth.getSession();
+//     const handlePasswordReset = async () => {
+//       if (type === 'recovery' && accessToken) {
+//         const { data, error } = await supabase.auth.getSession();
 
-        if (error || !data?.session) {
-          toast.error('Istunnon hakeminen epäonnistui.');
-          router.push('/auth/login');
-        } else {
-          toast.success('Kirjautuminen onnistui. Voit nyt asettaa uuden salasanan.');
-          router.push('/auth/vaihda-salasana');
-        }
-      } else {
-        toast.error('Virheellinen linkki.');
-        router.push('/auth/login');
-      }
+//         if (error || !data?.session) {
+//           toast.error('Istunnon hakeminen epäonnistui.');
+//           router.push('/auth/login');
+//         } else {
+//           toast.success('Kirjautuminen onnistui. Voit nyt asettaa uuden salasanan.');
+//           router.push('/auth/vaihda-salasana');
+//         }
+//       } else {
+//         toast.error('Virheellinen linkki.');
+//         router.push('/auth/login');
+//       }
 
-      setLoading(false);
-    };
+//       setLoading(false);
+//     };
 
-    handlePasswordReset();
-  }, [router]);
+//     handlePasswordReset();
+//   }, [router]);
 
-  return (
-    <div style={styles.container}>
-      <p style={styles.text}>{loading ? 'Kirjaudutaan sisään...' : 'Uudelleenohjataan...'}</p>
-    </div>
-  );
-}
+//   return (
+//     <div style={styles.container}>
+//       <p style={styles.text}>{loading ? 'Kirjaudutaan sisään...' : 'Uudelleenohjataan...'}</p>
+//     </div>
+//   );
+// }
 
-const styles = {
-  container: {
-    display: 'flex',
-    height: '100vh',
-    backgroundColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    color: 'white',
-    fontSize: '1.5rem',
-    textAlign: 'center',
-  },
-};
+// const styles = {
+//   container: {
+//     display: 'flex',
+//     height: '100vh',
+//     backgroundColor: 'black',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   text: {
+//     color: 'white',
+//     fontSize: '1.5rem',
+//     textAlign: 'center',
+//   },
+// };

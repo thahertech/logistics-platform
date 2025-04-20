@@ -1,11 +1,10 @@
-/* Checkout.module.css */
 .checkout {
   background-color: #121212; /* Dark background */
   color: #ffffff; /* White text */
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: self-start;
+  align-items: flex-start;
   padding: 40px 20px;
 }
 
@@ -18,10 +17,14 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
 }
 
-.editBtn{
+.editBtn {
   border: 1px solid #fff;
   border-radius: 10px;
   padding: 10px;
+  color: #fff;
+  background-color: transparent;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .checkoutTitle {
@@ -38,16 +41,18 @@
   text-align: center;
 }
 
-.agreementSection{
-  margin: 20px  0;
+.agreementSection {
+  margin: 20px 0;
   padding: 20px 0;
   border-bottom: 1px solid #fff;
   color: #dcdcdc;
 }
 
-.agreementSection label, .cartItems label{
+.agreementSection label,
+.cartItems label {
   margin-left: 20px;
 }
+
 .cartItems {
   margin-bottom: 25px;
   border-bottom: 1px solid #fff;
@@ -65,13 +70,14 @@
   justify-content: space-between;
   align-items: center;
   color: #e5e5e5;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-.reminderLabel{
+.reminderLabel {
   margin: 20px;
   text-align: center;
 }
+
 .cartItem {
   background-color: #1c1c1c; /* Slightly lighter dark gray */
   border-radius: 8px;
@@ -98,15 +104,15 @@
 }
 
 .removeButton {
-  background-color: #d32f2f; /* Red remove button */
+  background-color: transparent; /* Red remove button */
   color: #ffffff;
-  border: none;
+  border: 1px solid #fff;
   padding: 8px 15px;
   font-size: 1.1rem;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  align-self: center;
+  align-self: end;
   font-weight: bold;
 }
 
@@ -119,12 +125,12 @@
 }
 
 .removeButton:active {
-  background-color: #8e0000; /* Even darker red on active */
+  background-color: #000000; /* Even darker red on active */
 }
 
-.totalPrice h3{
+.totalPrice h3 {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   font-size: 1.4rem;
   background-color: #1c1c1c; /* Dark background for totals section */
   padding: 20px;
@@ -132,11 +138,6 @@
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-.total h3 {
-  color: #ffffff;
-  font-size: 1.4rem;
 }
 
 .actions {
@@ -180,51 +181,5 @@
   margin-bottom: 30px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Add spacing between elements */
-}
-
-.total h3 {
-  font-size: 1.6rem; /* Slightly larger font size */
-  color: #ffffff;
-  font-weight: bold;
-  margin: 10px 0;
-  line-height: 1.4;
-}
-
-.total .label {
-  font-size: 1.2rem;
-  color: #b0b0b0;
-}
-
-.total .amount {
-  font-size: 1.6rem;
-  color: #ffffff;
-  font-weight: bold;
-}
-
-.total .commission {
-  color: #ffb74d; /* Orange for commission to draw attention */
-}
-
-.total .amountPaid {
-  color: #4caf50; /* Green for the final amount paid to the company */
-}
-
-.backButton {
-  background-color: #000; /* Primary color */
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border-radius: 6px;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.backButton:hover {
-  background-color: #001f33; /* Darker shade for hover effect */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
