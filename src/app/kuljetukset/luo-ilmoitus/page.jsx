@@ -114,8 +114,8 @@ const CreateShipment = () => {
             </div>
           </div>
         </form>
-  <ShipmentSidebar pickup={form.pickup} delivery={form.delivery} />
-</div>    
+        <ShipmentSidebar pickup={form.pickup} delivery={form.delivery} />
+      </div>    
     </>
   );
 };

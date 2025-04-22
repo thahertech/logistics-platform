@@ -43,8 +43,9 @@ const AddressAutocomplete = ({ value, onChange, onSelect }) => {
     <input
       ref={inputRef}
       type="text"
-      className="w-full p-2 mb-4 border rounded bg-transparent text-white"
+      className="w-full bg-white/10 border border-white/20 mb-4 text-white placeholder-white/40 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
       placeholder="Katuosoite"
+      autoComplete="address-line1"
       value={value}
       onChange={onChange}
     />

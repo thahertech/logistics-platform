@@ -92,7 +92,7 @@ const ShipmentStep = ({ form, handleChange, autoFillFlags, handleToggle }) => {
       </select>
       <textarea 
         className="w-full bg-white/10 border border-white/20 mb-4 text-white placeholder-white/40 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-        placeholder="Lisätiedot kuljettajalle" value={form.shipment.details} onChange={handleChange('shipment','details')} />          
+      placeholder="Lisätiedot kuljettajalle" value={form.shipment.details} onChange={handleChange('shipment','details')} />          
 
     </div>
   );

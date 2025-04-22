@@ -73,7 +73,7 @@ export async function submitShipment(form) {
     weight: form.shipment.weight,
     transport_units: form.shipment.transportUnits,
     unit_type: form.shipment.unitType,
-    details: form.delivery.details,
+    details: form.shipment.details,
     status: "pending",
     price: form.shipment.price,
     amount: form.shipment.price * COMMISSION_RATE,

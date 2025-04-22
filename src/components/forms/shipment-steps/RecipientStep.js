@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AddressAutocomplete from '../../maps/addressAutocomplete';
 
 const RecipientStep = ({ form, handleChange, handleAddressSelect }) => {
+  useEffect(() => {
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 2);
+
+    const formattedDate = tomorrow.toISOString().split("T")[0];
+    const defaultTime = "12:00";
+
+    if (!form.delivery.date) handleChange('delivery', 'date')({ target: { value: formattedDate } });
+    if (!form.delivery.time) handleChange('delivery', 'time')({ target: { value: defaultTime } });
+  }, [form.delivery.date, form.delivery.time, handleChange]);
+
+  const today = new Date();
+  const minDate = today.toISOString().split("T")[0];
+
   return (
     <div>
       <AddressAutocomplete

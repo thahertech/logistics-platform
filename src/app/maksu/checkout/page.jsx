@@ -7,17 +7,19 @@ import { supabase } from '@/supabaseClient';
 import { toast } from 'react-toastify';
 import  useUser  from '@/lib/hooks/useUser';
 import useUserProfile from '@/lib/hooks/useUserProfile';
+import usePlaceOrder from '@/lib/hooks/usePlaceOrder';
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);
   const [isAgreementChecked, setIsAgreementChecked] = useState(false);
   const [isLogistixAgreementChecked, setIsLogistixAgreementChecked] = useState(false);
-  const [isPurchased, setIsPurchased] = useState(false);
 
   const router = useRouter();
   const { user, loading: userLoading, error: userError } = useUser();
-  
   const { userProfile, loading: profileLoading, error: profileError } = useUserProfile(user);
+  const { isPurchased, loading, handlePlaceOrder } = usePlaceOrder(cart, userProfile, isAgreementChecked, isLogistixAgreementChecked);
+
+
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart'));
@@ -39,73 +41,6 @@ const Checkout = () => {
     const commission = totalPrice * 0.1;
     const amountPaidToCompany = totalPrice - commission;
     return { totalPrice, commission, amountPaidToCompany };
-  };
-
-  const handlePlaceOrder = async () => {
-    const kuljetus = cart[0];
-
-    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-
-    if (sessionError || !sessionData?.session?.access_token) {
-      console.error("Error fetching session details:", sessionError);
-      toast.error("Failed to authenticate user. Please log in.");
-      return;
-    }
-
-    const accessToken = sessionData.session.access_token;
-
-    // Check if user profile is loaded
-    if (!userProfile || !userProfile.full_name || !userProfile.vat_number || !userProfile.yritys_nimi || !userProfile.address) {
-      toast.error("Täytä ensin käyttäjätiedot.");
-      return;
-    }
-
-    if (!isAgreementChecked) {
-      toast.error("Sinun täytyy hyväksyä kuljetuksen ehdot.");
-      return;
-    }
-    if (!isLogistixAgreementChecked) {
-      toast.error("Sinun täytyy hyväksyä Logistix palveluehdot.");
-      return;
-    }
-
-    const { totalPrice } = calculateTotal();
-
-    try {
-      const response = await fetch(
-        "https://ccjggzpkomwjzwrawmyr.supabase.co/functions/v1/placeOrder",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            kuljetus,
-            user: sessionData.session.user,
-            totalPrice,
-            agreementAccepted: true,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        const errorDetails = await response.json();
-        console.error("Error placing order:", errorDetails);
-        toast.error("Tilaus epäonnistui. Tarkista tiedot ja yritä uudelleen.");
-        return;
-      }
-
-      const data = await response.json();
-      toast.success("Tilaus onnistui! Kiitos ostoksestasi.");
-
-      setIsPurchased(true);
-      localStorage.removeItem("cart");
-      setCart([]);
-    } catch (err) {
-      console.error("Network error:", err);
-      toast.error("Tilaus epäonnistui. Tarkista yhteys ja yritä uudelleen.");
-    }
   };
 
   if (userLoading || profileLoading) {

@@ -1,41 +1,44 @@
-import { supabase } from "@/supabaseClient";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+"use client"
+
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { supabase } from "@/supabaseClient"
+import { toast } from "react-toastify"
 
 export const useShipmentHandlers = (fetchOrders) => {
-  const router = useRouter();
+  const router = useRouter()
+  const [openDialog, setOpenDialog] = useState(false)
+  const [selectedId, setSelectedId] = useState(null)
 
   const handleEditShipment = (order) => {
-    router.push(`/kuljetukset/muokkaa-kuljetus/${order.id}`);
-  };
+    router.push(`/kuljetukset/muokkaa-kuljetus/${order.id}`)
+  }
 
-  const handleDeleteShipment = async (id) => {
-    const confirmed = confirm("Haluatko varmasti poistaa lähetyksen?");
-    if (!confirmed) return;
+  const confirmDeleteShipment = (id) => {
+    setSelectedId(id)
+    setOpenDialog(true)
+  }
 
-    const { error } = await supabase.from("shipments").delete().eq("id", id);
+  const handleConfirmDelete = async () => {
+    if (!selectedId) return
+
+    const { error } = await supabase.from("shipments").delete().eq("id", selectedId)
     if (error) {
-      console.error("Error deleting:", error.message);
-      toast.error("Poistaminen epäonnistui.");
-      return;
+      toast.error("Poistaminen epäonnistui.")
+    } else {
+      toast.success("Lähetys poistettu.")
+      fetchOrders?.()
     }
 
-    toast.success("Lähetys poistettu.");
-    fetchOrders?.(); // optional
-  };
+    setOpenDialog(false)
+    setSelectedId(null)
+  }
 
-  const handleDuplicateShipment = (order) => {
-    const template = {
-      ...order,
-      id: undefined,
-      status: "draft",
-    };
-
-    router.push({
-      pathname: "/kuljetukset/luo-ilmoitus",
-      query: { template: JSON.stringify(template) },
-    });
-  };
-
-  return { handleEditShipment, handleDeleteShipment, handleDuplicateShipment };
-};
+  return {
+    handleEditShipment,
+    confirmDeleteShipment,
+    handleConfirmDelete,
+    openDialog,
+    setOpenDialog,
+  }
+}
