@@ -15,6 +15,13 @@ src/pages/kuljetukset/[id].js
 src/pages/kuljetukset/muokkaa-kuljetus/[id].js
 /supabase/*
 
+
+#page
+src/pages/kuljetukset/**
+src/pages/kuljetukset.js
+src/pages/kuljetukset/[id].js
+src/pages/kuljetukset/muokkaa-kuljetus/[id].js
+
 # testing
 /coverage
 
@@ -46,6 +53,4 @@ next-env.d.ts
 sendgrid.env
 
 src/pages/kuljetukset/*
-public/assets/backgrounds/auth.mp4
-public/assets/backgrounds/ab.mp4
-public/assets/backgrounds/Triangle.mp4
+
