@@ -3,15 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #003366; /* Define your primary color */
-  --foreground-rgb: 255, 255, 255; /* White for text */
-  --background-start-rgb: 0, 0, 0; /* Start with black */
-  --background-end-rgb: 0, 0, 0;   /* End with black */
+  --primary-color: #003366;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  background-color: #000;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-start-rgb));
+  color: white;
 }
 
 @layer utilities {
@@ -41,13 +42,166 @@ select{
   overflow: scroll;
 }
 
-button {
-}
-
-:focus {
-  border: 1px solid var(--primary-color);
-}
-
 input {
   padding: 10px;
+}
+
+.video-container, .video-container-2 {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),  no-repeat center center;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 300px;
+  max-height: 500px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1;
+}
+.video-container-2 {
+  min-height: 300px;
+  align-self: flex-start;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.video-container h2, .video-container-2 h2 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-align: left;
+  
+}
+
+.video-container h4, .video-container-2 h4 {
+  font-size: 2rem;
+  font-weight: 100;
+  max-width: 1000px;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.customer-promise-label, .customer-promise-label-2 {
+  max-width: 1000px;
+}
+
+
+
+.Toastify__toast-container {
+  z-index: 9999;
+}
+.first-hero-section {
+  padding-top: 200px;
+  margin-bottom: 20px;
+}
+
+.background-video, .background-video-2{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+.background-video {
+  margin-left: 300px;
+}
+.background-video {
+  transform:rotate(-1deg);
+}
+
+.content {
+  position: relative;
+  color: #003366;
+  text-align: center;
+  z-index: 1;
+}
+@media (max-width: 768px) {
+  .video-container, .video-container-2 {
+    padding: 2rem;
+    height: fit-content;
+  }
+  .customer-promise-label-2 {
+    padding: 0 2rem;
+    
+  }
+  .video-container h2, .video-container-2 h2 {
+    font-size: 2.0rem;
+  }
+  .video-container h4, .video-container-2 h4 {
+    font-size: 1.5rem;
+  }
+  .first-hero-section {
+    padding-top: 20px;
+  }
+  .background-video {
+    margin-left: 0;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 60 9.1% 97.8%;
+    --primary-foreground: 24 9.8% 10%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 24 5.7% 82.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

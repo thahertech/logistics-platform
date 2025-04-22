@@ -1,0 +1,40 @@
+/* KuljetusSuoritettu.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #f4f4f4cc;
+    height: 100vh;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0070f3;
+  }
+  
+  .message {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    text-align: center;
+  }
+  
+  .backButton {
+    margin-top: 1.5rem;
+  }
+  
+  .backButton button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .backButton button:hover {
+    background-color: #005bb5;
+  }

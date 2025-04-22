@@ -23,7 +23,6 @@
   right:0;
 }
 
-/* Contact Details */
 .contactDetails {
   display: flex;
 
@@ -54,10 +53,10 @@
 
 .inputField, .textArea {
   width: 100%;
-  height: 50px;
+  height: 45px;
   padding: 15px;
   border-radius: 7px;
-  background-color: rgba(56, 56, 56, 0.75);
+  background-color: rgba(56, 56, 56, 0.255);
   color: white;
   font-size: 16px;
   border: 1px solid rgba(255, 255, 255, 0.6);
