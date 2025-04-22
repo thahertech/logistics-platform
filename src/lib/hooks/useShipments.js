@@ -50,14 +50,14 @@ export default function useShipments() {
   useEffect(() => {
     fetchShipments();
 
-    const channel = supabase
+      const channel = supabase
       .channel('shipments-changes')
       .on(
         'postgres_changes',
         { event: 'UPDATE', schema: 'public', table: 'shipments' },
         (payload) => {
           console.log('🔄 Shipment updated:', payload);
-
+  
           const updatedShipment = payload.new;
           setShipments(prevShipments =>
             prevShipments.map(shipment =>
@@ -66,8 +66,18 @@ export default function useShipments() {
           );
         }
       )
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'shipments' },
+        (payload) => {
+          console.log('📦 New shipment added:', payload);
+  
+          const newShipment = payload.new;
+          setShipments(prevShipments => [...prevShipments, newShipment]);
+        }
+      )
       .subscribe();
-
+  
     return () => {
       supabase.removeChannel(channel);
     };

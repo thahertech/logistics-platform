@@ -42,6 +42,7 @@ export default function Shipments() {
     if (shipment?.locked) {
       toast.error(`Tämä kuljetus on lukittu ja sitä muokkaa toinen käyttäjä.`);
     } else {
+      console.log(shipment);
       setSelectedShipment(shipment);
       setIsModalOpen(true);
     }
@@ -101,7 +102,7 @@ export default function Shipments() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {shipments
                   .filter((shipment) => {
-                    const pickup = new Date(shipment.pickup_time);
+                    const pickup = new Date(shipment.pickup_date);
                     const now = new Date();
                     const inNext24h = !isNaN(pickup) && pickup > now && pickup - now <= 24 * 60 * 60 * 1000;
                     return shipment.urgent || inNext24h;

@@ -2,6 +2,9 @@
   font-family: 'Inter';
 }
 
+.preLoad {
+  min-height: 450px;
+}
 @keyframes fadeIn {
   0% {
     opacity: 0;

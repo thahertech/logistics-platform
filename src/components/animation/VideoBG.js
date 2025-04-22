@@ -11,7 +11,7 @@ export default function VideoBackground() {
         <h4>Jos et näe vähintään 10% säästöjä kuljetuskustannuksissa ensimmäisen 6kk aikana, saat täyden hyvityksen.
         </h4>
         </div>
-        <video autoPlay loop muted playsInline className="background-video">
+        <video autoPlay loop muted playsInline className="background-video" loading="lazy">
         <source src="/assets/backgrounds/Triangle.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
         </video>

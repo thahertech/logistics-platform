@@ -27,16 +27,9 @@ export default function RootLayout({ children }) {
         <meta property="og:description" content={metadata.description} />
         <meta property="og:image" content="/assets/logistix-logos/png/Logo.png" />
         <meta property="og:url" content="https://www.logistix.fi" />
-
         <Script
           src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
           strategy="beforeInteractive"
-        />
-
-        <Script
-          src="https://www.gstatic.com/maps-platform/places/web/js/PlaceAutocompleteElement.js"
-          type="module"
-          strategy="afterInteractive"
         />
       </head>
 

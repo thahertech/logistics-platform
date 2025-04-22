@@ -1,13 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Lock, Bell } from 'lucide-react'; // Example of using Bell icon instead of Alarm
+import { Lock, Bell } from 'lucide-react';
 export default function ShipmentCard({ shipment, onClick }) {
   const isLocked = shipment.locked;
-  const isUrgent = shipment.urgent; // Assuming this is a boolean flag in the shipment object
-  
-  console.log(shipment);
-  
+  const isUrgent = shipment.urgent;
+
   const requiredFields = [
     'pickup_city',
     'delivery_city',

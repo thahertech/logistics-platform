@@ -40,7 +40,7 @@ const Dashboard = () => {
           content="Tehosta logistiikkaratkaisuja, säästä kustannuksissa ja paranna tehokkuutta Logistixin avulla."
         />
       </Head>
-    <div>
+    <div className={styles.preLoad}>
   <VideoBackground2 />
   </div>
   <div className={styles.serviceSection}>
