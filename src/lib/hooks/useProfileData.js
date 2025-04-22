@@ -12,7 +12,6 @@ export const useProfileData = () => {
       if (error) return toast.error('Käyttäjän haku epäonnistui');
 
       const userData = data.user;
-      console.log('userData', userData);
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
         .select('full_name, phone_number, vat_number, yritys_nimi, user_role, address, city, postal_code')
@@ -32,7 +31,6 @@ export const useProfileData = () => {
 
     fetchUserAndProfile();
   }, []);
-  console.log(user, profile);
 
   return { user, profile };
 };

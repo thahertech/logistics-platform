@@ -14,13 +14,14 @@ const PickupStep = ({ form, handleChange, handleToggle, autoFillFlags, handleAdd
           onSelect={(data) => handleAddressSelect('pickup', data)}
       />
 
-      <input type="email" className="w-full p-2 mb-4 border rounded bg-transparent text-white" placeholder="Sähköposti" value={form.pickup.email} onChange={handleChange('pickup', 'email')} />
-      <input type="text" className="w-full p-2 mb-4 border rounded bg-transparent text-white" placeholder="Puhelinnumero" value={form.pickup.phone} onChange={handleChange('pickup', 'phone')} />
       <div className="flex space-x-4">
-        <input type="date" className="w-full p-2 mb-4 border rounded bg-transparent text-white" value={form.pickup.date} onChange={handleChange('pickup','date')} />
-        <input type="time" className="w-full p-2 mb-4 border rounded bg-transparent text-white" value={form.pickup.time} onChange={handleChange('pickup', 'time')} />
+        <input type="date" 
+        className="w-full bg-white/10 border border-white/20 mb-4 text-white placeholder-white/40 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        value={form.pickup.date} onChange={handleChange('pickup','date')} />
+        <input type="time" 
+        className="w-full bg-white/10 border border-white/20 mb-4 text-white placeholder-white/40 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        value={form.pickup.time} onChange={handleChange('pickup', 'time')} />
       </div>
-      <textarea className="w-full p-2 mb-12 border rounded bg-transparent text-white" placeholder="Lisätiedot kuljettajalle" value={form.pickup.details} onChange={handleChange('pickup','details')} />          
     </div>
   );
 };

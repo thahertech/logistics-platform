@@ -1,11 +1,10 @@
 import React, { useReducer, useState, useEffect } from 'react';
 import styles from '@/app/Styles/sideBar.module.css';
-import { FaFilter } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { initialState, filterReducer } from '../filtering/filterReducer/filterReducer';
 
 const FilterSidebar = ({ applyFilters, shipmentData }) => {
   const [filters, dispatch] = useReducer(filterReducer, initialState);
-  const [isVisible, setIsVisible] = useState(true);
   const [isSidebarVisible, setSidebarVisible] = useState(true);
 
   const [selectedCity, setSelectedCity] = useState('');
@@ -51,7 +50,7 @@ const FilterSidebar = ({ applyFilters, shipmentData }) => {
         (!filters.pickup_city || shipment.pickup_city === filters.pickup_city)
       );
     });
-    
+
     applyFilters(filteredData);
   };
 
@@ -72,16 +71,15 @@ const FilterSidebar = ({ applyFilters, shipmentData }) => {
   return (
     <div className={styles.wrapper}>
       <button onClick={toggleSidebar} className={styles.toggleButton}>
-        {!isSidebarVisible && <FaFilter />}
-        {isSidebarVisible ? 'X' : ''}
+      {isSidebarVisible ? <FaChevronLeft /> : <FaChevronRight />}
       </button>
-
-      <div className={`${styles.sidebar} ${isSidebarVisible ? '' : 'closed'}`}>
+  
+      <div className={`${styles.sidebar} ${!isSidebarVisible ? styles.closed : ''}`}>
         <div className={styles.buttonGroup}>
           <button onClick={handleSubmit}>Suodata</button>
           <button onClick={resetFilters}>Tyhjennä</button>
         </div>
-
+  
         <div className={styles.filterGroup}>
           <label className={styles.label}>Noutokaupunki</label>
           <select
@@ -90,8 +88,8 @@ const FilterSidebar = ({ applyFilters, shipmentData }) => {
             onChange={(e) => setSelectedCity(e.target.value)}
           >
             <option value="">Kaikki kaupungit</option>
-            {cities.map((city) => (
-              <option key={city} value={city}>
+            {cities.map((city, index) => (
+              <option key={`${city}-${index}`} value={city}>
                 {city}
               </option>
             ))}

@@ -32,7 +32,6 @@ export function validateShipmentForm(form) {
 export async function submitShipment(form) {
   const COMMISSION_RATE = 0.9;
 
-  // ✅ Validate first
   validateShipmentForm(form);
 
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
@@ -41,7 +40,7 @@ export async function submitShipment(form) {
   }
 
   const userId = sessionData.session.user.id;
-
+  console.log('submitting shipment for user:', userId);
   const shipmentData = {
     user_id: userId,
     shipment_identifier: uuidv4(),

@@ -4,7 +4,7 @@ export const useFormAutofill = (profile, form, setForm) => {
   const [autoFillFlags, setAutoFillFlags] = useState({
     useSenderProfileDetails: false,
     usePickupProfileDetails: false,
-    sameAsRecipient: true,
+    sameAsRecipient: false,
   });
 
   const handleToggle = (key) => () => {

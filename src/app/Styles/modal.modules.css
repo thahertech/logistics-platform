@@ -4,13 +4,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    background-color: #000000a6;
+    background-color: transparent;
 
     padding: 1rem;
     border-radius: 8px;
     max-width: 780px;
     width: 100%;
-    border: 1px solid #003366;
   }
   
   .overlay {
@@ -27,8 +26,8 @@
   
   .modal-close-btn, .buy-btn {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: 30px;
+    right: 40px;
     background: transparent;
     border: none;
     font-size: 20px;

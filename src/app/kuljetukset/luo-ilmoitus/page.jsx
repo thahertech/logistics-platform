@@ -17,6 +17,7 @@ import ShipmentSidebar from '@/components/checkout/sidebar';
 import LShipmentSidebar from '@/components/checkout/sidebar-left';
 import { ROUTES } from '@/constants/routes';
 import { submitShipment } from '@/components/shipments/api/submitShipment';
+import Stepper from '@/components/forms/shipment-steps/Stepper';
 
 const CreateShipment = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -71,21 +72,7 @@ const CreateShipment = () => {
         <h2 className="text-lg font-bold mb-4 text-white">Luo uusi Lähetys</h2>
       
         <form onSubmit={(e) => e.preventDefault()} className="bg-gray-800 bg-opacity-20 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-1/3">
-          <div className="mb-4 flex justify-between items-center">
-            {steps.map((label, index) => (
-              <div key={label} className="text-center flex flex-col items-center">
-                <div
-                  className={`w-8 h-8 flex items-center justify-center rounded-full text-white text-sm font-bold 
-                  ${activeStep >= index ? 'bg-blue-500' : 'bg-gray-400'}`}
-                >
-                  {index + 1}
-                </div>
-                <span className={`text-xs mt-2 ${activeStep >= index ? 'text-blue-500' : 'text-gray-300'}`}>
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
+        <Stepper steps={steps} activeStep={activeStep} />
 
           <div className="mb-6">
             {renderStepContent({
@@ -127,9 +114,8 @@ const CreateShipment = () => {
             </div>
           </div>
         </form>
-        <ShipmentSidebar pickup={form.pickup} delivery={form.delivery}/>
-      </div>
-    
+  <ShipmentSidebar pickup={form.pickup} delivery={form.delivery} />
+</div>    
     </>
   );
 };

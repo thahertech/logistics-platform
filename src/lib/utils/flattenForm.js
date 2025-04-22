@@ -9,7 +9,6 @@ export const flattenForm = (form) => {
         if (field === 'street' && section === 'recipient') continue;
         if (field === 'amount' && section === 'shipment') continue;
         if (field === 'status' && section === 'shipment') continue;
-        if (field === 'unitType' && section === 'shipment') continue;
         if (field === 'details' && section === 'shipment') continue;
         if (field === 'incoTerms' && section === 'shipment') continue;
         if (field === 'email' && section === 'pickup') continue;
@@ -21,6 +20,8 @@ export const flattenForm = (form) => {
         if (field === 'agreement_type' && section === 'shipment') continue;
         if (field === 'shipment_identifier' && section === 'shipment') continue;
         if (field === 'user_id' && section === 'shipment') continue;
+        if (field === 'transport_units' && section === 'shipment') continue;
+        if (field === 'unit_type' && section === 'shipment') continue;
         if (field === 'weight' && section === 'shipment') continue;
         flattened[`${section}_${field}`] = form[section][field];
       }

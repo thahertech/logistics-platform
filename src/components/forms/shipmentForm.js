@@ -8,7 +8,6 @@ export const shipmentForm = {
     postal_code: '',
     email: '',
     phone: '',
-    vat_number: ''
   },
   pickup: {
     date: '',
@@ -16,8 +15,6 @@ export const shipmentForm = {
     address: '',
     postal_code: '',
     city: '',
-    email: '',
-    phone: '',
     details: ''
   },
   recipient: {
@@ -38,8 +35,8 @@ export const shipmentForm = {
   },
   shipment: {
     weight: '',
-    transport_units: '',
-    unit_type: '',
+    transportUnits: '',
+    unitType: '',
     details: '',
     incoTerms: '',
     price: '',

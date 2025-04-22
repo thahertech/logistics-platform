@@ -10,10 +10,10 @@ const TopBar = ({ activeTab, setActiveTab }) => {
   className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${
     activeTab === 'shipments' ? 'bg-[#003366]' : 'bg-transparent'
   }`}
->
-  <FaTruck className="mr-3 text-xl" />
-  <span>Kaikki kuljetukset</span>
-</button>
+      >
+        <FaTruck className="mr-3 text-xl" />
+        <span>Kaikki kuljetukset</span>
+      </button>
       <button
         onClick={() => setActiveTab('map')}
         className={`py-3 px-6 rounded-lg flex items-center text-white transition duration-300 transform hover:bg-[#003366] hover:scale-105 ${

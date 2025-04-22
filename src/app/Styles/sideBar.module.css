@@ -9,6 +9,12 @@
   min-width: 200px;
 }
 
+.closed {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  display: none;
+}
 .modal-price {
   padding: 10px;
   background-color: #000000;
@@ -132,7 +138,7 @@
   position: fixed;
   left: 20px;
   top: 10px;
-  padding: 7px 14px;
+  padding: 14px 14px;
   /* background-color: #003366; */
   border: 1px solid #fff;
   color: white;
@@ -143,7 +149,6 @@
 }
 
 .toggleButton:hover {
-  background-color: #005f99;
 }
 
 /* Map container */
@@ -384,33 +389,7 @@
   cursor: grabbing;
 }
 
-/* Sidebar toggle button */
-.toggleButton {
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  padding: 10px 15px;
-  background-color: #003366;
-  border: 1px solid #fff;
-  color: white;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 1100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
 
-.toggleButton:hover {
-  background-color: #005f99;
-}
-
-.sidebar .filterGroup {
-  width: 100%; /* Ensure filter group takes full width */
-}
-
-.filterGroup input[type="text"],
-.filterGroup select {
-  width: 100%; /* Ensure select inputs take full available width */
-}
 
 /* Button Group adjustments */
 .buttonGroup {

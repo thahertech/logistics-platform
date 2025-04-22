@@ -4,22 +4,22 @@ import dayjs from 'dayjs';
 import Layout from '@/components/Layout/Layout';
 import { supabase } from '@/supabaseClient';
 import { useRouter, useParams } from 'next/navigation';
-import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 import { renderStepContent } from "@/components/forms/shipment-steps/renderStepContent";
 import { useShipmentForm } from '@/lib/hooks/useShipmentForm';
 import { steps } from 'src/components/forms/shipmentForm';
-import '@/app/globals.css';
 import { submitShipment } from '@/components/shipments/api/submitShipment';
 import { lockShipmentForEditing, unlockShipmentAfterEdit, fetchShipmentData } from '@/components/shipments/api/shipmentActions';
 import BackButton from '@/components/buttons/BackButton';
 import SecondaryButton from '@/components/buttons/SecondaryButton';
 import PrimaryButton from '@/components/buttons/PrimaryButton';
 import SubmitShipmentButton from '@/components/buttons/IconButton';
+import Stepper from '@/components/forms/shipment-steps/Stepper';
 
-const EditShipment = () => {
+const ShipmentForm = () => {
   const {
     form,
+    setForm,
     handleChange,
     handleNext,
     handleBack,
@@ -29,69 +29,97 @@ const EditShipment = () => {
     handleAddressSelect,
     handleToggle
   } = useShipmentForm();
+
   const [shipmentData, setShipmentData] = useState(null);
   const [shipmentIdentifier, setShipmentIdentifier] = useState('');
-  const [userID, setUserID] = useState('');
   const router = useRouter();
-  const { id } = useParams(); 
+  const { id } = useParams();  // Check if there's an id for editing
   const [isSubmitting, setIsSubmitting] = useState('');
-  
   const isFinalStep = activeStep === steps.length - 1;
-  
 
+  // Fetch shipment data if it's an edit operation
   useEffect(() => {
     let isMounted = true;
     const getShipmentData = async () => {
-      try {
-        const fetchedData = await fetchShipmentData(id);
-        if (isMounted) setShipmentData(fetchedData);
-      } catch (error) {
-        console.error("Error fetching shipment data:", error);
+      if (id) {
+        try {
+          const fetchedData = await fetchShipmentData(id);
+          if (isMounted) setShipmentData(fetchedData);
+          console.log("Fetched shipment data:", fetchedData);
+        } catch (error) {
+          console.error("Error fetching shipment data:", error);
+        }
       }
     };
   
-    if (id) getShipmentData();
-  
+    getShipmentData();
     return () => { isMounted = false; };
   }, [id]);
 
+  // Lock/unlock shipment for editing
   useEffect(() => {
     if (shipmentData) {
       lockShipmentForEditing(shipmentData.id);
     }
     return () => {
-      if (shipmentData && shipmentData.id) {
+      if (shipmentData?.id) {
         unlockShipmentAfterEdit(shipmentData.id);
       }
     };
   }, [shipmentData]);
 
- 
+  // Populate the form with existing data (if it's an edit)
   useEffect(() => {
-    if (shipmentData) {
-      // Only update the form if shipmentData is defined
-      form.sender = shipmentData.sender || {};  // Default to empty object if undefined
-      form.sender.address = shipmentData.sender_address || '';  // Default to empty string if undefined
-      form.recipient = shipmentData.recipient || {};
-      form.recipient.address = shipmentData.recipient_address || '';
-      form.delivery.address = shipmentData.delivery_address || '';
-      form.pickup = shipmentData.pickup || {};
-      form.delivery = shipmentData.delivery || {};
-      form.shipment = shipmentData.shipment || {};
-      form.shipment.weight = shipmentData.weight || '';
-      form.shipment.transport_units = shipmentData.transport_units || '';
-      form.shipment.price = shipmentData.price || '';
-      form.shipment.details = shipmentData.details || '';
-      form.shipment.incoTerms = shipmentData.agreement_type || '';
-    } else {
-      // Handle the case where shipmentData is not yet available
-      const today = new Date();
-      const formattedDate = today.toISOString().split('T')[0];
-      form.pickup = { date: formattedDate };
-    }
-  }, [shipmentData, form]);
+    if (!shipmentData) return;
 
- 
+    const filledForm = {
+      sender: {
+        ...shipmentData.sender,
+        name: shipmentData.sender_name || '',
+        vat_number: shipmentData.vat_number || '',
+        email: shipmentData.sender_email || '',
+        address: shipmentData.sender_address || '',
+        postal_code: shipmentData.sender_postal_code || '',
+        city: shipmentData.sender_city || '',
+        phone: shipmentData.sender_phone || '',
+      },
+      recipient: {
+        ...shipmentData.recipient,
+        name: shipmentData.recipient_name || '',
+        email: shipmentData.recipient_email || '',
+        address: shipmentData.recipient_address || '',
+        postal_code: shipmentData.recipient_postal_code || '',
+        city: shipmentData.recipient_city || '',
+        phone: shipmentData.recipient_phone || '',
+      },
+      pickup: {
+        ...shipmentData.pickup,
+        date: shipmentData.pickup_date ? dayjs(shipmentData.pickup_date).format('YYYY-MM-DD') : '',
+        time: shipmentData.pickup_time || '',
+        address: shipmentData.pickup_address || '',
+        postal_code: shipmentData.pickup_postal_code || '',
+        city: shipmentData.pickup_city || '',
+      },
+      delivery: {
+        ...shipmentData.delivery,
+        date: shipmentData.delivery_date ? dayjs(shipmentData.delivery_date).format('YYYY-MM-DD') : '',
+        time: shipmentData.delivery_time || '',      
+        address: shipmentData.delivery_address || '',
+        postal_code: shipmentData.delivery_postal_code || '',
+        city: shipmentData.delivery_city || '',
+      },
+      shipment: {
+        weight: shipmentData.weight || '',
+        transportUnits: shipmentData.transport_units || '',
+        unitType: shipmentData.unit_type || '',
+        price: shipmentData.price || '',
+        details: shipmentData.details || '',
+        incoTerms: shipmentData.agreement_type || '',
+      }
+    };
+  
+    setForm(filledForm);
+  }, [shipmentData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -100,59 +128,45 @@ const EditShipment = () => {
       handleNext();
       return;
     }
+
     try {
-      await submitShipment(form);
-      toast.success('Ilmoitus julkaistu!');
+      if (id) {
+        // If editing, update the shipment
+        await submitShipment(form, id);
+        toast.success('Ilmoitus päivitetty!');
+      } else {
+        // If creating a new shipment
+        await submitShipment(form);
+        toast.success('Ilmoitus julkaistu!');
+      }
       router.push('/kuljetukset');
     } catch (error) {
       toast.error(`Error submitting shipment: ${error.message}`);
       console.error(error);
-    } finally {
-      if (shipmentData?.id) {
-        unlockShipmentAfterEdit(shipmentData.id);
-      }
     }
   };
 
   useEffect(() => {
-    document.title = 'Logistix | Muokkaa ilmoitus';
-  }, []);
+    document.title = id ? 'Logistix | Muokkaa ilmoitus' : 'Logistix | Luo uusi ilmoitus';
+  }, [id]);
 
   return (
     <Layout>
       <div className="flex flex-col items-center justify-center h-screen bg-black-800">
-        <h2 className="text-lg font-bold mb-4 text-white">Muokkaa Lähetystä</h2>
+        <h2 className="text-lg font-bold mb-4 text-white">{id ? 'Muokkaa Lähetystä' : 'Luo Uusi Lähetys'}</h2>
 
+        <form onSubmit={(e) => e.preventDefault()} className="bg-gray-800 bg-opacity-20 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-2/3">
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-gray-700 bg-opacity-50 backdrop-filter backdrop-blur-lg border border-gray-300 flex flex-col p-6 rounded-lg shadow-md w-2/4"
-        >
-          <div className="mb-4 flex justify-between items-center">
-            {steps.map((label, index) => (
-              <div key={label} className="text-center flex flex-col items-center">
-                <div
-                  className={`w-8 h-8 flex items-center justify-center rounded-full text-white text-sm font-bold 
-                  ${activeStep >= index ? 'bg-blue-500' : 'bg-gray-400'}`}
-                >
-                  {index + 1}
-                </div>
-                <span className={`text-xs mt-2 ${activeStep >= index ? 'text-blue-500' : 'text-gray-300'}`}>
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
+         <Stepper steps={steps} activeStep={activeStep} />
 
           <div className="mb-6">
-            
             {renderStepContent({
               step: activeStep,
               form,
               handleChange,
               autoFillFlags,
               handleToggle,
-              handleAddressSelect
+              handleAddressSelect,
             })}
           </div>
 
@@ -187,15 +201,15 @@ const EditShipment = () => {
         </form>
 
         <button
-                type="button"
-                onClick={() => unlockShipmentAfterEdit(id)}
-                className="bg-transparent text-white border mt-4 px-4 py-2 rounded"
-              >
-                Peru muokkaus
-              </button>
+          type="button"
+          onClick={() => router.push('/kuljetukset')}
+          className="bg-transparent text-white border mt-4 px-4 py-2 rounded"
+        >
+          Peruuta
+        </button>
       </div>
     </Layout>
   );
 };
 
-export default EditShipment;
+export default ShipmentForm;
