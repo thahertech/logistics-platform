@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import styles from './Styles/landing.module.css';
-import serviceData from './Dashboard/serviceData';
+import serviceData from './dashboard/serviceData';
 import Head from 'next/head';
 import './globals.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
