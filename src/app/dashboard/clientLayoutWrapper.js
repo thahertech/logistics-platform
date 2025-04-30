@@ -37,7 +37,7 @@ const ClientLayoutWrapper = ({ children }) => {
   return (
     <div>
       <header>
-        <p>Current Path: {currentPath}</p>
+        <p>{currentPath}</p>
       </header>
       {children}
     </div>
