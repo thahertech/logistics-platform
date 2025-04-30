@@ -6,11 +6,11 @@ author: "Logistix"
 slug: "nopeat-kuljetukset-yrityksille"
 ---
 
-## Nopeat kuljetukset yrityksille – Logistix ratkaisee kiireen fiksusti
+ Nopeat kuljetukset yrityksille – Logistix ratkaisee kiireen fiksusti
 
 Onko asiakas odottamassa tuotetta jo saman päivän aikana? Logistix auttaa yrityksiä hoitamaan kiireelliset kuljetukset ilman turhaa säätöä.
 
-### Milloin tarvitset pikatoimitusta?
+ Milloin tarvitset pikatoimitusta?
 
 Kiireellisiä kuljetustarpeita syntyy esimerkiksi kun:
 
@@ -18,7 +18,7 @@ Kiireellisiä kuljetustarpeita syntyy esimerkiksi kun:
 - Tukkuri tarvitsee täydennystä nopeasti
 - Asiakkaalle on luvattu nopea toimitus
 
-### Miten Logistix auttaa?
+ Miten Logistix auttaa?
 
 Logistixin verkostossa on satoja luotettavia kuljettajia eri puolilla Suomea. Kun luot lähetyksen alustalle:
 
@@ -26,7 +26,7 @@ Logistixin verkostossa on satoja luotettavia kuljettajia eri puolilla Suomea. Ku
 - Saat arvion toimitusajasta
 - Voit valita kiireellisyyden: normaali, nopea tai express
 
-### Ei enää puhelinrumbaa
+ Ei enää puhelinrumbaa
 
 Unohda sähköpostit ja puhelut eri kuljetusliikkeisiin. Logistixin alusta hoitaa koko prosessin:
 
@@ -34,6 +34,5 @@ Unohda sähköpostit ja puhelut eri kuljetusliikkeisiin. Logistixin alusta hoita
 - Kuljettajan valinta
 - Seuranta ja kuittaukset
 
----
 
-**Kokeile Logistixia ja varmista, että tärkeät lähetykset menevät perille ajoissa – joka kerta.**
+Kokeile Logistixia ja varmista, että tärkeät lähetykset menevät perille ajoissa – joka kerta.

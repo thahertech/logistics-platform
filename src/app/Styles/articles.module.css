@@ -1,6 +1,4 @@
-/* Article.module.css */
 
-/* Container for the whole page */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -8,14 +6,28 @@
     font-family: Arial, sans-serif;
   }
   
-  /* Title of the Articles Page */
 .container h1 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
   }
+
+  /* Disable text selection */
+.articleContainer {
+  user-select: none; /* Prevents text selection */
+  -webkit-user-select: none; /* For Safari */
+  -ms-user-select: none; /* For older IE versions */
+}
+
+/* Disable right-click context menu */
+.articleContainer {
+  pointer-events: none; /* Prevents interaction */
+}
+
+.articleContent {
+  pointer-events: auto; /* Re-enable interaction for specific elements if needed */
+}
   
-  /* Style for the list of articles */
   .container ul {
     list-style: none;
     padding: 0;
@@ -24,7 +36,6 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
   
-  /* Each article item */
   .container li {
     background-color: transparent;
     border: 1px solid #eee;
@@ -40,7 +51,6 @@
     transform: scale(1.02);
   }
   
-  /* Article links */
   .container li a {
     font-size: 1.2rem;
     font-weight: bold;
