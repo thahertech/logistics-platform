@@ -3,7 +3,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from '@/app/styles/layout.module.css';
+import styles from '@/app/Styles/Layout.module.css';
  import footerImg from '@/../public/assets/logistix-logos/svg/logo.svg';
 
 const MainHeader = () => {
