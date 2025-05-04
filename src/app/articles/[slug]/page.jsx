@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import matter from "gray-matter";
 import { redirect } from "next/navigation"; // Import redirect function
-import styles from "@/app/styles/articlePage.module.css";
+import styles from "@/app/Styles/articlePage.module.css";
 
 function getArticles() {
   const articlesDir = path.join(process.cwd(), "content/articles");
