@@ -1,6 +1,6 @@
 import { GalleryVerticalEnd } from "lucide-react"
 import 'tailwindcss/tailwind.css';
-import { LoginForm } from "@/components/login-form"
+//import { LoginForm } from "@/components/login-form"
 
 export default function LoginPage() {
   return (
@@ -12,7 +12,7 @@ export default function LoginPage() {
           </div>
           Logistix.
         </a>
-        <LoginForm />
+       // <LoginForm />
       </div>
     </div>
   )
