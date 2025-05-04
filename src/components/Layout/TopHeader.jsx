@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import styles from '@/app/styles/layout.module.css';
+import styles from '@/app/Styles/Layout.module.css';
 import { supabase } from '@/supabaseClient';
 import { 
   HiOutlinePlusCircle as PlusIcon, 
