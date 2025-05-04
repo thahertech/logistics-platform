@@ -3,7 +3,7 @@ import Layout from '../components/Layout/Layout';
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import styles from './styles/landing.module.css';
+import styles from './styles/Landing.module.css';
 import serviceData from './dashboard/serviceData';
 import Head from 'next/head';
 import './globals.css';
