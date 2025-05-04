@@ -2,7 +2,7 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import styles from '@/app/Styles/layout.module.css';
+import styles from '@/app/Styles/Layout.module.css';
 import {
   FaComment,
   FaQuestionCircle,
