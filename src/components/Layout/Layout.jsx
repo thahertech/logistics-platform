@@ -1,13 +1,13 @@
 import React from 'react';
 import '@/app/globals.css';
-import styles from '@/app/styles/layout.module.css';
+import styles from '@/app/Styles/Layout.module.css';
 import { GoogleTagManager } from '@next/third-parties/google';
 // import ChatToggle from '@/components/ui/ChatToggle';
 import TopHeader from './TopHeader';
 import MainHeader from './MainHeader';
 import BottomFooter from './BottomFooter';
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
+//import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+//import { AppSidebar } from "@/components/app-sidebar"
 import 'react-toastify/dist/ReactToastify.css';
 import useUser  from '@/lib/hooks/useUser';
 
