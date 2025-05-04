@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/componen
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import styles from '@/app/styles/Dashboard.module.css';
+import styles from '@/app/Styles/Dashboard.module.css';
 import Head from 'next/head';
 
 export default function Contact() {
