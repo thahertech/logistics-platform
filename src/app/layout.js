@@ -7,7 +7,6 @@ import Script from 'next/script';
 import { Suspense } from 'react';
 import "@/app/globals.css";
 
-//import ToastifyClient from '../components/ToastifyClient';
 
 export const metadata = {
   title: 'Logistix',
@@ -47,17 +46,7 @@ export default function RootLayout({ children }) {
           <ClientTracker />
         </Suspense>
 
-    /*    <ToastifyClient
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        /> */
+  
         {children}
         <Analytics />
         <SpeedInsights />
