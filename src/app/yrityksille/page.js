@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@/components/Layout/Layout';
 import { Rocket, Leaf, ShieldCheck, LayoutDashboard, BadgeCheck, Briefcase } from 'lucide-react'; // Import new icons
-import styles from '@/app/styles/page.module.css';
+import styles from '@/app/Styles/page.module.css';
 
 import Image from 'next/image';
 import Head from 'next/head';
