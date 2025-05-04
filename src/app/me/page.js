@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Layout from '@/components/Layout/Layout';
 import styles from '@/app/Styles/page.module.css';
@@ -5,18 +6,13 @@ import '../globals.css';
 import Head from 'next/head';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench, faSeedling, faHandsHelping, faLightbulb } from '@fortawesome/free-solid-svg-icons';
-import { GoogleTagManager } from '@next/third-parties/google';
 
-export const metadata = {
-  title: 'Logistix | Meistä',
-  description: 'Logistix - Yhdistämme lähetykset kuljetuspalveluihin sujuvaa logistiikkaa varten.',
-};
+
 
 const AboutUs = () => {
 
   return (
     <Layout>
-        <GoogleTagManager gtmId="GTM-T7GRXLNQ" />
 
         <Head>
     <title>Meistä - Logistix</title>
