@@ -1,6 +1,6 @@
 import React from 'react';
 import '@/app/globals.css';
-import styles from '@/app/Styles/layout.module.css';
+import styles from '@/app/Styles/Layout.module.css';
 import { GoogleTagManager } from '@next/third-parties/google';
 // import ChatToggle from '@/components/ui/ChatToggle';
 import TopHeader from './TopHeader';
