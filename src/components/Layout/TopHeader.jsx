@@ -60,7 +60,6 @@ const TopHeader = () => {
                 <BeakerIcon className={styles.icon} /> Etusivu
               </Link>
               
-             <FeedbackModal/> 
           
 
             <Link
