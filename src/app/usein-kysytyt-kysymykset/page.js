@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import styles from '@/app/styles/Faq.module.css';
+import styles from '@/app/Styles/Faq.module.css';
 import '@/app/globals.css';
 import Layout from '@/components/Layout/Layout';
 
