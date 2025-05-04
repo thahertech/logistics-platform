@@ -13,7 +13,7 @@ import {
   HiBeaker as BeakerIcon,
 } from 'react-icons/hi';
 import { Badge } from '@/components/ui/badge';
-import FeedbackModal from '@/app/palauteet/page';
+// import FeedbackModal from '@/app/palauteet/page';
 
 const TopHeader = () => {
   const pathname = usePathname();
