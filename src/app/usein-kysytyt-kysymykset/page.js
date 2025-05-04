@@ -1,12 +1,10 @@
+'use client';
 import React from 'react';
-import styles from '@/app/Styles/Faq.module.css';
+import styles from '@/app/styles/Faq.module.css';
 import '@/app/globals.css';
 import Layout from '@/components/Layout/Layout';
 
-export const metadata = {
-  title: 'Logistix | Usein kysytyt kysymykset',
-  description: 'Kysymyksiä ja vastauksia',
-};
+
 const Faq = () => {
   return (
 <Layout>
