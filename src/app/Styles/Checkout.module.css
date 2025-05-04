@@ -1,7 +1,6 @@
-/* Checkout page - matching the Modal theme */
 .checkout {
-  background-color: #121212; /* Dark background */
-  color: #ffffff; /* White text */
+  background-color: #121212;
+  color: #ffffff;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -10,13 +9,13 @@
 }
 
 .checkoutContainer {
-  background-color: rgba(0, 0, 0, 0.6); /* Dark background with slight transparency */
-  backdrop-filter: blur(8px); /* Subtle blur effect */
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   border-radius: 16px;
   padding: 40px;
   max-width: 900px;
   width: 100%;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7); /* Soft shadow for depth */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
 }
 
 .checkoutTitle {
