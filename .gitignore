@@ -5,8 +5,13 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
-public/assets/signin-assets
+public/assets/signin-assets/Android/
+public/assets/signin-assets/IOS/
 /extras/jwt
+
+src/lib/rahtikirja-pdf-service/**
+src/lib/invoice-pdf-service/**
+
 
 #page
 src/pages/kuljetukset/**

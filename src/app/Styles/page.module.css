@@ -9,6 +9,17 @@
   }
 }
 
+.companiesherocontent {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.companiesherocontent h4 {
+  margin-bottom: 0;
+}
 
 .aboutUsHero,
 .serviceImage,
@@ -92,6 +103,7 @@
   padding: auto 0;
 }
 
+
 .buttonGroup {
   display: flex;
   max-width: 800px;
@@ -109,8 +121,7 @@
 .roleButton {
   padding: 10px 20px;
   margin: 0 2rem;
-  border: 2px solid #003366;
-  background-color: rgb(25, 25, 25);
+  border: 2px solid #ffffff;
   color: #ffffff;
   font-size: 16px;
   border-radius: 5px;
@@ -507,14 +518,16 @@
   }
 
   .sectionTitle {
-    font-size: 36px;
-    letter-spacing: 0.15rem;
+  
     text-align: center;
-    max-width: 600px;
+    max-width: 500px;
     color: #fff;
     margin-bottom: 1rem;
     margin: auto;
     line-height: 2.5rem;
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-align: left;
   }
 
   .sectionTitle {
@@ -937,20 +950,40 @@
 
 .section, .sectionHero, .aboutUsSectionHero, .sectionYrityksille{
   color: #f0f0f0;
-  padding: 20px;
+  padding: 20px 0;
   border-radius: 8px;
   margin: auto;
   max-width: 620px;
   text-align: center;
 }
 
+.yrityksetContactSection {
+  justify-content: center;
+  margin: auto;
+  text-align: left;
+  flex-direction: column;
+  display: flex;
+  font-size: 2.5rem;
+  max-width: 500px;
+  font-weight: 900;
+  z-index: 2;
+}
+.sectionYrityksilleContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+  margin: auto 0;
+
+}
 .sectionYrityksille{
-  max-width: 800px;
+  max-width: 500px;
+  margin-top: 1rem;
   text-align: left;
   border-radius: 0;
   margin-bottom: 20px;
-  border-bottom: 1px solid #fff;
-
 }
 
 .sectionHero {
@@ -999,6 +1032,8 @@
 
 .sectionContentYrityksille{
   margin-bottom: 1.25rem;
+  margin-top: 2rem;
+  font-size: 24px;
 }
 
 .benefitsList {
@@ -1214,11 +1249,7 @@
 }
 
 @media (max-width: 768px) {
-  .phaseContainer,
-  .phaseDescriptions {
-    flex-direction: column; 
-    align-items: center; 
-  }
+
 
 
 
@@ -1255,14 +1286,19 @@ box-shadow: 0 2px 4px rgba(255, 255, 255, 0.775);
     padding: 0.5rem;
     font-size: 0.85rem;
     width: 100%;
+    max-width: 175px;
   }
   .sectionTitle{
     text-align: center;
   }
-
+  .phaseContainer,
+  .phaseDescriptions {
+    flex-direction: column; 
+    align-items: center; 
+  }
 
   .phaseDescriptions{
-    margin-left: 130px;
+    margin-left: 150px;
     padding: 0;
     width: unset;
     position: absolute;

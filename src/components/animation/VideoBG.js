@@ -3,7 +3,7 @@ export default function VideoBackground() {
       <div className="video-container">
         <div className="customer-promise-label">
         <h2>Logistix</h2>
-        <h4> Tehokas kilpailutus ja kuljetushallinta -työkalu. Alusta yhdistää yrityksesi nopeasti kuljetuspalveluihin. Näin säästät aikaa, rahaa ja ympäristöä.</h4>
+        <h4> Digitaalinen alusta, joka automatisoi kuljetusten kilpailutuksen, hallinnan ja täyttää tyhjät kilometrit. Aikaa ja rahaa säästyy ilman sitoumuksia.</h4>
         </div>
 
         <div className="customer-promise-label">

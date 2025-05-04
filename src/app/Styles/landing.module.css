@@ -299,6 +299,7 @@
 .serviceCard .icon {
   font-size: 2rem;
   margin-bottom: 10px;
+  justify-self: center;
 }
 
   .card {

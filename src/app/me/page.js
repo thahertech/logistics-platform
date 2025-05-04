@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '@/components/Layout/Layout';
-import styles from '@/app/Styles/page.module.css';
+import styles from '@/app/styles/page.module.css';
 import '../globals.css';
 import Head from 'next/head';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

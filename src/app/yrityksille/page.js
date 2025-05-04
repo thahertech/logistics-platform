@@ -1,277 +1,348 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Layout from '@/components/Layout/Layout';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRocket, faLeaf, faChartLine, faBriefcase, faCog } from '@fortawesome/free-solid-svg-icons';
-import styles from '@/app/Styles/page.module.css';
-import '@/app/globals.css';
+import { Rocket, Leaf, ShieldCheck, LayoutDashboard, BadgeCheck, Briefcase } from 'lucide-react'; // Import new icons
+import styles from '@/app/styles/page.module.css';
+
 import Image from 'next/image';
 import Head from 'next/head';
+import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Label } from "@/components/ui/label"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+
 
 
 const MeidanPalvelusta = () => {
   const [selectedRole, setSelectedRole] = useState('Kuljettaja');
 
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   useEffect(() => {
-      document.title = 'Logistix | Yrityksille';
-    }, []);
+    document.title = 'Logistix | Yrityksille';
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSending(true);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, message }),
+      });
+
+      if (response.ok) {
+        setSuccess(true);
+        setEmail('');
+        setMessage('');
+      } else {
+        console.error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
 
-    <Layout>
+    <><Layout>
       <Head>
-      <title>Logistiikkaratkaisut Yrityksille - Logistix</title>
-      <meta name="description" content="Vähennä logistiikkakustannuksia ja paranna ympäristöystävällisyyttä innovatiivisilla Logistix-palveluilla." />
-    </Head>
+        <title>Logistiikkaratkaisut Yrityksille - Logistix</title>
+        <meta name="description" content="Vähennä logistiikkakustannuksia ja paranna ympäristöystävällisyyttä Logistixin avulla." />
+      </Head>
+      <div className="video-container-2">
+        <div className={styles.companiesherocontent}>
+        <video autoPlay controls={false} loop muted playsInline className="background-video-2" preload="auto">
+        <source src="/assets/backgrounds/traffic.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+        </video>
 
-    <div className={`${styles.hero} ${styles.yrityksilleHero}`}>
-    <Image
-              src={"/assets/backgrounds/harbour.jpg"}
-              alt="sunset-image"
-              width="1000"
-              height="200"
-              className={styles.serviceImage}
-              priority
-            />
-
-<div className={styles.sectionHero}>
-        <h2 className={styles.sectionTitle}>Tehokkaampi ja kestävämpi kuljetusratkaisu yrityksille</h2>
-        <p className={styles.sectionContent}>
-        Logistix tarjoaa innovatiivisen ja tehokkaan alustan yrityksille, jotka haluavat löytää kuljetuksen vaivattomasti ja kilpailukykyisesti.
-        </p>
+            <h2>    Tehokas ja kestävä logistiikkaratkaisu</h2>
+            <h4>
+              Logistix tarjoaa innovatiivisen alustan yrityksille, jotka haluavat säästää aikaa, rahaa sekä luontoa.
+            </h4>
+        </div>
       </div>
 
-</div>
 
-<div className={styles.sectionYrityksille}>
-  <h2 className={styles.sectionTitle}>Logistiikan Haasteet</h2>
-  <p className={styles.sectionContentYrityksille}>
-    Logistiikka-alalla yksi suurimmista ongelmista on tyhjien ajokilometrien määrä, mikä johtaa 
-    sekä korkeisiin kustannuksiin että ympäristöhaittoihin. Kuljetusyritykset ajavat usein tyhjää, 
-    koska kuljetusreiteillä ei ole täysiä lastauksia tai paluukuormia, mikä lisää polttoaineenkulutusta 
-    ja päästöjä. Tämä on kestämätön tilanne niin taloudellisesti kuin ekologisesti.
-  </p>
-  <p className={styles.sectionContentYrityksille}>
-    Logistix tarjoaa ratkaisun tähän ongelmaan. Alustamme mahdollistaa kuljetusyrityksille tehokkaamman 
-    reittien suunnittelun ja vähentää tyhjiä kilometrejä yhdistämällä lähettäjät ja kuljetusyritykset 
-    helposti. Tämä ei ainoastaan pienennä kuljetuskustannuksia, vaan tarjoaa myös lähettäjille mahdollisuuden 
-    tehdä ympäristöystävällisempiä valintoja kilpailukykyisin hinnoin. Kustannustehokkaat, kilpailutetut ja kestävämmät kuljetukset 
-    hyödyttävät sekä yrityksiä että ympäristöä.
-  </p>
-</div>
+     
 
-
-
-<div className={styles.buttonGroup}>
-  <div className={styles.buttonGroupText}>Katso tästä miten voimme auttaa</div>
-          <button
-            className={`${styles.roleButton} ${selectedRole === 'Kuljettaja' ? styles.activeButton : ''}`}
-            onClick={() => setSelectedRole('Kuljettaja')}
-          >
-            Kuljettaja
-          </button>
-          <button
-            className={`${styles.roleButton} ${selectedRole === 'Lähettäjä' ? styles.activeButton : ''}`}
-            onClick={() => setSelectedRole('Lähettäjä')}
-          >
-            Lähettäjä
-          </button>
-        </div>
-
-        <div className={styles.imageContainer}>
-        
-
-    
-
-
-
+    <Tabs defaultValue="delivery" className=" mx-auto py-4">
+    <TabsList className="grid w-full sm:w-1/3 my-12 bg-white/20 mx-auto grid-cols-2">
+          <TabsTrigger value="delivery">Kuljettaja</TabsTrigger>
+        <TabsTrigger value="owner">Lähettäjä</TabsTrigger>
+      </TabsList>
+      <TabsContent value="delivery">
+       
+            <div className={styles.imageContainer}>
 <div className={styles.phaseContainer}>
-  {selectedRole === 'Kuljettaja' && (
-    <>
+
       <Image
         src="/assets/animations/kuljettaja.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
-        className={styles.customerImage}
-      />
+        className={styles.customerImage} />
       <Image
         src="/assets/animations/etsitoimitus.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
-        className={styles.customerImage}
-      />
+        className={styles.customerImage} />
       <Image
         src="/assets/animations/kuljetusnouto.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
-        className={styles.customerImage}
-      />
+        className={styles.customerImage} />
       <Image
         src="/assets/animations/toimitus.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
-        className={styles.customerImage}
-      />
+        className={styles.customerImage} />
       <Image
         src="/assets/animations/kohteessa.png"
         alt="customer-journey Kuljettaja"
         width={2000}
         height={700}
-        className={styles.customerImage}
-      />
+        className={styles.customerImage} />
 
       <div className={styles.phaseDescriptions}>
         <div className={styles.phase}>
           <strong>Kuljettaja</strong>
-          <p>Luo kuljetuskäyttäjä ja löydä sopiva kuljetus.</p>
+          <p>Luo käyttäjä ja vahvista sähköposti.</p>
         </div>
         <div className={styles.phase}>
-          <strong>Etsi kuljetus</strong>
-          <p>Selaa avoimia kuljetustilauksia ja valitse kuljetus.</p>
+          <strong>Selaa kuljetuspyyntöjä</strong>
+          <p>Valitse kuljetus ja odota vahvistusta.</p>
         </div>
         {/* <div className={styles.phase}>
-          <strong>Vahvistettu</strong>
-          <p>Vahvista kuljetustehtävä ja tarkista yksityiskohdat.</p>
-        </div> */}
+      <strong>Vahvistettu</strong>
+      <p>Vahvista kuljetustehtävä ja tarkista yksityiskohdat.</p>
+    </div> */}
         <div className={styles.phase}>
           <strong>Nouto</strong>
-          <p>Nouda toimitus ja seuraa sen etenemistä.</p>
+          <p>Automaatti-ilmoitukset lastatessa ja purkaessa.</p>
         </div>
         <div className={styles.phase}>
           <strong>Kuljetus</strong>
-          <p>Hoida kuljetus turvallisesti ja aikataulussa.</p>
+          <p>Toimita kuljetus turvallisesti ja aikataulussa.</p>
         </div>
         <div className={styles.phase}>
-          <strong>Kohteessa</strong>
-          <p>Lasku lähtee Logistixille automaattisesti.</p>
+          <strong>Purku</strong>
+          <p>Automaattinen laskutus.</p>
         </div>
       </div>
-    </>
-  )}
 </div>
-
-{selectedRole === 'Lähettäjä' && (
-  <div className={styles.phaseContainer}>
-    <Image
-      src={"/assets/animations/tavaranlähettäjä.png"}
-      alt="customer-journey Lähettäjä"
-      width="2000"
-      height="700"
-      className={styles.customerImage}
-    />
-     <Image
-      src={"/assets/animations/etsitoimitus.png"}
-      alt="customer-journey Lähettäjä"
-      width="2000"
-      height="700"
-      className={styles.customerImage}
-    />
-     <Image
-      src={"/assets/animations/tavaranluovutus.png"}
-      alt="customer-journey Lähettäjä"
-      width={400}
-      height={700}
-      className={styles.customerImage}
-    />
-          <Image
-        src="/assets/animations/toimitus.png"
-        alt="customer-journey Kuljettaja"
-        width={2000}
-        height={700}
-        className={styles.customerImage}
-      />
-     <Image
-      src={"/assets/animations/kohteessa.png"}
-      alt="customer-journey Lähettäjä"
-      width="2000"
-      height="700"
-      className={styles.customerImage}
-    />
-    <div className={styles.phaseDescriptions}>
-      <div className={styles.phase}>
-        <strong>Lähettäjä</strong>
-        <p>Luo lähettäjäkäyttäjä ja löydä sopiva kuljettaja.</p>
-      </div>
-      <div className={styles.phase}>
-        <strong>Luo ilmoitus</strong>
-        <p>Kilpailuta kuljetustilaus yhdellä ilmoituksella ja löydä ostaja.</p>
-      </div>
-      {/* <div className={styles.phase}>
-        <strong>Hyväksytty</strong>
-        <p>Saat sähköpostiin tilausvahvistuksen.</p>
-      </div> */}
-      <div className={styles.phase}>
-        <strong>Luovutus</strong>
-        <p>Valmistele lähetys kuljetusta varten.</p>
-      </div>
-      <div className={styles.phase}>
-        <strong>Kuljetus</strong>
-        <p>Voit seurata kuljetuksen etenemistä.</p>
-      </div>
-      <div className={styles.phase}>
-        <strong>Laskutus</strong>
-        <p>Kun toimitus saapuu kohteeseen, saat laskun.</p>
-      </div>
-    </div>
-  </div>
-)}
-  <div className={styles.MasonryContainer}>
-
-{/* <div className={styles.masonryItem}>
-  <h2 className={styles.sectionTitle}>Toimintatapa</h2>
-  <p className={styles.sectionContent}>
-    1. <strong>Julkaise toimitus</strong>: Lähettäjä voi julkaista toimitustarpeen nopeasti.
-    <br />
-    <br /> 2. <strong>Etsi toimitus</strong>: Kuljetusyritys selaa avoimia toimituksia ja tarjoaa.
-    <br />
-    <br /> 3. <strong>Hyväksy toimitus</strong>: Varmistuksen jälkeen automaattinen dokumentointi
-  </p>
-</div> */}
-
-<div className={styles.masonryItem}>
-  <h2 className={styles.sectionTitle}>Miksi Logistix</h2>
-  <ul className={styles.benefitsList}>
-    <li>
-      <FontAwesomeIcon icon={faRocket} className={styles.animatedIcon} /> 
-      Nopeus: Julkaise ja kilpailuta toimituksesi muutamalla klikkauksella.
-    </li>
-    <li>
-      <FontAwesomeIcon icon={faLeaf} className={styles.animatedIcon} /> 
-      Ekologisuus: Vähemmän tyhjiä ajokilometrejä ja kestävämpi logistiikka.
-    </li>
-    <li>
-      <FontAwesomeIcon icon={faChartLine} className={styles.animatedIcon} /> 
-      Kasvata Bisnestäsi: Yritykset voivat laajentaa asiakaskuntaansa tehokkaasti.
-    </li>
-    <li>
-      <FontAwesomeIcon icon={faBriefcase} className={styles.animatedIcon} /> 
-      Helppokäyttöisyys: Käyttäjäystävällinen alusta, joka sopii kaiken kokoisille yrityksille.
-    </li>
-    <li>
-      <FontAwesomeIcon icon={faCog} className={styles.animatedIcon} /> 
-      Tekoäly: Reittien optimointi, mikä mahdollistaa ekologisemmat ja edullisemmat hinnat.
-    </li>
-  </ul>
 </div>
-      </div>
+   
+      </TabsContent>
+      <TabsContent value="owner">
+    <div className={styles.imageContainer}>
+          <div className={styles.phaseContainer}>
+            <Image
+              src={"/assets/animations/tavaranlähettäjä.png"}
+              alt="customer-journey Lähettäjä"
+              width="2000"
+              height="700"
+              className={styles.customerImage} />
+            <Image
+              src={"/assets/animations/etsitoimitus.png"}
+              alt="customer-journey Lähettäjä"
+              width="2000"
+              height="700"
+              className={styles.customerImage} />
+            <Image
+              src={"/assets/animations/tavaranluovutus.png"}
+              alt="customer-journey Lähettäjä"
+              width={400}
+              height={700}
+              className={styles.customerImage} />
+            <Image
+              src="/assets/animations/toimitus.png"
+              alt="customer-journey Kuljettaja"
+              width={2000}
+              height={700}
+              className={styles.customerImage} />
+            <Image
+              src={"/assets/animations/kohteessa.png"}
+              alt="customer-journey Lähettäjä"
+              width="2000"
+              height="700"
+              className={styles.customerImage} />
+            <div className={styles.phaseDescriptions}>
+              <div className={styles.phase}>
+                <strong>Lähettäjä</strong>
+                <p>Luo käyttäjä ja vahvista sähköposti.</p>
+              </div>
+              <div className={styles.phase}>
+                <strong>Luo ilmoitus</strong>
+                <p>Aseta hintakatto ja alusta kilpailuttaa lähetyksen.</p>
+              </div>
+              {/* <div className={styles.phase}>
+              <strong>Hyväksytty</strong>
+              <p>Saat sähköpostiin tilausvahvistuksen.</p>
+            </div> */}
+              <div className={styles.phase}>
+                <strong>Lastaus</strong>
+                <p>Liitä automaattinen rahtikirja lähetykseen.</p>
+              </div>
+              <div className={styles.phase}>
+                <strong>Kuljetus</strong>
+                <p>Ilmoitukset lähtiessä ja perilllä.</p>
+              </div>
+              <div className={styles.phase}>
+                <strong>Purku</strong>
+                <p>Automaattilasku logistix-tilille.</p>
+              </div>
+            </div>
+          </div>
+      </div> 
+       
+      </TabsContent>
+    </Tabs>
+
+<div className={styles.sectionYrityksilleContainer}>
 
 
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Mukaan kehitykseen?</h2>
-        <p className={styles.sectionContent}>
-          Olemme täällä auttamassa sinua kaikissa vaiheissa. Klikkaa alla olevaa painiketta niin kerromme lisää.
+    <div className={styles.sectionYrityksille}>
+
+        <p className={styles.sectionContentYrityksille}>
+          Logistiikka-alalla yksi suurimmista ongelmista on tyhjien ajokilometrien määrä, mikä johtaa
+          sekä korkeisiin kustannuksiin että ympäristöhaittoihin.
+          <br />
+          <br />Kuljetusyritykset ajavat usein tyhjää,
+          koska kuljetusreiteillä ei ole täysiä lastauksia tai paluukuormia, mikä lisää polttoaineenkulutusta
+          ja päästöjä.
         </p>
-        <button className={styles.joinButton} onClick={() => window.location.href='/yhteys'}>
-          Liity nyt
-        </button>
-      </div>
-      </div>
+        <p className={styles.sectionContentYrityksille}>
+          Alustamme mahdollistaa kuljetusyrityksille tehokkaamman
+          reittien suunnittelun ja vähentää tyhjiä kilometrejä yhdistämällä lähettäjät ja kuljetusyritykset
+          helposti.
+          <br />
+          <br /> Tämä ei ainoastaan pienennä kuljetuskustannuksia, vaan tarjoaa myös lähettäjille mahdollisuuden
+          tehdä ympäristöystävällisempiä valintoja kilpailukykyisin hinnoin. 
+          <br />
+          <br />
+          Kustannustehokkaat, kilpailutetut ja kestävämmät kuljetukset
+          hyödyttävät sekä yrityksiä että ympäristöä.
+          </p>
+          </div>
+     
+          {/* <div className={styles.masonryItem}>
+        <div className={styles.MasonryContainer}>
+
+      <h2 className={styles.sectionTitle}>Toimintatapa</h2>
+      <p className={styles.sectionContent}>
+        1. <strong>Julkaise toimitus</strong>: Lähettäjä voi julkaista toimitustarpeen nopeasti.
+        <br />
+        <br /> 2. <strong>Etsi toimitus</strong>: Kuljetusyritys selaa avoimia toimituksia ja tarjoaa.
+        <br />
+        <br /> 3. <strong>Hyväksy toimitus</strong>: Varmistuksen jälkeen automaattinen dokumentointi
+      </p>
+    </div> */}
+
+          {/* <Card className="bg-black/20 max-w-[600px] p-4 flex-col">
+            <h2 className={styles.sectionTitle}>Miksi Logistix</h2>
+            <ul className={styles.benefitsList}>
+              <li>
+                Nopeus: Kilpailuta ja julkaise muutamalla klikkauksella.
+              </li>
+              <li>
+                Ekologisuus: Vähemmän tyhjiä ajokilometrejä ja kestävämpi logistiikka.
+              </li>
+              <li>
+                Riskitön kokeilu: Maksat vain toteutuneista kuljetuksista, eikä tarvetta sitoutua.
+              </li>
+              <li>
+                Helppokäyttöisyys: Käyttäjäystävällinen alusta, joka sopii kaiken kokoisille yrityksille.
+              </li>
+              <li>
+                Tyytyväisyystakuu: Jos et säästä 10 % kuljetuskustannuksissa ensimmäisten 6kk aikana, maksamme osuutemme takaisin.
+              </li>
+            </ul>
+          </Card>
+          </div>
+          */}
+
+  <div className={styles.yrityksetContactSection}>
+
+        <p className={styles.yrityksetContactSectionContent}>
+          Haluatko lisätietoa palveluistamme? <br/>
+          Lähetä meille viesti, niin olemme sinuun yhteydessä.
+        </p>
+
+   
+        <div className="flex justify-center mt-8">
+          <Card className="max-w-[600px] w-full ">
+            <CardHeader>
+              <CardTitle>Vapaa sana</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    Sähköposti
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Syötä sähköpostiosoite"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                    Viesti
+                  </label>
+                  <Textarea
+                    id="message"
+                    placeholder="Kirjoita viesti"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required />
+                </div>
+              </form>
+            </CardContent>
+            <CardFooter className="flex justify-end">
+              <Button
+                type="submit"
+                onClick={handleSubmit}
+                disabled={isSending}
+                className="w-full"
+              >
+                {isSending ? 'Lähetetään...' : 'Lähetä'}
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+
+        {success && (
+          <div className="mt-4 text-center text-green-600">
+            Viesti lähetetty onnistuneesti! Tiimimme vastaa sinulle pian.
+          </div>
+        )}
+</div>
+</div>
 
     </Layout>
+    </>
   );
 };
 

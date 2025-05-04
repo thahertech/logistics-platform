@@ -3,8 +3,8 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from '../../app/Styles/Layout.module.css';
-import footerImg from '/public/assets/logistix-logos/png/Logo.png';
+import styles from '@/app/styles/layout.module.css';
+ import footerImg from '@/../public/assets/logistix-logos/svg/logo.svg';
 
 const MainHeader = () => {
   const pathname = usePathname();
@@ -13,7 +13,7 @@ const MainHeader = () => {
     <header className={styles.header}>
       <div className={styles.topRow}>
         <Link href="/" className={styles.headerLogo}>
-          <Image src={footerImg} alt="Logistix Logo" width={100} height={100} priority />
+           <Image src={footerImg} alt="Logistix Logo" width={100} height={100} priority />
         </Link>
       </div>
       <nav className={styles.bottomRow}>
@@ -34,14 +34,14 @@ const MainHeader = () => {
               Yrityksille
             </Link>
           </li>
-          <li className={styles.navItem}>
+          {/* <li className={styles.navItem}>
             <Link
               href="/yhteys"
               className={`${styles.navLink} ${pathname === '/yhteys' ? styles.activeLink : ''}`}
             >
               Ota yhteyttä
             </Link>
-          </li>
+          </li> */}
           <li className={styles.navItem}>
             <Link
               href="/me"

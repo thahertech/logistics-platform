@@ -4,7 +4,7 @@ export default function VideoBackground() {
         <div className="customer-promise-label-2">
         <h2>Tulevaisuuden logistiikkaa</h2>
         <h4>
-         Löydä kuljetuspalvelu yrityksesi tarpeisiin.
+         Löydä ratkaisu yrityksesi tarpeisiin.
         </h4>
         </div>
         <video autoPlay controls={false} loop muted playsInline className="background-video-2" preload="auto">

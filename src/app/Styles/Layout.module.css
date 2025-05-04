@@ -6,9 +6,12 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  background-color: #000;
   margin-top: 20px;
+  border-bottom: 1px solid #fff;
+
 }
+
+
 
 .registerButton {
   min-height: 75px;
@@ -27,6 +30,7 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  
 
 }
 .topHeaderNav{
@@ -36,6 +40,7 @@
   margin: 1rem;
   min-height: 30px;
   transition: all 0.1s ease;
+  
 }
 
 .topHeader {
@@ -43,10 +48,8 @@
   top: 0;
   z-index: 1000;
   min-height: 30px;
-  background-color: #000;
-  border-radius: 0 0 10px 10px;
   transition: all 0.3s ease;
-
+  background-color: #000;
 }
 
 .activeLink {
@@ -76,7 +79,7 @@
   position: relative;
   gap: 10px;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
   transition: 0.3s ease-out;
   text-wrap: nowrap;
 }
@@ -354,83 +357,6 @@
 .navLink:hover, .navLink1:hover {
   color: #9b9b9b;
 }
-@media (max-width: 680px) {
-  .logoInTopHeader{
-    position: relative;
-    left: 0;
-  }
-    .topHeaderNav{
-      font-size: 12px;
-    }
-  
-}
-@media (max-width: 500px) {
-
-.bottomFooterNav {
-flex-wrap: wrap;
-margin-left: 2rem;
-justify-content: space-between;
-  }
-
-.logoInTopHeaderImg {
-  margin-right: 20px;
-}
-
-}
-
-@media (max-width: 1200px) {
-  .header {
-    padding: 20px;
-  }
-  .navMenu {
-    flex-direction: row;
-    gap: 10px;
-    text-wrap: nowrap;
-  }
-  .headerTop {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-.section {
-  padding: 0;
-  overflow: hidden;
-}
-
-
-
-.funFactsContainer {
-  overflow: hidden;
-  position: relative;
-  padding: 0 50px;
-
-}
-
-.funFactsWrapper {
-  display: flex;
-  animation: scroll 66s linear infinite;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-}
-
-.funFactCard {
-  min-width: 300px;
-  margin: 0 20px;
-  background: #545454a4;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.funFactText {
-  font-size: 18px;
-  color: rgb(255, 255, 255);
-  text-align: center;
-}
 
 @keyframes scroll {
   0% {
@@ -457,4 +383,46 @@ justify-content: space-between;
 .tab.active {
   border-bottom: 2px solid #0070f3;
   color: #0070f3;
+}
+
+.menuToggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: none;
+  z-index: 1100;
+}
+
+@media (max-width: 768px) {
+  .menuToggle {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+
+  .topHeaderNav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #000;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    padding: 1rem;
+    display: none;
+  }
+
+  .mobileMenuOpen {
+    display: flex;
+  }
+
+  .topHeaderLink {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 12px;
+  }
 }

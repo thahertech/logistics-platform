@@ -2,7 +2,7 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import styles from '../../app/Styles/Layout.module.css';
+import styles from '@/app/styles/layout.module.css';
 import {
   FaComment,
   FaQuestionCircle,
@@ -17,7 +17,7 @@ const BottomFooter = () => {
   return (
     <div className={styles.bottomFooter}>
       <nav className={styles.bottomFooterNav}>
-        <Link
+        {/* <Link
           href="/asiakastarinat"
           className={`${styles.bottomFooterLink} ${
             pathname === '/asiakastarinat' ? styles.activeLink : ''
@@ -32,15 +32,15 @@ const BottomFooter = () => {
           }`}
         >
           <FaQuestionCircle className={styles.icon} /> Usein Kysytyt Kysymykset
-        </Link>
-        <Link
+        </Link> */}
+        {/* <Link
           href="/miten-toimii"
           className={`${styles.bottomFooterLink} ${
             pathname === '/miten-toimii' ? styles.activeLink : ''
           }`}
         >
           <FaCogs className={styles.icon} /> Miten Logistix toimii
-        </Link>
+        </Link> */}
         <Link
           href="/tietosuoja"
           className={`${styles.bottomFooterLink} ${
