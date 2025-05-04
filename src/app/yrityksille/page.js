@@ -82,14 +82,14 @@ const MeidanPalvelusta = () => {
      
 
     <Tabs defaultValue="delivery" className=" mx-auto py-4">
-    <TabsList className="grid w-full sm:w-1/3 my-12 bg-white/20 mx-auto grid-cols-2">
+    <TabsList className="grid w-full sm:w-1/3 my-24 bg-white/20 mx-auto grid-cols-2">
           <TabsTrigger value="delivery">Kuljettaja</TabsTrigger>
         <TabsTrigger value="owner">Lähettäjä</TabsTrigger>
       </TabsList>
       <TabsContent value="delivery">
        
-            <div className={styles.imageContainer}>
-<div className={styles.phaseContainer}>
+          <div className={styles.imageContainer}>
+            <div className={styles.phaseContainer}>
 
       <Image
         src="/assets/animations/kuljettaja.png"
