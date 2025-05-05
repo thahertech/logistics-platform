@@ -42,14 +42,7 @@ const MainHeader = () => {
               Ota yhteyttä
             </Link>
           </li> */}
-          <li className={styles.navItem}>
-            <Link
-              href="/me"
-              className={`${styles.navLink} ${pathname === '/me' ? styles.activeLink : ''}`}
-            >
-              Meistä
-            </Link>
-          </li>
+        
         </ul>
       </nav>
     </header>
